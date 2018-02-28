@@ -6,7 +6,7 @@ using Assets.Scripts.Services.Wildlife;
 
 namespace Assets.Scripts.Services
 {
-    public class ProjectQGameServiceProvider
+    public class CellGameServiceProvider
         : GameServiceProvider
     {
         protected override void Awake()
