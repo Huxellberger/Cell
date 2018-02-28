@@ -24,11 +24,9 @@ namespace Assets.Scripts.Components.ActionStateMachine.States.Locomotion
             AnalogResponses.Add(EInputKey.HorizontalAnalog, OnHorizontalInput);
             AnalogResponses.Add(EInputKey.VerticalAnalog, OnVerticalInput);
             AnalogResponses.Add(EInputKey.CameraHorizontal, OnCameraHorizontalInput);
-            AnalogResponses.Add(EInputKey.CameraVertical, OnCameraVerticalInput);
             AnalogResponses.Add(EInputKey.CameraZoom, OnCameraZoomInput);
 
             ButtonResponses.Add(EInputKey.CameraZoomReset, OnCameraZoomReset);
-            ButtonResponses.Add(EInputKey.CameraToggle, OnCameraToggle);
             ButtonResponses.Add(EInputKey.SprintButton, OnSprintButton);
             ButtonResponses.Add(EInputKey.PrimaryHeldAction, OnPrimaryHeldAction);
             ButtonResponses.Add(EInputKey.SecondaryHeldAction, OnSecondaryHeldAction);
@@ -68,17 +66,6 @@ namespace Assets.Scripts.Components.ActionStateMachine.States.Locomotion
             return EInputHandlerResult.Unhandled;
         }
 
-        private EInputHandlerResult OnCameraVerticalInput(float inInput)
-        {
-            if (CameraInterface != null)
-            {
-                CameraInterface.RotateVertical(inInput * -1);
-                return EInputHandlerResult.Handled;
-            }
-
-            return EInputHandlerResult.Unhandled;
-        }
-
         private EInputHandlerResult OnCameraZoomInput(float inInput)
         {
             if (CameraInterface != null)
@@ -99,21 +86,6 @@ namespace Assets.Scripts.Components.ActionStateMachine.States.Locomotion
                     CameraInterface.ResetZoom();
                 }
                 
-                return EInputHandlerResult.Handled;
-            }
-
-            return EInputHandlerResult.Unhandled;
-        }
-
-        private EInputHandlerResult OnCameraToggle(bool isEnabled)
-        {
-            if (CameraInterface != null)
-            {
-                if (isEnabled)
-                {
-                    CameraInterface.SetCameraMode(EPlayerCameraMode.FirstPerson);
-                }
-
                 return EInputHandlerResult.Handled;
             }
 

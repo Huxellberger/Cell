@@ -11,10 +11,8 @@ namespace Assets.Scripts.Input
 
         // Camera
         CameraHorizontal,
-        CameraVertical,
         CameraZoom,
         CameraZoomReset,
-        CameraToggle,
 
         // Functions
         TogglePause,

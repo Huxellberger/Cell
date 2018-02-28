@@ -8,9 +8,7 @@ namespace Assets.Scripts.Components.Character
     {
         void SetRelativeCameraPosition(Vector3 inStartLocation, Vector3 inStartRotation);
         void RotateHorizontal(float inRotation);
-        void RotateVertical(float inRotation);
         void Zoom(float inZoom);
         void ResetZoom();
-        void SetCameraMode(EPlayerCameraMode inMode);
     }
 }

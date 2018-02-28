@@ -15,10 +15,8 @@ namespace Assets.Scripts.Test.Components.Character
         public Vector3 ? SetRotation { get; private set; }
 
         public float ? RotateHorizontalResult { get; private set; }
-        public float ? RotateVerticalResult { get; private set; }
         public float ? ZoomResult { get; private set; }
         public bool ResetZoomCalled = false;
-        public EPlayerCameraMode ? SetCameraModeResult { get; private set; }
 
         public void SetRelativeCameraPosition(Vector3 inStartLocation, Vector3 inStartRotation)
         {
@@ -31,11 +29,6 @@ namespace Assets.Scripts.Test.Components.Character
             RotateHorizontalResult = inRotation;
         }
 
-        public void RotateVertical(float inRotation)
-        {
-            RotateVerticalResult = inRotation;
-        }
-
         public void Zoom(float inZoom)
         {
             ZoomResult = inZoom;
@@ -44,11 +37,6 @@ namespace Assets.Scripts.Test.Components.Character
         public void ResetZoom()
         {
             ResetZoomCalled = true;
-        }
-
-        public void SetCameraMode(EPlayerCameraMode inMode)
-        {
-            SetCameraModeResult = inMode;
         }
     }
 }

@@ -120,27 +120,9 @@ namespace Assets.Editor.UnitTests.Components.ActionStateMachine.States.OpenMenuU
         }
 
         [Test]
-        public void HandleButtonInput_CameraToggle__Pressed_Handled()
-        {
-            Assert.AreEqual(EInputHandlerResult.Handled, _handler.HandleButtonInput(EInputKey.CameraToggle, true));
-        }
-
-        [Test]
-        public void HandleButtonInput_CameraToggle__Unpressed_Handled()
-        {
-            Assert.AreEqual(EInputHandlerResult.Handled, _handler.HandleButtonInput(EInputKey.CameraToggle, false));
-        }
-
-        [Test]
         public void HandleAnalogInput_CameraHorizontal_Handled()
         {
             Assert.AreEqual(EInputHandlerResult.Handled, _handler.HandleAnalogInput(EInputKey.CameraHorizontal, 1.0f));
-        }
-
-        [Test]
-        public void HandleAnalogInput_CameraVertical_Handled()
-        {
-            Assert.AreEqual(EInputHandlerResult.Handled, _handler.HandleAnalogInput(EInputKey.CameraVertical, 1.0f));
         }
 
         [Test]

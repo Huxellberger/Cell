@@ -3,7 +3,6 @@
 using System.Collections.Generic;
 using Assets.Scripts.Components.ActionStateMachine.States.CinematicCamera;
 using Assets.Scripts.Components.ActionStateMachine.States.Dead;
-using Assets.Scripts.Components.ActionStateMachine.States.FirstPerson;
 using Assets.Scripts.Components.ActionStateMachine.States.Locomotion;
 using Assets.Scripts.Components.ActionStateMachine.States.MainMenu;
 using Assets.Scripts.Components.ActionStateMachine.States.OpenMenuUI;
@@ -37,7 +36,6 @@ namespace Assets.Scripts.Components.ActionStateMachine.Builder
             Definitions.Add(EActionStateId.Spawning, info => new SpawningActionState(info, inParams.SpawningParams));
             Definitions.Add(EActionStateId.PushObject, info => new PushObjectActionState((PushObjectActionStateInfo) info));
             Definitions.Add(EActionStateId.CinematicCamera, info => new CinematicCameraActionState((CinematicCameraActionStateInfo)info));
-            Definitions.Add(EActionStateId.FirstPerson, info => new FirstPersonActionState((FirstPersonActionStateInfo)info, inParams.FirstPersonParams));
             Definitions.Add(EActionStateId.SurfaceSticking, info => new SurfaceStickingActionState((SurfaceStickingActionStateInfo)info, inParams.SurfaceStickingParams));
         }
     }

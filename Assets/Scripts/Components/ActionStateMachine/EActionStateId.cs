@@ -12,7 +12,6 @@ namespace Assets.Scripts.Components.ActionStateMachine
         Transforming,
         PushObject,
         CinematicCamera,
-        FirstPerson,
         SurfaceSticking,
         Test,
 

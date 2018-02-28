@@ -72,10 +72,6 @@ namespace Assets.Scripts.Input
                     new TranslatedInput(EInputKey.CameraHorizontal, EInputType.Analog)
                 },
                 {
-                    new RawInput("Mouse Y_Analog", EInputType.Analog),
-                    new TranslatedInput(EInputKey.CameraVertical, EInputType.Analog)
-                },
-                {
                     new RawInput("Mouse ScrollWheel_Analog", EInputType.Analog),
                     new TranslatedInput(EInputKey.CameraZoom, EInputType.Analog)
                 },
@@ -118,10 +114,6 @@ namespace Assets.Scripts.Input
                 {
                     new RawInput("R_Button", EInputType.Button),
                     new TranslatedInput(EInputKey.DropHeldItem, EInputType.Button)
-                },
-                {
-                    new RawInput("1_Button", EInputType.Button),
-                    new TranslatedInput(EInputKey.CameraToggle, EInputType.Button)
                 }
             };
         }

@@ -4,7 +4,6 @@ using Assets.Scripts.Components.ActionStateMachine;
 using Assets.Scripts.Components.ActionStateMachine.Builder;
 using Assets.Scripts.Components.ActionStateMachine.States.CinematicCamera;
 using Assets.Scripts.Components.ActionStateMachine.States.Dead;
-using Assets.Scripts.Components.ActionStateMachine.States.FirstPerson;
 using Assets.Scripts.Components.ActionStateMachine.States.Locomotion;
 using Assets.Scripts.Components.ActionStateMachine.States.MainMenu;
 using Assets.Scripts.Components.ActionStateMachine.States.OpenMenuUI;
@@ -89,14 +88,6 @@ namespace Assets.Editor.UnitTests.Components.ActionStateMachine.Builder
             var definition = new ActionStateDefinitions(new ActionStateParams());
 
             Assert.IsNotNull((CinematicCameraActionState)definition.Definitions[EActionStateId.CinematicCamera](new CinematicCameraActionStateInfo()));
-        }
-
-        [Test]
-        public void Creation_FirstPersonStateExists()
-        {
-            var definition = new ActionStateDefinitions(new ActionStateParams());
-
-            Assert.IsNotNull((FirstPersonActionState)definition.Definitions[EActionStateId.FirstPerson](new FirstPersonActionStateInfo()));
         }
 
         [Test]

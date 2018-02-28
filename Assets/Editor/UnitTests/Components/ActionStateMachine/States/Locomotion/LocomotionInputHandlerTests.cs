@@ -213,46 +213,6 @@ namespace Assets.Editor.UnitTests.Components.ActionStateMachine.States.Locomotio
         }
 
         [Test]
-        public void ReceivesCameraVertical_PlayerCameraInterface_AppliesInverseVerticalMotion()
-        {
-            var locomotionHandler = new LocomotionInputHandler(_movement, _camera, _heldItem);
-
-            const float expectedAppliedInput = 0.5f;
-
-            locomotionHandler.HandleAnalogInput(EInputKey.CameraVertical, expectedAppliedInput);
-
-            Assert.AreEqual(expectedAppliedInput, _camera.RotateVerticalResult * -1.0f);
-        }
-
-        [Test]
-        public void ReceivesCameraVertical_PlayerCameraInterface_ReturnsHandled()
-        {
-            var locomotionHandler = new LocomotionInputHandler(_movement, _camera, _heldItem);
-
-            Assert.AreEqual(EInputHandlerResult.Handled, locomotionHandler.HandleAnalogInput(EInputKey.CameraVertical, 1.0f));
-        }
-
-        [Test]
-        public void ReceivesCameraVertical_NoPlayerCameraInterface_DoesNotApplyVerticalMotion()
-        {
-            var locomotionHandler = new LocomotionInputHandler(_movement, null, _heldItem);
-
-            const float expectedAppliedInput = 0.5f;
-
-            locomotionHandler.HandleAnalogInput(EInputKey.CameraVertical, expectedAppliedInput);
-
-            Assert.AreNotEqual(expectedAppliedInput, _camera.RotateVerticalResult);
-        }
-
-        [Test]
-        public void ReceivesCameraVertical_NoPlayerCameraInterface_ReturnsUnhandled()
-        {
-            var locomotionHandler = new LocomotionInputHandler(_movement, null, _heldItem);
-
-            Assert.AreEqual(EInputHandlerResult.Unhandled, locomotionHandler.HandleAnalogInput(EInputKey.CameraVertical, 1.0f));
-        }
-
-        [Test]
         public void ReceivesCameraZoom_PlayerCameraInterface_AppliesZoomMotion()
         {
             var locomotionHandler = new LocomotionInputHandler(_movement, _camera, _heldItem);
@@ -344,60 +304,6 @@ namespace Assets.Editor.UnitTests.Components.ActionStateMachine.States.Locomotio
             var locomotionHandler = new LocomotionInputHandler(_movement, null, _heldItem);
 
             Assert.AreEqual(EInputHandlerResult.Unhandled, locomotionHandler.HandleButtonInput(EInputKey.CameraZoomReset, true));
-        }
-
-        [Test]
-        public void ReceivesCameraToggle_PlayerCameraInterface_SetsCameraModeFirstPerson()
-        {
-            var locomotionHandler = new LocomotionInputHandler(_movement, _camera, _heldItem);
-
-            locomotionHandler.HandleButtonInput(EInputKey.CameraToggle, true);
-
-            Assert.AreEqual(EPlayerCameraMode.FirstPerson, _camera.SetCameraModeResult);
-        }
-
-        [Test]
-        public void ReceivesCameraToggle_PlayerCameraInterface_False_DoesNotSetCameraModeFirstPerson()
-        {
-            var locomotionHandler = new LocomotionInputHandler(_movement, _camera, _heldItem);
-
-            locomotionHandler.HandleButtonInput(EInputKey.CameraToggle, false);
-
-            Assert.IsNull(_camera.SetCameraModeResult);
-        }
-
-        [Test]
-        public void ReceivesCameraToggle_PlayerCameraInterface_False_ReturnsHandled()
-        {
-            var locomotionHandler = new LocomotionInputHandler(_movement, _camera, _heldItem);
-
-            Assert.AreEqual(EInputHandlerResult.Handled, locomotionHandler.HandleButtonInput(EInputKey.CameraToggle, false));
-        }
-
-        [Test]
-        public void ReceivesCameraToggle_PlayerCameraInterface_ReturnsHandled()
-        {
-            var locomotionHandler = new LocomotionInputHandler(_movement, _camera, _heldItem);
-
-            Assert.AreEqual(EInputHandlerResult.Handled, locomotionHandler.HandleButtonInput(EInputKey.CameraToggle, true));
-        }
-
-        [Test]
-        public void ReceivesCameraToggle_NoPlayerCameraInterface_DoesNotApplyCameraToggle()
-        {
-            var locomotionHandler = new LocomotionInputHandler(_movement, null, _heldItem);
-
-            locomotionHandler.HandleButtonInput(EInputKey.CameraToggle, false);
-
-            Assert.IsNull(_camera.SetCameraModeResult);
-        }
-
-        [Test]
-        public void ReceivesCameraToggle_NoPlayerCameraInterface_ReturnsUnhandled()
-        {
-            var locomotionHandler = new LocomotionInputHandler(_movement, null, _heldItem);
-
-            Assert.AreEqual(EInputHandlerResult.Unhandled, locomotionHandler.HandleButtonInput(EInputKey.CameraToggle, true));
         }
         #endregion
 

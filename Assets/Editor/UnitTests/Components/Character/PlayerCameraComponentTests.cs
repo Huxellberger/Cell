@@ -1,8 +1,6 @@
 ﻿// Copyright (C) Threetee Gang All Rights Reserved
 
 using Assets.Editor.UnitTests.Helpers;
-using Assets.Scripts.Components.ActionStateMachine;
-using Assets.Scripts.Components.ActionStateMachine.States.FirstPerson;
 using Assets.Scripts.Components.Character;
 using Assets.Scripts.Test.Components.ActionStateMachine;
 using Assets.Scripts.Test.Components.Character;
@@ -113,7 +111,7 @@ namespace Assets.Editor.UnitTests.Components.Character
             var expectedPosition = new Vector3
             (
                 0.0f,
-                _cameraComponent.transform.localPosition.y - (currentInitialLocation.y * zoomValue * deltaTime * _cameraComponent.ZoomSpeed),
+                0.0f,
                 _cameraComponent.transform.localPosition.z - (currentInitialLocation.z * zoomValue * deltaTime * _cameraComponent.ZoomSpeed)
             );
 
@@ -151,60 +149,6 @@ namespace Assets.Editor.UnitTests.Components.Character
         }
 
         [Test]
-        public void RotateVertical_RotatesCameraExpectedAmount()
-        {
-            const float rotationValue = 0.5f;
-            const float deltaTime = 1.2f;
-
-            _cameraComponent.RotateVertical(rotationValue);
-            _cameraComponent.TestUpdate(deltaTime);
-            
-            var expectedRotation = new Vector3(12.5f, 0.8f, 0.3f);
-
-            ExtendedAssertions.AssertVectorsNearlyEqual(expectedRotation, _cameraComponent.gameObject.transform.rotation.eulerAngles);
-        }
-
-        [Test]
-        public void RotateVertical_StopsFurtherRotationOnceExceedingMaxRange()
-        {
-            const float rotationValue = 1.5f;
-            const float deltaTime = 1.2f;
-
-            while (_camera.transform.eulerAngles.x < PlayerCameraConstants.MaxXAxisAngle)
-            {
-                _cameraComponent.RotateVertical(rotationValue);
-                _cameraComponent.TestUpdate(deltaTime);
-            }
-
-            var expectedRotation = _camera.transform.eulerAngles;
-
-            _cameraComponent.RotateVertical(rotationValue);
-            _cameraComponent.TestUpdate(deltaTime);
-
-            ExtendedAssertions.AssertVectorsNearlyEqual(expectedRotation, _cameraComponent.gameObject.transform.rotation.eulerAngles);
-        }
-
-        [Test]
-        public void RotateVertical_StopsFurtherRotationOnceExceedingMinRange()
-        {
-            const float rotationValue = -1.5f;
-            const float deltaTime = 1.2f;
-
-            while (_camera.transform.eulerAngles.x > PlayerCameraConstants.MinXAxisAngle)
-            {
-                _cameraComponent.RotateVertical(rotationValue);
-                _cameraComponent.TestUpdate(deltaTime);
-            }
-
-            var expectedRotation = _camera.transform.eulerAngles;
-
-            _cameraComponent.RotateVertical(rotationValue);
-            _cameraComponent.TestUpdate(deltaTime);
-
-            ExtendedAssertions.AssertVectorsNearlyEqual(expectedRotation, _cameraComponent.gameObject.transform.rotation.eulerAngles);
-        }
-
-        [Test]
         public void Rotate_ResetsToZeroAfterUpdate()
         {
             const float rotationValue = 1.5f;
@@ -230,7 +174,7 @@ namespace Assets.Editor.UnitTests.Components.Character
             var expectedPosition = new Vector3
             (
                 0.0f, 
-                _cameraComponent.transform.localPosition.y - (_cameraComponent.InitialLocation.y * zoomValue * deltaTime * _cameraComponent.ZoomSpeed), 
+                0.0f, 
                 _cameraComponent.transform.localPosition.z - (_cameraComponent.InitialLocation.z * zoomValue * deltaTime * _cameraComponent.ZoomSpeed)
             );
 
@@ -250,7 +194,7 @@ namespace Assets.Editor.UnitTests.Components.Character
             var expectedPosition = new Vector3
             (
                 0.0f,
-                _cameraComponent.transform.localPosition.y - (_cameraComponent.InitialLocation.y * zoomValue * deltaTime * _cameraComponent.ZoomSpeed),
+                0.0f,
                 _cameraComponent.transform.localPosition.z - (_cameraComponent.InitialLocation.z * zoomValue * deltaTime * _cameraComponent.ZoomSpeed)
             );
 
@@ -270,7 +214,7 @@ namespace Assets.Editor.UnitTests.Components.Character
             var expectedPosition = new Vector3
             (
                 0.0f,
-                _cameraComponent.transform.localPosition.y - (_cameraComponent.InitialLocation.y * zoomValue * deltaTime * _cameraComponent.ZoomSpeed),
+                0.0f,
                 _cameraComponent.transform.localPosition.z - (_cameraComponent.InitialLocation.z * zoomValue * deltaTime * _cameraComponent.ZoomSpeed)
             );
 
@@ -289,7 +233,7 @@ namespace Assets.Editor.UnitTests.Components.Character
 
             _cameraComponent.Zoom(zoomValue);
 
-            var expectedPosition = _cameraComponent.InitialLocation * PlayerCameraConstants.MaxZoomModifier;
+            var expectedPosition = new Vector3(0.0f, 0.0f, (_cameraComponent.InitialLocation * PlayerCameraConstants.MaxZoomModifier).z);
 
             _cameraComponent.TestUpdate(deltaTime);
 
@@ -305,7 +249,7 @@ namespace Assets.Editor.UnitTests.Components.Character
 
             _cameraComponent.Zoom(zoomValue);
 
-            var expectedPosition = _cameraComponent.InitialLocation * PlayerCameraConstants.MinZoomModifier;
+            var expectedPosition = new Vector3(0.0f, 0.0f, (_cameraComponent.InitialLocation * PlayerCameraConstants.MinZoomModifier).z);
 
             _cameraComponent.TestUpdate(deltaTime);
 
@@ -365,29 +309,6 @@ namespace Assets.Editor.UnitTests.Components.Character
             _cameraComponent.TestUpdate(12.1f);
 
             ExtendedAssertions.AssertVectorsNotNearlyEqual(_cameraComponent.InitialLocation, _cameraComponent.gameObject.transform.localPosition);
-        }
-
-        [Test]
-        public void SetCameraMode_FirstPerson_RequestsFirstPerson()
-        {
-            _cameraComponent.SetCameraMode(EPlayerCameraMode.FirstPerson);
-
-            var info = (FirstPersonActionStateInfo)_actionStateMachine.RequestedInfo;
-
-            Assert.AreEqual(EActionStateMachineTrack.Locomotion, _actionStateMachine.RequestedTrack);
-            Assert.AreEqual(EActionStateId.FirstPerson, _actionStateMachine.RequestedId);
-            Assert.AreSame(_camera.gameObject, info.CameraObject);
-            Assert.AreSame(_pawn, info.Owner);
-        }
-
-        [Test]
-        public void SetCameraMode_ThirdPerson_RequestsLocomotion()
-        {
-            _cameraComponent.SetCameraMode(EPlayerCameraMode.ThirdPerson);
-
-            Assert.AreEqual(EActionStateMachineTrack.Locomotion, _actionStateMachine.RequestedTrack);
-            Assert.AreEqual(EActionStateId.Locomotion, _actionStateMachine.RequestedId);
-            Assert.AreSame(_pawn, _actionStateMachine.RequestedInfo.Owner);
         }
     }
 }

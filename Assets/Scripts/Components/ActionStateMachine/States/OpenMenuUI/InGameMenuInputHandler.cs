@@ -18,10 +18,8 @@ namespace Assets.Scripts.Components.ActionStateMachine.States.OpenMenuUI
             ButtonResponses.Add(EInputKey.PrimaryHeldAction, OnDudButtonPressed);
             ButtonResponses.Add(EInputKey.SecondaryHeldAction, OnDudButtonPressed);
             ButtonResponses.Add(EInputKey.DropHeldItem, OnDudButtonPressed);
-            ButtonResponses.Add(EInputKey.CameraToggle, OnDudButtonPressed);
 
             AnalogResponses.Add(EInputKey.CameraHorizontal, OnDudAnalogInput);
-            AnalogResponses.Add(EInputKey.CameraVertical, OnDudAnalogInput);
             AnalogResponses.Add(EInputKey.CameraZoom, OnDudAnalogInput);
         }
 
