@@ -11,7 +11,7 @@ namespace Assets.Scripts.Components.Trigger
         protected abstract bool CanTrigger(GameObject inGameObject);
         protected abstract bool CanCancelTrigger(GameObject inGameObject);
 
-        private void OnTriggerEnter(Collider inCollider)
+        private void OnTriggerEnter2D(Collider2D inCollider)
         {
             if (inCollider != null && inCollider.gameObject != null)
             {
@@ -19,7 +19,7 @@ namespace Assets.Scripts.Components.Trigger
             }
         }
 
-        private void OnTriggerExit(Collider inCollider)
+        private void OnTriggerExit2D(Collider2D inCollider)
         {
             if (inCollider != null && inCollider.gameObject != null)
             {

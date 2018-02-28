@@ -9,7 +9,7 @@ namespace Assets.Scripts.Components.Health.Damage
     {
         public int HealthChangeOnContact;
 
-        void OnTriggerEnter(Collider inCollider)
+        void OnTriggerEnter2D(Collider2D inCollider)
         {
             if (inCollider != null && inCollider.gameObject != null)
             {

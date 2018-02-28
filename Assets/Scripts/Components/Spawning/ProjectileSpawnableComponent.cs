@@ -28,7 +28,7 @@ namespace Assets.Scripts.Components.Spawning
             _rigidbody.velocity = gameObject.transform.forward * Speed;
         }
 
-        private void OnTriggerEnter(Collider inCollider)
+        private void OnTriggerEnter2D(Collider2D inCollider)
         {
             if (inCollider != null && inCollider.gameObject != null)
             {

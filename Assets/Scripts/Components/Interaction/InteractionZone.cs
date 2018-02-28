@@ -39,12 +39,12 @@ namespace Assets.Scripts.Components.Interaction
             _currentInteractionObjects.Clear();
         }
 
-        private void OnTriggerEnter(Collider inCollider)
+        private void OnTriggerEnter2D(Collider2D inCollider)
         {
 		    OnGameObjectCollides(inCollider.gameObject);
         }
 
-        private void OnTriggerExit(Collider inCollider)
+        private void OnTriggerExit2D(Collider2D inCollider)
         {
             OnGameObjectStopsColliding(inCollider.gameObject);
         }
