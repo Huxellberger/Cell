@@ -26,7 +26,7 @@ namespace Assets.Editor.UnitTests.Input
 
             inputHandler.AddButtonResponse
             (
-                EInputKey.JumpButton, pressed => EInputHandlerResult.Handled
+                EInputKey.Interact, pressed => EInputHandlerResult.Handled
             );
 
             Assert.AreEqual(inputHandler.HandleButtonInput(EInputKey.HorizontalAnalog, false), EInputHandlerResult.Unhandled);
@@ -37,7 +37,7 @@ namespace Assets.Editor.UnitTests.Input
         public void Button_BindingHandles_Handled()
         {
             var inputHandler = new TestInputHandler();
-            const EInputKey expectedInputKey = EInputKey.JumpButton;
+            const EInputKey expectedInputKey = EInputKey.Interact;
 
             inputHandler.AddButtonResponse
             (
@@ -52,7 +52,7 @@ namespace Assets.Editor.UnitTests.Input
         public void Button_BindingDoesNotHandle_Unhandled()
         {
             var inputHandler = new TestInputHandler();
-            const EInputKey expectedInputKey = EInputKey.JumpButton;
+            const EInputKey expectedInputKey = EInputKey.Interact;
 
             inputHandler.AddButtonResponse
             (
@@ -78,7 +78,7 @@ namespace Assets.Editor.UnitTests.Input
 
             inputHandler.AddAnalogResponse
             (
-                EInputKey.JumpButton, analogValue => EInputHandlerResult.Handled
+                EInputKey.Interact, analogValue => EInputHandlerResult.Handled
             );
 
             Assert.AreEqual(inputHandler.HandleAnalogInput(EInputKey.HorizontalAnalog, 0.0f), EInputHandlerResult.Unhandled);
@@ -89,7 +89,7 @@ namespace Assets.Editor.UnitTests.Input
         public void Analog_BindingHandles_Handled()
         {
             var inputHandler = new TestInputHandler();
-            const EInputKey expectedInputKey = EInputKey.JumpButton;
+            const EInputKey expectedInputKey = EInputKey.Interact;
 
             inputHandler.AddAnalogResponse
             (
@@ -104,7 +104,7 @@ namespace Assets.Editor.UnitTests.Input
         public void Analog_BindingDoesNotHandle_Unhandled()
         {
             var inputHandler = new TestInputHandler();
-            const EInputKey expectedInputKey = EInputKey.JumpButton;
+            const EInputKey expectedInputKey = EInputKey.Interact;
 
             inputHandler.AddAnalogResponse
             (
@@ -130,7 +130,7 @@ namespace Assets.Editor.UnitTests.Input
 
             inputHandler.AddMouseResponse
             (
-                EInputKey.JumpButton, mousePosition => EInputHandlerResult.Handled
+                EInputKey.Interact, mousePosition => EInputHandlerResult.Handled
             );
 
             Assert.AreEqual(inputHandler.HandleMouseInput(EInputKey.HorizontalAnalog, new Vector3()), EInputHandlerResult.Unhandled);
@@ -141,7 +141,7 @@ namespace Assets.Editor.UnitTests.Input
         public void Mouse_BindingHandles_Handled()
         {
             var inputHandler = new TestInputHandler();
-            const EInputKey expectedInputKey = EInputKey.JumpButton;
+            const EInputKey expectedInputKey = EInputKey.Interact;
 
             inputHandler.AddMouseResponse
             (
@@ -156,7 +156,7 @@ namespace Assets.Editor.UnitTests.Input
         public void Mouse_BindingDoesNotHandle_Unhandled()
         {
             var inputHandler = new TestInputHandler();
-            const EInputKey expectedInputKey = EInputKey.JumpButton;
+            const EInputKey expectedInputKey = EInputKey.Interact;
 
             inputHandler.AddMouseResponse
             (

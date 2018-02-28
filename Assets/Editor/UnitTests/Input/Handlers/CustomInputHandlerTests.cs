@@ -15,7 +15,7 @@ namespace Assets.Editor.UnitTests.Input.Handlers
     public class CustomInputHandlerTestFixture
     {
         private bool _callbackInvoked;
-        private readonly List<EInputKey> _expectedInputs = new List<EInputKey> {EInputKey.JumpButton, EInputKey.HorizontalAnalog};
+        private readonly List<EInputKey> _expectedInputs = new List<EInputKey> {EInputKey.Interact, EInputKey.HorizontalAnalog};
         private EInputKey _unexpectedInput = EInputKey.VerticalAnalog;
 
         [SetUp]

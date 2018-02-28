@@ -10,7 +10,7 @@ namespace Assets.Editor.UnitTests.Components.Movement
     [TestFixture]
     public class MovementComponentTestFixture
     {
-        private Rigidbody _rigidbody;
+        private Rigidbody2D _rigidbody;
         private MockStaminaComponent _stamina;
         private TestMovementComponent _movement;
         private const float TimeDelta = 1.5f;
@@ -18,7 +18,7 @@ namespace Assets.Editor.UnitTests.Components.Movement
         [SetUp]
         public void BeforeTest()
         {
-            _rigidbody = new GameObject().AddComponent<Rigidbody>();
+            _rigidbody = new GameObject().AddComponent<Rigidbody2D>();
             _stamina = _rigidbody.gameObject.AddComponent<MockStaminaComponent>();
             _movement = _rigidbody.gameObject.AddComponent<TestMovementComponent>();
             _movement.TestAwake();
@@ -49,7 +49,7 @@ namespace Assets.Editor.UnitTests.Components.Movement
             _movement.TestUpdate(TimeDelta);
             _movement.TestUpdate(TimeDelta);
 
-            Assert.AreEqual(Vector3.zero, _rigidbody.velocity);
+            Assert.AreEqual(Vector2.zero, _rigidbody.velocity);
         }
 
         [Test]
@@ -57,7 +57,7 @@ namespace Assets.Editor.UnitTests.Components.Movement
         {
             _movement.TestUpdate(TimeDelta);
             
-            Assert.AreEqual(Vector3.zero, _rigidbody.velocity);
+            Assert.AreEqual(Vector2.zero, _rigidbody.velocity);
         }
 
         [Test]
@@ -69,7 +69,7 @@ namespace Assets.Editor.UnitTests.Components.Movement
 
             _movement.TestUpdate(TimeDelta);
 
-            var expectedVector = new Vector3(0.0f, 0.0f, expectedMagnitude).normalized * _movement.Velocity;
+            var expectedVector = new Vector2(0.0f, expectedMagnitude).normalized * _movement.Velocity;
 
             Assert.AreEqual(expectedVector, _rigidbody.velocity);
         }
@@ -83,7 +83,7 @@ namespace Assets.Editor.UnitTests.Components.Movement
 
             _movement.TestUpdate(TimeDelta);
 
-            var expectedVector = new Vector3(0.0f, 0.0f, expectedMagnitude).normalized * _movement.Velocity;
+            var expectedVector = new Vector2(0.0f, expectedMagnitude).normalized * _movement.Velocity;
 
             Assert.AreEqual(expectedVector, _rigidbody.velocity);
         }
@@ -99,12 +99,12 @@ namespace Assets.Editor.UnitTests.Components.Movement
 
             _movement.TestUpdate(TimeDelta);
 
-            var expectedVector = _movement.gameObject.transform.rotation * new Vector3(0.0f, 0.0f,
+            var expectedVector = _movement.gameObject.transform.rotation * new Vector2(0.0f,
                                      expectedMagnitude).normalized * _movement.Velocity;
 
-            expectedVector.y = 0.0f;
+            var expectedVector2D = new Vector2(expectedVector.x, expectedVector.y);
 
-            Assert.AreEqual(expectedVector, _rigidbody.velocity);
+            Assert.AreEqual(expectedVector2D, _rigidbody.velocity);
         }
 
         [Test]
@@ -116,7 +116,7 @@ namespace Assets.Editor.UnitTests.Components.Movement
 
             _movement.TestUpdate(TimeDelta);
 
-            var expectedVector = new Vector3(expectedMagnitude, 0.0f, 0.0f).normalized * _movement.Velocity;
+            var expectedVector = new Vector2(expectedMagnitude, 0.0f).normalized * _movement.Velocity;
 
             Assert.AreEqual(expectedVector, _rigidbody.velocity);
         }
@@ -130,7 +130,7 @@ namespace Assets.Editor.UnitTests.Components.Movement
 
             _movement.TestUpdate(TimeDelta);
 
-            var expectedVector = new Vector3(expectedMagnitude, 0.0f, 0.0f).normalized * _movement.Velocity;
+            var expectedVector = new Vector2(expectedMagnitude, 0.0f).normalized * _movement.Velocity;
 
             Assert.AreEqual(expectedVector, _rigidbody.velocity);
         }
@@ -140,20 +140,19 @@ namespace Assets.Editor.UnitTests.Components.Movement
         {
             const float expectedMagnitude = -1.0f;
 
-            var expectedRotation = new Vector3(10.0f, 30.0f, 100.0f);
+            var expectedRotation = new Vector2(10.0f, 30.0f);
             _movement.gameObject.transform.Rotate(expectedRotation);
 
             _movement.ApplySidewaysMotion(expectedMagnitude);
 
             _movement.TestUpdate(TimeDelta);
 
-            var expectedVector =  _movement.gameObject.transform.rotation * new Vector3(
-                _movement.Velocity, 0.0f, 0.0f).normalized * _movement.Velocity;
+            var expectedVector = _movement.gameObject.transform.rotation * new Vector2(
+                                     _movement.Velocity, 0.0f).normalized * _movement.Velocity;
 
-            expectedVector.y = 0.0f;
-            expectedVector *= -1;
+            var expectedVector2D = new Vector2(expectedVector.x, expectedVector.y) * -1;
 
-            Assert.AreEqual(expectedVector, _rigidbody.velocity);
+            Assert.AreEqual(expectedVector2D, _rigidbody.velocity);
         }
 
         [Test]
@@ -167,10 +166,9 @@ namespace Assets.Editor.UnitTests.Components.Movement
 
             _movement.TestUpdate(TimeDelta);
 
-            var expectedVector = new Vector3
+            var expectedVector = new Vector2
             (
                 expectedSidewaysMagnitude,
-                0.0f,
                 expectedForwardMagnitude
             ).normalized * _movement.Velocity;
 
@@ -189,7 +187,7 @@ namespace Assets.Editor.UnitTests.Components.Movement
 
             _movement.TestUpdate(TimeDelta);
 
-            var expectedVector = new Vector3 (expectedSidewaysMagnitude, 0.0f, 0.0f)
+            var expectedVector = new Vector2(expectedSidewaysMagnitude, 0.0f)
                 .normalized * _movement.Velocity * _movement.SprintMultiplier;
 
             Assert.AreEqual(expectedVector, _rigidbody.velocity);
@@ -207,7 +205,7 @@ namespace Assets.Editor.UnitTests.Components.Movement
 
             _movement.TestUpdate(TimeDelta);
 
-            var expectedVector = new Vector3(expectedSidewaysMagnitude, 0.0f, expectedForwardMagnitude)
+            var expectedVector = new Vector2(expectedSidewaysMagnitude, expectedForwardMagnitude)
                                       .normalized * _movement.Velocity * _movement.SprintMultiplier;
 
             Assert.AreEqual(expectedVector, _rigidbody.velocity);
@@ -227,7 +225,7 @@ namespace Assets.Editor.UnitTests.Components.Movement
 
             _movement.TestUpdate(TimeDelta);
 
-            var expectedVector = new Vector3(expectedSidewaysMagnitude, 0.0f, 0.0f)
+            var expectedVector = new Vector2(expectedSidewaysMagnitude, 0.0f)
                 .normalized * _movement.Velocity * _movement.SprintMultiplier;
 
             Assert.AreEqual(expectedVector, _rigidbody.velocity);
@@ -257,7 +255,7 @@ namespace Assets.Editor.UnitTests.Components.Movement
 
             _movement.TestUpdate(TimeDelta);
 
-            var expectedVector = new Vector3(_movement.Velocity * expectedSidewaysMagnitude, 0.0f, 0.0f)
+            var expectedVector = new Vector2(_movement.Velocity * expectedSidewaysMagnitude, 0.0f)
                 .normalized * _movement.Velocity;
 
             Assert.AreEqual(expectedVector, _rigidbody.velocity);
@@ -284,7 +282,7 @@ namespace Assets.Editor.UnitTests.Components.Movement
 
             _movement.TestUpdate(TimeDelta);
 
-            var expectedVector = new Vector3(expectedSidewaysMagnitude, 0.0f, 0.0f).normalized * _movement.Velocity;
+            var expectedVector = new Vector2(expectedSidewaysMagnitude, 0.0f).normalized * _movement.Velocity;
 
             Assert.AreEqual(expectedVector, _rigidbody.velocity);
         }
@@ -302,119 +300,10 @@ namespace Assets.Editor.UnitTests.Components.Movement
 
             _movement.TestUpdate(TimeDelta);
 
-            var expectedVector = new Vector3(0.0f, 0.0f, expectedForwardMagnitude)
+            var expectedVector = new Vector2(0.0f, expectedForwardMagnitude)
                 .normalized * _movement.Velocity * _movement.ExhaustedMultiplier;
 
             Assert.AreEqual(expectedVector, _rigidbody.velocity);
-        }
-
-        [Test]
-        public void SetSprintEnabled_Jumping_DoesNotAlterState()
-        {
-            const float expectedForwardMagnitude = 1.0f;
-            const float expectedYVelocity = 100.0f;
-
-            // Sprint And Jump
-            _movement.ApplyForwardMotion(expectedForwardMagnitude);
-            _movement.RequestJump();
-            _movement.SetSprintEnabled(true);
-            _movement.TestUpdate(TimeDelta);
-
-            // Deplete Stamina
-            _rigidbody.velocity = new Vector3(_rigidbody.velocity.x, expectedYVelocity, _rigidbody.velocity.z);
-            _stamina.CanExpendStaminaResult = false;
-            _stamina.IsStaminaDepletedResult = true;
-            _movement.TestUpdate(TimeDelta);
-
-            var expectedVector = new Vector3(0.0f, 0.0f, expectedForwardMagnitude)
-                .normalized * _movement.Velocity * _movement.SprintMultiplier + new Vector3(0.0f, expectedYVelocity, 0.0f);
-
-            Assert.AreEqual(expectedVector, _rigidbody.velocity);
-        }
-        #endregion
-
-        #region Jumping
-        [Test]
-        public void RequestJump_SetsRigidbodyYVelocityToJumpVelocity()
-        {
-            _movement.RequestJump();
-            _movement.TestUpdate(TimeDelta);
-
-            Assert.AreEqual(_movement.JumpVelocity, _rigidbody.velocity.y);
-        }
-
-        [Test]
-        public void RequestJump_ExpendsCorrectStamina()
-        {
-            _movement.RequestJump();
-            _movement.TestUpdate(TimeDelta);
-
-            Assert.AreEqual(_movement.JumpStaminaCost * -1, _stamina.AlterStaminaResult);
-        }
-
-        [Test]
-        public void RequestJump_VelocityContinuesChanging_JumpCannotBeReRequested()
-        {
-            _movement.RequestJump();
-            _movement.TestUpdate(TimeDelta);
-
-            _rigidbody.velocity = new Vector3(0.0f, _movement.JumpVelocity * 2.0f, 0.0f);
-
-            _movement.RequestJump();
-            _movement.TestUpdate(TimeDelta);
-
-            Assert.AreNotEqual(_movement.JumpVelocity, _rigidbody.velocity.y);
-        }
-
-        [Test]
-        public void RequestJump_VelocityDoesNotChange_JumpCanBeReRequested()
-        {
-            _movement.RequestJump();
-            _movement.TestUpdate(TimeDelta);
-
-            _movement.TestUpdate(TimeDelta);
-
-            _rigidbody.velocity = new Vector3(0.0f, _movement.JumpVelocity * 2.0f, 0.0f);
-
-            _movement.RequestJump();
-            _movement.TestUpdate(TimeDelta);
-
-            Assert.AreEqual(_movement.JumpVelocity, _rigidbody.velocity.y);
-        }
-
-        [Test]
-        public void RequestJump_NotEnoughStamina_JumpNotPerformed()
-        {
-            _stamina.CanExpendStaminaResult = false;
-            _movement.RequestJump();
-            _movement.TestUpdate(TimeDelta);
-
-            Assert.AreNotEqual(_movement.JumpVelocity, _rigidbody.velocity.y);
-        }
-
-        [Test]
-        public void JumpInProgress_CannotAlterVelocity()
-        {
-            const float expectedSidewaysMagnitude = -1.0f;
-
-            _movement.RequestJump();
-            _movement.ApplySidewaysMotion(expectedSidewaysMagnitude);
-            _movement.TestUpdate(TimeDelta);
-
-            var alteredYVelocity = _movement.JumpVelocity * 2.0f;
-
-            _rigidbody.velocity = new Vector3(_rigidbody.velocity.x, alteredYVelocity, _rigidbody.velocity.z);
-            _movement.ApplySidewaysMotion(expectedSidewaysMagnitude * 0.5f);
-            _movement.TestUpdate(TimeDelta);
-
-            var expectedVelocity = new Vector3
-            (
-                expectedSidewaysMagnitude * _movement.Velocity,
-                alteredYVelocity,
-                0.0f
-            );
-
-            Assert.AreEqual(expectedVelocity, _rigidbody.velocity);
         }
         #endregion
     }

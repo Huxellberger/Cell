@@ -24,7 +24,7 @@ namespace Assets.Editor.UnitTests.Input
                 new RawInput("Test2", EInputType.Analog)
             };
 
-            mockPlayerPrefsRepoInterface.GetValueForKey(Arg.Any<string>()).Returns(EInputKey.JumpButton.ToString());
+            mockPlayerPrefsRepoInterface.GetValueForKey(Arg.Any<string>()).Returns(EInputKey.Interact.ToString());
 
             var defaultTranslatedInputRepo = new DefaultTranslatedInputRepository(mockPlayerPrefsRepoInterface);
             defaultTranslatedInputRepo.RetrieveMappingsForRawInputs(expectedRawInputs);
@@ -40,7 +40,7 @@ namespace Assets.Editor.UnitTests.Input
         {
             var mockPlayerPrefsRepoInterface = Substitute.For<IPlayerPrefsRepositoryInterface>();
 
-            const EInputKey expectedInputKey = EInputKey.JumpButton;
+            const EInputKey expectedInputKey = EInputKey.Interact;
 
             var expectedRawInputs = new List<RawInput>
             {

@@ -69,7 +69,7 @@ namespace Assets.Editor.UnitTests.Input
         {
             var analogEventCalled = false;
             
-            var expectedtranslatedInput = new TranslatedInput(EInputKey.JumpButton, EInputType.Analog);
+            var expectedtranslatedInput = new TranslatedInput(EInputKey.Interact, EInputType.Analog);
 
             var mockInputMappingProviderInterface = Substitute.For<IInputMappingProviderInterface>();
             var mockUnityInputInterface = Substitute.For<IUnityInputInterface>();
@@ -101,7 +101,7 @@ namespace Assets.Editor.UnitTests.Input
             var analogEventCalled = false;
             var actualKey = EInputKey.HorizontalAnalog;
 
-            var expectedtranslatedInput = new TranslatedInput(EInputKey.JumpButton, EInputType.Analog);
+            var expectedtranslatedInput = new TranslatedInput(EInputKey.Interact, EInputType.Analog);
 
             var mockInputMappingProviderInterface = Substitute.For<IInputMappingProviderInterface>();
             var mockUnityInputInterface = Substitute.For<IUnityInputInterface>();
@@ -134,7 +134,7 @@ namespace Assets.Editor.UnitTests.Input
         {
             var buttonEventCalled = false;
 
-            var expectedtranslatedInput = new TranslatedInput(EInputKey.JumpButton, EInputType.Button);
+            var expectedtranslatedInput = new TranslatedInput(EInputKey.Interact, EInputType.Button);
 
             var mockInputMappingProviderInterface = Substitute.For<IInputMappingProviderInterface>();
             var mockUnityInputInterface = Substitute.For<IUnityInputInterface>();
@@ -165,7 +165,7 @@ namespace Assets.Editor.UnitTests.Input
             var buttonEventCalled = false;
             var actualKey = EInputKey.HorizontalAnalog;
 
-            var expectedtranslatedInput = new TranslatedInput(EInputKey.JumpButton, EInputType.Button);
+            var expectedtranslatedInput = new TranslatedInput(EInputKey.Interact, EInputType.Button);
 
             var mockInputMappingProviderInterface = Substitute.For<IInputMappingProviderInterface>();
             var mockUnityInputInterface = Substitute.For<IUnityInputInterface>();
@@ -198,7 +198,7 @@ namespace Assets.Editor.UnitTests.Input
         {
             var mouseEventCalled = false;
 
-            var expectedtranslatedInput = new TranslatedInput(EInputKey.JumpButton, EInputType.Mouse);
+            var expectedtranslatedInput = new TranslatedInput(EInputKey.Interact, EInputType.Mouse);
 
             var mockInputMappingProviderInterface = Substitute.For<IInputMappingProviderInterface>();
             var mockUnityInputInterface = Substitute.For<IUnityInputInterface>();
@@ -229,7 +229,7 @@ namespace Assets.Editor.UnitTests.Input
             var mouseEventCalled = false;
             var actualKey = EInputKey.HorizontalAnalog;
 
-            var expectedtranslatedInput = new TranslatedInput(EInputKey.JumpButton, EInputType.Mouse);
+            var expectedtranslatedInput = new TranslatedInput(EInputKey.Interact, EInputType.Mouse);
 
             var mockInputMappingProviderInterface = Substitute.For<IInputMappingProviderInterface>();
             var mockUnityInputInterface = Substitute.For<IUnityInputInterface>();

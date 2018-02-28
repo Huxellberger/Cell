@@ -88,10 +88,6 @@ namespace Assets.Scripts.Input
                     new TranslatedInput(EInputKey.SprintButton, EInputType.Button)
                 },
                 {
-                    new RawInput("Spacebar_Button", EInputType.Button),
-                    new TranslatedInput(EInputKey.JumpButton, EInputType.Button)
-                },
-                {
                     new RawInput("Cancel_Button", EInputType.Button),
                     new TranslatedInput(EInputKey.TogglePause, EInputType.Button)
                 },

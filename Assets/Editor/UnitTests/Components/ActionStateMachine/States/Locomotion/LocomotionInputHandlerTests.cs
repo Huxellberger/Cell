@@ -169,60 +169,6 @@ namespace Assets.Editor.UnitTests.Components.ActionStateMachine.States.Locomotio
 
             Assert.AreEqual(EInputHandlerResult.Unhandled, locomotionHandler.HandleButtonInput(EInputKey.SprintButton, true));
         }
-
-        [Test]
-        public void ReceivesJumpButton_MovementInterface_RequestsJump()
-        {
-            var locomotionHandler = new LocomotionInputHandler(_movement, _camera, _heldItem);
-
-            locomotionHandler.HandleButtonInput(EInputKey.JumpButton, true);
-
-            Assert.IsTrue(_movement.RequestJumpCalled);
-        }
-
-        [Test]
-        public void ReceivesJumpButton_MovementInterface_False_DoesNotRequestJump()
-        {
-            var locomotionHandler = new LocomotionInputHandler(_movement, _camera, _heldItem);
-
-            locomotionHandler.HandleButtonInput(EInputKey.JumpButton, false);
-
-            Assert.IsFalse(_movement.RequestJumpCalled);
-        }
-
-        [Test]
-        public void ReceivesJumpButton_MovementInterface_False_ReturnsHandled()
-        {
-            var locomotionHandler = new LocomotionInputHandler(_movement, _camera, _heldItem);
-
-            Assert.AreEqual(EInputHandlerResult.Handled, locomotionHandler.HandleButtonInput(EInputKey.JumpButton, false));
-        }
-
-        [Test]
-        public void ReceivesJumpButton_MovementInterface_ReturnsHandled()
-        {
-            var locomotionHandler = new LocomotionInputHandler(_movement, _camera, _heldItem);
-
-            Assert.AreEqual(EInputHandlerResult.Handled, locomotionHandler.HandleButtonInput(EInputKey.JumpButton, true));
-        }
-
-        [Test]
-        public void ReceivesJumpButton_NoMovementInterface_DoesNotRequestJump()
-        {
-            var locomotionHandler = new LocomotionInputHandler(null, _camera, _heldItem);
-
-            locomotionHandler.HandleButtonInput(EInputKey.JumpButton, true);
-
-            Assert.IsFalse(_movement.RequestJumpCalled);
-        }
-
-        [Test]
-        public void ReceivesJumpButton_NoMovementInterface_ReturnsUnhandled()
-        {
-            var locomotionHandler = new LocomotionInputHandler(null, _camera, _heldItem);
-
-            Assert.AreEqual(EInputHandlerResult.Unhandled, locomotionHandler.HandleButtonInput(EInputKey.JumpButton, true));
-        }
         #endregion
 
         #region Camera

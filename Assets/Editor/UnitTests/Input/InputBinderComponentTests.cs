@@ -45,7 +45,7 @@ namespace Assets.Editor.UnitTests.Input
         }
 
         public bool ReceivedResponse { get; set; }
-        public static readonly EInputKey InputKeyToUse = EInputKey.JumpButton;
+        public static readonly EInputKey InputKeyToUse = EInputKey.Interact;
     };
 
     [TestFixture]

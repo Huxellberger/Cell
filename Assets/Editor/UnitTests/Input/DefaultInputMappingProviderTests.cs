@@ -46,7 +46,7 @@ namespace Assets.Editor.UnitTests.Input
             var mockTranslatedInputRepository = Substitute.For<ITranslatedInputRepositoryInterface>();
             var validRawInput = new RawInput("TestInput", EInputType.Button);
 
-            var expectedTranslation = new TranslatedInput(EInputKey.JumpButton, EInputType.Analog);
+            var expectedTranslation = new TranslatedInput(EInputKey.Interact, EInputType.Analog);
 
             var expectedRawInputs = new List<RawInput>
             {

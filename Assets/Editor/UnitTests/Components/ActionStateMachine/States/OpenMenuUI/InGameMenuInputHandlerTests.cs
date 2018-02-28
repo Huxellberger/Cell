@@ -36,18 +36,6 @@ namespace Assets.Editor.UnitTests.Components.ActionStateMachine.States.OpenMenuU
         }
 
         [Test]
-        public void HandleButtonInput_JumpButton_Pressed_Handled()
-        {
-            Assert.AreEqual(EInputHandlerResult.Handled, _handler.HandleButtonInput(EInputKey.JumpButton, true));
-        }
-
-        [Test]
-        public void HandleButtonInput_JumpButton_Unpressed_Handled()
-        {
-            Assert.AreEqual(EInputHandlerResult.Handled, _handler.HandleButtonInput(EInputKey.JumpButton, false));
-        }
-
-        [Test]
         public void HandleButtonInput_CameraZoomReset_Pressed_Handled()
         {
             Assert.AreEqual(EInputHandlerResult.Handled, _handler.HandleButtonInput(EInputKey.CameraZoomReset, true));

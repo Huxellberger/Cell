@@ -13,7 +13,7 @@ namespace Assets.Scripts.Components.ActionStateMachine.States.Dead
     public class DeadActionState 
         : ActionState
     {
-        public readonly IList<EInputKey> ValidProgressingInputs = new List<EInputKey>{EInputKey.JumpButton};
+        public readonly IList<EInputKey> ValidProgressingInputs = new List<EInputKey>{EInputKey.Interact};
         private readonly ActionStateConditionRunner _conditionRunner;
 
         public DeadActionState(ActionStateInfo inInfo) 

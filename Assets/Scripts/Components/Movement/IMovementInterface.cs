@@ -7,6 +7,5 @@ namespace Assets.Scripts.Components.Movement
         void ApplyForwardMotion(float inForwardMagnitude);
         void ApplySidewaysMotion(float inTurningMotion);
         void SetSprintEnabled(bool inSprintEnabled);
-        void RequestJump();
     }
 }

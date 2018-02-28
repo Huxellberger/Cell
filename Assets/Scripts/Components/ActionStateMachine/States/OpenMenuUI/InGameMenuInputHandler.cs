@@ -11,7 +11,6 @@ namespace Assets.Scripts.Components.ActionStateMachine.States.OpenMenuUI
             : base()
         {
             ButtonResponses.Add(EInputKey.SprintButton, OnDudButtonPressed);
-            ButtonResponses.Add(EInputKey.JumpButton, OnDudButtonPressed);
             ButtonResponses.Add(EInputKey.CameraZoomReset, OnDudButtonPressed);
             ButtonResponses.Add(EInputKey.Interact, OnDudButtonPressed);
             ButtonResponses.Add(EInputKey.PositiveAnimalCry, OnDudButtonPressed);

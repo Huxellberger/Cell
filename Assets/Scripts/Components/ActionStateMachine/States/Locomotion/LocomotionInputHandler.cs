@@ -30,7 +30,6 @@ namespace Assets.Scripts.Components.ActionStateMachine.States.Locomotion
             ButtonResponses.Add(EInputKey.CameraZoomReset, OnCameraZoomReset);
             ButtonResponses.Add(EInputKey.CameraToggle, OnCameraToggle);
             ButtonResponses.Add(EInputKey.SprintButton, OnSprintButton);
-            ButtonResponses.Add(EInputKey.JumpButton, OnJumpButton);
             ButtonResponses.Add(EInputKey.PrimaryHeldAction, OnPrimaryHeldAction);
             ButtonResponses.Add(EInputKey.SecondaryHeldAction, OnSecondaryHeldAction);
             ButtonResponses.Add(EInputKey.DropHeldItem, OnDropHeldItem);
@@ -126,21 +125,6 @@ namespace Assets.Scripts.Components.ActionStateMachine.States.Locomotion
             if (MovementInterface != null)
             {
                 MovementInterface.SetSprintEnabled(isEnabled);
-
-                return EInputHandlerResult.Handled;
-            }
-
-            return EInputHandlerResult.Unhandled;
-        }
-
-        private EInputHandlerResult OnJumpButton(bool isEnabled)
-        {
-            if (MovementInterface != null)
-            {
-                if (isEnabled)
-                {
-                    MovementInterface.RequestJump();
-                }
 
                 return EInputHandlerResult.Handled;
             }

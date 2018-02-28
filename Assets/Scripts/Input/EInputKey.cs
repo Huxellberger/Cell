@@ -6,7 +6,6 @@ namespace Assets.Scripts.Input
     {
         // Movement
         SprintButton,
-        JumpButton,
         VerticalAnalog,
         HorizontalAnalog,
 

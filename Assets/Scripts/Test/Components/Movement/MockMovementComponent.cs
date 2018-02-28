@@ -15,7 +15,6 @@ namespace Assets.Scripts.Test.Components.Movement
         public float? ApplySidewaysMotionResult { get; private set; }
 
         public bool? SetSprintEnabledResult { get; private set; }
-        public bool RequestJumpCalled = false;
 
         public void ApplyForwardMotion(float inForwardMagnitude)
         {
@@ -30,11 +29,6 @@ namespace Assets.Scripts.Test.Components.Movement
         public void SetSprintEnabled(bool isEnabled)
         {
             SetSprintEnabledResult = isEnabled;
-        }
-
-        public void RequestJump()
-        {
-            RequestJumpCalled = true;
         }
     }
 }

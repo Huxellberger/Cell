@@ -15,7 +15,7 @@ namespace Assets.Editor.UnitTests.Components.ActionStateMachine.ConditionRunner.
     [TestFixture]
     public class InputReceivedActionStateConditionTestFixture
     {
-        private readonly List<EInputKey> _expectedInputs = new List<EInputKey> {EInputKey.JumpButton, EInputKey.HorizontalAnalog};
+        private readonly List<EInputKey> _expectedInputs = new List<EInputKey> {EInputKey.Interact, EInputKey.HorizontalAnalog};
         private readonly EInputKey _unexpectedInput = EInputKey.VerticalAnalog;
 
         [Test]
