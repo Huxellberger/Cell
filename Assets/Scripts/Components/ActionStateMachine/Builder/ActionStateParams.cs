@@ -1,7 +1,6 @@
 ﻿// Copyright (C) Threetee Gang All Rights Reserved
 
 using Assets.Scripts.Components.ActionStateMachine.States.Spawning;
-using Assets.Scripts.Components.ActionStateMachine.States.SurfaceSticking;
 using UnityEngine;
 
 namespace Assets.Scripts.Components.ActionStateMachine.Builder
@@ -11,6 +10,5 @@ namespace Assets.Scripts.Components.ActionStateMachine.Builder
         : ScriptableObject
     {
         public SpawningActionStateParams SpawningParams;
-        public SurfaceStickingActionStateParams SurfaceStickingParams;
     }
 }

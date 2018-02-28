@@ -9,7 +9,6 @@ using Assets.Scripts.Components.ActionStateMachine.States.MainMenu;
 using Assets.Scripts.Components.ActionStateMachine.States.OpenMenuUI;
 using Assets.Scripts.Components.ActionStateMachine.States.PushObjectActionState;
 using Assets.Scripts.Components.ActionStateMachine.States.Spawning;
-using Assets.Scripts.Components.ActionStateMachine.States.SurfaceSticking;
 using Assets.Scripts.Components.ActionStateMachine.States.Transforming;
 using NUnit.Framework;
 
@@ -88,14 +87,6 @@ namespace Assets.Editor.UnitTests.Components.ActionStateMachine.Builder
             var definition = new ActionStateDefinitions(new ActionStateParams());
 
             Assert.IsNotNull((CinematicCameraActionState)definition.Definitions[EActionStateId.CinematicCamera](new CinematicCameraActionStateInfo()));
-        }
-
-        [Test]
-        public void Creation_SurfaceStickingStateExists()
-        {
-            var definition = new ActionStateDefinitions(new ActionStateParams());
-
-            Assert.IsNotNull((SurfaceStickingActionState)definition.Definitions[EActionStateId.SurfaceSticking](new SurfaceStickingActionStateInfo()));
         }
     }
 }

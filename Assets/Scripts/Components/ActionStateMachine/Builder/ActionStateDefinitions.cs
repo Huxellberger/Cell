@@ -8,7 +8,6 @@ using Assets.Scripts.Components.ActionStateMachine.States.MainMenu;
 using Assets.Scripts.Components.ActionStateMachine.States.OpenMenuUI;
 using Assets.Scripts.Components.ActionStateMachine.States.PushObjectActionState;
 using Assets.Scripts.Components.ActionStateMachine.States.Spawning;
-using Assets.Scripts.Components.ActionStateMachine.States.SurfaceSticking;
 using Assets.Scripts.Components.ActionStateMachine.States.Transforming;
 
 namespace Assets.Scripts.Components.ActionStateMachine.Builder
@@ -36,7 +35,6 @@ namespace Assets.Scripts.Components.ActionStateMachine.Builder
             Definitions.Add(EActionStateId.Spawning, info => new SpawningActionState(info, inParams.SpawningParams));
             Definitions.Add(EActionStateId.PushObject, info => new PushObjectActionState((PushObjectActionStateInfo) info));
             Definitions.Add(EActionStateId.CinematicCamera, info => new CinematicCameraActionState((CinematicCameraActionStateInfo)info));
-            Definitions.Add(EActionStateId.SurfaceSticking, info => new SurfaceStickingActionState((SurfaceStickingActionStateInfo)info, inParams.SurfaceStickingParams));
         }
     }
 }
