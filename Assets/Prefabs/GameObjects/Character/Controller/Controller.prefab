@@ -21,12 +21,13 @@ GameObject:
   - component: {fileID: 4707551163284922}
   - component: {fileID: 114235443197533420}
   - component: {fileID: 20264330077599770}
-  - component: {fileID: 114696597940978262}
   - component: {fileID: 114637350154218588}
   - component: {fileID: 114831486409233330}
   - component: {fileID: 114657801431638018}
+  - component: {fileID: 114696597940978262}
   - component: {fileID: 82334592802677770}
   - component: {fileID: 81473178574521454}
+  - component: {fileID: 114790486807067158}
   m_Layer: 8
   m_Name: Controller
   m_TagString: Untagged
@@ -66,9 +67,9 @@ Camera:
   near clip plane: 0.3
   far clip plane: 1000
   field of view: 90.6
-  orthographic: 0
+  orthographic: 1
   orthographic size: 5
-  m_Depth: 0
+  m_Depth: -5
   m_CullingMask:
     serializedVersion: 2
     m_Bits: 4294967295
@@ -192,8 +193,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 830c26a8be09f284d809d25ba434a921, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  InitialLocation: {x: 0, y: 0, z: 20}
-  InitialRotation: {x: 0, y: 90, z: 0}
+  InitialLocation: {x: 0, y: 0, z: 0}
+  InitialRotation: {x: 0, y: 0, z: 0}
   CameraHorizontalSpeed: 200
   ZoomSpeed: 2
 --- !u!114 &114657801431638018
@@ -221,6 +222,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 30cd7820994575b4c9b5e41516a16415, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &114790486807067158
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1415648631202670}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a2c4ae9ec1958604a96fb4742e213994, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!114 &114831486409233330

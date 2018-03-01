@@ -11,4 +11,58 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8847146bf7789dd438c12d6decadf582, type: 3}
   m_Name: DefaultLocalisedText
   m_EditorClassIdentifier: 
-  LocalisedDatabase: []
+  LocalisedDatabase:
+  - TextKey:
+      LocalisationNamespace: MainMenu
+      LocalisationKeyValue: QuitGame
+    LocalisedTexts:
+      Entries:
+      - LanguageOption: 0
+        TranslatedText: Quit Game
+      - LanguageOption: 1
+        TranslatedText: 'ERROR: TEXT NOT TRANSLATED'
+  - TextKey:
+      LocalisationNamespace: MainMenu
+      LocalisationKeyValue: StartGame
+    LocalisedTexts:
+      Entries:
+      - LanguageOption: 0
+        TranslatedText: Start Game
+      - LanguageOption: 1
+        TranslatedText: 'ERROR: TEXT NOT TRANSLATED'
+  - TextKey:
+      LocalisationNamespace: LoadingScreen
+      LocalisationKeyValue: Loading
+    LocalisedTexts:
+      Entries:
+      - LanguageOption: 0
+        TranslatedText: Loading...
+      - LanguageOption: 1
+        TranslatedText: 'ERROR: TEXT NOT TRANSLATED'
+  - TextKey:
+      LocalisationNamespace: UIMessages
+      LocalisationKeyValue: DeathMessage
+    LocalisedTexts:
+      Entries:
+      - LanguageOption: 0
+        TranslatedText: You Died!
+      - LanguageOption: 1
+        TranslatedText: 'ERROR: TEXT NOT TRANSLATED'
+  - TextKey:
+      LocalisationNamespace: InteractionPrompt
+      LocalisationKeyValue: InteractVerb
+    LocalisedTexts:
+      Entries:
+      - LanguageOption: 0
+        TranslatedText: 'Interact: '
+      - LanguageOption: 1
+        TranslatedText: 'ERROR: TEXT NOT TRANSLATED'
+  - TextKey:
+      LocalisationNamespace: InGameMenu
+      LocalisationKeyValue: QuitButton
+    LocalisedTexts:
+      Entries:
+      - LanguageOption: 0
+        TranslatedText: Quit Game
+      - LanguageOption: 1
+        TranslatedText: 'ERROR: TEXT NOT TRANSLATED'

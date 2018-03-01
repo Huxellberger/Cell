@@ -2,7 +2,6 @@
 
 using Assets.Editor.UnitTests.Helpers;
 using Assets.Scripts.Components.Character;
-using Assets.Scripts.Test.Components.ActionStateMachine;
 using Assets.Scripts.Test.Components.Character;
 using Assets.Scripts.Test.Components.Controller;
 using NUnit.Framework;
@@ -17,14 +16,12 @@ namespace Assets.Editor.UnitTests.Components.Character
         private TestPlayerCameraComponent _cameraComponent;
         private TestControllerComponent _controller;
         private GameObject _pawn;
-        private MockActionStateMachineComponent _actionStateMachine;
 
         [SetUp]
         public void BeforeTest()
         {
             _pawn = new GameObject();
             _pawn.transform.position = new Vector3(100.0f, 300.0f, 700.0f);
-            _actionStateMachine = _pawn.AddComponent<MockActionStateMachineComponent>();
 
             _controller = new GameObject().AddComponent<TestControllerComponent>();
             _controller.SetPawn(_pawn);
@@ -47,7 +44,6 @@ namespace Assets.Editor.UnitTests.Components.Character
             _camera = null;
             _controller = null;
 
-            _actionStateMachine = null;
             _pawn = null;
         }
 
@@ -129,7 +125,7 @@ namespace Assets.Editor.UnitTests.Components.Character
             _cameraComponent.RotateHorizontal(rotationValue);
             _cameraComponent.TestUpdate(deltaTime);
 
-            var expectedRotation = new Vector3(0.0f, 120.0f, 0.0f);
+            var expectedRotation = new Vector3(0.0f, 0.0f, 120.0f);
 
             ExtendedAssertions.AssertVectorsNearlyEqual(expectedRotation, _cameraComponent.gameObject.transform.parent.rotation.eulerAngles);
         }
@@ -143,7 +139,7 @@ namespace Assets.Editor.UnitTests.Components.Character
             _cameraComponent.RotateHorizontal(rotationValue);
             _cameraComponent.TestUpdate(deltaTime);
 
-            var expectedRotation = new Vector3(0.0f, 240.0f, 0.0f);
+            var expectedRotation = new Vector3(0.0f, 0.0f, 240.0f);
 
             ExtendedAssertions.AssertVectorsNearlyEqual(expectedRotation, _cameraComponent.gameObject.transform.parent.rotation.eulerAngles);
         }
@@ -158,7 +154,7 @@ namespace Assets.Editor.UnitTests.Components.Character
             _cameraComponent.TestUpdate(deltaTime);
             _cameraComponent.TestUpdate(deltaTime);
 
-            var expectedRotation = new Vector3(0.0f, 240.0f, 0.0f);
+            var expectedRotation = new Vector3(0.0f, 0.0f, 240.0f);
 
             ExtendedAssertions.AssertVectorsNearlyEqual(expectedRotation, _cameraComponent.gameObject.transform.parent.rotation.eulerAngles);
         }

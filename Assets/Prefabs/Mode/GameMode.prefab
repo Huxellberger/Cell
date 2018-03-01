@@ -19,6 +19,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4289019321854154}
+  - component: {fileID: 114633763757008462}
   - component: {fileID: 114358108668303544}
   m_Layer: 0
   m_Name: GameMode
@@ -55,6 +56,17 @@ MonoBehaviour:
     type: 2}
   PlayerCharacterType: {fileID: 1734879116349694, guid: ab16f80f07a42d84db7cadbdb8e369ba,
     type: 2}
-  HUDType: {fileID: 1055933434247234, guid: 29c40e616ead2684087aec2605795166, type: 2}
-  MouseTexture: {fileID: 0}
+  HUDType: {fileID: 1488840512822448, guid: f5b324940c0002549b994eec03a07f11, type: 2}
+  MouseTexture: {fileID: 2800000, guid: 33e71b0e5b71001449e78acf04058f65, type: 3}
   StartingSpawnLocation: {fileID: 0}
+--- !u!114 &114633763757008462
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1503958366654476}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a2c4ae9ec1958604a96fb4742e213994, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

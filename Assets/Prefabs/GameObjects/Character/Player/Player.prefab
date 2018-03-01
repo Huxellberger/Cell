@@ -34,6 +34,8 @@ GameObject:
   - component: {fileID: 114138280753643236}
   - component: {fileID: 114337383748393336}
   - component: {fileID: 114331504469708376}
+  - component: {fileID: 61783838722112280}
+  - component: {fileID: 114962977084940308}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -74,6 +76,31 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
+--- !u!61 &61783838722112280
+BoxCollider2D:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1734879116349694}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 1.28, y: 1.28}
+    newSize: {x: 0.16, y: 0.16}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 1.28, y: 1.28}
+  m_EdgeRadius: 0
 --- !u!82 &82373054369488436
 AudioSource:
   m_ObjectHideFlags: 1
@@ -181,7 +208,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   SoundEffectsAudioSource: {fileID: 82373054369488436}
-  DamageSound: {fileID: 0}
+  DamageSound: {fileID: 8300000, guid: 969d0cb14c6e02a40914a6f5d7e73ebc, type: 3}
 --- !u!114 &114138280753643236
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -193,7 +220,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ee846cc423c5d384cbde4852aea99a28, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  StartingState: 0
+  StartingState: 9
 --- !u!114 &114225519056457630
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -266,7 +293,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 027f3a352efaaab42b174223cab22f87, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Params: {fileID: 0}
+  Params: {fileID: 11400000, guid: 94f3189afb4b57c4891030d9d064783a, type: 2}
 --- !u!114 &114585967730302366
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -290,7 +317,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c2012d19a62a9e2439a8a96ebe2042ff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  DefaultMusic: {fileID: 0}
+  DefaultMusic: {fileID: 8300000, guid: df8cea25c744f9c4f9504df9c59377b5, type: 3}
 --- !u!114 &114747674212708560
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -300,6 +327,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 018c1e8407fb5e8489097c0022bf8b43, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &114962977084940308
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1734879116349694}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 13591cc25fa46154fa22a60c7c832284, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!212 &212465483243010486
@@ -336,7 +374,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 10907, guid: 0000000000000000f000000000000000, type: 0}
+  m_Sprite: {fileID: 21300000, guid: b0fb1e60d6c9f5648887086d05e842b8, type: 3}
   m_Color: {r: 0.79158974, g: 0.0864511, b: 0.9044118, a: 1}
   m_FlipX: 0
   m_FlipY: 0

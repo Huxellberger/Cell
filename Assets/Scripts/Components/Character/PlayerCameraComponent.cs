@@ -46,7 +46,7 @@ namespace Assets.Scripts.Components.Character
         {
             var deltaTime = GetDeltaTime();
 
-            transform.parent.Rotate(new Vector3(0.0f, HorizontalModifier * deltaTime * CameraHorizontalSpeed));
+            transform.parent.Rotate(new Vector3(0.0f, 0.0f, HorizontalModifier * deltaTime * CameraHorizontalSpeed));
 
             if (ResetZoomFlag)
             {
