@@ -21,6 +21,7 @@ GameObject:
   - component: {fileID: 4066890876297604}
   - component: {fileID: 212465483243010486}
   - component: {fileID: 114567434435025556}
+  - component: {fileID: 114747674212708560}
   - component: {fileID: 114248481178405558}
   - component: {fileID: 114585967730302366}
   - component: {fileID: 114297470938727622}
@@ -30,7 +31,6 @@ GameObject:
   - component: {fileID: 82373054369488436}
   - component: {fileID: 114045059052088452}
   - component: {fileID: 114589162607525378}
-  - component: {fileID: 114747674212708560}
   - component: {fileID: 114138280753643236}
   - component: {fileID: 114337383748393336}
   - component: {fileID: 114331504469708376}
