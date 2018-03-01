@@ -12,5 +12,6 @@ MonoBehaviour:
   m_Name: PlayerActionStateParams
   m_EditorClassIdentifier: 
   SpawningParams:
-    InitialCameraLocation: {x: 0, y: 0, z: -10}
+    InitialCameraLocation: {x: 0, y: 0, z: -20}
     InitialCameraRotation: {x: 0, y: 0, z: 0}
+    InitialOrthographicSize: 5

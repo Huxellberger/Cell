@@ -17,16 +17,31 @@ namespace Assets.Scripts.Components.Character
         : MonoBehaviour
         , IPlayerCameraInterface
     {
-        public Vector3 InitialLocation;
-        public Vector3 InitialRotation;
-
         public float CameraHorizontalSpeed = 200.0f;
         public float ZoomSpeed = 2.0f;
 
         private ControllerComponent _controller;
 
-        private Vector3 MaxZoom;
-        private Vector3 MinZoom;
+        private Camera _camera;
+
+        private Camera CurrentCamera
+        {
+            get
+            {
+                if (_camera == null)
+                {
+                    _camera = gameObject.GetComponent<Camera>();
+                }
+
+                return _camera;
+            }
+            set { _camera = value; }
+        }
+
+        private float InitialOrthographicSize;
+
+        private float MaxZoom;
+        private float MinZoom;
 
         private float HorizontalModifier { get; set; }
         private float VerticalModifier { get; set; }
@@ -36,10 +51,9 @@ namespace Assets.Scripts.Components.Character
         protected void Start ()
         {
             _controller = gameObject.GetComponent<ControllerComponent>();
+            CurrentCamera = gameObject.GetComponent<Camera>();
 
             gameObject.transform.parent = _controller.PawnInstance.transform;
-
-            SetRelativeCameraPosition(InitialLocation, InitialRotation);
         }
 
         protected void FixedUpdate()
@@ -50,17 +64,12 @@ namespace Assets.Scripts.Components.Character
 
             if (ResetZoomFlag)
             {
-                transform.localPosition = InitialLocation;
-                transform.eulerAngles = new Vector3(InitialRotation.x, transform.eulerAngles.y, transform.eulerAngles.z);;
+                CurrentCamera.orthographicSize = InitialOrthographicSize;
             }
             else
             {
-                transform.localPosition = new Vector3
-                (
-                    0.0f,
-                    0.0f,
-                    Mathf.Clamp(transform.localPosition.z - (InitialLocation.z * ZoomModifier * deltaTime * ZoomSpeed), MinZoom.z, MaxZoom.z)
-                );
+                CurrentCamera.orthographicSize =
+                    Mathf.Clamp(_camera.orthographicSize - (ZoomModifier * ZoomSpeed * deltaTime), MaxZoom, MinZoom);
             }
 
             HorizontalModifier = 0.0f;
@@ -75,16 +84,15 @@ namespace Assets.Scripts.Components.Character
         }
 
         // IPlayerCameraInterface
-        public void SetRelativeCameraPosition(Vector3 inStartLocation, Vector3 inStartRotation)
+        public void SetRelativeCameraPosition(Vector3 inStartLocation, Vector3 inStartRotation, float inOrthographicSize)
         {
-            MaxZoom = inStartLocation * PlayerCameraConstants.MaxZoomModifier;
-            MinZoom = inStartLocation * PlayerCameraConstants.MinZoomModifier;
+            InitialOrthographicSize = inOrthographicSize;
+            MaxZoom = InitialOrthographicSize * PlayerCameraConstants.MaxZoomModifier;
+            MinZoom = InitialOrthographicSize * PlayerCameraConstants.MinZoomModifier;
+            CurrentCamera.orthographicSize = inOrthographicSize;
 
-            InitialLocation = inStartLocation;
-            InitialRotation = inStartRotation;
-
-            gameObject.transform.localPosition = InitialLocation;
-            gameObject.transform.eulerAngles = InitialRotation;
+            gameObject.transform.localPosition = inStartLocation;
+            gameObject.transform.eulerAngles = inStartRotation;
         }
 
         public void RotateHorizontal(float inRotation)

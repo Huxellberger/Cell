@@ -13,15 +13,17 @@ namespace Assets.Scripts.Test.Components.Character
     {
         public Vector3 ? SetLocation { get; private set; }
         public Vector3 ? SetRotation { get; private set; }
+        public float ? SetOrthographicSize { get; private set; }
 
         public float ? RotateHorizontalResult { get; private set; }
         public float ? ZoomResult { get; private set; }
         public bool ResetZoomCalled = false;
 
-        public void SetRelativeCameraPosition(Vector3 inStartLocation, Vector3 inStartRotation)
+        public void SetRelativeCameraPosition(Vector3 inStartLocation, Vector3 inStartRotation, float inOrthographicSize)
         {
             SetLocation = inStartLocation;
             SetRotation = inStartRotation;
+            SetOrthographicSize = inOrthographicSize;
         }
 
         public void RotateHorizontal(float inRotation)

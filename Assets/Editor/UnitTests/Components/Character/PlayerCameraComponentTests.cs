@@ -30,8 +30,6 @@ namespace Assets.Editor.UnitTests.Components.Character
 
             _cameraComponent = _controller.gameObject.AddComponent<TestPlayerCameraComponent>();
             
-            _cameraComponent.InitialLocation = new Vector3(0.0f, 200.0f, -10.0f);
-            _cameraComponent.InitialRotation = new Vector3(0.5f, 0.8f, 0.3f);
             _cameraComponent.ZoomSpeed = 2.0f;
 
             _cameraComponent.TestStart();
@@ -54,41 +52,17 @@ namespace Assets.Editor.UnitTests.Components.Character
         }
 
         [Test]
-        public void Start_LocalPositionMatchesInitialLocation()
-        {
-            Assert.AreEqual(_cameraComponent.InitialLocation, _camera.gameObject.transform.localPosition);
-        }
-
-        [Test]
-        public void Start_LocalRotationMatchesInitialRotation()
-        {
-            var rotation = _camera.gameObject.transform.rotation.eulerAngles;
-
-            ExtendedAssertions.AssertVectorsNearlyEqual(_cameraComponent.InitialRotation, rotation);
-        }
-
-        [Test]
         public void SetRelativeCameraPosition_CameraSetToGivenOrientation()
         {
             var expectedLocation = new Vector3(25.0f, 50.0f, -10.0f);
             var expectedRotation = new Vector3(10.0f, 20.0f, 30.0f);
+            const float expectedOrthoSize = 3.0f;
             
-            _cameraComponent.SetRelativeCameraPosition(expectedLocation, expectedRotation);
+            _cameraComponent.SetRelativeCameraPosition(expectedLocation, expectedRotation, expectedOrthoSize);
 
             ExtendedAssertions.AssertVectorsNearlyEqual(expectedLocation, _cameraComponent.gameObject.transform.localPosition);
             ExtendedAssertions.AssertVectorsNearlyEqual(expectedRotation, _cameraComponent.gameObject.transform.rotation.eulerAngles);
-        }
-
-        [Test]
-        public void SetRelativeCameraPosition_UpdatesInitialLocationAndRotation()
-        {
-            var expectedLocation = new Vector3(25.0f, 50.0f, -10.0f);
-            var expectedRotation = new Vector3(10.0f, 20.0f, 30.0f);
-
-            _cameraComponent.SetRelativeCameraPosition(expectedLocation, expectedRotation);
-
-            ExtendedAssertions.AssertVectorsNearlyEqual(expectedLocation, _cameraComponent.InitialLocation);
-            ExtendedAssertions.AssertVectorsNearlyEqual(expectedRotation, _cameraComponent.InitialRotation);
+            Assert.AreEqual(expectedOrthoSize, _camera.orthographicSize);
         }
 
         [Test]
@@ -96,24 +70,11 @@ namespace Assets.Editor.UnitTests.Components.Character
         {
             var currentInitialLocation = new Vector3(0.0f, 50.0f, -10.0f);
             var currentInitialRotation = new Vector3(10.0f, 20.0f, 30.0f);
+            const float expectedOrthoSize = 3.0f;
 
-            _cameraComponent.SetRelativeCameraPosition(currentInitialLocation, currentInitialRotation);
+            _cameraComponent.SetRelativeCameraPosition(currentInitialLocation, currentInitialRotation, expectedOrthoSize);
 
-            const float zoomValue = 1.0f;
-            const float deltaTime = 0.1f;
-
-            _cameraComponent.Zoom(zoomValue + 100.0f);
-
-            var expectedPosition = new Vector3
-            (
-                0.0f,
-                0.0f,
-                _cameraComponent.transform.localPosition.z - (currentInitialLocation.z * zoomValue * deltaTime * _cameraComponent.ZoomSpeed)
-            );
-
-            _cameraComponent.TestUpdate(deltaTime);
-
-            ExtendedAssertions.AssertVectorsNearlyEqual(expectedPosition, _cameraComponent.gameObject.transform.localPosition);
+            Assert.AreEqual(expectedOrthoSize, _camera.orthographicSize);
         }
 
         [Test]
@@ -160,43 +121,41 @@ namespace Assets.Editor.UnitTests.Components.Character
         }
 
         [Test]
-        public void Zoom_AltersLocalPositionAsExpected()
+        public void Zoom_AltersOrthographicSizeAsExpected()
         {
             const float zoomValue = 0.5f;
             const float deltaTime = 0.1f;
 
+            const float expectedOrthoSize = 3.0f;
+
+            _cameraComponent.SetRelativeCameraPosition(Vector3.zero, Vector3.zero, expectedOrthoSize);
+
             _cameraComponent.Zoom(zoomValue);
 
-            var expectedPosition = new Vector3
-            (
-                0.0f, 
-                0.0f, 
-                _cameraComponent.transform.localPosition.z - (_cameraComponent.InitialLocation.z * zoomValue * deltaTime * _cameraComponent.ZoomSpeed)
-            );
+            var expectedSize = expectedOrthoSize + (deltaTime * zoomValue * - 1 * _cameraComponent.ZoomSpeed);
 
             _cameraComponent.TestUpdate(deltaTime);
 
-            ExtendedAssertions.AssertVectorsNearlyEqual(expectedPosition, _cameraComponent.gameObject.transform.localPosition);
+            Assert.AreEqual(expectedSize, _camera.orthographicSize);
         }
 
         [Test]
-        public void Zoom_AltersLocalPositionInClampedRegion()
+        public void Zoom_AltersOrthographicSizeInClampedRegion()
         {
             const float zoomValue = 1.0f;
             const float deltaTime = 0.1f;
 
+            const float expectedOrthoSize = 3.0f;
+
+            _cameraComponent.SetRelativeCameraPosition(Vector3.zero, Vector3.zero, expectedOrthoSize);
+
             _cameraComponent.Zoom(zoomValue + 100.0f);
 
-            var expectedPosition = new Vector3
-            (
-                0.0f,
-                0.0f,
-                _cameraComponent.transform.localPosition.z - (_cameraComponent.InitialLocation.z * zoomValue * deltaTime * _cameraComponent.ZoomSpeed)
-            );
+            var expectedSize = expectedOrthoSize + (deltaTime * zoomValue * -1 * _cameraComponent.ZoomSpeed);
 
             _cameraComponent.TestUpdate(deltaTime);
 
-            ExtendedAssertions.AssertVectorsNearlyEqual(expectedPosition, _cameraComponent.gameObject.transform.localPosition);
+            Assert.AreEqual(expectedSize, _camera.orthographicSize);
         }
 
         [Test]
@@ -205,106 +164,111 @@ namespace Assets.Editor.UnitTests.Components.Character
             const float zoomValue = 0.5f;
             const float deltaTime = 0.1f;
 
+            const float expectedOrthoSize = 3.0f;
+
+            _cameraComponent.SetRelativeCameraPosition(Vector3.zero, Vector3.zero, expectedOrthoSize);
+
             _cameraComponent.Zoom(zoomValue);
 
-            var expectedPosition = new Vector3
-            (
-                0.0f,
-                0.0f,
-                _cameraComponent.transform.localPosition.z - (_cameraComponent.InitialLocation.z * zoomValue * deltaTime * _cameraComponent.ZoomSpeed)
-            );
+            var expectedSize = expectedOrthoSize + (deltaTime * zoomValue * -1 * _cameraComponent.ZoomSpeed);
 
             _cameraComponent.TestUpdate(deltaTime);
             _cameraComponent.TestUpdate(deltaTime);
 
-            ExtendedAssertions.AssertVectorsNearlyEqual(expectedPosition, _cameraComponent.gameObject.transform.localPosition);
+            Assert.AreEqual(expectedSize, _camera.orthographicSize);
         }
 
         [Test]
         public void Zoom_BoundByMaxRegion()
         {
             const float zoomValue = 1.0f;
-            const float deltaTime = 1.2f;
-            _cameraComponent.ZoomSpeed = 10000.0f;
+            const float deltaTime = 0.1f;
+
+            const float expectedOrthoSize = 3.0f;
+
+            _cameraComponent.ZoomSpeed = 20000.0f;
+            _cameraComponent.SetRelativeCameraPosition(Vector3.zero, Vector3.zero, expectedOrthoSize);
 
             _cameraComponent.Zoom(zoomValue);
 
-            var expectedPosition = new Vector3(0.0f, 0.0f, (_cameraComponent.InitialLocation * PlayerCameraConstants.MaxZoomModifier).z);
+            var expectedSize = expectedOrthoSize * PlayerCameraConstants.MaxZoomModifier;
 
             _cameraComponent.TestUpdate(deltaTime);
 
-            ExtendedAssertions.AssertVectorsNearlyEqual(expectedPosition, _cameraComponent.gameObject.transform.localPosition);
+            Assert.AreEqual(expectedSize, _camera.orthographicSize);
         }
 
         [Test]
         public void Zoom_BoundByMinRegion()
         {
             const float zoomValue = -1.0f;
-            const float deltaTime = 1.2f;
-            _cameraComponent.ZoomSpeed = 10000.0f;
+            const float deltaTime = 0.1f;
+
+            const float expectedOrthoSize = 3.0f;
+
+            _cameraComponent.ZoomSpeed = 20000.0f;
+            _cameraComponent.SetRelativeCameraPosition(Vector3.zero, Vector3.zero, expectedOrthoSize);
 
             _cameraComponent.Zoom(zoomValue);
 
-            var expectedPosition = new Vector3(0.0f, 0.0f, (_cameraComponent.InitialLocation * PlayerCameraConstants.MinZoomModifier).z);
+            var expectedSize = expectedOrthoSize * PlayerCameraConstants.MinZoomModifier;
 
             _cameraComponent.TestUpdate(deltaTime);
 
-            ExtendedAssertions.AssertVectorsNearlyEqual(expectedPosition, _cameraComponent.gameObject.transform.localPosition);
+            Assert.AreEqual(expectedSize, _camera.orthographicSize);
         }
 
         [Test]
-        public void ResetZoom_SetsLocalPositionToInitialLocation()
+        public void ResetZoom_SetsCameraOrthographicSizeToInitialValue()
         {
-            _cameraComponent.Zoom(1.2f);
+            const float expectedOrthoSize = 3.0f;
 
-            _cameraComponent.TestUpdate(12.1f);
+            _cameraComponent.SetRelativeCameraPosition(Vector3.zero, Vector3.zero, expectedOrthoSize);
+
+            _cameraComponent.Zoom(1.0f);
+
+            _cameraComponent.TestUpdate(1.0f);
 
             _cameraComponent.ResetZoom();
+            _cameraComponent.TestUpdate(1.0f);
 
-            _cameraComponent.TestUpdate(12.1f);
-
-            ExtendedAssertions.AssertVectorsNearlyEqual(_cameraComponent.InitialLocation, _cameraComponent.gameObject.transform.localPosition);
-        }
-
-        [Test]
-        public void ResetZoom_SetsXRotationToInitialRotation()
-        {
-            var newRotation = new Vector3(20.0f, 12.0f, 3.0f);
-            _cameraComponent.transform.eulerAngles = newRotation;
-
-            _cameraComponent.ResetZoom();
-
-            _cameraComponent.TestUpdate(12.1f);
-
-            var expectedRotation = new Vector3(_cameraComponent.InitialRotation.x, newRotation.y, newRotation.z);
-
-            ExtendedAssertions.AssertVectorsNearlyEqual(expectedRotation, _cameraComponent.gameObject.transform.eulerAngles);
+            Assert.AreEqual(expectedOrthoSize, _camera.orthographicSize);
         }
 
         [Test]
         public void ResetZoom_OverridesZoomChanges()
         {
-            _cameraComponent.Zoom(1.2f);
+            const float expectedOrthoSize = 3.0f;
+
+            _cameraComponent.SetRelativeCameraPosition(Vector3.zero, Vector3.zero, expectedOrthoSize);
+
+            _cameraComponent.Zoom(1.0f);
             _cameraComponent.ResetZoom();
+            _cameraComponent.TestUpdate(1.0f);
 
-            _cameraComponent.TestUpdate(12.1f);
-
-            ExtendedAssertions.AssertVectorsNearlyEqual(_cameraComponent.InitialLocation, _cameraComponent.gameObject.transform.localPosition);
+            Assert.AreEqual(expectedOrthoSize, _camera.orthographicSize);
         }
 
         [Test]
         public void ResetZoom_ResetFlagAfterUpdate()
         {
-            _cameraComponent.Zoom(1.2f);
+            const float zoomValue = 0.5f;
+            const float deltaTime = 0.1f;
+
+            const float expectedOrthoSize = 3.0f;
+
+            _cameraComponent.SetRelativeCameraPosition(Vector3.zero, Vector3.zero, expectedOrthoSize);
+
             _cameraComponent.ResetZoom();
+            _cameraComponent.Zoom(zoomValue);
+            _cameraComponent.TestUpdate(deltaTime);
 
-            _cameraComponent.TestUpdate(12.1f);
+            var expectedSize = expectedOrthoSize + (deltaTime * zoomValue * -1 * _cameraComponent.ZoomSpeed);
 
-            _cameraComponent.Zoom(1.2f);
+            _cameraComponent.Zoom(zoomValue);
+            _cameraComponent.TestUpdate(deltaTime);
 
-            _cameraComponent.TestUpdate(12.1f);
-
-            ExtendedAssertions.AssertVectorsNotNearlyEqual(_cameraComponent.InitialLocation, _cameraComponent.gameObject.transform.localPosition);
+            Assert.AreEqual(expectedSize, _camera.orthographicSize);
         }
     }
 }

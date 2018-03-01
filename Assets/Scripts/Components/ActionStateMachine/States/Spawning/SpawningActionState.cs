@@ -42,7 +42,7 @@ namespace Assets.Scripts.Components.ActionStateMachine.States.Spawning
                 var cameraInterface = inCharacter.ActiveController.gameObject.GetComponent<IPlayerCameraInterface>();
                 if (cameraInterface != null)
                 {
-                    cameraInterface.SetRelativeCameraPosition(_params.InitialCameraLocation, _params.InitialCameraRotation);
+                    cameraInterface.SetRelativeCameraPosition(_params.InitialCameraLocation, _params.InitialCameraRotation, _params.InitialOrthographicSize);
                 }
             }
         }

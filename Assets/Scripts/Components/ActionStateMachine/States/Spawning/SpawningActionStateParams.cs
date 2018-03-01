@@ -9,5 +9,6 @@ namespace Assets.Scripts.Components.ActionStateMachine.States.Spawning
     {
         public Vector3 InitialCameraLocation;
         public Vector3 InitialCameraRotation;
+        public float InitialOrthographicSize;
     }
 }

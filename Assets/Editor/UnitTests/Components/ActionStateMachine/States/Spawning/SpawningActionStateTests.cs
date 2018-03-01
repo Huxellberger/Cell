@@ -57,13 +57,15 @@ namespace Assets.Editor.UnitTests.Components.ActionStateMachine.States.Spawning
         [Test]
         public void Start_SetsCameraPositionBasedOnParams()
         {
-            var spawningParams = new SpawningActionStateParams { InitialCameraLocation = new Vector3(10.0f, 11.0f, 30.0f), InitialCameraRotation = new Vector3(1.0f, 0.5f, 2.0f) };
+            var spawningParams = new SpawningActionStateParams { InitialCameraLocation = new Vector3(10.0f, 11.0f, 30.0f), InitialCameraRotation = new Vector3(1.0f, 0.5f, 2.0f), InitialOrthographicSize = 3.0f};
             var spawning = new SpawningActionState(new ActionStateInfo(_inputBinder.gameObject), spawningParams);
 
             spawning.Start();
 
             ExtendedAssertions.AssertVectorsNearlyEqual(spawningParams.InitialCameraLocation, _playerCamera.SetLocation.Value);
             ExtendedAssertions.AssertVectorsNearlyEqual(spawningParams.InitialCameraRotation, _playerCamera.SetRotation.Value);
+
+            Assert.AreEqual(spawningParams.InitialOrthographicSize, _playerCamera.SetOrthographicSize);
         }
 
         [Test]
