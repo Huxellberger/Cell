@@ -21,6 +21,9 @@ namespace Assets.Scripts.Input
         SecondaryHeldAction,
         DropHeldItem,
 
+        PrimaryPower,
+        SecondaryPower,
+
         // Animal
         PositiveAnimalCry,
         NegativeAnimalCry,

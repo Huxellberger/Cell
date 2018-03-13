@@ -97,11 +97,11 @@ namespace Assets.Scripts.Input
                 },
                 {
                     new RawInput("Q_Button", EInputType.Button),
-                    new TranslatedInput(EInputKey.PositiveAnimalCry, EInputType.Button)
+                    new TranslatedInput(EInputKey.PrimaryPower, EInputType.Button)
                 },
                 {
                     new RawInput("E_Button", EInputType.Button),
-                    new TranslatedInput(EInputKey.NegativeAnimalCry, EInputType.Button)
+                    new TranslatedInput(EInputKey.SecondaryPower, EInputType.Button)
                 },
                 {
                     new RawInput("lmb_Button", EInputType.Button),

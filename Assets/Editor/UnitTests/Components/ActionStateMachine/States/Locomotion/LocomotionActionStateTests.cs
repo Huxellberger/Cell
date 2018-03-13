@@ -6,6 +6,7 @@ using Assets.Scripts.Components.ActionStateMachine;
 using Assets.Scripts.Components.ActionStateMachine.States.Locomotion;
 using Assets.Scripts.Components.Character;
 using Assets.Scripts.Components.Controller;
+using Assets.Scripts.Components.Power;
 using Assets.Scripts.Input.Handlers;
 using Assets.Scripts.Messaging;
 using Assets.Scripts.Services;
@@ -86,6 +87,16 @@ namespace Assets.Editor.UnitTests.Components.ActionStateMachine.States.Locomotio
         }
 
         [Test]
+        public void Start_RegistersPowerInputHandler()
+        {
+            var locomotion = new LocomotionActionState(new ActionStateInfo(_inputBinder.gameObject));
+
+            locomotion.Start();
+
+            Assert.IsTrue(_inputBinder.IsHandlerOfTypeRegistered<PowerInputHandler>());
+        }
+
+        [Test]
         public void Start_SendsEnterLocomotionStateMessage()
         {
             var locomotion = new LocomotionActionState(new ActionStateInfo(_inputBinder.gameObject));
@@ -137,6 +148,18 @@ namespace Assets.Editor.UnitTests.Components.ActionStateMachine.States.Locomotio
             locomotion.End();
 
             Assert.IsTrue(_inputBinder.IsHandlerOfTypeUnregistered<PauseInputHandler>());
+        }
+
+        [Test]
+        public void End_UnregistersPowerInputHandler()
+        {
+            var locomotion = new LocomotionActionState(new ActionStateInfo(_inputBinder.gameObject));
+
+            locomotion.Start();
+
+            locomotion.End();
+
+            Assert.IsTrue(_inputBinder.IsHandlerOfTypeUnregistered<PowerInputHandler>());
         }
 
         [Test]

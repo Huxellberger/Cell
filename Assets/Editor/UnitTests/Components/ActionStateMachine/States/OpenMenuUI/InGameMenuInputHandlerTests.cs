@@ -120,6 +120,30 @@ namespace Assets.Editor.UnitTests.Components.ActionStateMachine.States.OpenMenuU
         }
 
         [Test]
+        public void HandleButtonInput_PrimaryPower_Pressed_Handled()
+        {
+            Assert.AreEqual(EInputHandlerResult.Handled, _handler.HandleButtonInput(EInputKey.PrimaryPower, true));
+        }
+
+        [Test]
+        public void HandleButtonInput_PrimaryPower_Unpressed_Handled()
+        {
+            Assert.AreEqual(EInputHandlerResult.Handled, _handler.HandleButtonInput(EInputKey.PrimaryPower, false));
+        }
+
+        [Test]
+        public void HandleButtonInput_SecondaryPower_Pressed_Handled()
+        {
+            Assert.AreEqual(EInputHandlerResult.Handled, _handler.HandleButtonInput(EInputKey.SecondaryPower, true));
+        }
+
+        [Test]
+        public void HandleButtonInput_SecondaryPower_Unpressed_Handled()
+        {
+            Assert.AreEqual(EInputHandlerResult.Handled, _handler.HandleButtonInput(EInputKey.SecondaryPower, false));
+        }
+
+        [Test]
         public void HandleAnalogInput_CameraHorizontal_Handled()
         {
             Assert.AreEqual(EInputHandlerResult.Handled, _handler.HandleAnalogInput(EInputKey.CameraHorizontal, 1.0f));
