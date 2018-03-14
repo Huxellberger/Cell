@@ -60,6 +60,16 @@ namespace Assets.Editor.UnitTests.AI.Goals
         }
 
         [Test]
+        public void Initialise_CallsOnInitialised()
+        {
+            _compositeGoal.TestAddSubGoal(_goal);
+
+            _compositeGoal.Initialise();
+
+            Assert.IsTrue(_compositeGoal.OnInitialisedCalled);
+        }
+
+        [Test]
         public void Initialise_EmptiesSubGoalsOnTermination()
         {
             _compositeGoal.TestAddSubGoal(_goal);
@@ -228,6 +238,17 @@ namespace Assets.Editor.UnitTests.AI.Goals
 
             Assert.IsTrue(_otherGoal.Terminated);
             Assert.IsFalse(_goal.Terminated);
+        }
+
+        [Test]
+        public void Terminate_OnTerminatedCalled()
+        {
+            _compositeGoal.TestAddSubGoal(_otherGoal);
+            _compositeGoal.Initialise();
+
+            _compositeGoal.Terminate();
+
+            Assert.IsTrue(_compositeGoal.OnTerminatedCalled);
         }
     }
 }

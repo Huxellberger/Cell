@@ -7,6 +7,7 @@ namespace Assets.Scripts.AI.Goals
         Default,
         FollowTarget,
         RemainInRadius,
+        InvestigateDisturbance,
         Idle
     }
 }

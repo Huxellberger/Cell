@@ -17,8 +17,13 @@ namespace Assets.Scripts.AI.Goals
             _activeGoalIndex = -1;
         }
 
+        protected abstract void OnInitialised();
+        protected abstract void OnTerminated();
+
         public override void Initialise()
         {
+            OnInitialised();
+
             if (_subGoals.Count == 0)
             {
                 Debug.LogError("CompositeGoal has no SubGoals to complete on initialisation!");
@@ -64,6 +69,8 @@ namespace Assets.Scripts.AI.Goals
 
             _activeGoalIndex = -1;
             _subGoals.Clear();
+
+            OnTerminated();
         }
 
         protected void AddSubGoal(Goal inGoal)

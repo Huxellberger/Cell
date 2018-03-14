@@ -67,5 +67,11 @@ namespace Assets.Editor.UnitTests.AI.Goals
         {
             Assert.IsNotNull((RemainInRadiusGoal)_goalBuilder.CreateGoalForId(EGoalID.RemainInRadius));
         }
+
+        [Test]
+        public void CreateGoalWithId_InvestigateDisturbance_CreateInvestigateDisturbanceGoal()
+        {
+            Assert.IsNotNull((InvestigateDisturbanceGoal)_goalBuilder.CreateGoalForId(EGoalID.InvestigateDisturbance));
+        }
     }
 }
