@@ -154,8 +154,11 @@ namespace UnityEngine.AI
                 sourcesBounds = CalculateWorldBounds(sources);
             }
 
+            // BEGIN THREETEE GANG: Potential Modification for building navmesh in 2d
+            // var alteredRotation = Quaternion.FromToRotation(Vector3.up, Vector3.forward);
             var data = NavMeshBuilder.BuildNavMeshData(GetBuildSettings(),
-                    sources, sourcesBounds, transform.position, transform.rotation);
+                    sources, sourcesBounds, transform.position, Quaternion.Euler(-90.0f, 0.0f, 0.0f));
+            // END THREETEE GANG: Potential Modification for building navmesh in 2d
 
             if (data != null)
             {
