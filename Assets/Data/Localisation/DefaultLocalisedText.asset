@@ -66,3 +66,12 @@ MonoBehaviour:
         TranslatedText: Quit Game
       - LanguageOption: 1
         TranslatedText: 'ERROR: TEXT NOT TRANSLATED'
+  - TextKey:
+      LocalisationNamespace: Holdable
+      LocalisationKeyValue: Horn
+    LocalisedTexts:
+      Entries:
+      - LanguageOption: 0
+        TranslatedText: Horn
+      - LanguageOption: 1
+        TranslatedText: 'ERROR: TEXT NOT TRANSLATED'

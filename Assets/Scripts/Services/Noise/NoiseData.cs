@@ -5,6 +5,7 @@ using UnityEngine;
 
 namespace Assets.Scripts.Services.Noise
 {
+    [System.Serializable]
     public struct NoiseData
     {
         public Vector3 NoiseLocation;

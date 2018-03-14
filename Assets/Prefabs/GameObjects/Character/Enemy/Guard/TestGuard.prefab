@@ -20,11 +20,13 @@ GameObject:
   m_Component:
   - component: {fileID: 4445391182159720}
   - component: {fileID: 212966911299361754}
+  - component: {fileID: 114636006130790086}
   - component: {fileID: 114571299615851848}
   - component: {fileID: 195298085168168020}
   - component: {fileID: 114297713508286906}
   - component: {fileID: 50964931327340522}
   - component: {fileID: 61282028469465928}
+  - component: {fileID: 114294214031658156}
   m_Layer: 0
   m_Name: TestGuard
   m_TagString: Untagged
@@ -90,6 +92,18 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1.28, y: 1.28}
   m_EdgeRadius: 0
+--- !u!114 &114294214031658156
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1483872886818042}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 69f163b2d8fcb754895771cd1814e2cd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  NoisesOfInterest: 00000000
 --- !u!114 &114297713508286906
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -118,6 +132,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   PossibleGoalIds: 0400000003000000
   GoalParameters: {fileID: 11400000, guid: 182efb813a7f58f46ba43d796f671f2c, type: 2}
+--- !u!114 &114636006130790086
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1483872886818042}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a2c4ae9ec1958604a96fb4742e213994, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!195 &195298085168168020
 NavMeshAgent:
   m_ObjectHideFlags: 1
@@ -174,7 +199,7 @@ SpriteRenderer:
   m_SortingLayer: 2
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: b0fb1e60d6c9f5648887086d05e842b8, type: 3}
-  m_Color: {r: 0.6670145, g: 0.10207612, b: 0.86764705, a: 1}
+  m_Color: {r: 0.21410036, g: 0.27289408, b: 0.33088237, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
