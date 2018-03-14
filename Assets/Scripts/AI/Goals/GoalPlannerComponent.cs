@@ -43,7 +43,17 @@ namespace Assets.Scripts.AI.Goals
 
             foreach (var possibleGoalId in PossibleGoalIds)
             {
-                PotentialGoals.Add(GoalBuilder.CreateGoalForId(possibleGoalId));
+                var newGoal = GoalBuilder.CreateGoalForId(possibleGoalId);
+                newGoal.RegisterGoal();
+                PotentialGoals.Add(newGoal);
+            }
+        }
+
+        protected void OnDestroy()
+        {
+            foreach (var potentialGoal in PotentialGoals)
+            {
+                potentialGoal.UnregisterGoal();
             }
         }
 	

@@ -9,6 +9,9 @@ namespace Assets.Scripts.Test.AI.Goals
 {
     public class TestGoal : Goal
     {
+        public bool Registered { get; private set; }
+        public bool Unregistered { get; private set; }
+        
         public bool Initialised { get; private set; }
 
         public bool Updated { get; private set; }
@@ -23,6 +26,8 @@ namespace Assets.Scripts.Test.AI.Goals
         public TestGoal(GameObject inOwner) 
             : base(inOwner)
         {
+            Registered = false;
+            Unregistered = false;
             Initialised = false;
             Updated = false;
             UpdateResult = EGoalStatus.InProgress;
@@ -30,6 +35,16 @@ namespace Assets.Scripts.Test.AI.Goals
 
             OverrideDesirabilityFunction = false;
             CalculateDesirabilityOverride = 0.0f;
+        }
+
+        public override void RegisterGoal()
+        {
+            Registered = true;
+        }
+
+        public override void UnregisterGoal()
+        {
+            Unregistered = true;
         }
 
         public override void Initialise()

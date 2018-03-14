@@ -17,7 +17,12 @@ namespace Assets.Scripts.Test.AI.Goals
         {
             Start();
         }
-	
+
+        public void TestDestroy()
+        {
+            OnDestroy();
+        }
+
         public void TestUpdate (float inDelta)
         {
             GetTimeDeltaResult = inDelta;

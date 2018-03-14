@@ -49,6 +49,26 @@ namespace Assets.Editor.UnitTests.AI.Goals
         }
 
         [Test]
+        public void Start_RegistersAllCreatedGoals()
+        {
+            foreach (var createdGoal in _builder.CreatedGoals)
+            {
+                Assert.IsTrue(createdGoal.Registered);
+            }
+        }
+
+        [Test]
+        public void OnDestroy_UnregistersAllCreatedGoals()
+        {
+            _planner.TestDestroy();
+
+            foreach (var createdGoal in _builder.CreatedGoals)
+            {
+                Assert.IsTrue(createdGoal.Unregistered);
+            }
+        }
+
+        [Test]
         public void Update_InitialisesMostDesirableGoal()
         {
             var mostDesirableGoal = _builder.CreatedGoals.First();

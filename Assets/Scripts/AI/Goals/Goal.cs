@@ -23,6 +23,11 @@ namespace Assets.Scripts.AI.Goals
             return 0.0f;
         }
 
+        // Called on Creation/Destruction of goal
+        public virtual void RegisterGoal() { }
+        public virtual void UnregisterGoal() { }
+
+        // Called during active running of goal
         public abstract void Initialise();
         public abstract EGoalStatus Update(float inDeltaTime);
         public abstract void Terminate();
