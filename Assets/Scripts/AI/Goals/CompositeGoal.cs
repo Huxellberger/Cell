@@ -63,6 +63,7 @@ namespace Assets.Scripts.AI.Goals
             }
 
             _activeGoalIndex = -1;
+            _subGoals.Clear();
         }
 
         protected void AddSubGoal(Goal inGoal)

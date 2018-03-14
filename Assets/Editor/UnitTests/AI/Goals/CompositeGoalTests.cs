@@ -60,7 +60,7 @@ namespace Assets.Editor.UnitTests.AI.Goals
         }
 
         [Test]
-        public void Initialise_ReturnsToFirstGoal()
+        public void Initialise_EmptiesSubGoalsOnTermination()
         {
             _compositeGoal.TestAddSubGoal(_goal);
             _compositeGoal.TestAddSubGoal(_otherGoal);
@@ -71,11 +71,9 @@ namespace Assets.Editor.UnitTests.AI.Goals
 
             _compositeGoal.Update(1.0f);
             _compositeGoal.Terminate();
+
+            LogAssert.Expect(LogType.Error, "CompositeGoal has no SubGoals to complete on initialisation!");
             _compositeGoal.Initialise();
-
-            _otherGoal.UpdateResult = EGoalStatus.Failed;
-
-            Assert.AreEqual(_otherGoal.UpdateResult, _compositeGoal.Update(1.0f));
         }
 
         [Test]
