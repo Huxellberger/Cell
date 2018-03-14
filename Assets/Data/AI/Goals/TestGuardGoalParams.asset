@@ -1,0 +1,25 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 364e28daae1361b4a88ce71cb4a42314, type: 3}
+  m_Name: TestGuardGoalParams
+  m_EditorClassIdentifier: 
+  IdleGoalParameters:
+    IdleDesirability: 0.2
+  FollowTargetGoalParameters:
+    ValidTargetDesirability: 0
+    FollowRadius: 0
+    LoseFollowRadiusSquared: 0
+  RemainInRadiusGoalParameters:
+    LeftRadiusDesirability: 0
+    MaxRadius: 0
+  InvestigateDisturbanceGoalParameters:
+    DesirabilityOnDetection: 0.6
+    IdleDelay: 3
