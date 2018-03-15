@@ -9,7 +9,7 @@ namespace Assets.Scripts.AI.Pathfinding.Nav
     public class NavRegion
     {
         public readonly NavNode[] Nodes;
-        public Bounds RegionBounds { get; private set; }
+        public Rect RegionBounds { get; private set; }
 
         public NavRegion(NavNode[] inNodes)
         {
@@ -37,8 +37,7 @@ namespace Assets.Scripts.AI.Pathfinding.Nav
                     }
                 }
 
-                RegionBounds = new Bounds();
-                RegionBounds.SetMinMax(new Vector3(minPoint.x, minPoint.y, 0.0f), new Vector3(maxPoint.x, maxPoint.y, 0.0f));
+                RegionBounds = Rect.MinMaxRect(minPoint.x, minPoint.y, maxPoint.x, maxPoint.y);
             }
         }
 
