@@ -11,6 +11,7 @@ namespace Assets.Editor.CustomEditors.AI.Nav
     {
         private string filePath = @"Assets\Data\AI\Nav\";
         private string fileName = "DefaultTilemapNav";
+        private int tilesPerRegion = 64;
 
         [MenuItem("Window/Tilemap Nav Generation")]
         public static void ShowWindow()
@@ -23,6 +24,7 @@ namespace Assets.Editor.CustomEditors.AI.Nav
             GUILayout.Label("Nav Settings", EditorStyles.boldLabel);
             filePath = EditorGUILayout.TextField("File Path", filePath);
             fileName = EditorGUILayout.TextField("File Name", fileName);
+            tilesPerRegion = EditorGUILayout.IntField("Tiles Per Region", tilesPerRegion);
 
             GUILayout.Label("Operations", EditorStyles.boldLabel);
             if (GUILayout.Button("Build Tilemap Nav"))
