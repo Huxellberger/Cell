@@ -3,6 +3,7 @@
 using Assets.Scripts.Core;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.Tilemaps;
 
 namespace Assets.Scripts.AI.Pathfinding
 {
