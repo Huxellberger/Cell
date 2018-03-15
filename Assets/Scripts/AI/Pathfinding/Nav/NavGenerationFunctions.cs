@@ -22,6 +22,18 @@ namespace Assets.Scripts.AI.Pathfinding.Nav
             }
         }
 
+        public class NodeReturnResult
+        {
+            public readonly int NodeIndex;
+            public readonly NavNode ReturnedNode;
+
+            public NodeReturnResult(int inNodeIndex, NavNode inReturnedNode)
+            {
+                NodeIndex = inNodeIndex;
+                ReturnedNode = inReturnedNode;
+            }
+        }
+
         public static List<NavNode> GenerateNavDataForCurrentScene()
         {
             var allTilemaps = Object.FindObjectsOfType<Tilemap>();
@@ -95,21 +107,22 @@ namespace Assets.Scripts.AI.Pathfinding.Nav
         private static List<NavNode> GenerateNavDataFromPoints(List<TileNavInfo> nodePositions)
         {
             var generatedNodes = new List<NavNode>();
-            var foundNeighbours = new List<NavNode>(4);
+            var foundNeighbours = new List<int>(4);
             foreach (var nodePosition in nodePositions)
             {
-                foreach (var otherNodes in nodePositions)
+                foreach (var otherNode in nodePositions)
                 {
-                    if (NodeIsNeighbour(nodePosition.CurrentCell, otherNodes.CurrentCell))
+                    if (NodeIsNeighbour(nodePosition.CurrentCell, otherNode.CurrentCell))
                     {
-                        var neighbourNode = GetNode(nodePosition, generatedNodes);
+                        var neighbourNode = GetNode(otherNode, generatedNodes);
                         if (neighbourNode == null)
                         {
-                            neighbourNode = new NavNode { Position = otherNodes.CurrentTilePosition, Weight = 1 };
-                            generatedNodes.Add(neighbourNode);
+                            var generatedNeighbourNode = new NavNode { Position = otherNode.CurrentTilePosition, Weight = 1 };
+                            generatedNodes.Add(generatedNeighbourNode);
+                            neighbourNode = new NodeReturnResult(generatedNodes.Count - 1, generatedNeighbourNode);
                         }
 
-                        foundNeighbours.Add(neighbourNode);
+                        foundNeighbours.Add(neighbourNode.NodeIndex);
                     }
                 }
 
@@ -117,16 +130,18 @@ namespace Assets.Scripts.AI.Pathfinding.Nav
 
                 if (nodeToUpdate == null)
                 {
-                    nodeToUpdate = new NavNode
+                    var generatedNodeToUpdate = new NavNode
                     {
                         Position = nodePosition.CurrentTilePosition,
                         Weight = 1,
                         Neighbours = foundNeighbours.ToArray()
                     };
+
+                    generatedNodes.Add(generatedNodeToUpdate);
                 }
                 else
                 {
-                    nodeToUpdate.Neighbours = foundNeighbours.ToArray();
+                    nodeToUpdate.ReturnedNode.Neighbours = foundNeighbours.ToArray();
                 }
 
                 foundNeighbours.Clear();
@@ -146,13 +161,13 @@ namespace Assets.Scripts.AI.Pathfinding.Nav
             return Mathf.Abs(inNode.x - inOtherNode.x) + Mathf.Abs(inNode.y - inOtherNode.y) == 1;
         }
 
-        private static NavNode GetNode(TileNavInfo inInfo, IEnumerable<NavNode> exisitingNodes)
+        private static NodeReturnResult GetNode(TileNavInfo inInfo, List<NavNode> existingNodes)
         {
-            foreach (var existingNode in exisitingNodes)
+            for (var currentNodeIndex = 0; currentNodeIndex < existingNodes.Count; currentNodeIndex++) 
             {
-                if (inInfo.CurrentTilePosition.Equals(existingNode.Position))
+                if (inInfo.CurrentTilePosition.Equals(existingNodes[currentNodeIndex].Position))
                 {
-                    return existingNode;
+                    return new NodeReturnResult(currentNodeIndex, existingNodes[currentNodeIndex]);
                 }
             }
 
