@@ -1,7 +1,6 @@
 ﻿// Copyright (C) Threetee Gang All Rights Reserved
 
 using System.Collections.Generic;
-using System.Diagnostics;
 using Debug = UnityEngine.Debug;
 
 namespace Assets.Scripts.AI.Pathfinding.Nav
@@ -57,11 +56,13 @@ namespace Assets.Scripts.AI.Pathfinding.Nav
 
                     nodesToConsiderQueue.RemoveAt(0);
                 }
-            }
 
-            if (nodesToAssign.Count > 0)
-            {
-                assignedRegions.Add(new NavRegion(nodesToAssign.ToArray()));
+                // make sure regions don't span unconnected components (and allocate last, potentially unfilled region)
+                if (nodesToAssign.Count > 0)
+                {
+                    assignedRegions.Add(new NavRegion(nodesToAssign.ToArray()));
+                    nodesToAssign.Clear();
+                }
             }
 
             return assignedRegions;
