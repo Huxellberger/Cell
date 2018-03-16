@@ -8,9 +8,23 @@ namespace Assets.Scripts.Components.Equipment.Holdables
         : MonoBehaviour 
         , IHeldItemInterface
     {
+        public GameObject StartingHeldItem;
         public GameObject HeldItemSocketObject;
 
         private IHoldableInterface _currentHoldable;
+
+        protected void Start()
+        {
+            if (StartingHeldItem != null)
+            {
+                PickupHoldable(StartingHeldItem.GetComponent<IHoldableInterface>());
+            }
+        }
+
+        protected void OnDestroy()
+        {
+            DropHoldable();
+        }
 
         public void UseCurrentHoldable(EHoldableAction inAction)
         {

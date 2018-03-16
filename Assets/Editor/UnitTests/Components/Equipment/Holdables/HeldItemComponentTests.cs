@@ -10,25 +10,46 @@ namespace Assets.Editor.UnitTests.Components.Equipment.Holdables
     [TestFixture]
     public class HeldItemComponentTestFixture
     {
-        private HeldItemComponent _heldItem;
+        private TestHeldItemComponent _heldItem;
         private MockHoldableComponent _holdable;
+        private MockHoldableComponent _startingHoldable;
 
         [SetUp]
         public void BeforeTest()
         {
-            _heldItem = new GameObject().AddComponent<HeldItemComponent>();
+            _heldItem = new GameObject().AddComponent<TestHeldItemComponent>();
 
             _holdable = new GameObject().AddComponent<MockHoldableComponent>();
+            _startingHoldable = new GameObject().AddComponent<MockHoldableComponent>();
 
             _heldItem.HeldItemSocketObject = _holdable.gameObject;
+            _heldItem.StartingHeldItem = _startingHoldable.gameObject;
         }
 
         [TearDown]
         public void AfterTest()
         {
+            _startingHoldable = null;
             _holdable = null;
 
             _heldItem = null;
+        }
+
+        [Test]
+        public void Start_EquipsStartingHoldable()
+        {
+            _heldItem.TestStart();
+
+            Assert.AreSame(_heldItem.gameObject, _startingHoldable.OnHeldGameObject);
+        }
+
+        [Test]
+        public void OnDestroy_DropsCurrentHoldable()
+        {
+            _heldItem.TestStart();
+            _heldItem.TestDestroy();
+
+            Assert.IsTrue(_startingHoldable.OnDroppedCalled);
         }
 
         [Test]
