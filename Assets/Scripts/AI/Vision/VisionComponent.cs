@@ -25,9 +25,11 @@ namespace Assets.Scripts.AI.Vision
 
         public GameObject DetectingObject;
         public float TimeUntilDetection = 1.5f;
+        public Color DebugDrawColour = Color.red;
 
         private readonly List<GameObject> _nonSuspiciousObjects = new List<GameObject>(10);
         private readonly List<SuspicionEntry> _currentSuspicions = new List<SuspicionEntry>(2);
+        private PolygonCollider2D _visionCollider;
 
         protected abstract bool IsSuspicious(GameObject inDetectedObject);
 
@@ -149,6 +151,28 @@ namespace Assets.Scripts.AI.Vision
         private void OnDetected(GameObject inDetectedGameObject)
         {
             UnityMessageEventFunctions.InvokeMessageEventWithDispatcher(DetectingObject, new SuspiciousObjectDetectedMessage(inDetectedGameObject));
+        }
+
+        private void OnDrawGizmos()
+        {
+            if (_visionCollider == null)
+            {
+                _visionCollider = gameObject.GetComponent<PolygonCollider2D>();
+            }
+
+            if (_visionCollider != null)
+            {
+                Gizmos.color = DebugDrawColour;
+
+                Vector2 currentPosition = gameObject.transform.position;
+
+                for (var currentNodeIndex = 0; currentNodeIndex < _visionCollider.GetTotalPointCount() - 1; currentNodeIndex++)
+                {
+                    Gizmos.DrawLine(currentPosition + _visionCollider.points[currentNodeIndex], currentPosition + _visionCollider.points[currentNodeIndex + 1]);
+                }
+
+                Gizmos.DrawLine(currentPosition + _visionCollider.points[0], currentPosition + _visionCollider.points[_visionCollider.GetTotalPointCount() - 1]);
+            }
         }
     }
 }
