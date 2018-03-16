@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace Assets.Scripts.Components.Spawning
 {
-    [RequireComponent(typeof(Rigidbody), typeof(AudioSource))]
+    [RequireComponent(typeof(Rigidbody2D), typeof(AudioSource))]
     public class ProjectileSpawnableComponent 
         : SpawnableComponent
     {
@@ -14,18 +14,18 @@ namespace Assets.Scripts.Components.Spawning
         public AudioClip CollisionAudioClip;
 
         private AudioSource _audioSource;
-        private Rigidbody _rigidbody;
+        private Rigidbody2D _rigidbody;
 
         protected void Awake()
         {
             _audioSource = gameObject.GetComponent<AudioSource>();
-            _rigidbody = gameObject.GetComponent<Rigidbody>();
+            _rigidbody = gameObject.GetComponent<Rigidbody2D>();
         }
 
         protected override void OnSpawnedImpl()
         {
             PlaySound(SpawnAudioClip);
-            _rigidbody.velocity = gameObject.transform.forward * Speed;
+            _rigidbody.velocity = gameObject.transform.up * Speed;
         }
 
         private void OnTriggerEnter2D(Collider2D inCollider)

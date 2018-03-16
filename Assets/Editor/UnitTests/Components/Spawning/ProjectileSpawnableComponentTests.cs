@@ -10,7 +10,7 @@ namespace Assets.Editor.UnitTests.Components.Spawning
     public class ProjectileSpawnableComponentTestFixture
     {
         private TestProjectileSpawnableComponent _projectile;
-        private Rigidbody _rigidbody;
+        private Rigidbody2D _rigidbody;
 
         private MockSpawnerComponent _spawner;
 
@@ -19,7 +19,7 @@ namespace Assets.Editor.UnitTests.Components.Spawning
         {
             _spawner = new GameObject().AddComponent<MockSpawnerComponent>();
 
-            _rigidbody = new GameObject().AddComponent<Rigidbody>();
+            _rigidbody = new GameObject().AddComponent<Rigidbody2D>();
             _rigidbody.gameObject.AddComponent<AudioSource>();
             _projectile = _rigidbody.gameObject.AddComponent<TestProjectileSpawnableComponent>();
             _projectile.SetSpawner(_spawner);
@@ -39,11 +39,11 @@ namespace Assets.Editor.UnitTests.Components.Spawning
         }
 
         [Test]
-        public void OnSpawned_VelocitySetToForwardVectorBySpeed()
+        public void OnSpawned_VelocitySetToUpVectorBySpeed()
         {
             _projectile.OnSpawned();
 
-            Assert.AreEqual(_projectile.transform.forward * _projectile.Speed, _rigidbody.velocity);
+            Assert.AreEqual(_projectile.transform.up * _projectile.Speed, _rigidbody.velocity);
         }
 
         [Test]
