@@ -74,7 +74,7 @@ namespace Assets.Scripts.AI.Pathfinding
             else
             {
                 /* ToDo: Write turning function for NPC 
-                var angle = Vector2.Angle(gameObject.transform.up, targetNode.Position);
+                var angle = Vector2.SignedAngle(gameObject.transform.up, targetNode.Position);
 
                 if (Math.Abs(angle) > 2.0f)
                 {
@@ -89,26 +89,26 @@ namespace Assets.Scripts.AI.Pathfinding
                 }
                 */
 
-                var angle = Vector2.Angle(gameObject.transform.up, targetNode.Position);
+                var deltaX =  targetNode.Position.x - gameObject.transform.position.x;
+                var deltaY =  targetNode.Position.y - gameObject.transform.position.y;
 
-                if (Math.Abs(angle) > 5.0f)
+                if (deltaX > 0.2f)
                 {
-                    if (angle < 90.0f)
-                    {
-                        _movement.ApplySidewaysMotion(1.0f);
-                    }
-                    else if (angle < 180.0f)
-                    {
-                        _movement.ApplyForwardMotion(-1.0f);
-                    }
-                    else if (angle < 270.0f)
-                    {
-                        _movement.ApplySidewaysMotion(-1.0f);
-                    }
+                    _movement.ApplySidewaysMotion(1.0f);
                 }
-                else
+                else if (deltaX < -0.2f)
+                {
+                    _movement.ApplySidewaysMotion(-1.0f);
+                }
+
+
+                if (deltaY > 0.2f)
                 {
                     _movement.ApplyForwardMotion(1.0f);
+                }
+                else if (deltaY < 0.2f)
+                {
+                    _movement.ApplyForwardMotion(-1.0f);
                 }
             }
         }
