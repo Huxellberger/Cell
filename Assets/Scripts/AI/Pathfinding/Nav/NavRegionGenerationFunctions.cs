@@ -1,6 +1,7 @@
 ﻿// Copyright (C) Threetee Gang All Rights Reserved
 
 using System.Collections.Generic;
+using UnityEngine;
 using Debug = UnityEngine.Debug;
 
 namespace Assets.Scripts.AI.Pathfinding.Nav
@@ -14,6 +15,7 @@ namespace Assets.Scripts.AI.Pathfinding.Nav
             var nodesToAssign = new List<NavNode>(regionSize);
 
             var nodesToConsiderQueue = new List<NavNode>(64) {nodes[0]};
+            var nodesForNextRegion = new List<NavNode>(regionSize);
 
             // Account for unconnected components
             while (assignedNodes.Count < nodes.Count)
@@ -36,12 +38,6 @@ namespace Assets.Scripts.AI.Pathfinding.Nav
                         nodesToAssign.Add(currentNode);
                         assignedNodes.Add(currentNode);
 
-                        if (nodesToAssign.Count >= regionSize)
-                        {
-                            assignedRegions.Add(new NavRegion(nodesToAssign.ToArray()));
-                            nodesToAssign.Clear();
-                        }
-
                         if (currentNode.NeighbourRefs != null)
                         {
                             foreach (var neighbourRef in currentNode.NeighbourRefs)
@@ -57,6 +53,37 @@ namespace Assets.Scripts.AI.Pathfinding.Nav
                     nodesToConsiderQueue.RemoveAt(0);
                 }
 
+                // Make sure we stop overlap in regions
+                while (nodesToAssign.Count >= regionSize)
+                {
+                    for (var currentNodeIndex = 0; currentNodeIndex < regionSize; currentNodeIndex++)
+                    {
+                        nodesForNextRegion.Add(nodesToAssign[currentNodeIndex]);
+                    }
+
+                    nodesToAssign.RemoveRange(0, regionSize);
+
+                    var regionBounds = CalculateBounds(nodesForNextRegion);
+
+                    var conflictingNodes = new List<NavNode>();
+
+                    foreach (var otherNodes in nodesToAssign)
+                    {
+                        if (regionBounds.Contains(otherNodes.Position))
+                        {
+                            conflictingNodes.Add(otherNodes);
+                            nodesForNextRegion.Add(otherNodes);
+                        }
+                    }
+
+                    assignedRegions.Add(new NavRegion(nodesForNextRegion.ToArray()));
+
+                    nodesToAssign.RemoveAll((node) => conflictingNodes.Contains(node));
+
+                    conflictingNodes.Clear();
+                    nodesForNextRegion.Clear();
+                }
+
                 // make sure regions don't span unconnected components (and allocate last, potentially unfilled region)
                 if (nodesToAssign.Count > 0)
                 {
@@ -66,6 +93,26 @@ namespace Assets.Scripts.AI.Pathfinding.Nav
             }
 
             return assignedRegions;
+        }
+
+        private static Rect CalculateBounds(List<NavNode> nodes)
+        {
+            var minPoint = nodes[0].Position;
+            var maxPoint = nodes[0].Position;
+
+            for (var currentNodeIndex = 1; currentNodeIndex < nodes.Count; currentNodeIndex++)
+            {
+                if (NavRegion.IsSmallestPoint(nodes[currentNodeIndex].Position, minPoint))
+                {
+                    minPoint = nodes[currentNodeIndex].Position;
+                }
+                else if (NavRegion.IsLargestPoint(nodes[currentNodeIndex].Position, maxPoint))
+                {
+                    maxPoint = nodes[currentNodeIndex].Position;
+                }
+            }
+
+            return Rect.MinMaxRect(minPoint.x, minPoint.y, maxPoint.x, maxPoint.y);
         }
 
         public static void InitialiseNavRegionsFromData(TilemapNavData data)

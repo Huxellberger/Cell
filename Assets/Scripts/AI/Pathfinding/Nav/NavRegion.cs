@@ -46,12 +46,12 @@ namespace Assets.Scripts.AI.Pathfinding.Nav
             }
         }
 
-        private static bool IsSmallestPoint(Vector2 first, Vector2 second)
+        public static bool IsSmallestPoint(Vector2 first, Vector2 second)
         {
             return first.y < second.y || (first.y.Equals(second.y) && first.x < second.x);
         }
 
-        private static bool IsLargestPoint(Vector2 first, Vector2 second)
+        public static bool IsLargestPoint(Vector2 first, Vector2 second)
         {
             return first.y > second.y || (first.y.Equals(second.y) && first.x > second.x);
         }
