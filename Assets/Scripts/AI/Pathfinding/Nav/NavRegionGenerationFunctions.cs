@@ -68,6 +68,29 @@ namespace Assets.Scripts.AI.Pathfinding.Nav
             return assignedRegions;
         }
 
+        public static void InitialiseNavRegionsFromData(TilemapNavData data)
+        {
+            var currentNodeNeighbours = new List<NavNode>(4);
+
+            foreach (var region in data.RegionData)
+            {
+                foreach (var node in region.Nodes)
+                {
+                    if (node.Neighbours != null)
+                    {
+                        foreach (var neighbourIndex in node.Neighbours)
+                        {
+                            currentNodeNeighbours.Add(data.NodeData[neighbourIndex]);
+                        }
+
+                        node.NeighbourRefs = currentNodeNeighbours.ToArray();
+                    }
+
+                    currentNodeNeighbours.Clear();
+                }
+            }
+        }
+
         private static NavNode FindNextUnallocatedNode(List<NavNode> nodes, HashSet<NavNode> allocatedNodes)
         {
             foreach (var node in nodes)

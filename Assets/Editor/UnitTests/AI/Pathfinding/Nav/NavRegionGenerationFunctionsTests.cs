@@ -4,13 +4,13 @@ using System.Collections.Generic;
 using System.Linq;
 using Assets.Scripts.AI.Pathfinding.Nav;
 using NUnit.Framework;
+using UnityEngine;
 
 namespace Assets.Editor.UnitTests.AI.Pathfinding.Nav
 {
     [TestFixture]
     public class NavRegionGenerationFunctionsTestFixture 
     {
-        
         [Test]
         public void GenerateNavRegionsFromNodes_DoesNotCreateRegionsAcrossUnconnectedComponents()
         {
@@ -118,6 +118,33 @@ namespace Assets.Editor.UnitTests.AI.Pathfinding.Nav
             }
 
             Assert.AreEqual(1, NavRegionGenerationFunctions.GenerateNavRegionsFromNodes(nodesToAllocate, singleNodes).Count);
+        }
+
+        [Test]
+        public void InitialiseNavRegionsFromData_LoadsExpectedNeighbourRefs()
+        {
+            var nodes = new List<NavNode>{new NavNode(), new NavNode(), new NavNode()};
+
+            var nodeListingNeighbours = new List<NavNode>{new NavNode{Neighbours = new []{0, 2}}};
+            var nodeListingNoNeighbours = new List<NavNode>{new NavNode(), new NavNode()};
+
+            var regions = new List<NavRegion>{new NavRegion(nodeListingNeighbours.ToArray()), new NavRegion(nodeListingNoNeighbours.ToArray())};
+
+            var data = ScriptableObject.CreateInstance<TilemapNavData>();
+            data.NodeData = nodes;
+            data.RegionData = regions;
+            
+            NavRegionGenerationFunctions.InitialiseNavRegionsFromData(data);
+
+            foreach (var node in regions[0].Nodes)
+            {
+                Assert.AreEqual(2, node.NeighbourRefs.Length);
+            }
+
+            foreach (var node in regions[1].Nodes)
+            {
+                Assert.IsNull(node.NeighbourRefs);
+            }
         }
     }
 }
