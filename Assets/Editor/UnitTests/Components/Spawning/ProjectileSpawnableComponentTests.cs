@@ -43,7 +43,8 @@ namespace Assets.Editor.UnitTests.Components.Spawning
         {
             _projectile.OnSpawned();
 
-            Assert.AreEqual(_projectile.transform.up * _projectile.Speed, _rigidbody.velocity);
+            Vector2 expectedVelocity = _projectile.transform.up * _projectile.Speed;
+            Assert.AreEqual(expectedVelocity, _rigidbody.velocity);
         }
 
         [Test]
