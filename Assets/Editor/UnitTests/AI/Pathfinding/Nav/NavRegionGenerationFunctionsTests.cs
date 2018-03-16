@@ -50,7 +50,7 @@ namespace Assets.Editor.UnitTests.AI.Pathfinding.Nav
         }
 
         [Test]
-        public void GenerateNavRegionsFromNodes_CreatesExpectedNumberOfRegions()
+        public void GenerateNavRegionsFromNodes_CreatesExpectedNumberOfRegionsForClashingPoints()
         {
             const int neighbourCount = 4;
             const int singleNodes = 30;
@@ -96,7 +96,7 @@ namespace Assets.Editor.UnitTests.AI.Pathfinding.Nav
                 }
             }
 
-            Assert.AreEqual(expectedRegionCount, NavRegionGenerationFunctions.GenerateNavRegionsFromNodes(nodesToAllocate, singleNodes * neighbourCount).Count);
+            Assert.AreEqual(1, NavRegionGenerationFunctions.GenerateNavRegionsFromNodes(nodesToAllocate, singleNodes * neighbourCount).Count);
         }
 
         [Test]

@@ -246,6 +246,11 @@ Prefab:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 114753484904881322, guid: ed0c4f1372430ad4f9c727cddc94e426,
+        type: 2}
+      propertyPath: GizmoColors.Array.size
+      value: 5
+      objectReference: {fileID: 0}
     - target: {fileID: 4301683247464268, guid: ed0c4f1372430ad4f9c727cddc94e426, type: 2}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -284,6 +289,66 @@ Prefab:
       value: 
       objectReference: {fileID: 11400000, guid: 75ce32d84d45d464ba0670c951adea41,
         type: 2}
+    - target: {fileID: 114753484904881322, guid: ed0c4f1372430ad4f9c727cddc94e426,
+        type: 2}
+      propertyPath: GizmoColors.Array.data[1].r
+      value: 0.9191176
+      objectReference: {fileID: 0}
+    - target: {fileID: 114753484904881322, guid: ed0c4f1372430ad4f9c727cddc94e426,
+        type: 2}
+      propertyPath: GizmoColors.Array.data[1].g
+      value: 0.013516448
+      objectReference: {fileID: 0}
+    - target: {fileID: 114753484904881322, guid: ed0c4f1372430ad4f9c727cddc94e426,
+        type: 2}
+      propertyPath: GizmoColors.Array.data[1].b
+      value: 0.013516448
+      objectReference: {fileID: 0}
+    - target: {fileID: 114753484904881322, guid: ed0c4f1372430ad4f9c727cddc94e426,
+        type: 2}
+      propertyPath: GizmoColors.Array.data[2].r
+      value: 0.2966532
+      objectReference: {fileID: 0}
+    - target: {fileID: 114753484904881322, guid: ed0c4f1372430ad4f9c727cddc94e426,
+        type: 2}
+      propertyPath: GizmoColors.Array.data[2].g
+      value: 0.28492647
+      objectReference: {fileID: 0}
+    - target: {fileID: 114753484904881322, guid: ed0c4f1372430ad4f9c727cddc94e426,
+        type: 2}
+      propertyPath: GizmoColors.Array.data[2].b
+      value: 0.625
+      objectReference: {fileID: 0}
+    - target: {fileID: 114753484904881322, guid: ed0c4f1372430ad4f9c727cddc94e426,
+        type: 2}
+      propertyPath: GizmoColors.Array.data[3].r
+      value: 0.8014706
+      objectReference: {fileID: 0}
+    - target: {fileID: 114753484904881322, guid: ed0c4f1372430ad4f9c727cddc94e426,
+        type: 2}
+      propertyPath: GizmoColors.Array.data[3].g
+      value: 0.72278666
+      objectReference: {fileID: 0}
+    - target: {fileID: 114753484904881322, guid: ed0c4f1372430ad4f9c727cddc94e426,
+        type: 2}
+      propertyPath: GizmoColors.Array.data[3].b
+      value: 0.28287196
+      objectReference: {fileID: 0}
+    - target: {fileID: 114753484904881322, guid: ed0c4f1372430ad4f9c727cddc94e426,
+        type: 2}
+      propertyPath: GizmoColors.Array.data[4].r
+      value: 0.9632353
+      objectReference: {fileID: 0}
+    - target: {fileID: 114753484904881322, guid: ed0c4f1372430ad4f9c727cddc94e426,
+        type: 2}
+      propertyPath: GizmoColors.Array.data[4].g
+      value: 0.9632353
+      objectReference: {fileID: 0}
+    - target: {fileID: 114753484904881322, guid: ed0c4f1372430ad4f9c727cddc94e426,
+        type: 2}
+      propertyPath: GizmoColors.Array.data[4].b
+      value: 0.9632353
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: ed0c4f1372430ad4f9c727cddc94e426, type: 2}
   m_IsPrefabParent: 0

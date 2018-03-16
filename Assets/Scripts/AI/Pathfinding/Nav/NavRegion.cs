@@ -19,41 +19,46 @@ namespace Assets.Scripts.AI.Pathfinding.Nav
         public NavRegion(NavNode[] inNodes)
         {
             Nodes = inNodes;
-           InitializeBounds();
+            RegionBounds = GenerateRectFromNodes(Nodes);
         }
 
-        private void InitializeBounds()
+        public static Rect GenerateRectFromNodes(NavNode[] inNodes)
         {
-            if (Nodes.Length >= 2)
+            if (inNodes.Length >= 2)
             {
-                var minPoint = Nodes[0].Position;
+                var minX = inNodes[0].Position.x;
+                var maxX = inNodes[0].Position.x;
 
-                var maxPoint = Nodes[0].Position;
+                var minY = inNodes[0].Position.y;
+                var maxY = inNodes[0].Position.y;
 
-                for (var currentNodeIndex = 1; currentNodeIndex < Nodes.Length; currentNodeIndex++)
+                for (var currentNodeIndex = 1; currentNodeIndex < inNodes.Length; currentNodeIndex++)
                 {
-                    if (IsSmallestPoint(Nodes[currentNodeIndex].Position, minPoint))
+                    var currentNodePosition = inNodes[currentNodeIndex].Position;
+
+                    if (currentNodePosition.x < minX)
                     {
-                        minPoint = Nodes[currentNodeIndex].Position;
+                        minX = currentNodePosition.x;
                     }
-                    else if (IsLargestPoint(Nodes[currentNodeIndex].Position, maxPoint))
+                    else if (currentNodePosition.x > maxX)
                     {
-                        maxPoint = Nodes[currentNodeIndex].Position;
+                        maxX = currentNodePosition.x;
+                    }
+
+                    if (currentNodePosition.y < minY)
+                    {
+                        minY = currentNodePosition.y;
+                    }
+                    else if (currentNodePosition.y > maxY)
+                    {
+                        maxY = currentNodePosition.y;
                     }
                 }
 
-                RegionBounds = Rect.MinMaxRect(minPoint.x, minPoint.y, maxPoint.x + NavRegionConstants.MaxInclusionExtension, maxPoint.y + NavRegionConstants.MaxInclusionExtension);
+                return Rect.MinMaxRect(minX, minY, maxX + NavRegionConstants.MaxInclusionExtension, maxY + NavRegionConstants.MaxInclusionExtension);
             }
-        }
 
-        public static bool IsSmallestPoint(Vector2 first, Vector2 second)
-        {
-            return first.y < second.y || (first.y.Equals(second.y) && first.x < second.x);
-        }
-
-        public static bool IsLargestPoint(Vector2 first, Vector2 second)
-        {
-            return first.y > second.y || (first.y.Equals(second.y) && first.x > second.x);
+            return new Rect();
         }
     }
 }

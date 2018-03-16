@@ -51,61 +51,64 @@ namespace Assets.Scripts.AI.Pathfinding
         {
             if (_pathNodes.Count == 0)
             {
-                if (_pathRegions.Count == 0)
+                UpdateRegionPathStatus();
+
+                if (_pathNodes.Count == 0)
                 {
                     return;
                 }
-                else
+            }
+
+            var targetNode = _pathNodes[0];
+
+            if (VectorFunctions.DistanceSquared(gameObject.transform.position, targetNode.Position) <
+                DistanceSquaredThreshold)
+            {
+                _pathNodes.RemoveAt(0);
+
+                if (_pathNodes.Count == 0)
                 {
                     UpdateRegionPathStatus();
                 }
+            }
+            else
+            {
+                /* ToDo: Write turning function for NPC 
+                var angle = Vector2.Angle(gameObject.transform.up, targetNode.Position);
 
-                var targetNode = _pathNodes[0];
-
-                if (VectorFunctions.DistanceSquared(gameObject.transform.position, targetNode.Position) <
-                    DistanceSquaredThreshold)
+                if (Math.Abs(angle) > 2.0f)
                 {
-                    _pathNodes.RemoveAt(0);
-                }
-                else
-                {
-                    /* ToDo: Write turning function for NPC 
-                    var angle = Vector2.Angle(gameObject.transform.up, targetNode.Position);
-
-                    if (Math.Abs(angle) > 2.0f)
+                    if (angle < 180.0f)
                     {
-                        if (angle < 180.0f)
-                        {
-                            _movement.
-                        }
-                        else
-                        {
-                            
-                        }
-                    }
-                    */
-
-                    var angle = Vector2.Angle(gameObject.transform.up, targetNode.Position);
-
-                    if (Math.Abs(angle) > 5.0f)
-                    {
-                        if (angle < 90.0f)
-                        {
-                            _movement.ApplySidewaysMotion(-1.0f);
-                        }
-                        else if (angle < 180.0f)
-                        {
-                            _movement.ApplyForwardMotion(-1.0f);
-                        }
-                        else if (angle < 270.0f)
-                        {
-                            _movement.ApplySidewaysMotion(1.0f);
-                        }
+                        _movement.
                     }
                     else
                     {
-                        _movement.ApplyForwardMotion(1.0f);
+
                     }
+                }
+                */
+
+                var angle = Vector2.Angle(gameObject.transform.up, targetNode.Position);
+
+                if (Math.Abs(angle) > 5.0f)
+                {
+                    if (angle < 90.0f)
+                    {
+                        _movement.ApplySidewaysMotion(1.0f);
+                    }
+                    else if (angle < 180.0f)
+                    {
+                        _movement.ApplyForwardMotion(-1.0f);
+                    }
+                    else if (angle < 270.0f)
+                    {
+                        _movement.ApplySidewaysMotion(-1.0f);
+                    }
+                }
+                else
+                {
+                    _movement.ApplyForwardMotion(1.0f);
                 }
             }
         }
@@ -131,6 +134,11 @@ namespace Assets.Scripts.AI.Pathfinding
 
         private void UpdateRegionPathStatus()
         {
+            if (_pathRegions.Count == 0)
+            {
+                return;
+            }
+
             if (_pathRegions.Count > 1)
             {
                 PlotRegionPath(_pathRegions[0], _pathRegions[1], GetNearestNavNode(_pathRegions[0], gameObject.transform.position), _currentTargetLocation);
@@ -185,25 +193,28 @@ namespace Assets.Scripts.AI.Pathfinding
 
             while (region.RegionBounds.Contains(lastAddedNode.Position) && lastAddedNode != closestTargetNode)
             {
-                foreach (var neighbour in lastAddedNode.NeighbourRefs)
+                var nodeUpdated = false;
+                if (lastAddedNode.NeighbourRefs != null)
                 {
-                    var nodeUpdated = false;
-                    if ((VectorFunctions.DistanceSquared(lastAddedNode.Position, closestTargetNode.Position) >
-                        VectorFunctions.DistanceSquared(neighbour.Position, closestTargetNode.Position)) 
-                        && !_pathNodes.Contains(neighbour))
+                    foreach (var neighbour in lastAddedNode.NeighbourRefs)
                     {
-                        lastAddedNode = neighbour;
-                        nodeUpdated = true;
+                        if ((VectorFunctions.DistanceSquared(lastAddedNode.Position, closestTargetNode.Position) >
+                             VectorFunctions.DistanceSquared(neighbour.Position, closestTargetNode.Position))
+                            && !_pathNodes.Contains(neighbour))
+                        {
+                            lastAddedNode = neighbour;
+                            nodeUpdated = true;
+                        }
                     }
+                }
 
-                    if (nodeUpdated)
-                    {
-                        _pathNodes.Add(lastAddedNode);
-                    }
-                    else
-                    {
-                        break;
-                    }
+                if (nodeUpdated)
+                {
+                    _pathNodes.Add(lastAddedNode);
+                }
+                else
+                {
+                    break;
                 }
             }
         }

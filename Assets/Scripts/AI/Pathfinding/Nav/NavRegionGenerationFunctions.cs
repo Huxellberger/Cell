@@ -63,7 +63,7 @@ namespace Assets.Scripts.AI.Pathfinding.Nav
 
                     nodesToAssign.RemoveRange(0, regionSize);
 
-                    var regionBounds = CalculateBounds(nodesForNextRegion);
+                    var regionBounds = NavRegion.GenerateRectFromNodes(nodesForNextRegion.ToArray());
 
                     var conflictingNodes = new List<NavNode>();
 
@@ -93,26 +93,6 @@ namespace Assets.Scripts.AI.Pathfinding.Nav
             }
 
             return assignedRegions;
-        }
-
-        private static Rect CalculateBounds(List<NavNode> nodes)
-        {
-            var minPoint = nodes[0].Position;
-            var maxPoint = nodes[0].Position;
-
-            for (var currentNodeIndex = 1; currentNodeIndex < nodes.Count; currentNodeIndex++)
-            {
-                if (NavRegion.IsSmallestPoint(nodes[currentNodeIndex].Position, minPoint))
-                {
-                    minPoint = nodes[currentNodeIndex].Position;
-                }
-                else if (NavRegion.IsLargestPoint(nodes[currentNodeIndex].Position, maxPoint))
-                {
-                    maxPoint = nodes[currentNodeIndex].Position;
-                }
-            }
-
-            return Rect.MinMaxRect(minPoint.x, minPoint.y, maxPoint.x, maxPoint.y);
         }
 
         public static void InitialiseNavRegionsFromData(TilemapNavData data)
