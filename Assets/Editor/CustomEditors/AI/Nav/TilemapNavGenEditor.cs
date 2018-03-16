@@ -34,7 +34,7 @@ namespace Assets.Editor.CustomEditors.AI.Nav
 
                 var navData = CreateInstance<TilemapNavData>();
                 navData.NodeData = returnedNodes;
-                navData.RegionData = returnedRegions;
+                navData.NavigationTable = new NavTable(returnedRegions);
 
                 AssetDatabase.CreateAsset(navData, filePath + fileName + ".asset");
             }

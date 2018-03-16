@@ -12,6 +12,6 @@ namespace Assets.Scripts.AI.Pathfinding.Nav
         public List<NavNode> NodeData;
 
         [HideInInspector]
-        public List<NavRegion> RegionData;
+        public NavTable NavigationTable;
     }
 }

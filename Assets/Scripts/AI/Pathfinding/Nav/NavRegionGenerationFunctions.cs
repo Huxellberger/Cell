@@ -72,7 +72,7 @@ namespace Assets.Scripts.AI.Pathfinding.Nav
         {
             var currentNodeNeighbours = new List<NavNode>(4);
 
-            foreach (var region in data.RegionData)
+            foreach (var region in data.NavigationTable.Regions)
             {
                 foreach (var node in region.Nodes)
                 {

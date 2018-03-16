@@ -14,7 +14,7 @@ namespace Assets.Editor.CustomEditors.AI.Nav
             var data = (TilemapNavData)target;
 
             EditorGUILayout.LabelField("Node Count: ", data.NodeData.Count.ToString());
-            EditorGUILayout.LabelField("Region Count: ", data.RegionData.Count.ToString());
+            EditorGUILayout.LabelField("Region Count: ", data.NavigationTable.Regions.Count.ToString());
         }
     }
 }

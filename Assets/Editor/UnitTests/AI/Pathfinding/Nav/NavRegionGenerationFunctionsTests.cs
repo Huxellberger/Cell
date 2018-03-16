@@ -132,7 +132,7 @@ namespace Assets.Editor.UnitTests.AI.Pathfinding.Nav
 
             var data = ScriptableObject.CreateInstance<TilemapNavData>();
             data.NodeData = nodes;
-            data.RegionData = regions;
+            data.NavigationTable = new NavTable(regions);
             
             NavRegionGenerationFunctions.InitialiseNavRegionsFromData(data);
 

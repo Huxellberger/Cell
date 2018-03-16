@@ -28,7 +28,11 @@ namespace Assets.Editor.UnitTests.AI.Pathfinding.Nav
             var region = new NavRegion(points.ToArray());
 
             Assert.AreEqual(expectedMin, region.RegionBounds.min);
-            Assert.AreEqual(expectedMax, region.RegionBounds.max);
+            Assert.AreEqual
+            (
+                expectedMax + new Vector2(NavRegionConstants.MaxInclusionExtension, NavRegionConstants.MaxInclusionExtension), 
+                region.RegionBounds.max
+            );
         }
     }
 }

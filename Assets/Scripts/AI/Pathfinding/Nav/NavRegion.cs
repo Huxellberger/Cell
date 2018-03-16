@@ -5,6 +5,11 @@ using UnityEngine;
 
 namespace Assets.Scripts.AI.Pathfinding.Nav
 {
+    public static class NavRegionConstants
+    {
+        public const float MaxInclusionExtension = 0.01f;
+    }
+
     [Serializable]
     public class NavRegion
     {
@@ -37,7 +42,7 @@ namespace Assets.Scripts.AI.Pathfinding.Nav
                     }
                 }
 
-                RegionBounds = Rect.MinMaxRect(minPoint.x, minPoint.y, maxPoint.x, maxPoint.y);
+                RegionBounds = Rect.MinMaxRect(minPoint.x, minPoint.y, maxPoint.x + NavRegionConstants.MaxInclusionExtension, maxPoint.y + NavRegionConstants.MaxInclusionExtension);
             }
         }
 
