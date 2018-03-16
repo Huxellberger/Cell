@@ -121,6 +121,27 @@ namespace Assets.Editor.UnitTests.AI.Pathfinding.Nav
         }
 
         [Test]
+        public void InitialiseNavRegionsFromData_LoadsExpectedNeighbourRefsForRawData()
+        {
+            var nodes = new List<NavNode> { new NavNode { Neighbours = new[] { 1, 2 } }, new NavNode { Neighbours = new[] { 0, 2 } }, new NavNode { Neighbours = new[] { 0, 1 } } };
+
+            var nodeListingNeighbours = new List<NavNode> { new NavNode { Neighbours = new[] { 0, 2 } } };
+
+            var regions = new List<NavRegion> { new NavRegion(nodeListingNeighbours.ToArray()) };
+
+            var data = ScriptableObject.CreateInstance<TilemapNavData>();
+            data.NodeData = nodes;
+            data.NavigationTable = new NavTable(regions);
+
+            NavRegionGenerationFunctions.InitialiseNavRegionsFromData(data);
+
+            foreach (var node in nodes)
+            {
+                Assert.AreEqual(2, node.NeighbourRefs.Length);
+            }
+        }
+
+        [Test]
         public void InitialiseNavRegionsFromData_LoadsExpectedNeighbourRefs()
         {
             var nodes = new List<NavNode>{new NavNode(), new NavNode(), new NavNode()};

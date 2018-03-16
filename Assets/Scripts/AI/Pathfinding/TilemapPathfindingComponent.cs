@@ -17,6 +17,7 @@ namespace Assets.Scripts.AI.Pathfinding
         , IPathfindingInterface
     {
         public float DistanceSquaredThreshold = 4.0f;
+        public Color DebugDrawColour = Color.cyan;
 
         private IMovementInterface _movement;
         private INavigationServiceInterface _navigation;
@@ -215,6 +216,18 @@ namespace Assets.Scripts.AI.Pathfinding
                 else
                 {
                     break;
+                }
+            }
+        }
+
+        private void OnDrawGizmos()
+        {
+            if (_pathNodes != null && _pathNodes.Count > 1)
+            {
+                Gizmos.color = DebugDrawColour;
+                for (var currentNodeIndex = 0; currentNodeIndex < _pathNodes.Count - 1; currentNodeIndex++)
+                {
+                    Gizmos.DrawLine(_pathNodes[currentNodeIndex].Position, _pathNodes[currentNodeIndex + 1].Position);
                 }
             }
         }

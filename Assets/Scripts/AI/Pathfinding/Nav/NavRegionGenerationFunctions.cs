@@ -99,6 +99,20 @@ namespace Assets.Scripts.AI.Pathfinding.Nav
         {
             var currentNodeNeighbours = new List<NavNode>(4);
 
+            foreach (var node in data.NodeData)
+            {
+                if (node.Neighbours != null)
+                {
+                    foreach (var neigbourIndex in node.Neighbours)
+                    {
+                        currentNodeNeighbours.Add(data.NodeData[neigbourIndex]);
+                    }
+
+                    node.NeighbourRefs = currentNodeNeighbours.ToArray();
+                    currentNodeNeighbours.Clear();
+                }
+            }
+
             foreach (var region in data.NavigationTable.Regions)
             {
                 foreach (var node in region.Nodes)
