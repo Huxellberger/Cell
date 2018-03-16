@@ -65,7 +65,10 @@ namespace Assets.Scripts.UI.Local
 
         private void OnEmoteStateChanged(EmoteStatusChangedUIMessage inMessage)
         {
-            _emoteMappings[_currentState].gameObject.SetActive(false);
+            if (_emoteMappings.ContainsKey(_currentState))
+            {
+                _emoteMappings[_currentState].gameObject.SetActive(false);
+            }
 
             _currentState = inMessage.State;
 
