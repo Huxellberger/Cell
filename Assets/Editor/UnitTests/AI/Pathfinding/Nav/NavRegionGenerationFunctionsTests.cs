@@ -1,0 +1,67 @@
+﻿// Copyright (C) Threetee Gang All Rights Reserved
+
+using System.Collections.Generic;
+using Assets.Scripts.AI.Pathfinding.Nav;
+using NUnit.Framework;
+
+namespace Assets.Editor.UnitTests.AI.Pathfinding.Nav
+{
+    [TestFixture]
+    public class NavRegionGenerationFunctionsTestFixture 
+    {
+        [Test]
+        public void GenerateNavRegionsFromNodes_CreatesExpectedNumberOfRegions()
+        {
+            const int neighbourCount = 4;
+            const int singleNodes = 30;
+            const int expectedRegionCount = 5;
+
+            var nodesToAllocate = new List<NavNode>();
+            var neighbourNodes = new List<NavNode>(neighbourCount);
+
+            for (int j = 0; j < expectedRegionCount; j++)
+            {
+                for (int i = 0; i < singleNodes; i++)
+                {
+                    var newNode = new NavNode();
+                    
+                    for (int k = 0; k < neighbourCount - 1; k++)
+                    {
+                        var newNeighbour = new NavNode();
+                        neighbourNodes.Add(newNeighbour);
+                        nodesToAllocate.Add(newNeighbour);
+                    }
+
+                    newNode.NeighbourRefs = neighbourNodes.ToArray();
+
+                    nodesToAllocate.Add(newNode);
+
+                    neighbourNodes.Clear();
+                }
+            }
+
+            Assert.AreEqual(expectedRegionCount, NavRegionGenerationFunctions.GenerateNavRegionsFromNodes(nodesToAllocate, singleNodes * neighbourCount).Count);
+        }
+
+        [Test]
+        public void GenerateNavRegionsFromNodes_DoesNotConsiderDuplicates()
+        {
+            const int singleNodes = 30;
+            const int expectedRegionCount = 5;
+
+            var nodesToAllocate = new List<NavNode>();
+
+            var newNode = new NavNode();
+
+            for (int j = 0; j < expectedRegionCount; j++)
+            {
+                for (int i = 0; i < singleNodes; i++)
+                {
+                    nodesToAllocate.Add(newNode);
+                }
+            }
+
+            Assert.AreEqual(1, NavRegionGenerationFunctions.GenerateNavRegionsFromNodes(nodesToAllocate, singleNodes).Count);
+        }
+    }
+}

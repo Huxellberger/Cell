@@ -10,5 +10,8 @@ namespace Assets.Scripts.AI.Pathfinding.Nav
     {
         [HideInInspector]
         public List<NavNode> NodeData;
+
+        [HideInInspector]
+        public List<NavRegion> RegionData;
     }
 }

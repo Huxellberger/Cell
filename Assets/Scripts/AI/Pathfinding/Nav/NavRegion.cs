@@ -8,8 +8,8 @@ namespace Assets.Scripts.AI.Pathfinding.Nav
     [Serializable]
     public class NavRegion
     {
-        public readonly NavNode[] Nodes;
-        public Rect RegionBounds { get; private set; }
+        public NavNode[] Nodes;
+        public Rect RegionBounds;
 
         public NavRegion(NavNode[] inNodes)
         {

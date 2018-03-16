@@ -108,6 +108,8 @@ namespace Assets.Scripts.AI.Pathfinding.Nav
         {
             var generatedNodes = new List<NavNode>();
             var foundNeighbours = new List<int>(4);
+            var foundNeighbourRefs = new List<NavNode>(4);
+
             foreach (var nodePosition in nodePositions)
             {
                 foreach (var otherNode in nodePositions)
@@ -123,6 +125,7 @@ namespace Assets.Scripts.AI.Pathfinding.Nav
                         }
 
                         foundNeighbours.Add(neighbourNode.NodeIndex);
+                        foundNeighbourRefs.Add(neighbourNode.ReturnedNode);
                     }
                 }
 
@@ -134,7 +137,8 @@ namespace Assets.Scripts.AI.Pathfinding.Nav
                     {
                         Position = nodePosition.CurrentTilePosition,
                         Weight = 1,
-                        Neighbours = foundNeighbours.ToArray()
+                        Neighbours = foundNeighbours.ToArray(),
+                        NeighbourRefs = foundNeighbourRefs.ToArray()
                     };
 
                     generatedNodes.Add(generatedNodeToUpdate);
@@ -142,9 +146,11 @@ namespace Assets.Scripts.AI.Pathfinding.Nav
                 else
                 {
                     nodeToUpdate.ReturnedNode.Neighbours = foundNeighbours.ToArray();
+                    nodeToUpdate.ReturnedNode.NeighbourRefs = foundNeighbourRefs.ToArray();
                 }
 
                 foundNeighbours.Clear();
+                foundNeighbourRefs.Clear();
             }
 
             return generatedNodes;

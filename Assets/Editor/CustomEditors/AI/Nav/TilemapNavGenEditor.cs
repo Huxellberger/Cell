@@ -30,9 +30,11 @@ namespace Assets.Editor.CustomEditors.AI.Nav
             if (GUILayout.Button("Build Tilemap Nav"))
             {
                 var returnedNodes = NavGenerationFunctions.GenerateNavDataForCurrentScene();
+                var returnedRegions = NavRegionGenerationFunctions.GenerateNavRegionsFromNodes(returnedNodes, tilesPerRegion);
 
                 var navData = CreateInstance<TilemapNavData>();
                 navData.NodeData = returnedNodes;
+                navData.RegionData = returnedRegions;
 
                 AssetDatabase.CreateAsset(navData, filePath + fileName + ".asset");
             }
