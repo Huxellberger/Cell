@@ -24,712 +24,676 @@ MonoBehaviour:
   - Neighbours: 000000000500000006000000
     Position: {x: -8, y: -4}
     Weight: 1
-  - Neighbours: 00000000010000000600000029000000
+  - Neighbours: 000000000100000006000000
     Position: {x: -9, y: -3}
     Weight: 1
   - Neighbours: 030000000700000008000000
     Position: {x: -7, y: -4}
     Weight: 1
-  - Neighbours: 0300000004000000080000002a000000
+  - Neighbours: 030000000400000008000000
     Position: {x: -8, y: -3}
     Weight: 1
   - Neighbours: 05000000090000000a000000
     Position: {x: -6, y: -4}
     Weight: 1
-  - Neighbours: 05000000060000000a0000002b000000
+  - Neighbours: 05000000060000000a000000
     Position: {x: -7, y: -3}
     Weight: 1
   - Neighbours: 070000000b0000000c000000
     Position: {x: -5, y: -4}
     Weight: 1
-  - Neighbours: 07000000080000000c0000002c000000
+  - Neighbours: 07000000080000000c000000
     Position: {x: -6, y: -3}
     Weight: 1
   - Neighbours: 090000000d0000000e000000
     Position: {x: -4, y: -4}
     Weight: 1
-  - Neighbours: 090000000a0000000e0000002d000000
+  - Neighbours: 090000000a0000000e000000
     Position: {x: -5, y: -3}
     Weight: 1
   - Neighbours: 0b0000000f00000010000000
     Position: {x: -3, y: -4}
     Weight: 1
-  - Neighbours: 0b0000000c000000100000002e000000
+  - Neighbours: 0b0000000c00000010000000
     Position: {x: -4, y: -3}
     Weight: 1
   - Neighbours: 0d0000001100000012000000
     Position: {x: -2, y: -4}
     Weight: 1
-  - Neighbours: 0d0000000e000000120000002f000000
+  - Neighbours: 0d0000000e0000001200000029000000
     Position: {x: -3, y: -3}
     Weight: 1
   - Neighbours: 0f0000001300000014000000
     Position: {x: -1, y: -4}
     Weight: 1
-  - Neighbours: 0f000000100000001400000030000000
+  - Neighbours: 0f00000010000000140000002a000000
     Position: {x: -2, y: -3}
     Weight: 1
   - Neighbours: 110000001500000016000000
     Position: {x: 0, y: -4}
     Weight: 1
-  - Neighbours: 11000000120000001600000031000000
+  - Neighbours: 1100000012000000160000002b000000
     Position: {x: -1, y: -3}
     Weight: 1
   - Neighbours: 130000001700000018000000
     Position: {x: 1, y: -4}
     Weight: 1
-  - Neighbours: 13000000140000001800000032000000
+  - Neighbours: 1300000014000000180000002c000000
     Position: {x: 0, y: -3}
     Weight: 1
   - Neighbours: 15000000190000001a000000
     Position: {x: 2, y: -4}
     Weight: 1
-  - Neighbours: 15000000160000001a00000033000000
+  - Neighbours: 15000000160000001a0000002d000000
     Position: {x: 1, y: -3}
     Weight: 1
   - Neighbours: 170000001b0000001c000000
     Position: {x: 3, y: -4}
     Weight: 1
-  - Neighbours: 17000000180000001c00000034000000
+  - Neighbours: 17000000180000001c0000002e000000
     Position: {x: 2, y: -3}
     Weight: 1
   - Neighbours: 190000001d0000001e000000
     Position: {x: 4, y: -4}
     Weight: 1
-  - Neighbours: 190000001a0000001e00000035000000
+  - Neighbours: 190000001a0000001e0000002f000000
     Position: {x: 3, y: -3}
     Weight: 1
   - Neighbours: 1b0000001f00000020000000
     Position: {x: 5, y: -4}
     Weight: 1
-  - Neighbours: 1b0000001c0000002000000036000000
+  - Neighbours: 1b0000001c0000002000000030000000
     Position: {x: 4, y: -3}
     Weight: 1
   - Neighbours: 1d0000002100000022000000
     Position: {x: 6, y: -4}
     Weight: 1
-  - Neighbours: 1d0000001e0000002200000037000000
+  - Neighbours: 1d0000001e0000002200000031000000
     Position: {x: 5, y: -3}
     Weight: 1
   - Neighbours: 1f0000002300000024000000
     Position: {x: 7, y: -4}
     Weight: 1
-  - Neighbours: 1f000000200000002400000038000000
+  - Neighbours: 1f000000200000002400000032000000
     Position: {x: 6, y: -3}
     Weight: 1
   - Neighbours: 210000002500000026000000
     Position: {x: 8, y: -4}
     Weight: 1
-  - Neighbours: 21000000220000002600000039000000
+  - Neighbours: 21000000220000002600000033000000
     Position: {x: 7, y: -3}
     Weight: 1
   - Neighbours: 2300000027000000
     Position: {x: 9, y: -4}
     Weight: 1
-  - Neighbours: 2300000024000000270000003a000000
+  - Neighbours: 23000000240000002700000034000000
     Position: {x: 8, y: -3}
     Weight: 1
-  - Neighbours: 25000000260000003b000000
+  - Neighbours: 250000002600000035000000
     Position: {x: 9, y: -3}
     Weight: 1
-  - Neighbours: 01000000290000003c000000
+  - Neighbours: 0100000036000000
     Position: {x: -10, y: -2}
     Weight: 1
-  - Neighbours: 04000000280000002a0000003d000000
-    Position: {x: -9, y: -2}
-    Weight: 1
-  - Neighbours: 06000000290000002b0000003e000000
-    Position: {x: -8, y: -2}
-    Weight: 1
-  - Neighbours: 080000002a0000002c0000003f000000
-    Position: {x: -7, y: -2}
-    Weight: 1
-  - Neighbours: 0a0000002b0000002d00000040000000
-    Position: {x: -6, y: -2}
-    Weight: 1
-  - Neighbours: 0c0000002c0000002e00000041000000
-    Position: {x: -5, y: -2}
-    Weight: 1
-  - Neighbours: 0e0000002d0000002f00000042000000
-    Position: {x: -4, y: -2}
-    Weight: 1
-  - Neighbours: 100000002e0000003000000043000000
+  - Neighbours: 100000002a00000037000000
     Position: {x: -3, y: -2}
     Weight: 1
-  - Neighbours: 120000002f0000003100000044000000
+  - Neighbours: 12000000290000002b00000038000000
     Position: {x: -2, y: -2}
     Weight: 1
-  - Neighbours: 14000000300000003200000045000000
+  - Neighbours: 140000002a0000002c00000039000000
     Position: {x: -1, y: -2}
     Weight: 1
-  - Neighbours: 16000000310000003300000046000000
+  - Neighbours: 160000002b0000002d0000003a000000
     Position: {x: 0, y: -2}
     Weight: 1
-  - Neighbours: 18000000320000003400000047000000
+  - Neighbours: 180000002c0000002e0000003b000000
     Position: {x: 1, y: -2}
     Weight: 1
-  - Neighbours: 1a000000330000003500000048000000
+  - Neighbours: 1a0000002d0000002f0000003c000000
     Position: {x: 2, y: -2}
     Weight: 1
-  - Neighbours: 1c000000340000003600000049000000
+  - Neighbours: 1c0000002e000000300000003d000000
     Position: {x: 3, y: -2}
     Weight: 1
-  - Neighbours: 1e00000035000000370000004a000000
+  - Neighbours: 1e0000002f000000310000003e000000
     Position: {x: 4, y: -2}
     Weight: 1
-  - Neighbours: 2000000036000000380000004b000000
+  - Neighbours: 2000000030000000320000003f000000
     Position: {x: 5, y: -2}
     Weight: 1
-  - Neighbours: 2200000037000000390000004c000000
+  - Neighbours: 22000000310000003300000040000000
     Position: {x: 6, y: -2}
     Weight: 1
-  - Neighbours: 24000000380000003a0000004d000000
+  - Neighbours: 24000000320000003400000041000000
     Position: {x: 7, y: -2}
     Weight: 1
-  - Neighbours: 26000000390000003b0000004e000000
+  - Neighbours: 26000000330000003500000042000000
     Position: {x: 8, y: -2}
     Weight: 1
-  - Neighbours: 270000003a0000004f000000
+  - Neighbours: 270000003400000043000000
     Position: {x: 9, y: -2}
     Weight: 1
-  - Neighbours: 280000003d00000050000000
+  - Neighbours: 2800000044000000
     Position: {x: -10, y: -1}
     Weight: 1
-  - Neighbours: 290000003c0000003e00000051000000
-    Position: {x: -9, y: -1}
-    Weight: 1
-  - Neighbours: 2a0000003d0000003f00000052000000
-    Position: {x: -8, y: -1}
-    Weight: 1
-  - Neighbours: 2b0000003e0000004000000053000000
-    Position: {x: -7, y: -1}
-    Weight: 1
-  - Neighbours: 2c0000003f0000004100000054000000
-    Position: {x: -6, y: -1}
-    Weight: 1
-  - Neighbours: 2d000000400000004200000055000000
-    Position: {x: -5, y: -1}
-    Weight: 1
-  - Neighbours: 2e000000410000004300000056000000
-    Position: {x: -4, y: -1}
-    Weight: 1
-  - Neighbours: 2f000000420000004400000057000000
+  - Neighbours: 290000003800000045000000
     Position: {x: -3, y: -1}
     Weight: 1
-  - Neighbours: 30000000430000004500000058000000
+  - Neighbours: 2a000000370000003900000046000000
     Position: {x: -2, y: -1}
     Weight: 1
-  - Neighbours: 31000000440000004600000059000000
+  - Neighbours: 2b000000380000003a00000047000000
     Position: {x: -1, y: -1}
     Weight: 1
-  - Neighbours: 3200000045000000470000005a000000
+  - Neighbours: 2c000000390000003b00000048000000
     Position: {x: 0, y: -1}
     Weight: 1
-  - Neighbours: 3300000046000000480000005b000000
+  - Neighbours: 2d0000003a0000003c00000049000000
     Position: {x: 1, y: -1}
     Weight: 1
-  - Neighbours: 3400000047000000490000005c000000
+  - Neighbours: 2e0000003b0000003d0000004a000000
     Position: {x: 2, y: -1}
     Weight: 1
-  - Neighbours: 35000000480000004a0000005d000000
+  - Neighbours: 2f0000003c0000003e0000004b000000
     Position: {x: 3, y: -1}
     Weight: 1
-  - Neighbours: 36000000490000004b0000005e000000
+  - Neighbours: 300000003d0000003f0000004c000000
     Position: {x: 4, y: -1}
     Weight: 1
-  - Neighbours: 370000004a0000004c0000005f000000
+  - Neighbours: 310000003e000000400000004d000000
     Position: {x: 5, y: -1}
     Weight: 1
-  - Neighbours: 380000004b0000004d00000060000000
+  - Neighbours: 320000003f000000410000004e000000
     Position: {x: 6, y: -1}
     Weight: 1
-  - Neighbours: 390000004c0000004e00000061000000
+  - Neighbours: 3300000040000000420000004f000000
     Position: {x: 7, y: -1}
     Weight: 1
-  - Neighbours: 3a0000004d0000004f00000062000000
+  - Neighbours: 34000000410000004300000050000000
     Position: {x: 8, y: -1}
     Weight: 1
-  - Neighbours: 3b0000004e00000063000000
+  - Neighbours: 350000004200000051000000
     Position: {x: 9, y: -1}
     Weight: 1
-  - Neighbours: 3c0000005100000064000000
+  - Neighbours: 360000005200000053000000
     Position: {x: -10, y: 0}
     Weight: 1
-  - Neighbours: 3d000000500000005200000065000000
-    Position: {x: -9, y: 0}
-    Weight: 1
-  - Neighbours: 3e000000510000005300000066000000
-    Position: {x: -8, y: 0}
-    Weight: 1
-  - Neighbours: 3f000000520000005400000067000000
-    Position: {x: -7, y: 0}
-    Weight: 1
-  - Neighbours: 40000000530000005500000068000000
-    Position: {x: -6, y: 0}
-    Weight: 1
-  - Neighbours: 41000000540000005600000069000000
-    Position: {x: -5, y: 0}
-    Weight: 1
-  - Neighbours: 4200000055000000570000006a000000
-    Position: {x: -4, y: 0}
-    Weight: 1
-  - Neighbours: 4300000056000000580000006b000000
+  - Neighbours: 370000005c000000460000005f000000
     Position: {x: -3, y: 0}
     Weight: 1
-  - Neighbours: 4400000057000000590000006c000000
+  - Neighbours: 38000000450000004700000060000000
     Position: {x: -2, y: 0}
     Weight: 1
-  - Neighbours: 45000000580000005a0000006d000000
+  - Neighbours: 39000000460000004800000061000000
     Position: {x: -1, y: 0}
     Weight: 1
-  - Neighbours: 46000000590000005b0000006e000000
+  - Neighbours: 3a000000470000004900000062000000
     Position: {x: 0, y: 0}
     Weight: 1
-  - Neighbours: 470000005a0000005c0000006f000000
+  - Neighbours: 3b000000480000004a00000063000000
     Position: {x: 1, y: 0}
     Weight: 1
-  - Neighbours: 480000005b0000005d00000070000000
+  - Neighbours: 3c000000490000004b00000064000000
     Position: {x: 2, y: 0}
     Weight: 1
-  - Neighbours: 490000005c0000005e00000071000000
+  - Neighbours: 3d0000004a0000004c00000065000000
     Position: {x: 3, y: 0}
     Weight: 1
-  - Neighbours: 4a0000005d0000005f00000072000000
+  - Neighbours: 3e0000004b0000004d00000066000000
     Position: {x: 4, y: 0}
     Weight: 1
-  - Neighbours: 4b0000005e0000006000000073000000
+  - Neighbours: 3f0000004c0000004e00000067000000
     Position: {x: 5, y: 0}
     Weight: 1
-  - Neighbours: 4c0000005f0000006100000074000000
+  - Neighbours: 400000004d0000004f00000068000000
     Position: {x: 6, y: 0}
     Weight: 1
-  - Neighbours: 4d000000600000006200000075000000
+  - Neighbours: 410000004e0000005000000069000000
     Position: {x: 7, y: 0}
     Weight: 1
-  - Neighbours: 4e000000610000006300000076000000
+  - Neighbours: 420000004f000000510000006a000000
     Position: {x: 8, y: 0}
     Weight: 1
-  - Neighbours: 4f0000006200000077000000
+  - Neighbours: 43000000500000006b000000
     Position: {x: 9, y: 0}
     Weight: 1
-  - Neighbours: 500000006500000078000000
+  - Neighbours: 440000005400000055000000
+    Position: {x: -9, y: 0}
+    Weight: 1
+  - Neighbours: 44000000550000006c000000
     Position: {x: -10, y: 1}
     Weight: 1
-  - Neighbours: 51000000640000006600000079000000
+  - Neighbours: 520000005600000057000000
+    Position: {x: -8, y: 0}
+    Weight: 1
+  - Neighbours: 5200000053000000570000006d000000
     Position: {x: -9, y: 1}
     Weight: 1
-  - Neighbours: 5200000065000000670000007a000000
+  - Neighbours: 540000005800000059000000
+    Position: {x: -7, y: 0}
+    Weight: 1
+  - Neighbours: 5400000055000000590000006e000000
     Position: {x: -8, y: 1}
     Weight: 1
-  - Neighbours: 5300000066000000680000007b000000
+  - Neighbours: 560000005a0000005b000000
+    Position: {x: -6, y: 0}
+    Weight: 1
+  - Neighbours: 56000000570000005b0000006f000000
     Position: {x: -7, y: 1}
     Weight: 1
-  - Neighbours: 5400000067000000690000007c000000
+  - Neighbours: 580000005c0000005d000000
+    Position: {x: -5, y: 0}
+    Weight: 1
+  - Neighbours: 58000000590000005d00000070000000
     Position: {x: -6, y: 1}
     Weight: 1
-  - Neighbours: 55000000680000006a0000007d000000
+  - Neighbours: 5a000000450000005e000000
+    Position: {x: -4, y: 0}
+    Weight: 1
+  - Neighbours: 5a0000005b0000005e00000071000000
     Position: {x: -5, y: 1}
     Weight: 1
-  - Neighbours: 56000000690000006b0000007e000000
+  - Neighbours: 5c0000005d0000005f00000072000000
     Position: {x: -4, y: 1}
     Weight: 1
-  - Neighbours: 570000006a0000006c0000007f000000
+  - Neighbours: 450000005e0000006000000073000000
     Position: {x: -3, y: 1}
     Weight: 1
-  - Neighbours: 580000006b0000006d00000080000000
+  - Neighbours: 460000005f0000006100000074000000
     Position: {x: -2, y: 1}
     Weight: 1
-  - Neighbours: 590000006c0000006e00000081000000
+  - Neighbours: 47000000600000006200000075000000
     Position: {x: -1, y: 1}
     Weight: 1
-  - Neighbours: 5a0000006d0000006f00000082000000
+  - Neighbours: 48000000610000006300000076000000
     Position: {x: 0, y: 1}
     Weight: 1
-  - Neighbours: 5b0000006e0000007000000083000000
+  - Neighbours: 49000000620000006400000077000000
     Position: {x: 1, y: 1}
     Weight: 1
-  - Neighbours: 5c0000006f0000007100000084000000
+  - Neighbours: 4a000000630000006500000078000000
     Position: {x: 2, y: 1}
     Weight: 1
-  - Neighbours: 5d000000700000007200000085000000
+  - Neighbours: 4b000000640000006600000079000000
     Position: {x: 3, y: 1}
     Weight: 1
-  - Neighbours: 5e000000710000007300000086000000
+  - Neighbours: 4c00000065000000670000007a000000
     Position: {x: 4, y: 1}
     Weight: 1
-  - Neighbours: 5f000000720000007400000087000000
+  - Neighbours: 4d00000066000000680000007b000000
     Position: {x: 5, y: 1}
     Weight: 1
-  - Neighbours: 60000000730000007500000088000000
+  - Neighbours: 4e00000067000000690000007c000000
     Position: {x: 6, y: 1}
     Weight: 1
-  - Neighbours: 61000000740000007600000089000000
+  - Neighbours: 4f000000680000006a0000007d000000
     Position: {x: 7, y: 1}
     Weight: 1
-  - Neighbours: 6200000075000000770000008a000000
+  - Neighbours: 50000000690000006b0000007e000000
     Position: {x: 8, y: 1}
     Weight: 1
-  - Neighbours: 63000000760000008b000000
+  - Neighbours: 510000006a0000007f000000
     Position: {x: 9, y: 1}
     Weight: 1
-  - Neighbours: 64000000790000008c000000
+  - Neighbours: 530000006d00000080000000
     Position: {x: -10, y: 2}
     Weight: 1
-  - Neighbours: 65000000780000007a0000008d000000
+  - Neighbours: 550000006c0000006e00000081000000
     Position: {x: -9, y: 2}
     Weight: 1
-  - Neighbours: 66000000790000007b0000008e000000
+  - Neighbours: 570000006d0000006f00000082000000
     Position: {x: -8, y: 2}
     Weight: 1
-  - Neighbours: 670000007a0000007c0000008f000000
+  - Neighbours: 590000006e0000007000000083000000
     Position: {x: -7, y: 2}
     Weight: 1
-  - Neighbours: 680000007b0000007d00000090000000
+  - Neighbours: 5b0000006f0000007100000084000000
     Position: {x: -6, y: 2}
     Weight: 1
-  - Neighbours: 690000007c0000007e00000091000000
+  - Neighbours: 5d000000700000007200000085000000
     Position: {x: -5, y: 2}
     Weight: 1
-  - Neighbours: 6a0000007d0000007f00000092000000
+  - Neighbours: 5e000000710000007300000086000000
     Position: {x: -4, y: 2}
     Weight: 1
-  - Neighbours: 6b0000007e0000008000000093000000
+  - Neighbours: 5f000000720000007400000087000000
     Position: {x: -3, y: 2}
     Weight: 1
-  - Neighbours: 6c0000007f0000008100000094000000
+  - Neighbours: 60000000730000007500000088000000
     Position: {x: -2, y: 2}
     Weight: 1
-  - Neighbours: 6d000000800000008200000095000000
+  - Neighbours: 61000000740000007600000089000000
     Position: {x: -1, y: 2}
     Weight: 1
-  - Neighbours: 6e000000810000008300000096000000
+  - Neighbours: 6200000075000000770000008a000000
     Position: {x: 0, y: 2}
     Weight: 1
-  - Neighbours: 6f000000820000008400000097000000
+  - Neighbours: 6300000076000000780000008b000000
     Position: {x: 1, y: 2}
     Weight: 1
-  - Neighbours: 70000000830000008500000098000000
+  - Neighbours: 6400000077000000790000008c000000
     Position: {x: 2, y: 2}
     Weight: 1
-  - Neighbours: 71000000840000008600000099000000
+  - Neighbours: 65000000780000007a0000008d000000
     Position: {x: 3, y: 2}
     Weight: 1
-  - Neighbours: 7200000085000000870000009a000000
+  - Neighbours: 66000000790000007b0000008e000000
     Position: {x: 4, y: 2}
     Weight: 1
-  - Neighbours: 7300000086000000880000009b000000
+  - Neighbours: 670000007a0000007c0000008f000000
     Position: {x: 5, y: 2}
     Weight: 1
-  - Neighbours: 7400000087000000890000009c000000
+  - Neighbours: 680000007b0000007d00000090000000
     Position: {x: 6, y: 2}
     Weight: 1
-  - Neighbours: 75000000880000008a0000009d000000
+  - Neighbours: 690000007c0000007e00000091000000
     Position: {x: 7, y: 2}
     Weight: 1
-  - Neighbours: 76000000890000008b0000009e000000
+  - Neighbours: 6a0000007d0000007f00000092000000
     Position: {x: 8, y: 2}
     Weight: 1
-  - Neighbours: 770000008a0000009f000000
+  - Neighbours: 6b0000007e00000093000000
     Position: {x: 9, y: 2}
     Weight: 1
-  - Neighbours: 780000008d000000a0000000
+  - Neighbours: 6c0000008100000094000000
     Position: {x: -10, y: 3}
     Weight: 1
-  - Neighbours: 790000008c0000008e000000a1000000
+  - Neighbours: 6d000000800000008200000095000000
     Position: {x: -9, y: 3}
     Weight: 1
-  - Neighbours: 7a0000008d0000008f000000a2000000
+  - Neighbours: 6e000000810000008300000096000000
     Position: {x: -8, y: 3}
     Weight: 1
-  - Neighbours: 7b0000008e00000090000000a3000000
+  - Neighbours: 6f000000820000008400000097000000
     Position: {x: -7, y: 3}
     Weight: 1
-  - Neighbours: 7c0000008f00000091000000a4000000
+  - Neighbours: 70000000830000008500000098000000
     Position: {x: -6, y: 3}
     Weight: 1
-  - Neighbours: 7d0000009000000092000000a5000000
+  - Neighbours: 71000000840000008600000099000000
     Position: {x: -5, y: 3}
     Weight: 1
-  - Neighbours: 7e0000009100000093000000a6000000
+  - Neighbours: 7200000085000000870000009a000000
     Position: {x: -4, y: 3}
     Weight: 1
-  - Neighbours: 7f0000009200000094000000a7000000
+  - Neighbours: 7300000086000000880000009b000000
     Position: {x: -3, y: 3}
     Weight: 1
-  - Neighbours: 800000009300000095000000a8000000
+  - Neighbours: 7400000087000000890000009c000000
     Position: {x: -2, y: 3}
     Weight: 1
-  - Neighbours: 810000009400000096000000a9000000
+  - Neighbours: 75000000880000008a0000009d000000
     Position: {x: -1, y: 3}
     Weight: 1
-  - Neighbours: 820000009500000097000000aa000000
+  - Neighbours: 76000000890000008b0000009e000000
     Position: {x: 0, y: 3}
     Weight: 1
-  - Neighbours: 830000009600000098000000ab000000
+  - Neighbours: 770000008a0000008c0000009f000000
     Position: {x: 1, y: 3}
     Weight: 1
-  - Neighbours: 840000009700000099000000ac000000
+  - Neighbours: 780000008b0000008d000000a0000000
     Position: {x: 2, y: 3}
     Weight: 1
-  - Neighbours: 85000000980000009a000000ad000000
+  - Neighbours: 790000008c0000008e000000a1000000
     Position: {x: 3, y: 3}
     Weight: 1
-  - Neighbours: 86000000990000009b000000ae000000
+  - Neighbours: 7a0000008d0000008f000000a2000000
     Position: {x: 4, y: 3}
     Weight: 1
-  - Neighbours: 870000009a0000009c000000af000000
+  - Neighbours: 7b0000008e00000090000000a3000000
     Position: {x: 5, y: 3}
     Weight: 1
-  - Neighbours: 880000009b0000009d000000b0000000
+  - Neighbours: 7c0000008f00000091000000a4000000
     Position: {x: 6, y: 3}
     Weight: 1
-  - Neighbours: 890000009c0000009e000000b1000000
+  - Neighbours: 7d0000009000000092000000a5000000
     Position: {x: 7, y: 3}
     Weight: 1
-  - Neighbours: 8a0000009d0000009f000000b2000000
+  - Neighbours: 7e0000009100000093000000a6000000
     Position: {x: 8, y: 3}
     Weight: 1
-  - Neighbours: 8b0000009e000000b3000000
+  - Neighbours: 7f00000092000000a7000000
     Position: {x: 9, y: 3}
     Weight: 1
-  - Neighbours: 8c000000a1000000b4000000
+  - Neighbours: 8000000095000000a8000000
     Position: {x: -10, y: 4}
     Weight: 1
-  - Neighbours: 8d000000a0000000a2000000b5000000
+  - Neighbours: 810000009400000096000000a9000000
     Position: {x: -9, y: 4}
     Weight: 1
-  - Neighbours: 8e000000a1000000a3000000b6000000
+  - Neighbours: 820000009500000097000000aa000000
     Position: {x: -8, y: 4}
     Weight: 1
-  - Neighbours: 8f000000a2000000a4000000b7000000
+  - Neighbours: 830000009600000098000000ab000000
     Position: {x: -7, y: 4}
     Weight: 1
-  - Neighbours: 90000000a3000000a5000000b8000000
+  - Neighbours: 840000009700000099000000ac000000
     Position: {x: -6, y: 4}
     Weight: 1
-  - Neighbours: 91000000a4000000a6000000b9000000
+  - Neighbours: 85000000980000009a000000ad000000
     Position: {x: -5, y: 4}
     Weight: 1
-  - Neighbours: 92000000a5000000a7000000ba000000
+  - Neighbours: 86000000990000009b000000ae000000
     Position: {x: -4, y: 4}
     Weight: 1
-  - Neighbours: 93000000a6000000a8000000bb000000
+  - Neighbours: 870000009a0000009c000000af000000
     Position: {x: -3, y: 4}
     Weight: 1
-  - Neighbours: 94000000a7000000a9000000bc000000
+  - Neighbours: 880000009b0000009d000000b0000000
     Position: {x: -2, y: 4}
     Weight: 1
-  - Neighbours: 95000000a8000000aa000000bd000000
+  - Neighbours: 890000009c0000009e000000b1000000
     Position: {x: -1, y: 4}
     Weight: 1
-  - Neighbours: 96000000a9000000ab000000be000000
+  - Neighbours: 8a0000009d0000009f000000b2000000
     Position: {x: 0, y: 4}
     Weight: 1
-  - Neighbours: 97000000aa000000ac000000bf000000
+  - Neighbours: 8b0000009e000000a0000000b3000000
     Position: {x: 1, y: 4}
     Weight: 1
-  - Neighbours: 98000000ab000000ad000000c0000000
+  - Neighbours: 8c0000009f000000a1000000b4000000
     Position: {x: 2, y: 4}
     Weight: 1
-  - Neighbours: 99000000ac000000ae000000c1000000
+  - Neighbours: 8d000000a0000000a2000000b5000000
     Position: {x: 3, y: 4}
     Weight: 1
-  - Neighbours: 9a000000ad000000af000000c2000000
+  - Neighbours: 8e000000a1000000a3000000b6000000
     Position: {x: 4, y: 4}
     Weight: 1
-  - Neighbours: 9b000000ae000000b0000000c3000000
+  - Neighbours: 8f000000a2000000a4000000b7000000
     Position: {x: 5, y: 4}
     Weight: 1
-  - Neighbours: 9c000000af000000b1000000c4000000
+  - Neighbours: 90000000a3000000a5000000b8000000
     Position: {x: 6, y: 4}
     Weight: 1
-  - Neighbours: 9d000000b0000000b2000000c5000000
+  - Neighbours: 91000000a4000000a6000000b9000000
     Position: {x: 7, y: 4}
     Weight: 1
-  - Neighbours: 9e000000b1000000b3000000c6000000
+  - Neighbours: 92000000a5000000a7000000ba000000
     Position: {x: 8, y: 4}
     Weight: 1
-  - Neighbours: 9f000000b2000000c7000000
+  - Neighbours: 93000000a6000000bb000000
     Position: {x: 9, y: 4}
     Weight: 1
-  - Neighbours: a0000000b5000000c8000000
+  - Neighbours: 94000000a9000000bc000000
     Position: {x: -10, y: 5}
     Weight: 1
-  - Neighbours: a1000000b4000000b6000000c9000000
+  - Neighbours: 95000000a8000000aa000000bd000000
     Position: {x: -9, y: 5}
     Weight: 1
-  - Neighbours: a2000000b5000000b7000000ca000000
+  - Neighbours: 96000000a9000000ab000000be000000
     Position: {x: -8, y: 5}
     Weight: 1
-  - Neighbours: a3000000b6000000b8000000cb000000
+  - Neighbours: 97000000aa000000ac000000bf000000
     Position: {x: -7, y: 5}
     Weight: 1
-  - Neighbours: a4000000b7000000b9000000cc000000
+  - Neighbours: 98000000ab000000ad000000c0000000
     Position: {x: -6, y: 5}
     Weight: 1
-  - Neighbours: a5000000b8000000ba000000cd000000
+  - Neighbours: 99000000ac000000ae000000c1000000
     Position: {x: -5, y: 5}
     Weight: 1
-  - Neighbours: a6000000b9000000bb000000ce000000
+  - Neighbours: 9a000000ad000000af000000c2000000
     Position: {x: -4, y: 5}
     Weight: 1
-  - Neighbours: a7000000ba000000bc000000cf000000
+  - Neighbours: 9b000000ae000000b0000000c3000000
     Position: {x: -3, y: 5}
     Weight: 1
-  - Neighbours: a8000000bb000000bd000000d0000000
+  - Neighbours: 9c000000af000000b1000000c4000000
     Position: {x: -2, y: 5}
     Weight: 1
-  - Neighbours: a9000000bc000000be000000d1000000
+  - Neighbours: 9d000000b0000000b2000000c5000000
     Position: {x: -1, y: 5}
     Weight: 1
-  - Neighbours: aa000000bd000000bf000000d2000000
+  - Neighbours: 9e000000b1000000b3000000c6000000
     Position: {x: 0, y: 5}
     Weight: 1
-  - Neighbours: ab000000be000000c0000000d3000000
+  - Neighbours: 9f000000b2000000b4000000c7000000
     Position: {x: 1, y: 5}
     Weight: 1
-  - Neighbours: ac000000bf000000c1000000d4000000
+  - Neighbours: a0000000b3000000b5000000c8000000
     Position: {x: 2, y: 5}
     Weight: 1
-  - Neighbours: ad000000c0000000c2000000d5000000
+  - Neighbours: a1000000b4000000b6000000c9000000
     Position: {x: 3, y: 5}
     Weight: 1
-  - Neighbours: ae000000c1000000c3000000d6000000
+  - Neighbours: a2000000b5000000b7000000ca000000
     Position: {x: 4, y: 5}
     Weight: 1
-  - Neighbours: af000000c2000000c4000000d7000000
+  - Neighbours: a3000000b6000000b8000000cb000000
     Position: {x: 5, y: 5}
     Weight: 1
-  - Neighbours: b0000000c3000000c5000000d8000000
+  - Neighbours: a4000000b7000000b9000000cc000000
     Position: {x: 6, y: 5}
     Weight: 1
-  - Neighbours: b1000000c4000000c6000000d9000000
+  - Neighbours: a5000000b8000000ba000000cd000000
     Position: {x: 7, y: 5}
     Weight: 1
-  - Neighbours: b2000000c5000000c7000000da000000
+  - Neighbours: a6000000b9000000bb000000ce000000
     Position: {x: 8, y: 5}
     Weight: 1
-  - Neighbours: b3000000c6000000db000000
+  - Neighbours: a7000000ba000000cf000000
     Position: {x: 9, y: 5}
     Weight: 1
-  - Neighbours: b4000000c9000000dc000000
+  - Neighbours: a8000000bd000000d0000000
     Position: {x: -10, y: 6}
     Weight: 1
-  - Neighbours: b5000000c8000000ca000000dd000000
+  - Neighbours: a9000000bc000000be000000d1000000
     Position: {x: -9, y: 6}
     Weight: 1
-  - Neighbours: b6000000c9000000cb000000de000000
+  - Neighbours: aa000000bd000000bf000000d2000000
     Position: {x: -8, y: 6}
     Weight: 1
-  - Neighbours: b7000000ca000000cc000000df000000
+  - Neighbours: ab000000be000000c0000000d3000000
     Position: {x: -7, y: 6}
     Weight: 1
-  - Neighbours: b8000000cb000000cd000000e0000000
+  - Neighbours: ac000000bf000000c1000000d4000000
     Position: {x: -6, y: 6}
     Weight: 1
-  - Neighbours: b9000000cc000000ce000000e1000000
+  - Neighbours: ad000000c0000000c2000000d5000000
     Position: {x: -5, y: 6}
     Weight: 1
-  - Neighbours: ba000000cd000000cf000000e2000000
+  - Neighbours: ae000000c1000000c3000000d6000000
     Position: {x: -4, y: 6}
     Weight: 1
-  - Neighbours: bb000000ce000000d0000000e3000000
+  - Neighbours: af000000c2000000c4000000d7000000
     Position: {x: -3, y: 6}
     Weight: 1
-  - Neighbours: bc000000cf000000d1000000e4000000
+  - Neighbours: b0000000c3000000c5000000d8000000
     Position: {x: -2, y: 6}
     Weight: 1
-  - Neighbours: bd000000d0000000d2000000e5000000
+  - Neighbours: b1000000c4000000c6000000d9000000
     Position: {x: -1, y: 6}
     Weight: 1
-  - Neighbours: be000000d1000000d3000000e6000000
+  - Neighbours: b2000000c5000000c7000000da000000
     Position: {x: 0, y: 6}
     Weight: 1
-  - Neighbours: bf000000d2000000d4000000e7000000
+  - Neighbours: b3000000c6000000c8000000db000000
     Position: {x: 1, y: 6}
     Weight: 1
-  - Neighbours: c0000000d3000000d5000000e8000000
+  - Neighbours: b4000000c7000000c9000000dc000000
     Position: {x: 2, y: 6}
     Weight: 1
-  - Neighbours: c1000000d4000000d6000000e9000000
+  - Neighbours: b5000000c8000000ca000000dd000000
     Position: {x: 3, y: 6}
     Weight: 1
-  - Neighbours: c2000000d5000000d7000000ea000000
+  - Neighbours: b6000000c9000000cb000000de000000
     Position: {x: 4, y: 6}
     Weight: 1
-  - Neighbours: c3000000d6000000d8000000eb000000
+  - Neighbours: b7000000ca000000cc000000df000000
     Position: {x: 5, y: 6}
     Weight: 1
-  - Neighbours: c4000000d7000000d9000000ec000000
+  - Neighbours: b8000000cb000000cd000000e0000000
     Position: {x: 6, y: 6}
     Weight: 1
-  - Neighbours: c5000000d8000000da000000ed000000
+  - Neighbours: b9000000cc000000ce000000e1000000
     Position: {x: 7, y: 6}
     Weight: 1
-  - Neighbours: c6000000d9000000db000000ee000000
+  - Neighbours: ba000000cd000000cf000000e2000000
     Position: {x: 8, y: 6}
     Weight: 1
-  - Neighbours: c7000000da000000ef000000
+  - Neighbours: bb000000ce000000e3000000
     Position: {x: 9, y: 6}
     Weight: 1
-  - Neighbours: c8000000dd000000
+  - Neighbours: bc000000d1000000
     Position: {x: -10, y: 7}
     Weight: 1
-  - Neighbours: c9000000dc000000de000000
+  - Neighbours: bd000000d0000000d2000000
     Position: {x: -9, y: 7}
     Weight: 1
-  - Neighbours: ca000000dd000000df000000
+  - Neighbours: be000000d1000000d3000000
     Position: {x: -8, y: 7}
     Weight: 1
-  - Neighbours: cb000000de000000e0000000
+  - Neighbours: bf000000d2000000d4000000
     Position: {x: -7, y: 7}
     Weight: 1
-  - Neighbours: cc000000df000000e1000000
+  - Neighbours: c0000000d3000000d5000000
     Position: {x: -6, y: 7}
     Weight: 1
-  - Neighbours: cd000000e0000000e2000000
+  - Neighbours: c1000000d4000000d6000000
     Position: {x: -5, y: 7}
     Weight: 1
-  - Neighbours: ce000000e1000000e3000000
+  - Neighbours: c2000000d5000000d7000000
     Position: {x: -4, y: 7}
     Weight: 1
-  - Neighbours: cf000000e2000000e4000000
+  - Neighbours: c3000000d6000000d8000000
     Position: {x: -3, y: 7}
     Weight: 1
-  - Neighbours: d0000000e3000000e5000000
+  - Neighbours: c4000000d7000000d9000000
     Position: {x: -2, y: 7}
     Weight: 1
-  - Neighbours: d1000000e4000000e6000000
+  - Neighbours: c5000000d8000000da000000
     Position: {x: -1, y: 7}
     Weight: 1
-  - Neighbours: d2000000e5000000e7000000
+  - Neighbours: c6000000d9000000db000000
     Position: {x: 0, y: 7}
     Weight: 1
-  - Neighbours: d3000000e6000000e8000000
+  - Neighbours: c7000000da000000dc000000
     Position: {x: 1, y: 7}
     Weight: 1
-  - Neighbours: d4000000e7000000e9000000
+  - Neighbours: c8000000db000000dd000000
     Position: {x: 2, y: 7}
     Weight: 1
-  - Neighbours: d5000000e8000000ea000000
+  - Neighbours: c9000000dc000000de000000
     Position: {x: 3, y: 7}
     Weight: 1
-  - Neighbours: d6000000e9000000eb000000
+  - Neighbours: ca000000dd000000df000000
     Position: {x: 4, y: 7}
     Weight: 1
-  - Neighbours: d7000000ea000000ec000000
+  - Neighbours: cb000000de000000e0000000
     Position: {x: 5, y: 7}
     Weight: 1
-  - Neighbours: d8000000eb000000ed000000
+  - Neighbours: cc000000df000000e1000000
     Position: {x: 6, y: 7}
     Weight: 1
-  - Neighbours: d9000000ec000000ee000000
+  - Neighbours: cd000000e0000000e2000000
     Position: {x: 7, y: 7}
     Weight: 1
-  - Neighbours: da000000ed000000ef000000
+  - Neighbours: ce000000e1000000e3000000
     Position: {x: 8, y: 7}
     Weight: 1
-  - Neighbours: db000000ee000000
+  - Neighbours: cf000000e2000000
     Position: {x: 9, y: 7}
     Weight: 1
   NavigationTable:
@@ -744,7 +708,7 @@ MonoBehaviour:
       - Neighbours: 000000000500000006000000
         Position: {x: -8, y: -4}
         Weight: 1
-      - Neighbours: 00000000010000000600000029000000
+      - Neighbours: 000000000100000006000000
         Position: {x: -9, y: -3}
         Weight: 1
       - Neighbours: 020000000400000028000000
@@ -753,713 +717,677 @@ MonoBehaviour:
       - Neighbours: 030000000700000008000000
         Position: {x: -7, y: -4}
         Weight: 1
-      - Neighbours: 0300000004000000080000002a000000
+      - Neighbours: 030000000400000008000000
         Position: {x: -8, y: -3}
         Weight: 1
-      - Neighbours: 04000000280000002a0000003d000000
-        Position: {x: -9, y: -2}
-        Weight: 1
-      - Neighbours: 01000000290000003c000000
+      - Neighbours: 0100000036000000
         Position: {x: -10, y: -2}
         Weight: 1
       - Neighbours: 05000000090000000a000000
         Position: {x: -6, y: -4}
         Weight: 1
-      - Neighbours: 05000000060000000a0000002b000000
+      - Neighbours: 05000000060000000a000000
         Position: {x: -7, y: -3}
         Weight: 1
-      - Neighbours: 06000000290000002b0000003e000000
-        Position: {x: -8, y: -2}
-        Weight: 1
-      - Neighbours: 290000003c0000003e00000051000000
-        Position: {x: -9, y: -1}
-        Weight: 1
-      - Neighbours: 280000003d00000050000000
+      - Neighbours: 2800000044000000
         Position: {x: -10, y: -1}
         Weight: 1
       - Neighbours: 070000000b0000000c000000
         Position: {x: -5, y: -4}
         Weight: 1
-      - Neighbours: 07000000080000000c0000002c000000
+      - Neighbours: 07000000080000000c000000
         Position: {x: -6, y: -3}
         Weight: 1
-      - Neighbours: 080000002a0000002c0000003f000000
-        Position: {x: -7, y: -2}
-        Weight: 1
-      - Neighbours: 2a0000003d0000003f00000052000000
-        Position: {x: -8, y: -1}
-        Weight: 1
-      - Neighbours: 3d000000500000005200000065000000
-        Position: {x: -9, y: 0}
-        Weight: 1
-      - Neighbours: 3c0000005100000064000000
+      - Neighbours: 360000005200000053000000
         Position: {x: -10, y: 0}
         Weight: 1
       - Neighbours: 090000000d0000000e000000
         Position: {x: -4, y: -4}
         Weight: 1
-      - Neighbours: 090000000a0000000e0000002d000000
+      - Neighbours: 090000000a0000000e000000
         Position: {x: -5, y: -3}
         Weight: 1
-      - Neighbours: 0a0000002b0000002d00000040000000
-        Position: {x: -6, y: -2}
+      - Neighbours: 440000005400000055000000
+        Position: {x: -9, y: 0}
         Weight: 1
-      - Neighbours: 2b0000003e0000004000000053000000
-        Position: {x: -7, y: -1}
-        Weight: 1
-      - Neighbours: 3e000000510000005300000066000000
-        Position: {x: -8, y: 0}
-        Weight: 1
-      - Neighbours: 51000000640000006600000079000000
-        Position: {x: -9, y: 1}
-        Weight: 1
-      - Neighbours: 500000006500000078000000
+      - Neighbours: 44000000550000006c000000
         Position: {x: -10, y: 1}
         Weight: 1
       - Neighbours: 0b0000000f00000010000000
         Position: {x: -3, y: -4}
         Weight: 1
-      - Neighbours: 0b0000000c000000100000002e000000
+      - Neighbours: 0b0000000c00000010000000
         Position: {x: -4, y: -3}
         Weight: 1
-      - Neighbours: 0c0000002c0000002e00000041000000
-        Position: {x: -5, y: -2}
+      - Neighbours: 520000005600000057000000
+        Position: {x: -8, y: 0}
         Weight: 1
-      - Neighbours: 2c0000003f0000004100000054000000
-        Position: {x: -6, y: -1}
+      - Neighbours: 5200000053000000570000006d000000
+        Position: {x: -9, y: 1}
         Weight: 1
-      - Neighbours: 3f000000520000005400000067000000
-        Position: {x: -7, y: 0}
-        Weight: 1
-      - Neighbours: 5200000065000000670000007a000000
-        Position: {x: -8, y: 1}
-        Weight: 1
-      - Neighbours: 65000000780000007a0000008d000000
-        Position: {x: -9, y: 2}
-        Weight: 1
-      - Neighbours: 64000000790000008c000000
+      - Neighbours: 530000006d00000080000000
         Position: {x: -10, y: 2}
         Weight: 1
       - Neighbours: 0d0000001100000012000000
         Position: {x: -2, y: -4}
         Weight: 1
-      - Neighbours: 0d0000000e000000120000002f000000
+      - Neighbours: 0d0000000e0000001200000029000000
         Position: {x: -3, y: -3}
         Weight: 1
-      - Neighbours: 0e0000002d0000002f00000042000000
-        Position: {x: -4, y: -2}
+      - Neighbours: 540000005800000059000000
+        Position: {x: -7, y: 0}
         Weight: 1
-      - Neighbours: 2d000000400000004200000055000000
-        Position: {x: -5, y: -1}
+      - Neighbours: 5400000055000000590000006e000000
+        Position: {x: -8, y: 1}
         Weight: 1
-      - Neighbours: 40000000530000005500000068000000
-        Position: {x: -6, y: 0}
+      - Neighbours: 550000006c0000006e00000081000000
+        Position: {x: -9, y: 2}
         Weight: 1
-      - Neighbours: 5300000066000000680000007b000000
-        Position: {x: -7, y: 1}
-        Weight: 1
-      - Neighbours: 66000000790000007b0000008e000000
-        Position: {x: -8, y: 2}
-        Weight: 1
-      - Neighbours: 790000008c0000008e000000a1000000
-        Position: {x: -9, y: 3}
-        Weight: 1
-      - Neighbours: 780000008d000000a0000000
+      - Neighbours: 6c0000008100000094000000
         Position: {x: -10, y: 3}
         Weight: 1
       - Neighbours: 0f0000001300000014000000
         Position: {x: -1, y: -4}
         Weight: 1
-      - Neighbours: 0f000000100000001400000030000000
+      - Neighbours: 0f00000010000000140000002a000000
         Position: {x: -2, y: -3}
         Weight: 1
-      - Neighbours: 100000002e0000003000000043000000
+      - Neighbours: 100000002a00000037000000
         Position: {x: -3, y: -2}
         Weight: 1
-      - Neighbours: 2e000000410000004300000056000000
-        Position: {x: -4, y: -1}
+      - Neighbours: 560000005a0000005b000000
+        Position: {x: -6, y: 0}
         Weight: 1
-      - Neighbours: 41000000540000005600000069000000
-        Position: {x: -5, y: 0}
+      - Neighbours: 56000000570000005b0000006f000000
+        Position: {x: -7, y: 1}
         Weight: 1
-      - Neighbours: 5400000067000000690000007c000000
-        Position: {x: -6, y: 1}
+      - Neighbours: 570000006d0000006f00000082000000
+        Position: {x: -8, y: 2}
         Weight: 1
-      - Neighbours: 670000007a0000007c0000008f000000
-        Position: {x: -7, y: 2}
+      - Neighbours: 6d000000800000008200000095000000
+        Position: {x: -9, y: 3}
         Weight: 1
-      - Neighbours: 7a0000008d0000008f000000a2000000
-        Position: {x: -8, y: 3}
-        Weight: 1
-      - Neighbours: 8d000000a0000000a2000000b5000000
-        Position: {x: -9, y: 4}
-        Weight: 1
-      - Neighbours: 8c000000a1000000b4000000
+      - Neighbours: 8000000095000000a8000000
         Position: {x: -10, y: 4}
         Weight: 1
       - Neighbours: 110000001500000016000000
         Position: {x: 0, y: -4}
         Weight: 1
-      - Neighbours: 11000000120000001600000031000000
+      - Neighbours: 1100000012000000160000002b000000
         Position: {x: -1, y: -3}
         Weight: 1
-      - Neighbours: 120000002f0000003100000044000000
+      - Neighbours: 12000000290000002b00000038000000
         Position: {x: -2, y: -2}
         Weight: 1
-      - Neighbours: 2f000000420000004400000057000000
+      - Neighbours: 290000003800000045000000
         Position: {x: -3, y: -1}
         Weight: 1
-      - Neighbours: 4200000055000000570000006a000000
-        Position: {x: -4, y: 0}
+      - Neighbours: 580000005c0000005d000000
+        Position: {x: -5, y: 0}
         Weight: 1
-      - Neighbours: 55000000680000006a0000007d000000
-        Position: {x: -5, y: 1}
+      - Neighbours: 58000000590000005d00000070000000
+        Position: {x: -6, y: 1}
         Weight: 1
-      - Neighbours: 680000007b0000007d00000090000000
-        Position: {x: -6, y: 2}
-        Weight: 1
-      - Neighbours: 7b0000008e00000090000000a3000000
-        Position: {x: -7, y: 3}
-        Weight: 1
-      - Neighbours: 8e000000a1000000a3000000b6000000
-        Position: {x: -8, y: 4}
-        Weight: 1
-      - Neighbours: a1000000b4000000b6000000c9000000
-        Position: {x: -9, y: 5}
-        Weight: 1
-      - Neighbours: a0000000b5000000c8000000
-        Position: {x: -10, y: 5}
-        Weight: 1
-      - Neighbours: 13000000140000001800000032000000
-        Position: {x: 0, y: -3}
-        Weight: 1
-      - Neighbours: 14000000300000003200000045000000
-        Position: {x: -1, y: -2}
-        Weight: 1
-      - Neighbours: 30000000430000004500000058000000
-        Position: {x: -2, y: -1}
-        Weight: 1
-      - Neighbours: 4300000056000000580000006b000000
-        Position: {x: -3, y: 0}
-        Weight: 1
-      - Neighbours: 56000000690000006b0000007e000000
-        Position: {x: -4, y: 1}
-        Weight: 1
-      - Neighbours: 690000007c0000007e00000091000000
-        Position: {x: -5, y: 2}
-        Weight: 1
-      - Neighbours: 7c0000008f00000091000000a4000000
-        Position: {x: -6, y: 3}
-        Weight: 1
-      - Neighbours: 8f000000a2000000a4000000b7000000
-        Position: {x: -7, y: 4}
-        Weight: 1
-      - Neighbours: a2000000b5000000b7000000ca000000
-        Position: {x: -8, y: 5}
-        Weight: 1
-      - Neighbours: 16000000310000003300000046000000
-        Position: {x: 0, y: -2}
-        Weight: 1
-      - Neighbours: 31000000440000004600000059000000
-        Position: {x: -1, y: -1}
-        Weight: 1
-      - Neighbours: 4400000057000000590000006c000000
-        Position: {x: -2, y: 0}
-        Weight: 1
-      - Neighbours: 570000006a0000006c0000007f000000
-        Position: {x: -3, y: 1}
-        Weight: 1
-      - Neighbours: 6a0000007d0000007f00000092000000
-        Position: {x: -4, y: 2}
-        Weight: 1
-      - Neighbours: 7d0000009000000092000000a5000000
-        Position: {x: -5, y: 3}
-        Weight: 1
-      - Neighbours: 90000000a3000000a5000000b8000000
-        Position: {x: -6, y: 4}
-        Weight: 1
-      - Neighbours: a3000000b6000000b8000000cb000000
-        Position: {x: -7, y: 5}
-        Weight: 1
-      - Neighbours: 3200000045000000470000005a000000
-        Position: {x: 0, y: -1}
-        Weight: 1
-      - Neighbours: 45000000580000005a0000006d000000
-        Position: {x: -1, y: 0}
-        Weight: 1
-      - Neighbours: 580000006b0000006d00000080000000
-        Position: {x: -2, y: 1}
-        Weight: 1
-      - Neighbours: 6b0000007e0000008000000093000000
-        Position: {x: -3, y: 2}
-        Weight: 1
-      - Neighbours: 7e0000009100000093000000a6000000
-        Position: {x: -4, y: 3}
-        Weight: 1
-      - Neighbours: 91000000a4000000a6000000b9000000
-        Position: {x: -5, y: 4}
-        Weight: 1
-      - Neighbours: a4000000b7000000b9000000cc000000
-        Position: {x: -6, y: 5}
-        Weight: 1
-      - Neighbours: 46000000590000005b0000006e000000
-        Position: {x: 0, y: 0}
-        Weight: 1
-      - Neighbours: 590000006c0000006e00000081000000
-        Position: {x: -1, y: 1}
-        Weight: 1
-      - Neighbours: 6c0000007f0000008100000094000000
-        Position: {x: -2, y: 2}
-        Weight: 1
-      - Neighbours: 7f0000009200000094000000a7000000
-        Position: {x: -3, y: 3}
-        Weight: 1
-      - Neighbours: 92000000a5000000a7000000ba000000
-        Position: {x: -4, y: 4}
-        Weight: 1
-      - Neighbours: a5000000b8000000ba000000cd000000
-        Position: {x: -5, y: 5}
-        Weight: 1
-      - Neighbours: 5a0000006d0000006f00000082000000
-        Position: {x: 0, y: 1}
-        Weight: 1
-      - Neighbours: 6d000000800000008200000095000000
-        Position: {x: -1, y: 2}
-        Weight: 1
-      - Neighbours: 800000009300000095000000a8000000
-        Position: {x: -2, y: 3}
-        Weight: 1
-      - Neighbours: 93000000a6000000a8000000bb000000
-        Position: {x: -3, y: 4}
-        Weight: 1
-      - Neighbours: a6000000b9000000bb000000ce000000
-        Position: {x: -4, y: 5}
+      - Neighbours: 590000006e0000007000000083000000
+        Position: {x: -7, y: 2}
         Weight: 1
       - Neighbours: 6e000000810000008300000096000000
-        Position: {x: 0, y: 2}
+        Position: {x: -8, y: 3}
         Weight: 1
       - Neighbours: 810000009400000096000000a9000000
-        Position: {x: -1, y: 3}
+        Position: {x: -9, y: 4}
         Weight: 1
-      - Neighbours: 94000000a7000000a9000000bc000000
-        Position: {x: -2, y: 4}
+      - Neighbours: 94000000a9000000bc000000
+        Position: {x: -10, y: 5}
         Weight: 1
-      - Neighbours: a7000000ba000000bc000000cf000000
-        Position: {x: -3, y: 5}
-        Weight: 1
-      - Neighbours: 820000009500000097000000aa000000
-        Position: {x: 0, y: 3}
-        Weight: 1
-      - Neighbours: 95000000a8000000aa000000bd000000
-        Position: {x: -1, y: 4}
-        Weight: 1
-      - Neighbours: a8000000bb000000bd000000d0000000
-        Position: {x: -2, y: 5}
-        Weight: 1
-      - Neighbours: 96000000a9000000ab000000be000000
-        Position: {x: 0, y: 4}
-        Weight: 1
-      - Neighbours: a9000000bc000000be000000d1000000
-        Position: {x: -1, y: 5}
-        Weight: 1
-      - Neighbours: aa000000bd000000bf000000d2000000
-        Position: {x: 0, y: 5}
-        Weight: 1
-      RegionBounds:
-        serializedVersion: 2
-        x: -10
-        y: -4
-        width: 10.01
-        height: 9.01
-    - Nodes:
       - Neighbours: 130000001700000018000000
         Position: {x: 1, y: -4}
         Weight: 1
-      - Neighbours: b5000000c8000000ca000000dd000000
-        Position: {x: -9, y: 6}
+      - Neighbours: 1300000014000000180000002c000000
+        Position: {x: 0, y: -3}
         Weight: 1
-      - Neighbours: b4000000c9000000dc000000
+      - Neighbours: 140000002a0000002c00000039000000
+        Position: {x: -1, y: -2}
+        Weight: 1
+      - Neighbours: 2a000000370000003900000046000000
+        Position: {x: -2, y: -1}
+        Weight: 1
+      - Neighbours: 370000005c000000460000005f000000
+        Position: {x: -3, y: 0}
+        Weight: 1
+      - Neighbours: 5a000000450000005e000000
+        Position: {x: -4, y: 0}
+        Weight: 1
+      - Neighbours: 5a0000005b0000005e00000071000000
+        Position: {x: -5, y: 1}
+        Weight: 1
+      - Neighbours: 5b0000006f0000007100000084000000
+        Position: {x: -6, y: 2}
+        Weight: 1
+      - Neighbours: 6f000000820000008400000097000000
+        Position: {x: -7, y: 3}
+        Weight: 1
+      - Neighbours: 820000009500000097000000aa000000
+        Position: {x: -8, y: 4}
+        Weight: 1
+      - Neighbours: 95000000a8000000aa000000bd000000
+        Position: {x: -9, y: 5}
+        Weight: 1
+      - Neighbours: a8000000bd000000d0000000
         Position: {x: -10, y: 6}
         Weight: 1
       - Neighbours: 15000000190000001a000000
         Position: {x: 2, y: -4}
         Weight: 1
-      - Neighbours: 15000000160000001a00000033000000
+      - Neighbours: 15000000160000001a0000002d000000
         Position: {x: 1, y: -3}
         Weight: 1
-      - Neighbours: b6000000c9000000cb000000de000000
+      - Neighbours: 160000002b0000002d0000003a000000
+        Position: {x: 0, y: -2}
+        Weight: 1
+      - Neighbours: 2b000000380000003a00000047000000
+        Position: {x: -1, y: -1}
+        Weight: 1
+      - Neighbours: 38000000450000004700000060000000
+        Position: {x: -2, y: 0}
+        Weight: 1
+      - Neighbours: 450000005e0000006000000073000000
+        Position: {x: -3, y: 1}
+        Weight: 1
+      - Neighbours: 5c0000005d0000005f00000072000000
+        Position: {x: -4, y: 1}
+        Weight: 1
+      - Neighbours: 5d000000700000007200000085000000
+        Position: {x: -5, y: 2}
+        Weight: 1
+      - Neighbours: 70000000830000008500000098000000
+        Position: {x: -6, y: 3}
+        Weight: 1
+      - Neighbours: 830000009600000098000000ab000000
+        Position: {x: -7, y: 4}
+        Weight: 1
+      - Neighbours: 96000000a9000000ab000000be000000
+        Position: {x: -8, y: 5}
+        Weight: 1
+      - Neighbours: a9000000bc000000be000000d1000000
+        Position: {x: -9, y: 6}
+        Weight: 1
+      - Neighbours: 17000000180000001c0000002e000000
+        Position: {x: 2, y: -3}
+        Weight: 1
+      - Neighbours: 180000002c0000002e0000003b000000
+        Position: {x: 1, y: -2}
+        Weight: 1
+      - Neighbours: 2c000000390000003b00000048000000
+        Position: {x: 0, y: -1}
+        Weight: 1
+      - Neighbours: 39000000460000004800000061000000
+        Position: {x: -1, y: 0}
+        Weight: 1
+      - Neighbours: 460000005f0000006100000074000000
+        Position: {x: -2, y: 1}
+        Weight: 1
+      - Neighbours: 5f000000720000007400000087000000
+        Position: {x: -3, y: 2}
+        Weight: 1
+      - Neighbours: 5e000000710000007300000086000000
+        Position: {x: -4, y: 2}
+        Weight: 1
+      - Neighbours: 71000000840000008600000099000000
+        Position: {x: -5, y: 3}
+        Weight: 1
+      - Neighbours: 840000009700000099000000ac000000
+        Position: {x: -6, y: 4}
+        Weight: 1
+      - Neighbours: 97000000aa000000ac000000bf000000
+        Position: {x: -7, y: 5}
+        Weight: 1
+      - Neighbours: aa000000bd000000bf000000d2000000
         Position: {x: -8, y: 6}
         Weight: 1
-      - Neighbours: c9000000dc000000de000000
-        Position: {x: -9, y: 7}
+      - Neighbours: 1a0000002d0000002f0000003c000000
+        Position: {x: 2, y: -2}
         Weight: 1
-      - Neighbours: c8000000dd000000
+      - Neighbours: 2d0000003a0000003c00000049000000
+        Position: {x: 1, y: -1}
+        Weight: 1
+      - Neighbours: 3a000000470000004900000062000000
+        Position: {x: 0, y: 0}
+        Weight: 1
+      - Neighbours: 47000000600000006200000075000000
+        Position: {x: -1, y: 1}
+        Weight: 1
+      - Neighbours: 60000000730000007500000088000000
+        Position: {x: -2, y: 2}
+        Weight: 1
+      - Neighbours: 7300000086000000880000009b000000
+        Position: {x: -3, y: 3}
+        Weight: 1
+      - Neighbours: 7200000085000000870000009a000000
+        Position: {x: -4, y: 3}
+        Weight: 1
+      - Neighbours: 85000000980000009a000000ad000000
+        Position: {x: -5, y: 4}
+        Weight: 1
+      - Neighbours: 98000000ab000000ad000000c0000000
+        Position: {x: -6, y: 5}
+        Weight: 1
+      - Neighbours: ab000000be000000c0000000d3000000
+        Position: {x: -7, y: 6}
+        Weight: 1
+      - Neighbours: 2e0000003b0000003d0000004a000000
+        Position: {x: 2, y: -1}
+        Weight: 1
+      - Neighbours: 3b000000480000004a00000063000000
+        Position: {x: 1, y: 0}
+        Weight: 1
+      - Neighbours: 48000000610000006300000076000000
+        Position: {x: 0, y: 1}
+        Weight: 1
+      - Neighbours: 61000000740000007600000089000000
+        Position: {x: -1, y: 2}
+        Weight: 1
+      - Neighbours: 7400000087000000890000009c000000
+        Position: {x: -2, y: 3}
+        Weight: 1
+      - Neighbours: 870000009a0000009c000000af000000
+        Position: {x: -3, y: 4}
+        Weight: 1
+      - Neighbours: 86000000990000009b000000ae000000
+        Position: {x: -4, y: 4}
+        Weight: 1
+      - Neighbours: 99000000ac000000ae000000c1000000
+        Position: {x: -5, y: 5}
+        Weight: 1
+      - Neighbours: ac000000bf000000c1000000d4000000
+        Position: {x: -6, y: 6}
+        Weight: 1
+      - Neighbours: 3c000000490000004b00000064000000
+        Position: {x: 2, y: 0}
+        Weight: 1
+      - Neighbours: 49000000620000006400000077000000
+        Position: {x: 1, y: 1}
+        Weight: 1
+      - Neighbours: 6200000075000000770000008a000000
+        Position: {x: 0, y: 2}
+        Weight: 1
+      - Neighbours: 75000000880000008a0000009d000000
+        Position: {x: -1, y: 3}
+        Weight: 1
+      - Neighbours: 880000009b0000009d000000b0000000
+        Position: {x: -2, y: 4}
+        Weight: 1
+      - Neighbours: 9b000000ae000000b0000000c3000000
+        Position: {x: -3, y: 5}
+        Weight: 1
+      - Neighbours: 9a000000ad000000af000000c2000000
+        Position: {x: -4, y: 5}
+        Weight: 1
+      - Neighbours: ad000000c0000000c2000000d5000000
+        Position: {x: -5, y: 6}
+        Weight: 1
+      - Neighbours: 4a000000630000006500000078000000
+        Position: {x: 2, y: 1}
+        Weight: 1
+      - Neighbours: 6300000076000000780000008b000000
+        Position: {x: 1, y: 2}
+        Weight: 1
+      - Neighbours: 76000000890000008b0000009e000000
+        Position: {x: 0, y: 3}
+        Weight: 1
+      - Neighbours: 890000009c0000009e000000b1000000
+        Position: {x: -1, y: 4}
+        Weight: 1
+      - Neighbours: 9c000000af000000b1000000c4000000
+        Position: {x: -2, y: 5}
+        Weight: 1
+      - Neighbours: af000000c2000000c4000000d7000000
+        Position: {x: -3, y: 6}
+        Weight: 1
+      - Neighbours: ae000000c1000000c3000000d6000000
+        Position: {x: -4, y: 6}
+        Weight: 1
+      - Neighbours: 6400000077000000790000008c000000
+        Position: {x: 2, y: 2}
+        Weight: 1
+      - Neighbours: 770000008a0000008c0000009f000000
+        Position: {x: 1, y: 3}
+        Weight: 1
+      - Neighbours: 8a0000009d0000009f000000b2000000
+        Position: {x: 0, y: 4}
+        Weight: 1
+      - Neighbours: 9d000000b0000000b2000000c5000000
+        Position: {x: -1, y: 5}
+        Weight: 1
+      - Neighbours: b0000000c3000000c5000000d8000000
+        Position: {x: -2, y: 6}
+        Weight: 1
+      - Neighbours: 780000008b0000008d000000a0000000
+        Position: {x: 2, y: 3}
+        Weight: 1
+      - Neighbours: 8b0000009e000000a0000000b3000000
+        Position: {x: 1, y: 4}
+        Weight: 1
+      - Neighbours: 9e000000b1000000b3000000c6000000
+        Position: {x: 0, y: 5}
+        Weight: 1
+      - Neighbours: b1000000c4000000c6000000d9000000
+        Position: {x: -1, y: 6}
+        Weight: 1
+      - Neighbours: 8c0000009f000000a1000000b4000000
+        Position: {x: 2, y: 4}
+        Weight: 1
+      - Neighbours: 9f000000b2000000b4000000c7000000
+        Position: {x: 1, y: 5}
+        Weight: 1
+      - Neighbours: b2000000c5000000c7000000da000000
+        Position: {x: 0, y: 6}
+        Weight: 1
+      - Neighbours: a0000000b3000000b5000000c8000000
+        Position: {x: 2, y: 5}
+        Weight: 1
+      - Neighbours: b3000000c6000000c8000000db000000
+        Position: {x: 1, y: 6}
+        Weight: 1
+      - Neighbours: b4000000c7000000c9000000dc000000
+        Position: {x: 2, y: 6}
+        Weight: 1
+      RegionBounds:
+        serializedVersion: 2
+        x: -10
+        y: -4
+        width: 12.01
+        height: 10.01
+    - Nodes:
+      - Neighbours: bc000000d1000000
         Position: {x: -10, y: 7}
         Weight: 1
       - Neighbours: 170000001b0000001c000000
         Position: {x: 3, y: -4}
         Weight: 1
-      - Neighbours: 17000000180000001c00000034000000
-        Position: {x: 2, y: -3}
-        Weight: 1
-      - Neighbours: 18000000320000003400000047000000
-        Position: {x: 1, y: -2}
-        Weight: 1
-      - Neighbours: b7000000ca000000cc000000df000000
-        Position: {x: -7, y: 6}
-        Weight: 1
-      - Neighbours: ca000000dd000000df000000
-        Position: {x: -8, y: 7}
+      - Neighbours: bd000000d0000000d2000000
+        Position: {x: -9, y: 7}
         Weight: 1
       - Neighbours: 190000001d0000001e000000
         Position: {x: 4, y: -4}
         Weight: 1
-      - Neighbours: 190000001a0000001e00000035000000
+      - Neighbours: 190000001a0000001e0000002f000000
         Position: {x: 3, y: -3}
         Weight: 1
-      - Neighbours: 1a000000330000003500000048000000
-        Position: {x: 2, y: -2}
-        Weight: 1
-      - Neighbours: 3300000046000000480000005b000000
-        Position: {x: 1, y: -1}
-        Weight: 1
-      - Neighbours: b8000000cb000000cd000000e0000000
-        Position: {x: -6, y: 6}
-        Weight: 1
-      - Neighbours: cb000000de000000e0000000
-        Position: {x: -7, y: 7}
+      - Neighbours: be000000d1000000d3000000
+        Position: {x: -8, y: 7}
         Weight: 1
       - Neighbours: 1b0000001f00000020000000
         Position: {x: 5, y: -4}
         Weight: 1
-      - Neighbours: 1b0000001c0000002000000036000000
+      - Neighbours: 1b0000001c0000002000000030000000
         Position: {x: 4, y: -3}
         Weight: 1
-      - Neighbours: 1c000000340000003600000049000000
+      - Neighbours: 1c0000002e000000300000003d000000
         Position: {x: 3, y: -2}
         Weight: 1
-      - Neighbours: 3400000047000000490000005c000000
-        Position: {x: 2, y: -1}
-        Weight: 1
-      - Neighbours: 470000005a0000005c0000006f000000
-        Position: {x: 1, y: 0}
-        Weight: 1
-      - Neighbours: b9000000cc000000ce000000e1000000
-        Position: {x: -5, y: 6}
-        Weight: 1
-      - Neighbours: cc000000df000000e1000000
-        Position: {x: -6, y: 7}
+      - Neighbours: bf000000d2000000d4000000
+        Position: {x: -7, y: 7}
         Weight: 1
       - Neighbours: 1d0000002100000022000000
         Position: {x: 6, y: -4}
         Weight: 1
-      - Neighbours: 1d0000001e0000002200000037000000
+      - Neighbours: 1d0000001e0000002200000031000000
         Position: {x: 5, y: -3}
         Weight: 1
-      - Neighbours: 1e00000035000000370000004a000000
+      - Neighbours: 1e0000002f000000310000003e000000
         Position: {x: 4, y: -2}
         Weight: 1
-      - Neighbours: 35000000480000004a0000005d000000
+      - Neighbours: 2f0000003c0000003e0000004b000000
         Position: {x: 3, y: -1}
         Weight: 1
-      - Neighbours: 480000005b0000005d00000070000000
-        Position: {x: 2, y: 0}
-        Weight: 1
-      - Neighbours: 5b0000006e0000007000000083000000
-        Position: {x: 1, y: 1}
-        Weight: 1
-      - Neighbours: ba000000cd000000cf000000e2000000
-        Position: {x: -4, y: 6}
-        Weight: 1
-      - Neighbours: cd000000e0000000e2000000
-        Position: {x: -5, y: 7}
+      - Neighbours: c0000000d3000000d5000000
+        Position: {x: -6, y: 7}
         Weight: 1
       - Neighbours: 1f0000002300000024000000
         Position: {x: 7, y: -4}
         Weight: 1
-      - Neighbours: 1f000000200000002400000038000000
+      - Neighbours: 1f000000200000002400000032000000
         Position: {x: 6, y: -3}
         Weight: 1
-      - Neighbours: 2000000036000000380000004b000000
+      - Neighbours: 2000000030000000320000003f000000
         Position: {x: 5, y: -2}
         Weight: 1
-      - Neighbours: 36000000490000004b0000005e000000
+      - Neighbours: 300000003d0000003f0000004c000000
         Position: {x: 4, y: -1}
         Weight: 1
-      - Neighbours: 490000005c0000005e00000071000000
+      - Neighbours: 3d0000004a0000004c00000065000000
         Position: {x: 3, y: 0}
         Weight: 1
-      - Neighbours: 5c0000006f0000007100000084000000
-        Position: {x: 2, y: 1}
-        Weight: 1
-      - Neighbours: 6f000000820000008400000097000000
-        Position: {x: 1, y: 2}
-        Weight: 1
-      - Neighbours: bb000000ce000000d0000000e3000000
-        Position: {x: -3, y: 6}
-        Weight: 1
-      - Neighbours: ce000000e1000000e3000000
-        Position: {x: -4, y: 7}
+      - Neighbours: c1000000d4000000d6000000
+        Position: {x: -5, y: 7}
         Weight: 1
       - Neighbours: 210000002500000026000000
         Position: {x: 8, y: -4}
         Weight: 1
-      - Neighbours: 21000000220000002600000039000000
+      - Neighbours: 21000000220000002600000033000000
         Position: {x: 7, y: -3}
         Weight: 1
-      - Neighbours: 2200000037000000390000004c000000
+      - Neighbours: 22000000310000003300000040000000
         Position: {x: 6, y: -2}
         Weight: 1
-      - Neighbours: 370000004a0000004c0000005f000000
+      - Neighbours: 310000003e000000400000004d000000
         Position: {x: 5, y: -1}
         Weight: 1
-      - Neighbours: 4a0000005d0000005f00000072000000
+      - Neighbours: 3e0000004b0000004d00000066000000
         Position: {x: 4, y: 0}
         Weight: 1
-      - Neighbours: 5d000000700000007200000085000000
+      - Neighbours: 4b000000640000006600000079000000
         Position: {x: 3, y: 1}
         Weight: 1
-      - Neighbours: 70000000830000008500000098000000
-        Position: {x: 2, y: 2}
-        Weight: 1
-      - Neighbours: 830000009600000098000000ab000000
-        Position: {x: 1, y: 3}
-        Weight: 1
-      - Neighbours: bc000000cf000000d1000000e4000000
-        Position: {x: -2, y: 6}
-        Weight: 1
-      - Neighbours: cf000000e2000000e4000000
+      - Neighbours: c3000000d6000000d8000000
         Position: {x: -3, y: 7}
+        Weight: 1
+      - Neighbours: c2000000d5000000d7000000
+        Position: {x: -4, y: 7}
         Weight: 1
       - Neighbours: 2300000027000000
         Position: {x: 9, y: -4}
         Weight: 1
-      - Neighbours: 2300000024000000270000003a000000
+      - Neighbours: 23000000240000002700000034000000
         Position: {x: 8, y: -3}
         Weight: 1
-      - Neighbours: 24000000380000003a0000004d000000
+      - Neighbours: 24000000320000003400000041000000
         Position: {x: 7, y: -2}
         Weight: 1
-      - Neighbours: 380000004b0000004d00000060000000
+      - Neighbours: 320000003f000000410000004e000000
         Position: {x: 6, y: -1}
         Weight: 1
-      - Neighbours: 4b0000005e0000006000000073000000
+      - Neighbours: 3f0000004c0000004e00000067000000
         Position: {x: 5, y: 0}
         Weight: 1
-      - Neighbours: 5e000000710000007300000086000000
+      - Neighbours: 4c00000065000000670000007a000000
         Position: {x: 4, y: 1}
         Weight: 1
-      - Neighbours: 71000000840000008600000099000000
+      - Neighbours: 65000000780000007a0000008d000000
         Position: {x: 3, y: 2}
         Weight: 1
-      - Neighbours: 840000009700000099000000ac000000
-        Position: {x: 2, y: 3}
-        Weight: 1
-      - Neighbours: 97000000aa000000ac000000bf000000
-        Position: {x: 1, y: 4}
-        Weight: 1
-      - Neighbours: bd000000d0000000d2000000e5000000
-        Position: {x: -1, y: 6}
-        Weight: 1
-      - Neighbours: d0000000e3000000e5000000
+      - Neighbours: c4000000d7000000d9000000
         Position: {x: -2, y: 7}
         Weight: 1
-      - Neighbours: 25000000260000003b000000
+      - Neighbours: 250000002600000035000000
         Position: {x: 9, y: -3}
         Weight: 1
-      - Neighbours: 26000000390000003b0000004e000000
+      - Neighbours: 26000000330000003500000042000000
         Position: {x: 8, y: -2}
         Weight: 1
-      - Neighbours: 390000004c0000004e00000061000000
+      - Neighbours: 3300000040000000420000004f000000
         Position: {x: 7, y: -1}
         Weight: 1
-      - Neighbours: 4c0000005f0000006100000074000000
+      - Neighbours: 400000004d0000004f00000068000000
         Position: {x: 6, y: 0}
         Weight: 1
-      - Neighbours: 5f000000720000007400000087000000
+      - Neighbours: 4d00000066000000680000007b000000
         Position: {x: 5, y: 1}
         Weight: 1
-      - Neighbours: 7200000085000000870000009a000000
+      - Neighbours: 66000000790000007b0000008e000000
         Position: {x: 4, y: 2}
         Weight: 1
-      - Neighbours: 85000000980000009a000000ad000000
+      - Neighbours: 790000008c0000008e000000a1000000
         Position: {x: 3, y: 3}
         Weight: 1
-      - Neighbours: 98000000ab000000ad000000c0000000
-        Position: {x: 2, y: 4}
-        Weight: 1
-      - Neighbours: ab000000be000000c0000000d3000000
-        Position: {x: 1, y: 5}
-        Weight: 1
-      - Neighbours: be000000d1000000d3000000e6000000
-        Position: {x: 0, y: 6}
-        Weight: 1
-      - Neighbours: d1000000e4000000e6000000
+      - Neighbours: c5000000d8000000da000000
         Position: {x: -1, y: 7}
         Weight: 1
-      - Neighbours: 270000003a0000004f000000
+      - Neighbours: 270000003400000043000000
         Position: {x: 9, y: -2}
         Weight: 1
-      - Neighbours: 3a0000004d0000004f00000062000000
+      - Neighbours: 34000000410000004300000050000000
         Position: {x: 8, y: -1}
         Weight: 1
-      - Neighbours: 4d000000600000006200000075000000
+      - Neighbours: 410000004e0000005000000069000000
         Position: {x: 7, y: 0}
         Weight: 1
-      - Neighbours: 60000000730000007500000088000000
+      - Neighbours: 4e00000067000000690000007c000000
         Position: {x: 6, y: 1}
         Weight: 1
-      - Neighbours: 7300000086000000880000009b000000
+      - Neighbours: 670000007a0000007c0000008f000000
         Position: {x: 5, y: 2}
         Weight: 1
-      - Neighbours: 86000000990000009b000000ae000000
+      - Neighbours: 7a0000008d0000008f000000a2000000
         Position: {x: 4, y: 3}
         Weight: 1
-      - Neighbours: 99000000ac000000ae000000c1000000
+      - Neighbours: 8d000000a0000000a2000000b5000000
         Position: {x: 3, y: 4}
         Weight: 1
-      - Neighbours: ac000000bf000000c1000000d4000000
-        Position: {x: 2, y: 5}
-        Weight: 1
-      - Neighbours: bf000000d2000000d4000000e7000000
-        Position: {x: 1, y: 6}
-        Weight: 1
-      - Neighbours: d2000000e5000000e7000000
+      - Neighbours: c6000000d9000000db000000
         Position: {x: 0, y: 7}
         Weight: 1
-      - Neighbours: 3b0000004e00000063000000
+      - Neighbours: 350000004200000051000000
         Position: {x: 9, y: -1}
         Weight: 1
-      - Neighbours: 4e000000610000006300000076000000
+      - Neighbours: 420000004f000000510000006a000000
         Position: {x: 8, y: 0}
         Weight: 1
-      - Neighbours: 61000000740000007600000089000000
+      - Neighbours: 4f000000680000006a0000007d000000
         Position: {x: 7, y: 1}
         Weight: 1
-      - Neighbours: 7400000087000000890000009c000000
+      - Neighbours: 680000007b0000007d00000090000000
         Position: {x: 6, y: 2}
         Weight: 1
-      - Neighbours: 870000009a0000009c000000af000000
+      - Neighbours: 7b0000008e00000090000000a3000000
         Position: {x: 5, y: 3}
         Weight: 1
-      - Neighbours: 9a000000ad000000af000000c2000000
+      - Neighbours: 8e000000a1000000a3000000b6000000
         Position: {x: 4, y: 4}
         Weight: 1
-      - Neighbours: ad000000c0000000c2000000d5000000
+      - Neighbours: a1000000b4000000b6000000c9000000
         Position: {x: 3, y: 5}
         Weight: 1
-      - Neighbours: c0000000d3000000d5000000e8000000
-        Position: {x: 2, y: 6}
-        Weight: 1
-      - Neighbours: d3000000e6000000e8000000
+      - Neighbours: c7000000da000000dc000000
         Position: {x: 1, y: 7}
         Weight: 1
-      - Neighbours: 4f0000006200000077000000
+      - Neighbours: 43000000500000006b000000
         Position: {x: 9, y: 0}
         Weight: 1
-      - Neighbours: 6200000075000000770000008a000000
+      - Neighbours: 50000000690000006b0000007e000000
         Position: {x: 8, y: 1}
         Weight: 1
-      - Neighbours: 75000000880000008a0000009d000000
+      - Neighbours: 690000007c0000007e00000091000000
         Position: {x: 7, y: 2}
         Weight: 1
-      - Neighbours: 880000009b0000009d000000b0000000
+      - Neighbours: 7c0000008f00000091000000a4000000
         Position: {x: 6, y: 3}
         Weight: 1
-      - Neighbours: 9b000000ae000000b0000000c3000000
+      - Neighbours: 8f000000a2000000a4000000b7000000
         Position: {x: 5, y: 4}
         Weight: 1
-      - Neighbours: ae000000c1000000c3000000d6000000
+      - Neighbours: a2000000b5000000b7000000ca000000
         Position: {x: 4, y: 5}
         Weight: 1
-      - Neighbours: c1000000d4000000d6000000e9000000
+      - Neighbours: b5000000c8000000ca000000dd000000
         Position: {x: 3, y: 6}
         Weight: 1
-      - Neighbours: d4000000e7000000e9000000
+      - Neighbours: c8000000db000000dd000000
         Position: {x: 2, y: 7}
         Weight: 1
-      - Neighbours: 63000000760000008b000000
+      - Neighbours: 510000006a0000007f000000
         Position: {x: 9, y: 1}
         Weight: 1
-      - Neighbours: 76000000890000008b0000009e000000
+      - Neighbours: 6a0000007d0000007f00000092000000
         Position: {x: 8, y: 2}
         Weight: 1
-      - Neighbours: 890000009c0000009e000000b1000000
+      - Neighbours: 7d0000009000000092000000a5000000
         Position: {x: 7, y: 3}
         Weight: 1
-      - Neighbours: 9c000000af000000b1000000c4000000
+      - Neighbours: 90000000a3000000a5000000b8000000
         Position: {x: 6, y: 4}
         Weight: 1
-      - Neighbours: af000000c2000000c4000000d7000000
+      - Neighbours: a3000000b6000000b8000000cb000000
         Position: {x: 5, y: 5}
         Weight: 1
-      - Neighbours: c2000000d5000000d7000000ea000000
+      - Neighbours: b6000000c9000000cb000000de000000
         Position: {x: 4, y: 6}
         Weight: 1
-      - Neighbours: d5000000e8000000ea000000
+      - Neighbours: c9000000dc000000de000000
         Position: {x: 3, y: 7}
         Weight: 1
-      - Neighbours: 770000008a0000009f000000
+      - Neighbours: 6b0000007e00000093000000
         Position: {x: 9, y: 2}
         Weight: 1
-      - Neighbours: 8a0000009d0000009f000000b2000000
+      - Neighbours: 7e0000009100000093000000a6000000
         Position: {x: 8, y: 3}
         Weight: 1
-      - Neighbours: 9d000000b0000000b2000000c5000000
+      - Neighbours: 91000000a4000000a6000000b9000000
         Position: {x: 7, y: 4}
         Weight: 1
-      - Neighbours: b0000000c3000000c5000000d8000000
+      - Neighbours: a4000000b7000000b9000000cc000000
         Position: {x: 6, y: 5}
         Weight: 1
-      - Neighbours: c3000000d6000000d8000000eb000000
+      - Neighbours: b7000000ca000000cc000000df000000
         Position: {x: 5, y: 6}
         Weight: 1
-      - Neighbours: d6000000e9000000eb000000
+      - Neighbours: ca000000dd000000df000000
         Position: {x: 4, y: 7}
         Weight: 1
-      - Neighbours: 8b0000009e000000b3000000
+      - Neighbours: 7f00000092000000a7000000
         Position: {x: 9, y: 3}
         Weight: 1
-      - Neighbours: 9e000000b1000000b3000000c6000000
+      - Neighbours: 92000000a5000000a7000000ba000000
         Position: {x: 8, y: 4}
         Weight: 1
-      - Neighbours: b1000000c4000000c6000000d9000000
+      - Neighbours: a5000000b8000000ba000000cd000000
         Position: {x: 7, y: 5}
         Weight: 1
-      - Neighbours: c4000000d7000000d9000000ec000000
+      - Neighbours: b8000000cb000000cd000000e0000000
         Position: {x: 6, y: 6}
         Weight: 1
-      - Neighbours: d7000000ea000000ec000000
+      - Neighbours: cb000000de000000e0000000
         Position: {x: 5, y: 7}
         Weight: 1
-      - Neighbours: 9f000000b2000000c7000000
+      - Neighbours: 93000000a6000000bb000000
         Position: {x: 9, y: 4}
         Weight: 1
-      - Neighbours: b2000000c5000000c7000000da000000
+      - Neighbours: a6000000b9000000bb000000ce000000
         Position: {x: 8, y: 5}
         Weight: 1
-      - Neighbours: c5000000d8000000da000000ed000000
+      - Neighbours: b9000000cc000000ce000000e1000000
         Position: {x: 7, y: 6}
         Weight: 1
-      - Neighbours: d8000000eb000000ed000000
+      - Neighbours: cc000000df000000e1000000
         Position: {x: 6, y: 7}
         Weight: 1
-      - Neighbours: b3000000c6000000db000000
+      - Neighbours: a7000000ba000000cf000000
         Position: {x: 9, y: 5}
         Weight: 1
-      - Neighbours: c6000000d9000000db000000ee000000
+      - Neighbours: ba000000cd000000cf000000e2000000
         Position: {x: 8, y: 6}
         Weight: 1
-      - Neighbours: d9000000ec000000ee000000
+      - Neighbours: cd000000e0000000e2000000
         Position: {x: 7, y: 7}
         Weight: 1
-      - Neighbours: c7000000da000000ef000000
+      - Neighbours: bb000000ce000000e3000000
         Position: {x: 9, y: 6}
         Weight: 1
-      - Neighbours: da000000ed000000ef000000
+      - Neighbours: ce000000e1000000e3000000
         Position: {x: 8, y: 7}
         Weight: 1
-      - Neighbours: db000000ee000000
+      - Neighbours: cf000000e2000000
         Position: {x: 9, y: 7}
         Weight: 1
       RegionBounds:
