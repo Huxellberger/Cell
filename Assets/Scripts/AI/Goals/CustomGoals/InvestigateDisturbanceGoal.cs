@@ -40,7 +40,7 @@ namespace Assets.Scripts.AI.Goals.CustomGoals
 
         protected override void OnInitialised()
         {
-            Owner.GetComponent<IEmoteInterface>().SetEmoteState(EEmoteState.Alerted);
+            Owner.GetComponent<IEmoteInterface>().SetEmoteState(EEmoteState.Suspicious);
             _initialRotation = Owner.transform.eulerAngles;
 
             AddSubGoal(new MoveToTargetGoal(Owner, Owner.transform.position));

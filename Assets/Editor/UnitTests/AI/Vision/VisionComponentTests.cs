@@ -73,6 +73,29 @@ namespace Assets.Editor.UnitTests.AI.Vision
         }
 
         [Test]
+        public void OnNonSuspiciousObjectCollides_BecomesSuspicious_SendsSightingMessage()
+        {
+            _vision.IsSuspiciousResult = false;
+            var detectedObject = new GameObject();
+
+            var messageSpy = new UnityTestMessageHandleResponseObject<SuspiciousObjectSightedMessage>();
+            var handle =
+                UnityMessageEventFunctions.RegisterActionWithDispatcher<SuspiciousObjectSightedMessage>(_detector,
+                    messageSpy.OnResponse);
+
+            _vision.TestCollide(detectedObject);
+
+            _vision.IsSuspiciousResult = true;
+
+            _vision.TestUpdate(1.0f);
+
+            Assert.IsTrue(messageSpy.ActionCalled);
+            Assert.AreSame(detectedObject, messageSpy.MessagePayload.SuspiciousGameObject);
+
+            UnityMessageEventFunctions.UnregisterActionWithDispatcher(_detector, handle);
+        }
+
+        [Test]
         public void OnSuspiciousObjectCollides_UpdatesLessThanDetectionLimit_DoesNotSendDetectionMessageToDetector()
         {
             _vision.IsSuspiciousResult = true;
@@ -134,6 +157,107 @@ namespace Assets.Editor.UnitTests.AI.Vision
         }
 
         [Test]
+        public void OnSuspiciousObjectCollides_UpdateBecomesSuspicious_SendsDetectionMessageToDetector()
+        {
+            _vision.IsSuspiciousResult = false;
+            var detectedObject = new GameObject();
+
+            var messageSpy = new UnityTestMessageHandleResponseObject<SuspiciousObjectDetectedMessage>();
+            var handle =
+                UnityMessageEventFunctions.RegisterActionWithDispatcher<SuspiciousObjectDetectedMessage>(_detector,
+                    messageSpy.OnResponse);
+
+            _vision.TestCollide(detectedObject);
+
+            _vision.IsSuspiciousResult = true;
+
+            _vision.TestUpdate(_vision.TimeUntilDetection + 0.1f);
+
+            Assert.IsFalse(messageSpy.ActionCalled);
+
+            _vision.TestUpdate(_vision.TimeUntilDetection + 0.1f);
+
+            Assert.IsTrue(messageSpy.ActionCalled);
+            Assert.AreSame(detectedObject, messageSpy.MessagePayload.SuspiciousGameObject);
+
+            UnityMessageEventFunctions.UnregisterActionWithDispatcher(_detector, handle);
+        }
+
+        [Test]
+        public void OnSuspiciousObjectCollides_UpdateTogglesSuspicions_SendsExpectedMessages()
+        {
+            _vision.IsSuspiciousResult = false;
+            var detectedObject = new GameObject();
+
+            _vision.TestCollide(detectedObject);
+
+            _vision.IsSuspiciousResult = true;
+
+            _vision.TestUpdate(_vision.TimeUntilDetection + 0.1f);
+            _vision.TestUpdate(_vision.TimeUntilDetection + 0.1f);
+
+            var messageSpy = new UnityTestMessageHandleResponseObject<SuspiciousObjectDetectedMessage>();
+            var handle =
+                UnityMessageEventFunctions.RegisterActionWithDispatcher<SuspiciousObjectDetectedMessage>(_detector,
+                    messageSpy.OnResponse);
+
+            _vision.IsSuspiciousResult = false;
+
+            _vision.TestUpdate(_vision.TimeUntilDetection + 0.1f);
+
+            Assert.IsFalse(messageSpy.ActionCalled);
+
+            UnityMessageEventFunctions.UnregisterActionWithDispatcher(_detector, handle);
+        }
+
+        [Test]
+        public void OnSuspiciousObjectCollides_StopsColliding_SendsNoMessages()
+        {
+            _vision.IsSuspiciousResult = false;
+            var detectedObject = new GameObject();
+
+            var messageSpy = new UnityTestMessageHandleResponseObject<SuspiciousObjectDetectedMessage>();
+            var handle =
+                UnityMessageEventFunctions.RegisterActionWithDispatcher<SuspiciousObjectDetectedMessage>(_detector,
+                    messageSpy.OnResponse);
+
+            _vision.TestCollide(detectedObject);
+
+            _vision.TestStopColliding(detectedObject);
+
+            _vision.IsSuspiciousResult = true;
+
+            _vision.TestUpdate(_vision.TimeUntilDetection + 0.1f);
+            _vision.TestUpdate(_vision.TimeUntilDetection + 0.1f);
+
+            Assert.IsFalse(messageSpy.ActionCalled);
+
+            UnityMessageEventFunctions.UnregisterActionWithDispatcher(_detector, handle);
+        }
+
+        [Test]
+        public void OnSuspiciousObjectCollides_UpdatesNoLongerSuspicious_DoesNotSendDetectionMessage()
+        {
+            _vision.IsSuspiciousResult = true;
+            var detectedObject = new GameObject();
+
+            var messageSpy = new UnityTestMessageHandleResponseObject<SuspiciousObjectDetectedMessage>();
+            var handle =
+                UnityMessageEventFunctions.RegisterActionWithDispatcher<SuspiciousObjectDetectedMessage>(_detector,
+                    messageSpy.OnResponse);
+
+            _vision.TestCollide(detectedObject);
+
+            _vision.IsSuspiciousResult = false;
+
+            _vision.TestUpdate(_vision.TimeUntilDetection + 0.1f);
+
+            Assert.IsFalse(messageSpy.ActionCalled);
+
+            UnityMessageEventFunctions.UnregisterActionWithDispatcher(_detector, handle);
+        }
+
+        [Test]
         public void OnSuspiciousObjectCollides_UpdatesGreaterThanDetectionLimit_OneDetectionMessageToDetector()
         {
             _vision.IsSuspiciousResult = true;
@@ -157,7 +281,7 @@ namespace Assets.Editor.UnitTests.AI.Vision
         }
 
         [Test]
-        public void OnSuspiciousObjectCollides_UpdatesGreaterThanDetectionLimit_SendsDetectionMessageToDetectorForCorrectObject()
+        public void OnSuspiciousObjectCollides_Updates_SendsDetectionMessageToDetectorForCorrectObject()
         {
             _vision.IsSuspiciousResult = true;
             var detectedObject = new GameObject();

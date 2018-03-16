@@ -195,7 +195,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0c617aa3cf5fb5442b0b551b1aba8ee2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  LocalUIPrefab: {fileID: 1192864385378152, guid: 96ed9c5b14be4c84b882d0363e97045e,
+  LocalUIPrefab: {fileID: 1160982046658846, guid: 96ed9c5b14be4c84b882d0363e97045e,
     type: 2}
   LocalUIOffset: {x: 0, y: 1, z: 0}
 --- !u!212 &212966911299361754

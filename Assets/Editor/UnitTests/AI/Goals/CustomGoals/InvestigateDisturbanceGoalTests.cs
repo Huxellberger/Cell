@@ -59,11 +59,11 @@ namespace Assets.Editor.UnitTests.AI.Goals.CustomGoals
         }
 
         [Test]
-        public void Initialised_SetsEmoteStateToAlerted()
+        public void Initialised_SetsEmoteStateToSuspicious()
         {
             _goal.Initialise();
 
-            Assert.AreEqual(EEmoteState.Alerted, _emote.SetEmoteStateResult);
+            Assert.AreEqual(EEmoteState.Suspicious, _emote.SetEmoteStateResult);
         }
 
         [Test]

@@ -5,6 +5,7 @@ namespace Assets.Scripts.Components.Emote
     public enum EEmoteState : uint
     {
         None,
+        Suspicious,
         Alerted
     }
 }
