@@ -60,7 +60,7 @@ namespace Assets.Editor.UnitTests.AI.Pathfinding.Nav
 
             var table = new NavTable(new List<NavRegion>{_regionA, _regionB});
 
-            Assert.IsNull(table.GetRegionRouteForPoints(_nodeAMin, _nodeBMin));
+            Assert.IsNull(table.GetRegionRouteForPoints(_nodeAMin.Position, _nodeBMin.Position));
         }
 
         [Test]
@@ -71,7 +71,7 @@ namespace Assets.Editor.UnitTests.AI.Pathfinding.Nav
             var table = new NavTable(new List<NavRegion> { _regionA, _regionB });
             table.Initialise();
 
-            var result = table.GetRegionRouteForPoints(_nodeAMin, _nodeBMin);
+            var result = table.GetRegionRouteForPoints(_nodeAMin.Position, _nodeBMin.Position);
             Assert.AreEqual(2, result.Count);
             Assert.AreSame(_regionA, result[0]);
             Assert.AreSame(_regionB, result[1]);
@@ -83,7 +83,7 @@ namespace Assets.Editor.UnitTests.AI.Pathfinding.Nav
             var table = new NavTable(new List<NavRegion> { _regionA, _regionB });
             table.Initialise();
 
-            var result = table.GetRegionRouteForPoints(_nodeAMin, _nodeAMax);
+            var result = table.GetRegionRouteForPoints(_nodeAMin.Position, _nodeAMax.Position);
             Assert.AreEqual(1, result.Count);
             Assert.AreSame(_regionA, result[0]);
         }
@@ -97,7 +97,7 @@ namespace Assets.Editor.UnitTests.AI.Pathfinding.Nav
             var table = new NavTable(new List<NavRegion> { _regionA, _regionB, _regionC });
             table.Initialise();
 
-            var result = table.GetRegionRouteForPoints(_nodeAMin, _nodeCMin);
+            var result = table.GetRegionRouteForPoints(_nodeAMin.Position, _nodeCMin.Position);
             Assert.AreEqual(3, result.Count);
             Assert.AreSame(_regionA, result[0]);
             Assert.AreSame(_regionB, result[1]);
@@ -114,7 +114,7 @@ namespace Assets.Editor.UnitTests.AI.Pathfinding.Nav
             var table = new NavTable(new List<NavRegion> { _regionA, _regionB, _regionC });
             table.Initialise();
 
-            var result = table.GetRegionRouteForPoints(_nodeAMin, _nodeBMin);
+            var result = table.GetRegionRouteForPoints(_nodeAMin.Position, _nodeBMin.Position);
             Assert.AreEqual(2, result.Count);
             Assert.AreSame(_regionA, result[0]);
             Assert.AreSame(_regionB, result[1]);
@@ -128,8 +128,8 @@ namespace Assets.Editor.UnitTests.AI.Pathfinding.Nav
             var table = new NavTable(new List<NavRegion> { _regionA, _regionB });
             table.Initialise();
 
-            var result = table.GetRegionRouteForPoints(_nodeAMin, _nodeBMin);
-            Assert.IsNull(table.GetRegionRouteForPoints(_nodeAMin, _nodeCMin));
+            var result = table.GetRegionRouteForPoints(_nodeAMin.Position, _nodeBMin.Position);
+            Assert.IsNull(table.GetRegionRouteForPoints(_nodeAMin.Position, _nodeCMin.Position));
         }
     }
 }

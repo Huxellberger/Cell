@@ -2,6 +2,7 @@
 
 using System;
 using System.Collections.Generic;
+using UnityEngine;
 
 namespace Assets.Scripts.AI.Pathfinding.Nav
 {
@@ -46,7 +47,7 @@ namespace Assets.Scripts.AI.Pathfinding.Nav
                     {
                         foreach (var neighbour in node.NeighbourRefs)
                         {
-                            var owningRegion = GetOwningNavRegion(Regions, neighbour);
+                            var owningRegion = GetOwningNavRegion(Regions, neighbour.Position);
                             if (owningRegion != region && owningRegion != null)
                             {
                                 adjacentReachabilityMappings[region].Add(owningRegion);
@@ -89,7 +90,7 @@ namespace Assets.Scripts.AI.Pathfinding.Nav
             }
         }
 
-        public List<NavRegion> GetRegionRouteForPoints(NavNode start, NavNode destination)
+        public List<NavRegion> GetRegionRouteForPoints(Vector2 start, Vector2 destination)
         {
             if (_regionReachabilityTable == null)
             {
@@ -124,11 +125,11 @@ namespace Assets.Scripts.AI.Pathfinding.Nav
             return null;
         }
 
-        private static NavRegion GetOwningNavRegion(List<NavRegion> regions, NavNode inNode)
+        private static NavRegion GetOwningNavRegion(List<NavRegion> regions, Vector2 inPoint)
         {
             foreach (var region in regions)
             {
-                if (region.RegionBounds.Contains(inNode.Position))
+                if (region.RegionBounds.Contains(inPoint))
                 {
                     return region;
                 }

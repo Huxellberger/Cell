@@ -278,6 +278,12 @@ Prefab:
       propertyPath: m_RootOrder
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 114753484904881322, guid: ed0c4f1372430ad4f9c727cddc94e426,
+        type: 2}
+      propertyPath: NavData
+      value: 
+      objectReference: {fileID: 11400000, guid: 75ce32d84d45d464ba0670c951adea41,
+        type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: ed0c4f1372430ad4f9c727cddc94e426, type: 2}
   m_IsPrefabParent: 0
@@ -3058,7 +3064,7 @@ Tilemap:
     e33: 1
   m_TileRefreshArray:
   - serializedVersion: 1
-    m_DirtyIndex: 66
+    m_DirtyIndex: 0
 --- !u!1001 &2095251689
 Prefab:
   m_ObjectHideFlags: 0
@@ -3952,4 +3958,4 @@ Tilemap:
     e33: 1
   m_TileRefreshArray:
   - serializedVersion: 1
-    m_DirtyIndex: 22
+    m_DirtyIndex: 0
