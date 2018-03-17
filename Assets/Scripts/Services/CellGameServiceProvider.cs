@@ -2,6 +2,7 @@
 
 using System.Collections.Generic;
 using Assets.Scripts.AI.Pathfinding.Nav;
+using Assets.Scripts.Services.EventsOfInterest;
 using Assets.Scripts.Services.Navigation;
 using Assets.Scripts.Services.Noise;
 using Assets.Scripts.Services.Spawn;
@@ -30,6 +31,7 @@ namespace Assets.Scripts.Services
             AddService<IWildlifeServiceInterface>(new WildlifeService());
             AddService<INoiseServiceInterface>(gameObject.AddComponent<NoiseService>());
             AddService<INavigationServiceInterface>(new NavigationService(data));
+            AddService<IEventsOfInterestServiceInterface>(new EventsOfInterestService());
         }
 
         private void OnDrawGizmosSelected()
