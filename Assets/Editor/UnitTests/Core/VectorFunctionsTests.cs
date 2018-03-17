@@ -20,6 +20,16 @@ namespace Assets.Editor.UnitTests.Core
         }
 
         [Test]
+        public void DistSquared2D_ReturnsDistanceBetween2Vectors()
+        {
+            var firstVector = new Vector2(-2.0f, 101.1f);
+            var secondVector = new Vector2(12.0f, -30.0f);
+
+            Assert.AreEqual(Mathf.Pow((firstVector.x - secondVector.x), 2) + Mathf.Pow((firstVector.y - secondVector.y), 2), 
+                VectorFunctions.DistanceSquared(firstVector, secondVector));
+        }
+
+        [Test]
         public void LerpVector_ReturnsLerpedVector()
         {
             var firstVector = new Vector3(-2.0f, 101.1f, 30.0f);

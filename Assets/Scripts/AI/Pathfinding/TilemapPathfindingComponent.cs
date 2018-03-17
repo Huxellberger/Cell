@@ -62,7 +62,9 @@ namespace Assets.Scripts.AI.Pathfinding
 
             var targetNode = _pathNodes[0];
 
-            if (VectorFunctions.DistanceSquared(gameObject.transform.position, targetNode.Position) <
+            var currentPosition = new Vector2(gameObject.transform.position.x, gameObject.transform.position.y);
+
+            if (VectorFunctions.DistanceSquared(currentPosition, targetNode.Position) <
                 DistanceSquaredThreshold)
             {
                 _pathNodes.RemoveAt(0);
