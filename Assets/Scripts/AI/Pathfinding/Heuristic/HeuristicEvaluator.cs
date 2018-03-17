@@ -14,15 +14,18 @@ namespace Assets.Scripts.AI.Pathfinding.Heuristic
             _heuristics = inHeuristics;
         }
 
-        public NavNode GetBestNode(NavNode currentNode, NavNode startNode, NavNode destinationNode)
+        public NavNode GetBestNode(NavNode currentNode, NavNode startNode, NavNode destinationNode, List<NavNode> priorNodes)
         {
-            foreach (var heuristic in _heuristics)
+            if (priorNodes != null)
             {
-               var bestNode = heuristic.GetBestNode(currentNode, startNode, destinationNode);
-
-                if (bestNode != null)
+                foreach (var heuristic in _heuristics)
                 {
-                    return bestNode;
+                    var bestNode = heuristic.GetBestNode(currentNode, startNode, destinationNode);
+
+                    if (bestNode != null && !priorNodes.Contains(bestNode))
+                    {
+                        return bestNode;
+                    }
                 }
             }
 

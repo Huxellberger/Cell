@@ -2,6 +2,7 @@
 
 using System;
 using System.Collections.Generic;
+using Assets.Scripts.AI.Pathfinding.Heuristic;
 using Assets.Scripts.AI.Pathfinding.Nav;
 using Assets.Scripts.Components.Movement;
 using Assets.Scripts.Core;
@@ -21,6 +22,7 @@ namespace Assets.Scripts.AI.Pathfinding
 
         private IMovementInterface _movement;
         private INavigationServiceInterface _navigation;
+        private HeuristicEvaluator _heuristicEvaluator;
 
         private OnPathfindingCompleteDelegate _currentTargetDelegate;
         private Vector2 _currentTargetLocation;
@@ -32,6 +34,15 @@ namespace Assets.Scripts.AI.Pathfinding
             _movement = gameObject.GetComponent<IMovementInterface>();
 
             _navigation = GameServiceProvider.CurrentInstance.GetService<INavigationServiceInterface>();
+            _heuristicEvaluator = new HeuristicEvaluator
+            (
+                new List<IBestFitHeuristicInterface>
+                {
+                    new ClosestNodeBestFitHeuristic(),
+                    new FurthestFromStartBestFitHeuristic(),
+                    new LowestCostBestFitHeuristic()
+                }
+            );
         }
 
         protected void Update()
@@ -194,24 +205,11 @@ namespace Assets.Scripts.AI.Pathfinding
                 // Calculate nearest point in region to current point
             }
 
-            while (region.RegionBounds.Contains(lastAddedNode.Position) && lastAddedNode != closestTargetNode)
+            while (region.RegionBounds.Contains(lastAddedNode.Position) && !lastAddedNode.Position.Equals(closestTargetNode.Position))
             {
-                var nodeUpdated = false;
-                if (lastAddedNode.NeighbourRefs != null)
-                {
-                    foreach (var neighbour in lastAddedNode.NeighbourRefs)
-                    {
-                        if ((VectorFunctions.DistanceSquared(lastAddedNode.Position, closestTargetNode.Position) >
-                             VectorFunctions.DistanceSquared(neighbour.Position, closestTargetNode.Position))
-                            && !_pathNodes.Contains(neighbour))
-                        {
-                            lastAddedNode = neighbour;
-                            nodeUpdated = true;
-                        }
-                    }
-                }
+                lastAddedNode = _heuristicEvaluator.GetBestNode(lastAddedNode, startingLocation, closestTargetNode, _pathNodes);
 
-                if (nodeUpdated)
+                if (lastAddedNode != null)
                 {
                     _pathNodes.Add(lastAddedNode);
                 }
