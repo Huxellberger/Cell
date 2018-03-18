@@ -13,6 +13,7 @@ namespace Assets.Scripts.Test.Services.EventsOfInterest
         public readonly List<EventOfInterestRegistration> ListenedEvents = new List<EventOfInterestRegistration>();
         public readonly List<EventOfInterestRegistration> StopListeningEvents = new List<EventOfInterestRegistration>();
         public string LastRecordedEvent { get; private set; }
+        public bool EventRecorded = false;
 
         public void ListenForEventOfInterest(EventOfInterestRegistration registration)
         {
@@ -27,6 +28,7 @@ namespace Assets.Scripts.Test.Services.EventsOfInterest
         public void RecordEventOfInterest(string inEventKey)
         {
             LastRecordedEvent = inEventKey;
+            EventRecorded = true;
         }
     }
 }
