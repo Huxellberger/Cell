@@ -43,7 +43,10 @@ namespace Assets.Scripts.Services
                 foreach (var region in NavData.NavigationTable.Regions)
                 {
                     Gizmos.color = GizmoColors[_currentGizmoColorIndex];
-                    Gizmos.DrawCube(region.RegionBounds.center, new Vector3(region.RegionBounds.size.x, region.RegionBounds.size.y, 5.0f));
+                    Gizmos.DrawLine(new Vector2(region.RegionBounds.xMin, region.RegionBounds.yMin), new Vector2(region.RegionBounds.xMin, region.RegionBounds.yMax));
+                    Gizmos.DrawLine(new Vector2(region.RegionBounds.xMin, region.RegionBounds.yMax), new Vector2(region.RegionBounds.xMax, region.RegionBounds.yMax));
+                    Gizmos.DrawLine(new Vector2(region.RegionBounds.xMax, region.RegionBounds.yMax), new Vector2(region.RegionBounds.xMax, region.RegionBounds.yMin));
+                    Gizmos.DrawLine(new Vector2(region.RegionBounds.xMax, region.RegionBounds.yMin), new Vector2(region.RegionBounds.xMin, region.RegionBounds.yMin));
 
                     NextGizmoColor();
                 }

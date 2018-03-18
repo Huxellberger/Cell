@@ -9,7 +9,10 @@ namespace Assets.Scripts.Components.Trigger
     public class EventOfInterestTriggerResponseComponent 
         : TriggerResponseComponent
     {
+        [EventOfInterestKey]
         public string EventOfInterestNameForTrigger;
+
+        [EventOfInterestKey]
         public string EventOfInterestNameForCancelTrigger;
 
         private readonly LazyServiceProvider<IEventsOfInterestServiceInterface> _eventsOfInterest 

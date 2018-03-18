@@ -8,6 +8,7 @@ namespace Assets.Scripts.Services.EventsOfInterest
     public class PointOfInterestComponent 
         : MonoBehaviour
     {
+        [EventOfInterestKey]
         public string PointOfInterestEventKey;
 
         private readonly LazyServiceProvider<IEventsOfInterestServiceInterface> _eventOfInterestService 
