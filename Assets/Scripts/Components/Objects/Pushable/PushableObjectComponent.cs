@@ -12,7 +12,7 @@ namespace Assets.Scripts.Components.Objects.Pushable
         public float PushModifier = 1.0f;
 
         private Rigidbody2D _rigidbody;
-        private Vector3 _pushModifierThisFrame = new Vector3();
+        private Vector2 _pushModifierThisFrame = new Vector2();
 
         protected void Start()
         {
@@ -21,13 +21,17 @@ namespace Assets.Scripts.Components.Objects.Pushable
 
         protected void FixedUpdate ()
         {
-            if (_pushModifierThisFrame != Vector3.zero)
+            if (_pushModifierThisFrame != Vector2.zero)
             {
                 var deltaTime = GetDeltaTime();
 
                 _rigidbody.velocity = _pushModifierThisFrame * PushModifier * deltaTime;
 
-                _pushModifierThisFrame = Vector3.zero;
+                _pushModifierThisFrame = Vector2.zero;
+            }
+            else
+            {
+                _rigidbody.velocity = Vector2.zero;
             }
         }
 
@@ -36,7 +40,7 @@ namespace Assets.Scripts.Components.Objects.Pushable
             return Time.fixedDeltaTime;
         }
 
-        public void Push(Vector3 inVector)
+        public void Push(Vector2 inVector)
         {
             _pushModifierThisFrame += inVector;
         }

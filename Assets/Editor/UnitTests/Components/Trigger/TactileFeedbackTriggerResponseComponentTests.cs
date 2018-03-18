@@ -12,7 +12,7 @@ namespace Assets.Editor.UnitTests.Components.Trigger
     [TestFixture]
     public class TactileFeedbackTriggerResponseComponentTestFixture
     {
-        private MeshRenderer _meshRenderer;
+        private SpriteRenderer _spriteRenderer;
 
         private TestTactileFeedbackTriggerResponseComponent _tactile;
 
@@ -22,10 +22,8 @@ namespace Assets.Editor.UnitTests.Components.Trigger
             var initialObject = new GameObject();
             initialObject.AddComponent<AudioSource>();
 
-            initialObject.AddComponent<MeshFilter>();
-            _meshRenderer = initialObject.AddComponent<MeshRenderer>();
-            _meshRenderer.sharedMaterial = Resources.Load<Material>("Test/Material/BasicMaterial");
-            _meshRenderer.sharedMaterial.color = Color.cyan;
+            _spriteRenderer = initialObject.AddComponent<SpriteRenderer>();
+            _spriteRenderer.color = Color.cyan;
 
             _tactile = initialObject.AddComponent<TestTactileFeedbackTriggerResponseComponent>();
             _tactile.TriggerObject = new GameObject();
@@ -44,7 +42,7 @@ namespace Assets.Editor.UnitTests.Components.Trigger
 
             _tactile = null;
 
-            _meshRenderer = null;
+            _spriteRenderer = null;
         }
 
         [Test]

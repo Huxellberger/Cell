@@ -6,6 +6,6 @@ namespace Assets.Scripts.Components.Objects.Pushable
 {
     public interface IPushableObjectInterface
     {
-        void Push(Vector3 inVector);
+        void Push(Vector2 inVector);
     }
 }

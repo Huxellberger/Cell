@@ -11,9 +11,9 @@ namespace Assets.Scripts.Test.Components.Objects.Pushable
         : MonoBehaviour
         , IPushableObjectInterface
     {
-        public Vector3 ? PushResult { get; private set; }
+        public Vector2 ? PushResult { get; private set; }
 
-        public void Push(Vector3 inVector)
+        public void Push(Vector2 inVector)
         {
             PushResult = inVector;
         }

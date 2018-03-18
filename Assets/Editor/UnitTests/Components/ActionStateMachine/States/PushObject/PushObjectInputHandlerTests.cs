@@ -64,7 +64,9 @@ namespace Assets.Editor.UnitTests.Components.ActionStateMachine.States.PushObjec
 
             inputHandler.HandleAnalogInput(EInputKey.VerticalAnalog, inputModifier);
 
-            ExtendedAssertions.AssertVectorsNearlyEqual(_owner.transform.up * inputModifier, _pushable.PushResult.Value);
+            Vector2 expectedResult = _owner.transform.up * inputModifier;
+
+            ExtendedAssertions.AssertVectorsNearlyEqual(expectedResult, _pushable.PushResult.Value);
         }
 
         [Test]
@@ -99,7 +101,9 @@ namespace Assets.Editor.UnitTests.Components.ActionStateMachine.States.PushObjec
 
             inputHandler.HandleAnalogInput(EInputKey.HorizontalAnalog, inputModifier);
 
-            ExtendedAssertions.AssertVectorsNearlyEqual(_owner.transform.right * inputModifier, _pushable.PushResult.Value);
+            Vector2 expectedResult = _owner.transform.right * inputModifier;
+
+            ExtendedAssertions.AssertVectorsNearlyEqual(expectedResult, _pushable.PushResult.Value);
         }
     }
 }

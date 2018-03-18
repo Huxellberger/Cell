@@ -34,13 +34,13 @@ namespace Assets.Editor.UnitTests.Components.Objects.Pushable
         {
             _pushable.TestUpdate(1.0f);
 
-            Assert.AreEqual(Vector3.zero, _rigidbody.velocity);
+            Assert.AreEqual(Vector2.zero, _rigidbody.velocity);
         }
 
         [Test]
         public void Update_Push_ChangesVelocity()
         {
-            var pushVector = new Vector3(1.0f, 2.0f, -1.0f);
+            var pushVector = new Vector2(1.0f, 2.0f);
             const float delta = 0.5f;
 
             _pushable.Push(pushVector);
@@ -52,8 +52,8 @@ namespace Assets.Editor.UnitTests.Components.Objects.Pushable
         [Test]
         public void Update_MultiplePushes_ChangesVelocity()
         {
-            var pushVector = new Vector3(1.0f, 2.0f, -1.0f);
-            var otherPushVector = new Vector3(2.0f, -12.0f, 3.0f);
+            var pushVector = new Vector2(1.0f, 2.0f);
+            var otherPushVector = new Vector2(2.0f, -12.0f);
             const float delta = 0.5f;
 
             _pushable.Push(pushVector);
@@ -66,14 +66,14 @@ namespace Assets.Editor.UnitTests.Components.Objects.Pushable
         [Test]
         public void Update_ZeroesPreviousUpdate()
         {
-            var pushVector = new Vector3(1.0f, 2.0f, -1.0f);
+            var pushVector = new Vector2(1.0f, 2.0f);
             const float delta = 0.5f;
 
             _pushable.Push(pushVector);
             _pushable.TestUpdate(delta);
             _pushable.TestUpdate(delta);
 
-            Assert.AreEqual(pushVector * delta * _pushable.PushModifier, _rigidbody.velocity);
+            Assert.AreEqual(Vector2.zero, _rigidbody.velocity);
         }
     }
 }

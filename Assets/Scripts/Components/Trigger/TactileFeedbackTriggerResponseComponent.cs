@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace Assets.Scripts.Components.Trigger
 {
-    [RequireComponent(typeof(MeshRenderer), typeof(AudioSource))]
+    [RequireComponent(typeof(SpriteRenderer), typeof(AudioSource))]
     public class TactileFeedbackTriggerResponseComponent 
         : TriggerResponseComponent
     {
@@ -15,18 +15,18 @@ namespace Assets.Scripts.Components.Trigger
         private Color _initialColor;
 
         private AudioSource _audioSource;
-        private MeshRenderer _meshRenderer;
+        private SpriteRenderer _spriteRenderer;
 
         protected override void Start()
         {
             base.Start();
 
             _audioSource = gameObject.GetComponent<AudioSource>();
-            _meshRenderer = gameObject.GetComponent<MeshRenderer>();
+            _spriteRenderer = gameObject.GetComponent<SpriteRenderer>();
 
             if (Application.isPlaying)
             {
-                _initialColor = _meshRenderer.material.color;
+                _initialColor = _spriteRenderer.color;
             }
         }
 
@@ -36,7 +36,7 @@ namespace Assets.Scripts.Components.Trigger
 
             if (Application.isPlaying)
             {
-                _meshRenderer.material.color = TriggerColor;
+                _spriteRenderer.color = TriggerColor;
             }
         }
 
@@ -46,7 +46,7 @@ namespace Assets.Scripts.Components.Trigger
 
             if (Application.isPlaying)
             {
-                _meshRenderer.material.color = _initialColor;
+                _spriteRenderer.color = _initialColor;
             }
         }
 
