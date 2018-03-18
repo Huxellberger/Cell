@@ -2,6 +2,7 @@
 
 using System.Collections.Generic;
 using System.Linq;
+using Assets.Scripts.AI.Chatter;
 using Assets.Scripts.Components.Trigger;
 using Assets.Scripts.Core;
 using Assets.Scripts.Services.EventsOfInterest;
@@ -14,6 +15,7 @@ namespace Assets.Editor.CustomEditors.Services.EventsOfInterest
         : EditorWindow
     {
         private readonly List<string> _foundKeys = new List<string>();
+        private readonly List<string> _expectedKeys = new List<string>();
 
         [MenuItem("Window/Events Of Interest Keys")]
         public static void ShowWindow()
@@ -33,12 +35,25 @@ namespace Assets.Editor.CustomEditors.Services.EventsOfInterest
                 }
             }
 
+            GUILayout.Label("Expected Keys In Scene", EditorStyles.boldLabel);
+
+            if (_expectedKeys != null)
+            {
+                foreach (var foundKey in _expectedKeys)
+                {
+                    GUILayout.Label(foundKey, EditorStyles.label);
+                }
+            }
+
             GUILayout.Label("Operations", EditorStyles.boldLabel);
             if (GUILayout.Button("Refresh Key Listing"))
             {
                 _foundKeys.Clear();
+                _expectedKeys.Clear();
                 AddKeysForType<EventOfInterestTriggerResponseComponent>();
                 AddKeysForType<PointOfInterestComponent>();
+
+                AddExpectedKeysForType<ChatterComponent>();
             }
         }
 
@@ -60,6 +75,32 @@ namespace Assets.Editor.CustomEditors.Services.EventsOfInterest
                 }
 
                 _foundKeys.AddRange(newlyFoundKeys);
+            }
+        }
+
+        private void AddExpectedKeysForType<TComponentType>()
+            where TComponentType : MonoBehaviour
+        {
+            var components = FindObjectsOfType<TComponentType>();
+
+            foreach (var component in components)
+            {
+                var newlyFoundKeys = ReflectionFunctions.GetAttributeValuesOnTarget<EventOfInterestRegistrationAttribute, DialogueData>
+                (
+                    component
+                ).ToList();
+
+                var newExpectedKeys = new List<string>();
+
+                foreach (var newlyFoundKey in newlyFoundKeys)
+                {
+                    foreach (var dialogueEntry in newlyFoundKey.DialogueEntries)
+                    {
+                        newExpectedKeys.Add("Key: " + dialogueEntry.DialogueEntryKey + "\tObject Name: " + component.gameObject.name);
+                    }
+                }
+
+                _expectedKeys.AddRange(newExpectedKeys);
             }
         }
     }

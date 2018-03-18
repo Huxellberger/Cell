@@ -13,6 +13,7 @@ namespace Assets.Scripts.AI.Chatter
     public class ChatterComponent 
         : MonoBehaviour
     {
+        [EventOfInterestRegistrationAttribute]
         public DialogueData ChatterData;
 
         private Dictionary<string, DialogueEntry> _chatterEntries;
