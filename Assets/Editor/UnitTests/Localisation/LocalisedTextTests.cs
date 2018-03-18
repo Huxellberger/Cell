@@ -131,6 +131,27 @@ namespace Assets.Editor.UnitTests.Localisation
         }
 
         [Test]
+        public void GetTextFromLocalisationKey_QueriesLocalisationManagerToGetLocalisedText()
+        {
+            var locInterface = new MockLocalisationInterface();
+            LocalisationManager.CurrentLocalisationInterface = locInterface;
+
+            var entries = new List<LocalisedTextEntry>
+            {
+                new LocalisedTextEntry(ELanguageOptions.EnglishUK, "TEST")
+            };
+
+            locInterface.GetTextForLocalisationKeyResult = new LocalisedText(new LocalisedTextEntries(entries));
+
+            var expectedKey = new LocalisationKey("Testy", "Test");
+
+            Assert.AreEqual(locInterface.GetTextForLocalisationKeyResult.ToString(), LocalisedTextFunctions.GetTextFromLocalisationKey(expectedKey));
+            Assert.AreSame(locInterface.SubmittedGetTextLocalisationKey, expectedKey);
+
+            LocalisationManager.CurrentLocalisationInterface = null;
+        }
+
+        [Test]
         public void LocalisedTextRef_QueriesLocalisationManagerToGetLocalisedText()
         {
             var locInterface = new MockLocalisationInterface();

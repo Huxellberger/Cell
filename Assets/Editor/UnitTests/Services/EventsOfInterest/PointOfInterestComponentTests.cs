@@ -1,6 +1,5 @@
 ﻿// Copyright (C) Threetee Gang All Rights Reserved
 
-using System.Collections;
 using Assets.Scripts.Services;
 using Assets.Scripts.Services.EventsOfInterest;
 using Assets.Scripts.Test.Components.ActionStateMachine;
@@ -10,7 +9,6 @@ using Assets.Scripts.Test.Services;
 using Assets.Scripts.Test.Services.EventsOfInterest;
 using NUnit.Framework;
 using UnityEngine;
-using UnityEngine.TestTools;
 
 namespace Assets.Editor.UnitTests.Services.EventsOfInterest
 {

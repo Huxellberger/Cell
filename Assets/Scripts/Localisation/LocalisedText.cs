@@ -78,6 +78,14 @@ namespace Assets.Scripts.Localisation
         }
     }
 
+    public static class LocalisedTextFunctions
+    {
+        public static string GetTextFromLocalisationKey(LocalisationKey inKey)
+        {
+            return LocalisationManager.CurrentLocalisationInterface.GetTextForLocalisationKey(inKey).ToString();
+        }
+    }
+
     // Type to use in Game Code
     public class LocalisedTextRef
     {
