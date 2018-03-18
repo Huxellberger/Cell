@@ -56,7 +56,7 @@ MonoBehaviour:
     type: 2}
   PlayerCharacterType: {fileID: 1249083189207894, guid: ab16f80f07a42d84db7cadbdb8e369ba,
     type: 2}
-  HUDType: {fileID: 1235634924246318, guid: f5b324940c0002549b994eec03a07f11, type: 2}
+  HUDType: {fileID: 1015002441844084, guid: f5b324940c0002549b994eec03a07f11, type: 2}
   MouseTexture: {fileID: 2800000, guid: 33e71b0e5b71001449e78acf04058f65, type: 3}
   StartingSpawnLocation: {fileID: 0}
 --- !u!114 &114633763757008462

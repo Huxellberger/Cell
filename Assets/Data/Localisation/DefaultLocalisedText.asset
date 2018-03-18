@@ -84,3 +84,30 @@ MonoBehaviour:
         TranslatedText: Pistol
       - LanguageOption: 1
         TranslatedText: 'ERROR: TEXT NOT TRANSLATED'
+  - TextKey:
+      LocalisationNamespace: CharacterNames
+      LocalisationKeyValue: TestCharacter
+    LocalisedTexts:
+      Entries:
+      - LanguageOption: 0
+        TranslatedText: Bulbaloser
+      - LanguageOption: 1
+        TranslatedText: Bulbaloser
+  - TextKey:
+      LocalisationNamespace: TestDialogueLine
+      LocalisationKeyValue: DialogueLine1TestKey
+    LocalisedTexts:
+      Entries:
+      - LanguageOption: 0
+        TranslatedText: Relegated to a companion in a bollocks test scene..shameful
+      - LanguageOption: 1
+        TranslatedText: 'ERROR: TEXT NOT TRANSLATED'
+  - TextKey:
+      LocalisationNamespace: TestDialogueLine
+      LocalisationKeyValue: DialogueLine2TestKey
+    LocalisedTexts:
+      Entries:
+      - LanguageOption: 0
+        TranslatedText: ARGHH TEST SCENES MAKE ME SO ANGRY
+      - LanguageOption: 1
+        TranslatedText: 'ERROR: TEXT NOT TRANSLATED'

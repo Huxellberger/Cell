@@ -11,4 +11,26 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d73ffd7d83627b1488e72e09b972f86c, type: 3}
   m_Name: TestCharacterDialogue
   m_EditorClassIdentifier: 
-  DialogueEntries: []
+  DialogueEntries:
+  - DialogueEntryKey: Test
+    Lines:
+    - DialogueKey:
+        LocalisationNamespace: TestDialogueLine
+        LocalisationKeyValue: DialogueLine1TestKey
+      NameKey:
+        LocalisationNamespace: CharacterNames
+        LocalisationKeyValue: TestCharacter
+      DialogueSpeed: 6
+      Portrait: {fileID: 21300000, guid: 178ec6d4423279448892ced6192ff96c, type: 3}
+      TalkNoise: {fileID: 8300000, guid: 392a72843db839b419d83e6faf0170ab, type: 3}
+    - DialogueKey:
+        LocalisationNamespace: TestDialogueLine
+        LocalisationKeyValue: DialogueLine2TestKey
+      NameKey:
+        LocalisationNamespace: CharacterNames
+        LocalisationKeyValue: TestCharacter
+      DialogueSpeed: 10
+      Portrait: {fileID: 21300000, guid: 6f11ef765603ed645a8e6ed8ea82e463, type: 3}
+      TalkNoise: {fileID: 8300000, guid: 392a72843db839b419d83e6faf0170ab, type: 3}
+    Priority: 1
+    ChatterType: 0
