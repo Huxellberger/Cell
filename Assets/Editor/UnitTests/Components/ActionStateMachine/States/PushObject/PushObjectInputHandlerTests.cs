@@ -57,14 +57,14 @@ namespace Assets.Editor.UnitTests.Components.ActionStateMachine.States.PushObjec
         }
 
         [Test]
-        public void HandleVerticalAnalog_OwnerAndPushable_PushInForwardVectorByModifier()
+        public void HandleVerticalAnalog_OwnerAndPushable_PushInUpVectorByModifier()
         {
             var inputHandler = new PushObjectInputHandler(_owner, _pushable);
             const float inputModifier = 0.7f;
 
             inputHandler.HandleAnalogInput(EInputKey.VerticalAnalog, inputModifier);
 
-            ExtendedAssertions.AssertVectorsNearlyEqual(_owner.transform.forward * inputModifier, _pushable.PushResult.Value);
+            ExtendedAssertions.AssertVectorsNearlyEqual(_owner.transform.up * inputModifier, _pushable.PushResult.Value);
         }
 
         [Test]

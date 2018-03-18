@@ -26,7 +26,7 @@ namespace Assets.Scripts.Components.ActionStateMachine.States.PushObjectActionSt
         {
             if (_pusher != null && _pushable != null)
             {
-                _pushable.Push(_pusher.transform.forward * inValue);
+                _pushable.Push(_pusher.transform.up * inValue);
                 return EInputHandlerResult.Handled;
             }
 

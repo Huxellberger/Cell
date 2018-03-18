@@ -10,12 +10,12 @@ namespace Assets.Editor.UnitTests.Components.Objects.Pushable
     public class PushableObjectComponentTestFixture
     {
         private TestPushableObjectComponent _pushable;
-        private Rigidbody _rigidbody;
+        private Rigidbody2D _rigidbody;
 
         [SetUp]
         public void BeforeTest()
         {
-            _rigidbody = new GameObject().AddComponent<Rigidbody>();
+            _rigidbody = new GameObject().AddComponent<Rigidbody2D>();
             _pushable = _rigidbody.gameObject.AddComponent<TestPushableObjectComponent>();
 
             _pushable.PushModifier = 1.5f;

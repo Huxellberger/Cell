@@ -1,5 +1,6 @@
 ﻿// Copyright (C) Threetee Gang All Rights Reserved
 
+using System.Runtime.InteropServices;
 using Assets.Scripts.Components.ActionStateMachine.States.Locomotion;
 using Assets.Scripts.Components.Interaction;
 using Assets.Scripts.Components.Objects.Pushable;
@@ -16,7 +17,7 @@ namespace Assets.Scripts.Components.ActionStateMachine.States.PushObjectActionSt
         private PushObjectInputHandler _pushObjectInputHandler;
         private InteractionInputHandler _interactionInputHandler;
 
-        private RigidbodyConstraints _priorConstraints;
+        private RigidbodyConstraints2D _priorConstraints;
 
         public PushObjectActionState(PushObjectActionStateInfo inInfo) 
             : base (EActionStateId.PushObject, inInfo)
@@ -46,11 +47,12 @@ namespace Assets.Scripts.Components.ActionStateMachine.States.PushObjectActionSt
             Info.Owner.transform.position = _pushInfo.PushPointSocket.transform.position;
             Info.Owner.transform.rotation = _pushInfo.PushPointSocket.transform.rotation;
 
-            var rigidbody = Info.Owner.GetComponent<Rigidbody>();
+            var rigidbody = Info.Owner.GetComponent<Rigidbody2D>();
             if (rigidbody != null)
             {
                 _priorConstraints = rigidbody.constraints;
-                rigidbody.constraints = RigidbodyConstraints.FreezeAll;
+                rigidbody.constraints = RigidbodyConstraints2D.FreezeAll;
+                rigidbody.isKinematic = true;
             }
         }
 
@@ -69,9 +71,10 @@ namespace Assets.Scripts.Components.ActionStateMachine.States.PushObjectActionSt
 
         private void DetatchPusher()
         {
-            var rigidbody = Info.Owner.GetComponent<Rigidbody>();
+            var rigidbody = Info.Owner.GetComponent<Rigidbody2D>();
             if (rigidbody != null)
             {
+                rigidbody.isKinematic = false;
                 rigidbody.constraints = _priorConstraints;
             }
 

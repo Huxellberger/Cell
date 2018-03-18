@@ -4,19 +4,19 @@ using UnityEngine;
 
 namespace Assets.Scripts.Components.Objects.Pushable
 {
-    [RequireComponent(typeof(Rigidbody))]
+    [RequireComponent(typeof(Rigidbody2D))]
     public class PushableObjectComponent 
         : MonoBehaviour
         , IPushableObjectInterface
     {
         public float PushModifier = 1.0f;
 
-        private Rigidbody _rigidbody;
+        private Rigidbody2D _rigidbody;
         private Vector3 _pushModifierThisFrame = new Vector3();
 
         protected void Start()
         {
-            _rigidbody = gameObject.GetComponent<Rigidbody>();
+            _rigidbody = gameObject.GetComponent<Rigidbody2D>();
         }
 
         protected void FixedUpdate ()

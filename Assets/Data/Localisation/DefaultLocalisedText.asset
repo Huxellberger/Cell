@@ -111,3 +111,12 @@ MonoBehaviour:
         TranslatedText: ARGHH TEST SCENES MAKE ME SO ANGRY
       - LanguageOption: 1
         TranslatedText: 'ERROR: TEXT NOT TRANSLATED'
+  - TextKey:
+      LocalisationNamespace: Interaction
+      LocalisationKeyValue: Block
+    LocalisedTexts:
+      Entries:
+      - LanguageOption: 0
+        TranslatedText: Push Block
+      - LanguageOption: 1
+        TranslatedText: 'ERROR: TEXT NOT TRANSLATED'

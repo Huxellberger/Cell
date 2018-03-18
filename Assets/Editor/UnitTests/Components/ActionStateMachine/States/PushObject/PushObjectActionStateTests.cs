@@ -5,7 +5,6 @@ using Assets.Scripts.Components.ActionStateMachine.States.Locomotion;
 using Assets.Scripts.Components.ActionStateMachine.States.PushObjectActionState;
 using Assets.Scripts.Test.Components.Objects.Pushable;
 using Assets.Scripts.Test.Input;
-using Castle.Core.Internal;
 using NUnit.Framework;
 using UnityEngine;
 
@@ -16,7 +15,7 @@ namespace Assets.Editor.UnitTests.Components.ActionStateMachine.States.PushObjec
     {
         private MockPushableObjectComponent _pushableObject;
         private MockInputBinderComponent _inputBinder;
-        private Rigidbody _rigidbody;
+        private Rigidbody2D _rigidbody;
         private GameObject _pushSocket;
 
         [SetUp]
@@ -24,7 +23,7 @@ namespace Assets.Editor.UnitTests.Components.ActionStateMachine.States.PushObjec
         {
             _pushableObject = new GameObject().AddComponent<MockPushableObjectComponent>();
             _inputBinder = new GameObject().AddComponent<MockInputBinderComponent>();
-            _rigidbody = _inputBinder.gameObject.AddComponent<Rigidbody>();
+            _rigidbody = _inputBinder.gameObject.AddComponent<Rigidbody2D>();
 
             _pushSocket = new GameObject();
             _pushSocket.transform.Rotate(1.0f, 2.0f, 3.0f);
@@ -82,7 +81,16 @@ namespace Assets.Editor.UnitTests.Components.ActionStateMachine.States.PushObjec
             var actionState = new PushObjectActionState(new PushObjectActionStateInfo(_inputBinder.gameObject, _pushableObject.gameObject, _pushSocket));
             actionState.Start();
 
-            Assert.AreEqual(RigidbodyConstraints.FreezeAll, _rigidbody.constraints);
+            Assert.AreEqual(RigidbodyConstraints2D.FreezeAll, _rigidbody.constraints);
+        }
+
+        [Test]
+        public void Start_SetsRigidbodyToKinematic()
+        {
+            var actionState = new PushObjectActionState(new PushObjectActionStateInfo(_inputBinder.gameObject, _pushableObject.gameObject, _pushSocket));
+            actionState.Start();
+
+            Assert.IsTrue(_rigidbody.isKinematic);
         }
 
         [Test]
@@ -116,7 +124,7 @@ namespace Assets.Editor.UnitTests.Components.ActionStateMachine.States.PushObjec
         [Test]
         public void End_SetsRigidbodyConstraintsToPrior()
         {
-            const RigidbodyConstraints expectedConstraints = RigidbodyConstraints.FreezePositionY;
+            const RigidbodyConstraints2D expectedConstraints = RigidbodyConstraints2D.FreezePositionY;
 
             _rigidbody.constraints = expectedConstraints;
 
@@ -125,6 +133,16 @@ namespace Assets.Editor.UnitTests.Components.ActionStateMachine.States.PushObjec
             actionState.End();
 
             Assert.AreEqual(expectedConstraints, _rigidbody.constraints);
+        }
+
+        [Test]
+        public void End_SetsRigidbodyToNonKinematic()
+        {
+            var actionState = new PushObjectActionState(new PushObjectActionStateInfo(_inputBinder.gameObject, _pushableObject.gameObject, _pushSocket));
+            actionState.Start();
+            actionState.End();
+
+            Assert.IsFalse(_rigidbody.isKinematic);
         }
 
         [Test]
