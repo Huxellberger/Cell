@@ -19,7 +19,7 @@ namespace Assets.Scripts.Localisation
         }
     }
 
-    [CreateAssetMenu(fileName = "LocalisedText", menuName = "ProjectQ/Localisation/LocalisedTextDatabase", order = 1)]
+    [CreateAssetMenu(fileName = "LocalisedText", menuName = "Cell/Localisation/LocalisedTextDatabase", order = 1)]
     public class LocalisedTextDatabase : ScriptableObject
     {
         public List<LocalisationDatabaseEntry> LocalisedDatabase;

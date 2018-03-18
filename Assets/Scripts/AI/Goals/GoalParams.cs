@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace Assets.Scripts.AI.Goals
 {
-    [CreateAssetMenu(fileName = "Params", menuName = "ProjectQ/AI/Goals", order = 1)]
+    [CreateAssetMenu(fileName = "Params", menuName = "Cell/AI/Goals", order = 1)]
     public class GoalParams 
         : ScriptableObject
     {

@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace Assets.Scripts.Components.ActionStateMachine.Builder
 {
-    [CreateAssetMenu(fileName = "Params", menuName = "ProjectQ/ActionState/Params", order = 1)]
+    [CreateAssetMenu(fileName = "Params", menuName = "Cell/ActionState/Params", order = 1)]
     public class ActionStateParams 
         : ScriptableObject
     {
