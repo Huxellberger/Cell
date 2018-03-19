@@ -2,11 +2,11 @@
 
 using Assets.Editor.UnitTests.Messaging;
 using Assets.Editor.UnitTests.Services.Time;
+using Assets.Scripts.AI.Companion;
 using Assets.Scripts.Components.ActionStateMachine;
 using Assets.Scripts.Components.ActionStateMachine.States.Locomotion;
 using Assets.Scripts.Components.Character;
 using Assets.Scripts.Components.Controller;
-using Assets.Scripts.Components.Power;
 using Assets.Scripts.Input.Handlers;
 using Assets.Scripts.Messaging;
 using Assets.Scripts.Services;
@@ -87,13 +87,13 @@ namespace Assets.Editor.UnitTests.Components.ActionStateMachine.States.Locomotio
         }
 
         [Test]
-        public void Start_RegistersPowerInputHandler()
+        public void Start_RegistersCompanionInputHandler()
         {
             var locomotion = new LocomotionActionState(new ActionStateInfo(_inputBinder.gameObject));
 
             locomotion.Start();
 
-            Assert.IsTrue(_inputBinder.IsHandlerOfTypeRegistered<PowerInputHandler>());
+            Assert.IsTrue(_inputBinder.IsHandlerOfTypeRegistered<CompanionInputHandler>());
         }
 
         [Test]
@@ -151,7 +151,7 @@ namespace Assets.Editor.UnitTests.Components.ActionStateMachine.States.Locomotio
         }
 
         [Test]
-        public void End_UnregistersPowerInputHandler()
+        public void End_UnregistersCompanionInputHandler()
         {
             var locomotion = new LocomotionActionState(new ActionStateInfo(_inputBinder.gameObject));
 
@@ -159,7 +159,7 @@ namespace Assets.Editor.UnitTests.Components.ActionStateMachine.States.Locomotio
 
             locomotion.End();
 
-            Assert.IsTrue(_inputBinder.IsHandlerOfTypeUnregistered<PowerInputHandler>());
+            Assert.IsTrue(_inputBinder.IsHandlerOfTypeUnregistered<CompanionInputHandler>());
         }
 
         [Test]

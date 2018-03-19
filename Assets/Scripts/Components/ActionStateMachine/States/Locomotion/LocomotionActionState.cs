@@ -1,10 +1,10 @@
 ﻿// Copyright (C) Threetee Gang All Rights Reserved
 
+using Assets.Scripts.AI.Companion;
 using Assets.Scripts.Components.Character;
 using Assets.Scripts.Components.Equipment.Holdables;
 using Assets.Scripts.Components.Interaction;
 using Assets.Scripts.Components.Movement;
-using Assets.Scripts.Components.Power;
 using Assets.Scripts.Input;
 using Assets.Scripts.Input.Handlers;
 using Assets.Scripts.Messaging;
@@ -19,7 +19,7 @@ namespace Assets.Scripts.Components.ActionStateMachine.States.Locomotion
         private LocomotionInputHandler _locomotionInputHandler;
         private PauseInputHandler _pauseInputHandler;
         private InteractionInputHandler _interactionInputHandler;
-        private PowerInputHandler _powerInputHandler;
+        private CompanionInputHandler _companionInputHandler;
 
         private IInputBinderInterface _inputBinderInterface;
 
@@ -41,13 +41,13 @@ namespace Assets.Scripts.Components.ActionStateMachine.States.Locomotion
             _locomotionInputHandler = new LocomotionInputHandler(Info.Owner.GetComponent<IMovementInterface>(), inCharacter.ActiveController.GetComponent<IPlayerCameraInterface>(), Info.Owner.GetComponent<IHeldItemInterface>());
             _interactionInputHandler = new InteractionInputHandler(Info.Owner.GetComponent<IInteractionInterface>());
             _pauseInputHandler = new PauseInputHandler(GameServiceProvider.CurrentInstance.GetService<ITimeServiceInterface>());
-            _powerInputHandler = new PowerInputHandler(Info.Owner.GetComponent<IPowerAssignmentInterface>());
+            _companionInputHandler = new CompanionInputHandler(Info.Owner.GetComponent<ICompanionSetInterface>());
 
             _inputBinderInterface = Info.Owner.GetComponent<IInputBinderInterface>();
 
             if (_inputBinderInterface != null)
             {
-                _inputBinderInterface.RegisterInputHandler(_powerInputHandler);
+                _inputBinderInterface.RegisterInputHandler(_companionInputHandler);
                 _inputBinderInterface.RegisterInputHandler(_pauseInputHandler);
                 _inputBinderInterface.RegisterInputHandler(_interactionInputHandler);
                 _inputBinderInterface.RegisterInputHandler(_locomotionInputHandler);
@@ -70,7 +70,7 @@ namespace Assets.Scripts.Components.ActionStateMachine.States.Locomotion
         {
             if (_inputBinderInterface != null)
             {
-                _inputBinderInterface.UnregisterInputHandler(_powerInputHandler);
+                _inputBinderInterface.UnregisterInputHandler(_companionInputHandler);
                 _inputBinderInterface.UnregisterInputHandler(_pauseInputHandler);
                 _inputBinderInterface.UnregisterInputHandler(_interactionInputHandler);
                 _inputBinderInterface.UnregisterInputHandler(_locomotionInputHandler);

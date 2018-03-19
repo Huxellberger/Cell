@@ -36,7 +36,6 @@ GameObject:
   - component: {fileID: 114753987991252948}
   - component: {fileID: 61571548770558716}
   - component: {fileID: 114869429838413728}
-  - component: {fileID: 114607837209025216}
   - component: {fileID: 114341984064042260}
   - component: {fileID: 114314581918259684}
   m_Layer: 0
@@ -349,17 +348,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   SoundEffectsAudioSource: {fileID: 82782858526757582}
   DamageSound: {fileID: 8300000, guid: 969d0cb14c6e02a40914a6f5d7e73ebc, type: 3}
---- !u!114 &114607837209025216
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1249083189207894}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8929aa7d174590345826c6140dc0daa4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &114753987991252948
 MonoBehaviour:
   m_ObjectHideFlags: 1

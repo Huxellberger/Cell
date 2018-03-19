@@ -104,6 +104,14 @@ namespace Assets.Scripts.Input
                     new TranslatedInput(EInputKey.SecondaryPower, EInputType.Button)
                 },
                 {
+                    new RawInput("X_Button", EInputType.Button),
+                    new TranslatedInput(EInputKey.PrimaryDialogue, EInputType.Button)
+                },
+                {
+                    new RawInput("C_Button", EInputType.Button),
+                    new TranslatedInput(EInputKey.SecondaryDialogue, EInputType.Button)
+                },
+                {
                     new RawInput("lmb_Button", EInputType.Button),
                     new TranslatedInput(EInputKey.PrimaryHeldAction, EInputType.Button)
                 },
