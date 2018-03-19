@@ -134,7 +134,10 @@ namespace Assets.Scripts.UI.HUD.Conversation
         {
             if (_currentMessage != null)
             {
-                _currentMessage.DialogueCompleteDelegate();
+                if (_currentMessage.DialogueCompleteDelegate != null)
+                {
+                    _currentMessage.DialogueCompleteDelegate();
+                }
             }
             
             _currentMessage = null;
