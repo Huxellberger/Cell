@@ -1,6 +1,5 @@
 ﻿// Copyright (C) Threetee Gang All Rights Reserved
 
-using Assets.Scripts.Components.ActionStateMachine.States.OpenMenuUI;
 using Assets.Scripts.Components.Character;
 using Assets.Scripts.Components.Health;
 using Assets.Scripts.Input;
@@ -17,7 +16,7 @@ namespace Assets.Scripts.Components.ActionStateMachine.States.CinematicCamera
         private Camera _initialCamera;
         private Camera InitialCamera { get { return GetInitialCamera(); } set { _initialCamera = value; } }
 
-        private InGameMenuInputHandler _blockingInputHandler;
+        private BlockingInputHandler _blockingInputHandler;
         private float _elapsedTime;
 
         public CinematicCameraActionState(CinematicCameraActionStateInfo inInfo) 
@@ -47,7 +46,7 @@ namespace Assets.Scripts.Components.ActionStateMachine.States.CinematicCamera
             var inputBinder = Info.Owner.GetComponent<IInputBinderInterface>();
             if (inputBinder != null)
             {
-                _blockingInputHandler = new InGameMenuInputHandler();
+                _blockingInputHandler = new BlockingInputHandler();
                 inputBinder.RegisterInputHandler(_blockingInputHandler);
             }
         }

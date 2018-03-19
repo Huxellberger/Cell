@@ -3,7 +3,6 @@
 using Assets.Editor.UnitTests.Messaging;
 using Assets.Scripts.Components.ActionStateMachine;
 using Assets.Scripts.Components.ActionStateMachine.States.CinematicCamera;
-using Assets.Scripts.Components.ActionStateMachine.States.OpenMenuUI;
 using Assets.Scripts.Components.Health;
 using Assets.Scripts.Messaging;
 using Assets.Scripts.Test.Components.ActionStateMachine;
@@ -77,7 +76,7 @@ namespace Assets.Editor.UnitTests.Components.ActionStateMachine.States.Cinematic
         {
             _actionState.Start();
 
-            Assert.IsTrue(_inputBinder.IsHandlerOfTypeRegistered<InGameMenuInputHandler>());
+            Assert.IsTrue(_inputBinder.IsHandlerOfTypeRegistered<BlockingInputHandler>());
         }
 
         [Test]
@@ -122,7 +121,7 @@ namespace Assets.Editor.UnitTests.Components.ActionStateMachine.States.Cinematic
             _actionState.Start();
             _actionState.End();
 
-            Assert.IsTrue(_inputBinder.IsHandlerOfTypeUnregistered<InGameMenuInputHandler>());
+            Assert.IsTrue(_inputBinder.IsHandlerOfTypeUnregistered<BlockingInputHandler>());
         }
 
         [Test]
