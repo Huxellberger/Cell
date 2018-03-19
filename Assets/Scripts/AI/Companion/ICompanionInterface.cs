@@ -10,7 +10,7 @@ namespace Assets.Scripts.AI.Companion
         bool CanUseCompanionPower();
         void UseCompanionPower();
         void RequestDialogue();
-        void SetCompanion(GameObject inLeader);
-        void ClearCompanion();
+        void SetLeader(GameObject inLeader);
+        void ClearLeader();
     }
 }

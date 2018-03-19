@@ -13,8 +13,8 @@ namespace Assets.Scripts.Test.AI.Companion
 
         public bool CanUseCompanionPowerImplResult = true;
 
-        public bool OnCompanionSetImplCalled = false;
-        public bool OnCompanionClearedImplCalled = false;
+        public bool OnLeaderSetImplCalled = false;
+        public bool OnLeaderClearedImplCalled = false;
         public bool CompanionPowerImplCalled = false;
 
 
@@ -44,14 +44,14 @@ namespace Assets.Scripts.Test.AI.Companion
             CompanionPowerImplCalled = true;
         }
 
-        protected override void OnCompanionSetImpl()
+        protected override void OnLeaderSetImpl()
         {
-            OnCompanionSetImplCalled = true;
+            OnLeaderSetImplCalled = true;
         }
 
-        protected override void OnCompanionClearedImpl()
+        protected override void OnLeaderClearedImpl()
         {
-            OnCompanionClearedImplCalled = true;
+            OnLeaderClearedImplCalled = true;
         }
     }
 }

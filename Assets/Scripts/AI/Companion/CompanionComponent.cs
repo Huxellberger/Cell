@@ -88,23 +88,23 @@ namespace Assets.Scripts.AI.Companion
             }
         }
 
-        public void SetCompanion(GameObject inLeader)
+        public void SetLeader(GameObject inLeader)
         {
-            ClearCompanion();
+            ClearLeader();
 
             if (inLeader != null)
             {
                 Leader = inLeader;
 
-                OnCompanionSetImpl();
+                OnLeaderSetImpl();
             }
         }
 
-        public void ClearCompanion()
+        public void ClearLeader()
         {
             if (Leader != null)
             {
-                OnCompanionClearedImpl();
+                OnLeaderClearedImpl();
 
                 Leader = null;
             }
@@ -113,7 +113,7 @@ namespace Assets.Scripts.AI.Companion
 
         protected abstract bool CanUseCompanionPowerImpl();
         protected abstract void CompanionPowerImpl();
-        protected abstract void OnCompanionSetImpl();
-        protected abstract void OnCompanionClearedImpl();
+        protected abstract void OnLeaderSetImpl();
+        protected abstract void OnLeaderClearedImpl();
     }
 }

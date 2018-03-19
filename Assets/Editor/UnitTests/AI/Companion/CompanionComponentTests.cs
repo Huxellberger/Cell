@@ -57,7 +57,7 @@ namespace Assets.Editor.UnitTests.AI.Companion
         [Test]
         public void CanUseCompanionPower_ImplReturnsFalse_False()
         {
-            _companion.SetCompanion(new GameObject());
+            _companion.SetLeader(new GameObject());
             _companion.CanUseCompanionPowerImplResult = false;
             Assert.IsFalse(_companion.CanUseCompanionPower());
         }
@@ -65,7 +65,7 @@ namespace Assets.Editor.UnitTests.AI.Companion
         [Test]
         public void CanUseCompanionPower_ImplReturnsTrueAndLeader_True()
         {
-            _companion.SetCompanion(new GameObject());
+            _companion.SetLeader(new GameObject());
             _companion.CanUseCompanionPowerImplResult = true;
             Assert.IsTrue(_companion.CanUseCompanionPower());
         }
@@ -73,8 +73,8 @@ namespace Assets.Editor.UnitTests.AI.Companion
         [Test]
         public void CanUseCompanionPower_ImplReturnsTrueAndLeaderCleared_False()
         {
-            _companion.SetCompanion(new GameObject());
-            _companion.ClearCompanion();
+            _companion.SetLeader(new GameObject());
+            _companion.ClearLeader();
             _companion.CanUseCompanionPowerImplResult = true;
             Assert.IsFalse(_companion.CanUseCompanionPower());
         }
@@ -82,7 +82,7 @@ namespace Assets.Editor.UnitTests.AI.Companion
         [Test]
         public void CanUseCompanionPower_ImplReturnsTrueAndLeaderButOnCooldown_False()
         {
-            _companion.SetCompanion(new GameObject());
+            _companion.SetLeader(new GameObject());
             _companion.CanUseCompanionPowerImplResult = true;
             _companion.UseCompanionPower();
             Assert.IsFalse(_companion.CanUseCompanionPower());
@@ -91,7 +91,7 @@ namespace Assets.Editor.UnitTests.AI.Companion
         [Test]
         public void CanUseCompanionPower_FinishedCoolingDown_True()
         {
-            _companion.SetCompanion(new GameObject());
+            _companion.SetLeader(new GameObject());
             _companion.CanUseCompanionPowerImplResult = true;
             _companion.UseCompanionPower();
             _companion.TestUpdate(_companion.PowerCooldownTime + 0.1f);
@@ -101,7 +101,7 @@ namespace Assets.Editor.UnitTests.AI.Companion
         [Test]
         public void UseCompanionPower_CanUse_UseImplCalled()
         {
-            _companion.SetCompanion(new GameObject());
+            _companion.SetLeader(new GameObject());
             _companion.CanUseCompanionPowerImplResult = true;
             _companion.UseCompanionPower();
             Assert.IsTrue(_companion.CompanionPowerImplCalled);
@@ -110,51 +110,51 @@ namespace Assets.Editor.UnitTests.AI.Companion
         [Test]
         public void UseCompanionPower_CannotUse_NoUseImplCalled()
         {
-            _companion.SetCompanion(new GameObject());
+            _companion.SetLeader(new GameObject());
             _companion.CanUseCompanionPowerImplResult = false;
             _companion.UseCompanionPower();
             Assert.IsFalse(_companion.CompanionPowerImplCalled);
         }
 
         [Test]
-        public void SetCompanion_SetCompanionImplCalled()
+        public void SetLeader_SetLeaderImplCalled()
         {
-            _companion.SetCompanion(new GameObject());
-            Assert.IsTrue(_companion.OnCompanionSetImplCalled);
+            _companion.SetLeader(new GameObject());
+            Assert.IsTrue(_companion.OnLeaderSetImplCalled);
         }
 
         [Test]
-        public void SetCompanion_AlreadySet_ClearsFirstCompanion()
+        public void SetLeader_AlreadySet_ClearsFirstLeader()
         {
-            _companion.SetCompanion(new GameObject());
-            _companion.SetCompanion(new GameObject());
+            _companion.SetLeader(new GameObject());
+            _companion.SetLeader(new GameObject());
 
-            Assert.IsTrue(_companion.OnCompanionClearedImplCalled);
+            Assert.IsTrue(_companion.OnLeaderClearedImplCalled);
         }
 
         [Test]
-        public void SetCompanion_Null_NoSetImplCalled()
+        public void SetLeader_Null_NoSetImplCalled()
         {
-            _companion.SetCompanion(null);
+            _companion.SetLeader(null);
 
-            Assert.IsFalse(_companion.OnCompanionSetImplCalled);
+            Assert.IsFalse(_companion.OnLeaderSetImplCalled);
         }
 
         [Test]
-        public void ClearCompanion_NoCompanion_NoClear()
+        public void ClearLeader_NoLeader_NoClear()
         {
-            _companion.ClearCompanion();
+            _companion.ClearLeader();
 
-            Assert.IsFalse(_companion.OnCompanionClearedImplCalled);
+            Assert.IsFalse(_companion.OnLeaderClearedImplCalled);
         }
 
         [Test]
-        public void ClearCompanion_Companion_ClearImplCalled()
+        public void ClearLeader_Leader_ClearImplCalled()
         {
-            _companion.SetCompanion(new GameObject());
-            _companion.ClearCompanion();
+            _companion.SetLeader(new GameObject());
+            _companion.ClearLeader();
 
-            Assert.IsTrue(_companion.OnCompanionClearedImplCalled);
+            Assert.IsTrue(_companion.OnLeaderClearedImplCalled);
         }
 
         [Test]
@@ -166,7 +166,7 @@ namespace Assets.Editor.UnitTests.AI.Companion
         [Test]
         public void GetCompanionPowerCooldown_JustUsed_0()
         {
-            _companion.SetCompanion(new GameObject());
+            _companion.SetLeader(new GameObject());
             _companion.CanUseCompanionPowerImplResult = true;
             _companion.UseCompanionPower();
 
@@ -176,7 +176,7 @@ namespace Assets.Editor.UnitTests.AI.Companion
         [Test]
         public void GetCompanionPowerCooldown_ScalesToPercentageCooledDown()
         {
-            _companion.SetCompanion(new GameObject());
+            _companion.SetLeader(new GameObject());
             _companion.CanUseCompanionPowerImplResult = true;
             _companion.UseCompanionPower();
 
