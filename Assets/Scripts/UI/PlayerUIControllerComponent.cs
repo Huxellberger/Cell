@@ -1,5 +1,6 @@
 ﻿// Copyright (C) Threetee Gang All Rights Reserved
 
+using Assets.Scripts.AI.Companion;
 using Assets.Scripts.Components.ActionStateMachine;
 using Assets.Scripts.Components.ActionStateMachine.States.CinematicCamera;
 using Assets.Scripts.Components.ActionStateMachine.States.Dead;
@@ -43,6 +44,8 @@ namespace Assets.Scripts.UI
         private UnityMessageEventHandle<EnterCinematicCameraActionStateMessage> _enterCinematicCameraHandle;
         private UnityMessageEventHandle<ExitCinematicCameraActionStateMessage> _exitCinematicCameraHandle;
 
+        private UnityMessageEventHandle<CompanionSlotsUpdatedMessage> _companionSlotsUpdatedHandle;
+
         protected void Start ()
         {
             DeathMessage = new LocalisedTextRef(new LocalisationKey("UIMessages", "DeathMessage"));
@@ -80,10 +83,14 @@ namespace Assets.Scripts.UI
             _exitCinematicCameraHandle = _localDispatcher.RegisterForMessageEvent<ExitCinematicCameraActionStateMessage>(OnExitCinematicCameraActionStateMessage);
 
             _pauseStatusChangedHandle = _localDispatcher.RegisterForMessageEvent<PauseStatusChangedMessage>(OnPauseStatusChanged);
+
+            _companionSlotsUpdatedHandle =  _localDispatcher.RegisterForMessageEvent<CompanionSlotsUpdatedMessage>(OnCompanionSlotsUpdated);
         }
 
         private void UnregisterForMessages()
         {
+            _localDispatcher.UnregisterForMessageEvent(_companionSlotsUpdatedHandle);
+
             _localDispatcher.UnregisterForMessageEvent(_pauseStatusChangedHandle);
 
             _localDispatcher.UnregisterForMessageEvent(_exitCinematicCameraHandle);
@@ -162,6 +169,11 @@ namespace Assets.Scripts.UI
             {
                 _actionStateMachine.RequestActionState(EActionStateMachineTrack.UI, EActionStateId.Null, new ActionStateInfo(gameObject));
             }
+        }
+
+        private void OnCompanionSlotsUpdated(CompanionSlotsUpdatedMessage inMessage)
+        {
+            _uiDispatcher.InvokeMessageEvent(new CompanionSlotsUpdatedUIMessage(inMessage.Updates));
         }
     }
 }

@@ -1,6 +1,8 @@
 ﻿// Copyright (C) Threetee Gang All Rights Reserved
 
+using System.Collections.Generic;
 using Assets.Editor.UnitTests.Messaging;
+using Assets.Scripts.AI.Companion;
 using Assets.Scripts.Components.ActionStateMachine;
 using Assets.Scripts.Components.ActionStateMachine.States.CinematicCamera;
 using Assets.Scripts.Components.ActionStateMachine.States.Dead;
@@ -260,6 +262,25 @@ namespace Assets.Editor.UnitTests.UI
             Assert.AreEqual(EActionStateMachineTrack.UI, _actionStateMachineComponent.RequestedTrack);
             Assert.AreEqual(EActionStateId.Null, _actionStateMachineComponent.RequestedId);
             Assert.AreEqual(_playerUi.gameObject, _actionStateMachineComponent.RequestedInfo.Owner);
+        }
+
+        [Test]
+        public void ReceiveCompanionSlotsUpdatedMessage_ForwardsUpdateUIEnabledMessage()
+        {
+            var eventSpy = new UnityTestMessageHandleResponseObject<CompanionSlotsUpdatedUIMessage>();
+
+            var dispatcher = GameInstance.CurrentInstance.GetUIMessageDispatcher();
+            var handle = dispatcher
+                .RegisterForMessageEvent<CompanionSlotsUpdatedUIMessage>(eventSpy.OnResponse);
+
+            var payload = new Dictionary<ECompanionSlot, PriorCompanionSlotState>();
+
+            UnityMessageEventFunctions.InvokeMessageEventWithDispatcher(_playerUi.gameObject, new CompanionSlotsUpdatedMessage(payload));
+
+            Assert.IsTrue(eventSpy.ActionCalled);
+            Assert.AreSame(payload, eventSpy.MessagePayload.Updates);
+
+            dispatcher.UnregisterForMessageEvent(handle);
         }
     }
 }
