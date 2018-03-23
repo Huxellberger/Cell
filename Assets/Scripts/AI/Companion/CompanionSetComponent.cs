@@ -9,8 +9,17 @@ namespace Assets.Scripts.AI.Companion
 {
     public class PriorCompanionSlotState
     {
+        public void ConvertDataToState(CompanionData inData)
+        {
+            PriorUIIcon = inData.Image;
+            PriorCooldown = inData.PowerCooldown;
+            PriorUseCount = inData.PowerUseCount;
+        }
+
         public ICompanionInterface PriorCompanion;
+        public Sprite PriorUIIcon;
         public float PriorCooldown;
+        public int PriorUseCount;
         public bool PriorActive;
     }
 
@@ -60,19 +69,31 @@ namespace Assets.Scripts.AI.Companion
                 if (currentCompanion != null)
                 {
                     inPriorState.PriorActive = currentCompanion.CanUseCompanionPower();
-                    inPriorState.PriorCooldown = currentCompanion.GetCompanionPowerCooldown();
+                    inPriorState.ConvertDataToState(currentCompanion.GetCompanionData());
                 }
             }
             else
             {
                 if (currentCompanion != null)
                 {
-                    var newCooldown = currentCompanion.GetCompanionPowerCooldown();
+                    var newData = currentCompanion.GetCompanionData();
                     
-                    if (Math.Abs(newCooldown - inPriorState.PriorCooldown) > 0.04f)
+                    if (Math.Abs(newData.PowerCooldown - inPriorState.PriorCooldown) > 0.04f)
                     {
                         entryChanged = true;
-                        inPriorState.PriorCooldown = newCooldown;
+                        inPriorState.PriorCooldown = newData.PowerCooldown;
+                    }
+
+                    if (newData.PowerUseCount != inPriorState.PriorUseCount)
+                    {
+                        entryChanged = true;
+                        inPriorState.PriorUseCount = newData.PowerUseCount;
+                    }
+
+                    if (newData.Image != inPriorState.PriorUIIcon)
+                    {
+                        entryChanged = true;
+                        inPriorState.PriorUIIcon = newData.Image;
                     }
 
                     var newActive = currentCompanion.CanUseCompanionPower();

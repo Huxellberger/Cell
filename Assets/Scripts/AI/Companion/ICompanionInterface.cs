@@ -6,7 +6,7 @@ namespace Assets.Scripts.AI.Companion
 {
     public interface ICompanionInterface
     {
-        float GetCompanionPowerCooldown();
+        CompanionData GetCompanionData();
         bool CanUseCompanionPower();
         void UseCompanionPower();
         void RequestDialogue();

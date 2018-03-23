@@ -3,6 +3,7 @@
 using System.Collections.Generic;
 using Assets.Editor.UnitTests.Messaging;
 using Assets.Scripts.AI.Chatter;
+using Assets.Scripts.AI.Companion;
 using Assets.Scripts.Instance;
 using Assets.Scripts.Services.EventsOfInterest;
 using Assets.Scripts.Test.AI.Companion;
@@ -17,6 +18,8 @@ namespace Assets.Editor.UnitTests.AI.Companion
     [TestFixture]
     public class CompanionComponentTestFixture
     {
+        public const string SpritePath = "Test/Sprites/TestSprite";
+
         private TestCompanionComponent _companion;
 
         [SetUp]
@@ -29,6 +32,8 @@ namespace Assets.Editor.UnitTests.AI.Companion
             _companion.PowerCooldownTime = 2.0f;
             _companion.DefaultDialogueEntry = "TestEntry";
             _companion.DialogueEntries = ScriptableObject.CreateInstance<DialogueData>();
+            _companion.CompanionUIIcon = Resources.Load<Sprite>(SpritePath);
+            _companion.MaxPowerCharges = 3;
 
             _companion.DialogueEntries.DialogueEntries = new List<DialogueEntry>
             {
@@ -89,6 +94,32 @@ namespace Assets.Editor.UnitTests.AI.Companion
         }
 
         [Test]
+        public void CanUseCompanionPower_NoChargesRemain_False()
+        {
+            _companion.SetLeader(new GameObject());
+            _companion.CanUseCompanionPowerImplResult = true;
+
+            for (var i = 0; i < _companion.MaxPowerCharges; i++)
+            {
+                _companion.UseCompanionPower();
+                _companion.TestUpdate(_companion.PowerCooldownTime + 0.1f);
+            }
+
+            Assert.IsFalse(_companion.CanUseCompanionPower());
+        }
+
+        [Test]
+        public void CanUseCompanionPower_UnlimitedCharges_True()
+        {
+            _companion.SetLeader(new GameObject());
+            _companion.CanUseCompanionPowerImplResult = true;
+            _companion.MaxPowerCharges = CompanionConstants.UnlimitedCharges;
+            _companion.TestStart();
+
+            Assert.IsTrue(_companion.CanUseCompanionPower());
+        }
+
+        [Test]
         public void CanUseCompanionPower_FinishedCoolingDown_True()
         {
             _companion.SetLeader(new GameObject());
@@ -108,12 +139,30 @@ namespace Assets.Editor.UnitTests.AI.Companion
         }
 
         [Test]
+        public void UseCompanionPower_CanUse_ChargesReduced()
+        {
+            _companion.SetLeader(new GameObject());
+            _companion.CanUseCompanionPowerImplResult = true;
+            _companion.UseCompanionPower();
+            Assert.AreEqual(_companion.MaxPowerCharges -1, _companion.GetCompanionData().PowerUseCount);
+        }
+
+        [Test]
         public void UseCompanionPower_CannotUse_NoUseImplCalled()
         {
             _companion.SetLeader(new GameObject());
             _companion.CanUseCompanionPowerImplResult = false;
             _companion.UseCompanionPower();
             Assert.IsFalse(_companion.CompanionPowerImplCalled);
+        }
+
+        [Test]
+        public void UseCompanionPower_CanUse_ChargesNotReduced()
+        {
+            _companion.SetLeader(new GameObject());
+            _companion.CanUseCompanionPowerImplResult = false;
+            _companion.UseCompanionPower();
+            Assert.AreEqual(_companion.MaxPowerCharges, _companion.GetCompanionData().PowerUseCount);
         }
 
         [Test]
@@ -158,23 +207,29 @@ namespace Assets.Editor.UnitTests.AI.Companion
         }
 
         [Test]
-        public void GetCompanionPowerCooldown_Ready_1()
+        public void GetCompanionData_Ready_1()
         {
-            Assert.AreEqual(1.0f, _companion.GetCompanionPowerCooldown());
+            Assert.AreEqual(1.0f, _companion.GetCompanionData().PowerCooldown);
         }
 
         [Test]
-        public void GetCompanionPowerCooldown_JustUsed_0()
+        public void GetCompanionData_CorrectSprite()
+        {
+            Assert.AreSame(_companion.CompanionUIIcon, _companion.GetCompanionData().Image);
+        }
+
+        [Test]
+        public void GetCompanionData_JustUsed_0()
         {
             _companion.SetLeader(new GameObject());
             _companion.CanUseCompanionPowerImplResult = true;
             _companion.UseCompanionPower();
 
-            Assert.AreEqual(0.0f, _companion.GetCompanionPowerCooldown());
+            Assert.AreEqual(0.0f, _companion.GetCompanionData().PowerCooldown);
         }
 
         [Test]
-        public void GetCompanionPowerCooldown_ScalesToPercentageCooledDown()
+        public void GetCompanionData_ScalesToPercentageCooledDown()
         {
             _companion.SetLeader(new GameObject());
             _companion.CanUseCompanionPowerImplResult = true;
@@ -182,7 +237,7 @@ namespace Assets.Editor.UnitTests.AI.Companion
 
             _companion.TestUpdate(_companion.PowerCooldownTime * 0.5f);
 
-            Assert.AreEqual(0.5f, _companion.GetCompanionPowerCooldown());
+            Assert.AreEqual(0.5f, _companion.GetCompanionData().PowerCooldown);
         }
 
         [Test]

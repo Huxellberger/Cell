@@ -11,7 +11,7 @@ namespace Assets.Scripts.Test.AI.Companion
         : MonoBehaviour 
         , ICompanionInterface
     {
-        public float GetCompanionPowerCooldownResult { get; set; }
+        public CompanionData GetCompanionDataResult { get; set; }
         public bool CanUseCompanionPowerResult = true;
 
         public bool UseCompanionPowerCalled = false;
@@ -19,9 +19,9 @@ namespace Assets.Scripts.Test.AI.Companion
         public GameObject SetLeaderGameObject { get; private set; }
         public bool ClearLeaderCalled = false;
 
-        public float GetCompanionPowerCooldown()
+        public CompanionData GetCompanionData()
         {
-            return GetCompanionPowerCooldownResult;
+            return GetCompanionDataResult;
         }
 
         public bool CanUseCompanionPower()

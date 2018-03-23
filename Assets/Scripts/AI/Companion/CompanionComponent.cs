@@ -14,28 +14,44 @@ namespace Assets.Scripts.AI.Companion
         , ICompanionInterface
     {
         public DialogueData DialogueEntries;
+        public Sprite CompanionUIIcon;
 
         public string DefaultDialogueEntry;
         public float PowerCooldownTime = 2.0f;
+        public int MaxPowerCharges = 3;
         
         protected GameObject Leader { get; private set; }
 
         private Dictionary<string, DialogueEntry> _dialogueMappings;
         private UnityMessageEventDispatcher _uiDispatcher;
+        private CompanionData _currentData;
         private float _cooldownTimeRemaining = 0.0f;
+        private float CooldownTimeRemaining
+        {
+            get { return _cooldownTimeRemaining; }
+            set
+            {
+                _cooldownTimeRemaining = value;
+                if (_currentData != null)
+                {
+                    _currentData.PowerCooldown = GetCompanionPowerCooldown();
+                }
+            } 
+        }
 
         protected void Start()
         {
             _uiDispatcher = GameInstance.CurrentInstance.GetUIMessageDispatcher();
 
             _dialogueMappings = DialogueData.GenerateDialogueMappings(DialogueEntries);
+            _currentData = new CompanionData{Image = CompanionUIIcon, PowerCooldown = GetCompanionPowerCooldown(), PowerUseCount = MaxPowerCharges};
         }
 
         protected void Update()
         {
-            if (_cooldownTimeRemaining > 0.0f)
+            if (CooldownTimeRemaining > 0.0f)
             {
-                _cooldownTimeRemaining -= GetDeltaTime();
+                CooldownTimeRemaining -= GetDeltaTime();
             }
         }
 
@@ -44,20 +60,25 @@ namespace Assets.Scripts.AI.Companion
             return Time.deltaTime;
         }
 
-        // ICompanionInterface
-        public float GetCompanionPowerCooldown()
+        private float GetCompanionPowerCooldown()
         {
             if (IsPowerCooledDown())
             {
                 return 1.0f;
             }
 
-            return (PowerCooldownTime - _cooldownTimeRemaining) / PowerCooldownTime;
+            return (PowerCooldownTime - CooldownTimeRemaining) / PowerCooldownTime;
         }
 
+        // ICompanionInterface
+        public CompanionData GetCompanionData()
+        {
+            return _currentData;
+        }
+        
         public bool CanUseCompanionPower()
         {
-            if (Leader != null && IsPowerCooledDown())
+            if (Leader != null && IsPowerCooledDown() && PowerHasChargesRemaining())
             {
                 return CanUseCompanionPowerImpl();
             }
@@ -67,7 +88,12 @@ namespace Assets.Scripts.AI.Companion
 
         private bool IsPowerCooledDown()
         {
-            return _cooldownTimeRemaining <= 0.0f;
+            return CooldownTimeRemaining <= 0.0f;
+        }
+
+        private bool PowerHasChargesRemaining()
+        {
+            return _currentData.PowerUseCount == CompanionConstants.UnlimitedCharges || _currentData.PowerUseCount > 0;
         }
 
         public void UseCompanionPower()
@@ -75,7 +101,8 @@ namespace Assets.Scripts.AI.Companion
             if (CanUseCompanionPower())
             {
                 CompanionPowerImpl();
-                _cooldownTimeRemaining = PowerCooldownTime;
+                CooldownTimeRemaining = PowerCooldownTime;
+                _currentData.PowerUseCount--;
             }
         }
 

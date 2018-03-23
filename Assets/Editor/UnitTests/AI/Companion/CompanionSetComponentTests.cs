@@ -13,6 +13,8 @@ namespace Assets.Editor.UnitTests.AI.Companion
     [TestFixture]
     public class CompanionSetComponentTestFixture
     {
+        public const string SpritePath = "Test/Sprites/TestSprite";
+
         private TestCompanionSetComponent _set;
         private MockCompanionComponent _companion;
         private MockCompanionComponent _otherCompanion;
@@ -27,6 +29,12 @@ namespace Assets.Editor.UnitTests.AI.Companion
 
             _companion = new GameObject().AddComponent<MockCompanionComponent>();
             _otherCompanion = new GameObject().AddComponent<MockCompanionComponent>();
+            _companion.GetCompanionDataResult = new CompanionData
+            {
+                Image = Resources.Load<Sprite>(SpritePath),
+                PowerCooldown = 1.4f,
+                PowerUseCount = 1
+            };
         }
 	
         [TearDown]
@@ -183,7 +191,9 @@ namespace Assets.Editor.UnitTests.AI.Companion
             Assert.IsTrue(messageSpy.ActionCalled);
             Assert.AreEqual(_companion, messageSpy.MessagePayload.Updates[slot].PriorCompanion);
             Assert.AreEqual(_companion.CanUseCompanionPowerResult, messageSpy.MessagePayload.Updates[slot].PriorActive);
-            Assert.AreEqual(_companion.GetCompanionPowerCooldownResult, messageSpy.MessagePayload.Updates[slot].PriorCooldown);
+            Assert.AreEqual(_companion.GetCompanionDataResult.PowerCooldown, messageSpy.MessagePayload.Updates[slot].PriorCooldown);
+            Assert.AreSame(_companion.GetCompanionDataResult.Image, messageSpy.MessagePayload.Updates[slot].PriorUIIcon);
+            Assert.AreEqual(_companion.GetCompanionDataResult.PowerUseCount, messageSpy.MessagePayload.Updates[slot].PriorUseCount);
 
             UnityMessageEventFunctions.UnregisterActionWithDispatcher(_set.gameObject, handle);
         }
@@ -207,7 +217,9 @@ namespace Assets.Editor.UnitTests.AI.Companion
             Assert.IsTrue(messageSpy.ActionCalled);
             Assert.AreEqual(_companion, messageSpy.MessagePayload.Updates[slot].PriorCompanion);
             Assert.AreEqual(_companion.CanUseCompanionPowerResult, messageSpy.MessagePayload.Updates[slot].PriorActive);
-            Assert.AreEqual(_companion.GetCompanionPowerCooldownResult, messageSpy.MessagePayload.Updates[slot].PriorCooldown);
+            Assert.AreEqual(_companion.GetCompanionDataResult.PowerCooldown, messageSpy.MessagePayload.Updates[slot].PriorCooldown);
+            Assert.AreSame(_companion.GetCompanionDataResult.Image, messageSpy.MessagePayload.Updates[slot].PriorUIIcon);
+            Assert.AreEqual(_companion.GetCompanionDataResult.PowerUseCount, messageSpy.MessagePayload.Updates[slot].PriorUseCount);
 
             UnityMessageEventFunctions.UnregisterActionWithDispatcher(_set.gameObject, handle);
         }
@@ -225,13 +237,67 @@ namespace Assets.Editor.UnitTests.AI.Companion
                 UnityMessageEventFunctions.RegisterActionWithDispatcher<CompanionSlotsUpdatedMessage>(_set.gameObject,
                     messageSpy.OnResponse);
 
-            _companion.GetCompanionPowerCooldownResult += 1.0f;
+            _companion.GetCompanionDataResult.PowerCooldown += 1.0f;
             _set.TestUpdate();
 
             Assert.IsTrue(messageSpy.ActionCalled);
             Assert.AreEqual(_companion, messageSpy.MessagePayload.Updates[slot].PriorCompanion);
             Assert.AreEqual(_companion.CanUseCompanionPowerResult, messageSpy.MessagePayload.Updates[slot].PriorActive);
-            Assert.AreEqual(_companion.GetCompanionPowerCooldownResult, messageSpy.MessagePayload.Updates[slot].PriorCooldown);
+            Assert.AreEqual(_companion.GetCompanionDataResult.PowerCooldown, messageSpy.MessagePayload.Updates[slot].PriorCooldown);
+            Assert.AreSame(_companion.GetCompanionDataResult.Image, messageSpy.MessagePayload.Updates[slot].PriorUIIcon);
+            Assert.AreEqual(_companion.GetCompanionDataResult.PowerUseCount, messageSpy.MessagePayload.Updates[slot].PriorUseCount);
+
+            UnityMessageEventFunctions.UnregisterActionWithDispatcher(_set.gameObject, handle);
+        }
+
+        [Test]
+        public void Update_ImageChanges_UpdateMessageSent()
+        {
+            const ECompanionSlot slot = ECompanionSlot.Primary;
+            var messageSpy = new UnityTestMessageHandleResponseObject<CompanionSlotsUpdatedMessage>();
+
+            _set.SetCompanion(_companion, slot);
+            _set.TestUpdate();
+
+            var handle =
+                UnityMessageEventFunctions.RegisterActionWithDispatcher<CompanionSlotsUpdatedMessage>(_set.gameObject,
+                    messageSpy.OnResponse);
+
+            _companion.GetCompanionDataResult.Image = null;
+            _set.TestUpdate();
+
+            Assert.IsTrue(messageSpy.ActionCalled);
+            Assert.AreEqual(_companion, messageSpy.MessagePayload.Updates[slot].PriorCompanion);
+            Assert.AreEqual(_companion.CanUseCompanionPowerResult, messageSpy.MessagePayload.Updates[slot].PriorActive);
+            Assert.AreEqual(_companion.GetCompanionDataResult.PowerCooldown, messageSpy.MessagePayload.Updates[slot].PriorCooldown);
+            Assert.AreSame(_companion.GetCompanionDataResult.Image, messageSpy.MessagePayload.Updates[slot].PriorUIIcon);
+            Assert.AreEqual(_companion.GetCompanionDataResult.PowerUseCount, messageSpy.MessagePayload.Updates[slot].PriorUseCount);
+
+            UnityMessageEventFunctions.UnregisterActionWithDispatcher(_set.gameObject, handle);
+        }
+
+        [Test]
+        public void Update_ChargeCountChanges_UpdateMessageSent()
+        {
+            const ECompanionSlot slot = ECompanionSlot.Primary;
+            var messageSpy = new UnityTestMessageHandleResponseObject<CompanionSlotsUpdatedMessage>();
+
+            _set.SetCompanion(_companion, slot);
+            _set.TestUpdate();
+
+            var handle =
+                UnityMessageEventFunctions.RegisterActionWithDispatcher<CompanionSlotsUpdatedMessage>(_set.gameObject,
+                    messageSpy.OnResponse);
+
+            _companion.GetCompanionDataResult.PowerUseCount++;
+            _set.TestUpdate();
+
+            Assert.IsTrue(messageSpy.ActionCalled);
+            Assert.AreEqual(_companion, messageSpy.MessagePayload.Updates[slot].PriorCompanion);
+            Assert.AreEqual(_companion.CanUseCompanionPowerResult, messageSpy.MessagePayload.Updates[slot].PriorActive);
+            Assert.AreEqual(_companion.GetCompanionDataResult.PowerCooldown, messageSpy.MessagePayload.Updates[slot].PriorCooldown);
+            Assert.AreSame(_companion.GetCompanionDataResult.Image, messageSpy.MessagePayload.Updates[slot].PriorUIIcon);
+            Assert.AreEqual(_companion.GetCompanionDataResult.PowerUseCount, messageSpy.MessagePayload.Updates[slot].PriorUseCount);
 
             UnityMessageEventFunctions.UnregisterActionWithDispatcher(_set.gameObject, handle);
         }
