@@ -120,3 +120,21 @@ MonoBehaviour:
         TranslatedText: Push Block
       - LanguageOption: 1
         TranslatedText: 'ERROR: TEXT NOT TRANSLATED'
+  - TextKey:
+      LocalisationNamespace: Interaction
+      LocalisationKeyValue: CompanionJoin
+    LocalisedTexts:
+      Entries:
+      - LanguageOption: 0
+        TranslatedText: Join Party
+      - LanguageOption: 1
+        TranslatedText: 'ERROR: TEXT NOT TRANSLATED'
+  - TextKey:
+      LocalisationNamespace: TestCompanionDialogue
+      LocalisationKeyValue: ExampleIdleLine
+    LocalisedTexts:
+      Entries:
+      - LanguageOption: 0
+        TranslatedText: What are you talking to me for? Play the damn game!
+      - LanguageOption: 1
+        TranslatedText: 'ERROR: TEXT NOT TRANSLATED'

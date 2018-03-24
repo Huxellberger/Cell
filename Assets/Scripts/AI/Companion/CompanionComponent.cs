@@ -39,7 +39,7 @@ namespace Assets.Scripts.AI.Companion
             } 
         }
 
-        protected void Start()
+        protected virtual void Start()
         {
             _uiDispatcher = GameInstance.CurrentInstance.GetUIMessageDispatcher();
 
