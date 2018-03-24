@@ -1,5 +1,6 @@
 ﻿// Copyright (C) Threetee Gang All Rights Reserved
 
+using System.IO;
 using System.Linq;
 using Assets.Scripts.Input;
 using Assets.Scripts.Instance.Loading;
@@ -33,6 +34,7 @@ namespace Assets.Scripts.Instance
         }
 
         public string NextSceneToLoad { get; private set; }
+        public Stream NextSceneSaveData { get; private set; }
 
         private UnityMessageEventDispatcher _uiDispatcher;
 
@@ -55,9 +57,10 @@ namespace Assets.Scripts.Instance
             return _uiDispatcher;
         }
 
-        public void LoadLevel(string inLevelName)
+        public void LoadLevel(string inLevelName, Stream inFileStream)
         {
             NextSceneToLoad = inLevelName;
+            NextSceneSaveData = inFileStream;
             LoadingFunctions.LoadScene(LoadingConstants.LoadingScreenSceneName);
         }
 

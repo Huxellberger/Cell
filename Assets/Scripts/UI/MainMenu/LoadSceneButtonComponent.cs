@@ -1,6 +1,9 @@
 ﻿// Copyright (C) Threetee Gang All Rights Reserved
 
+using System.IO;
+using Assets.Scripts.Core;
 using Assets.Scripts.Instance;
+using Assets.Scripts.UnityLayer.Storage;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -11,6 +14,7 @@ namespace Assets.Scripts.UI.MainMenu
         : MonoBehaviour
     {
         public string LevelToLoad;
+        public bool UseSaveData = false;
 
         private void Start()
         {
@@ -19,7 +23,16 @@ namespace Assets.Scripts.UI.MainMenu
 
         protected void OnButtonPressed()
         {
-            GameInstance.CurrentInstance.LoadLevel(LevelToLoad);
+            Stream saveData = null;
+
+            if (UseSaveData)
+            {
+                var fileStream = File.Open(Application.persistentDataPath + GameDataStorageConstants.SaveDataPath, FileMode.Open);
+                saveData = PersistantDataOperationFunctions.DecryptFileStream(fileStream, "TestKey");
+                fileStream.Close();
+            }
+
+            GameInstance.CurrentInstance.LoadLevel(LevelToLoad, saveData);
         }
     }
 }

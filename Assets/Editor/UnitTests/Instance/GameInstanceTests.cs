@@ -1,5 +1,8 @@
 ﻿// Copyright (C) Threetee Gang All Rights Reserved
 
+using System.IO;
+using System.IO.Compression;
+using System.Security.Cryptography;
 using Assets.Scripts.Instance;
 using Assets.Scripts.Test.Input;
 using Assets.Scripts.Test.Instance;
@@ -86,7 +89,7 @@ namespace Assets.Editor.UnitTests.Instance
 
             const string nextScene = "Test";
 
-            _gameInstance.LoadLevel(nextScene);
+            _gameInstance.LoadLevel(nextScene, null);
 
             Assert.IsTrue(GameInstance.CurrentInstance.NextSceneToLoad.Equals(nextScene));
         }
