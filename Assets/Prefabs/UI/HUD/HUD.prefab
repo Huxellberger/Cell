@@ -825,7 +825,6 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 224259186513042360}
-  - component: {fileID: 114500726959942272}
   - component: {fileID: 114212850497626910}
   m_Layer: 5
   m_Name: CompanionStatus
@@ -1835,20 +1834,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_ShowMaskGraphic: 0
---- !u!114 &114500726959942272
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1949212660358724}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d1364772d61d2e5418b9b48338762188, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  DisabledOnNotification: 1
-  CompanionStates: []
-  IconDisableAlpha: 0.2
 --- !u!114 &114516583030473576
 MonoBehaviour:
   m_ObjectHideFlags: 1
