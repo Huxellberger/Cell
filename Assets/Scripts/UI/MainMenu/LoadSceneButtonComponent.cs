@@ -28,7 +28,7 @@ namespace Assets.Scripts.UI.MainMenu
             if (UseSaveData)
             {
                 var fileStream = File.Open(Application.persistentDataPath + GameDataStorageConstants.SaveDataPath, FileMode.Open);
-                saveData = PersistantDataOperationFunctions.DecryptFileStream(fileStream, "TestKey");
+                saveData = new MemoryStream(PersistantDataOperationFunctions.DecryptFileStream(fileStream, GameDataStorageConstants.AESKey, GameDataStorageConstants.AESIV));
                 fileStream.Close();
             }
 
