@@ -11,9 +11,9 @@ namespace Assets.Scripts.Test.Mode
     public class TestGameModeComponent 
         : GameModeComponent
     {
-        public void TestStart()
+        public void TestAwake()
         {
-            Start();
+           Awake();
         }
 
         public void TestDestroy()

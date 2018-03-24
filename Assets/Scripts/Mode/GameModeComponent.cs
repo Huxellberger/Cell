@@ -28,7 +28,7 @@ namespace Assets.Scripts.Mode
         private UnityMessageEventHandle<RequestRespawnMessage> _requestRespawnHandle;
         private ISpawnServiceInterface _spawnService;
 
-        protected void Start()
+        protected void Awake()
         {
             RegisteredGameMode = this;
 

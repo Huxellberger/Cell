@@ -66,17 +66,17 @@ namespace Assets.Editor.UnitTests.Mode
         }
 
         [Test]
-        public void Start_RegistersAsGameMode()
+        public void Awake_RegistersAsGameMode()
         {
-            _gameModeComponent.TestStart();
+            _gameModeComponent.TestAwake();
 
             Assert.AreEqual(GameModeComponent.RegisteredGameMode, _gameModeComponent);
         }
 
         [Test]
-        public void Start_OverridesPriorGameMode()
+        public void Awake_OverridesPriorGameMode()
         {
-            _gameModeComponent.TestStart();
+            _gameModeComponent.TestAwake();
 
             var otherGameMode = new GameObject().AddComponent<TestGameModeComponent>();
             otherGameMode.gameObject.AddComponent<TestUnityMessageEventDispatcherComponent>().TestAwake();
@@ -84,15 +84,15 @@ namespace Assets.Editor.UnitTests.Mode
             otherGameMode.PlayerCharacterType = new GameObject { name = "TestName" };
             otherGameMode.HUDType = new GameObject();
             otherGameMode.StartingSpawnLocation = new GameObject().AddComponent<TestSpawnLocationComponent>();
-            otherGameMode.TestStart();
+            otherGameMode.TestAwake();
 
             Assert.AreEqual(GameModeComponent.RegisteredGameMode, otherGameMode);
         }
 
         [Test]
-        public void Start_ControllerInitialisedWithPawn()
+        public void Awake_ControllerInitialisedWithPawn()
         {
-            _gameModeComponent.TestStart();
+            _gameModeComponent.TestAwake();
 
             Assert.NotNull(_gameModeComponent.ActiveController);
 
@@ -102,9 +102,9 @@ namespace Assets.Editor.UnitTests.Mode
         }
 
         [Test]
-        public void Start_ControllerTransformSetToSpawnLocation()
+        public void Awake_ControllerTransformSetToSpawnLocation()
         {
-            _gameModeComponent.TestStart();
+            _gameModeComponent.TestAwake();
 
             Assert.NotNull(_gameModeComponent.ActiveController);
 
@@ -114,41 +114,41 @@ namespace Assets.Editor.UnitTests.Mode
         }
 
         [Test]
-        public void Start_MouseCursorDisabled()
+        public void Awake_MouseCursorDisabled()
         {
-            _gameModeComponent.TestStart();
+            _gameModeComponent.TestAwake();
 
             Assert.IsFalse(Cursor.visible);
         }
 
         /* Test is currently failing for unknown reasons. 
         [Test]
-        public void Start_CursorConfined()
+        public void Awake_CursorConfined()
         {
-            _gameModeComponent.TestStart();
+            _gameModeComponent.TestAwake();
 
             Assert.AreEqual(CursorLockMode.Confined, Cursor.lockState);
         }
         */
 
         [Test]
-        public void Start_InvalidControllerType_ThrowsException()
+        public void Awake_InvalidControllerType_ThrowsException()
         {
             _gameModeComponent.PlayerControllerType = new GameObject();
-            Assert.Throws<ApplicationException>(() => _gameModeComponent.TestStart());
+            Assert.Throws<ApplicationException>(() => _gameModeComponent.TestAwake());
         }
 
         [Test]
-        public void Start_InstantiatesHUD()
+        public void Awake_InstantiatesHUD()
         {
-            _gameModeComponent.TestStart();
+            _gameModeComponent.TestAwake();
             Assert.NotNull(_gameModeComponent.GetHUDInstance());
         }
 
         [Test]
         public void OnDestroy_MouseCursorEnabled()
         {
-            _gameModeComponent.TestStart();
+            _gameModeComponent.TestAwake();
             _gameModeComponent.TestDestroy();
 
             Assert.IsTrue(Cursor.visible);
@@ -157,7 +157,7 @@ namespace Assets.Editor.UnitTests.Mode
         [Test]
         public void ReceivesRequestRespawnMessage_SetsControllerSpawnTransformToOneReceivedFromService()
         {
-            _gameModeComponent.TestStart();
+            _gameModeComponent.TestAwake();
 
             var controller = _gameModeComponent.ActiveController;
 
@@ -169,7 +169,7 @@ namespace Assets.Editor.UnitTests.Mode
         [Test]
         public void ReceivesRequestRespawnMessage_RecreatesPawn()
         {
-            _gameModeComponent.TestStart();
+            _gameModeComponent.TestAwake();
 
             var controller = _gameModeComponent.ActiveController;
             var initialPawn = _gameModeComponent.ActiveController.PawnInstance;
@@ -182,7 +182,7 @@ namespace Assets.Editor.UnitTests.Mode
         [Test]
         public void ReceivesRequestRespawnMessage_PawnNotMatching_DoesNotSetTransform()
         {
-            _gameModeComponent.TestStart();
+            _gameModeComponent.TestAwake();
 
             UnityMessageEventFunctions.InvokeMessageEventWithDispatcher(_gameModeComponent.gameObject, new RequestRespawnMessage(_gameModeComponent.ActiveController.gameObject));
 
