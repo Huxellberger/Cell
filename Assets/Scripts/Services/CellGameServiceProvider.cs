@@ -5,6 +5,7 @@ using Assets.Scripts.AI.Pathfinding.Nav;
 using Assets.Scripts.Services.EventsOfInterest;
 using Assets.Scripts.Services.Navigation;
 using Assets.Scripts.Services.Noise;
+using Assets.Scripts.Services.Persistence;
 using Assets.Scripts.Services.Spawn;
 using Assets.Scripts.Services.Time;
 using Assets.Scripts.Services.Wildlife;
@@ -32,6 +33,7 @@ namespace Assets.Scripts.Services
             AddService<INoiseServiceInterface>(gameObject.AddComponent<NoiseService>());
             AddService<INavigationServiceInterface>(new NavigationService(data));
             AddService<IEventsOfInterestServiceInterface>(new EventsOfInterestService());
+            AddService<IPersistenceServiceInterface>(new PersistenceService());
         }
 
         private void OnDrawGizmosSelected()

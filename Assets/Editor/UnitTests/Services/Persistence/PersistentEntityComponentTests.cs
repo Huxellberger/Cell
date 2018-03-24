@@ -1,0 +1,95 @@
+﻿// Copyright (C) Threetee Gang All Rights Reserved
+
+using System.IO;
+using System.Runtime.Serialization.Formatters.Binary;
+using Assets.Editor.UnitTests.Helpers;
+using Assets.Scripts.Core;
+using Assets.Scripts.Services;
+using Assets.Scripts.Services.Persistence;
+using Assets.Scripts.Test.Services;
+using Assets.Scripts.Test.Services.Persistence;
+using NUnit.Framework;
+using UnityEngine;
+
+namespace Assets.Editor.UnitTests.Services.Persistence
+{
+    [TestFixture]
+    public class PersistentEntityComponentTestFixture
+    {
+        private TestPersistentEntityComponent _entity;
+        private MockPersistenceService _service;
+
+        [SetUp]
+        public void BeforeTest()
+        {
+            _entity = new GameObject().AddComponent<TestPersistentEntityComponent>();
+            _entity.gameObject.transform.position = new Vector3(12.0f, 44.0f, 33.0f);
+            _entity.gameObject.transform.eulerAngles = new Vector3(33.0f, -12.0f, 2.0f);
+
+            _service = new MockPersistenceService();
+
+            new GameObject().AddComponent<TestGameServiceProvider>().TestAwake();
+
+            GameServiceProvider.CurrentInstance.AddService<IPersistenceServiceInterface>(_service);
+        }
+	
+        [TearDown]
+        public void AfterTest()
+        {
+            GameServiceProvider.ClearGameServiceProvider();
+
+            _service = null;
+            _entity = null;
+        }
+	
+        [Test]
+        public void Awake_RegistersWithServiceUsingObjectName() 
+        {
+            _entity.TestAwake();
+
+            Assert.AreEqual(_entity.gameObject.name, _service.RegisterPersistentEntityKey);
+            Assert.AreSame(_entity, _service.RegisterPersistentEntityChosen);
+        }
+
+        [Test]
+        public void Awake_UnregistersWithServiceUsingObjectName()
+        {
+            _entity.TestAwake();
+            _entity.TestDestroy();
+
+            Assert.AreEqual(_entity.gameObject.name, _service.UnregisterPersistentEntityKey);
+        }
+
+        [Test]
+        public void WriteData_WritesPositionAndTransformToStream()
+        {
+            var stream = new MemoryStream();
+            _entity.WriteData(stream);
+
+            var bf = new BinaryFormatter();
+
+            stream = new MemoryStream(stream.ToArray());
+
+            Assert.AreEqual(_entity.gameObject.transform.position, ((Vector3Serializer)bf.Deserialize(stream)).AsVector);
+            Assert.AreEqual(_entity.gameObject.transform.eulerAngles, ((Vector3Serializer)bf.Deserialize(stream)).AsVector);
+        }
+
+        [Test]
+        public void ReadData_ReadsInPositionsCorrectly()
+        {
+            var priorPosition = _entity.gameObject.transform.position;
+            var priorRotation = _entity.gameObject.transform.eulerAngles;
+
+            var stream = new MemoryStream();
+            _entity.WriteData(stream);
+
+            _entity.gameObject.transform.position = Vector3.down;
+            _entity.gameObject.transform.eulerAngles = Vector3.forward;
+        
+            _entity.ReadData(new MemoryStream(stream.ToArray()));
+
+            ExtendedAssertions.AssertVectorsNearlyEqual(_entity.gameObject.transform.position, priorPosition);
+            ExtendedAssertions.AssertVectorsNearlyEqual(_entity.gameObject.transform.eulerAngles, priorRotation);
+        }
+    }
+}
