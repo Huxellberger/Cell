@@ -10,6 +10,7 @@ using Assets.Scripts.Components.Stamina;
 using Assets.Scripts.Instance;
 using Assets.Scripts.Localisation;
 using Assets.Scripts.Messaging;
+using Assets.Scripts.Services.Persistence;
 using Assets.Scripts.Services.Time;
 using Assets.Scripts.UI.HUD;
 using UnityEngine;
@@ -21,6 +22,9 @@ namespace Assets.Scripts.UI
         : MonoBehaviour
     {
         public LocalisedTextRef DeathMessage;
+        public LocalisedTextRef SavedMessage;
+
+        public AudioClip SavedNoise;
 
         private IActionStateMachineInterface _actionStateMachine;
 
@@ -46,9 +50,12 @@ namespace Assets.Scripts.UI
 
         private UnityMessageEventHandle<CompanionSlotsUpdatedMessage> _companionSlotsUpdatedHandle;
 
+        private UnityMessageEventHandle<SaveGameTriggerActivatedMessage> _saveTriggerActivatedHandle;
+
         protected void Start ()
         {
             DeathMessage = new LocalisedTextRef(new LocalisationKey("UIMessages", "DeathMessage"));
+            SavedMessage = new LocalisedTextRef(new LocalisationKey("UIMessages", "SaveMessage"));
             _actionStateMachine = gameObject.GetComponent<IActionStateMachineInterface>();
 
             _localDispatcher = gameObject.GetComponent<IUnityMessageEventInterface>().GetUnityMessageEventDispatcher();
@@ -85,10 +92,14 @@ namespace Assets.Scripts.UI
             _pauseStatusChangedHandle = _localDispatcher.RegisterForMessageEvent<PauseStatusChangedMessage>(OnPauseStatusChanged);
 
             _companionSlotsUpdatedHandle =  _localDispatcher.RegisterForMessageEvent<CompanionSlotsUpdatedMessage>(OnCompanionSlotsUpdated);
+
+            _saveTriggerActivatedHandle = _localDispatcher.RegisterForMessageEvent<SaveGameTriggerActivatedMessage>(OnSaveTriggerActivated);
         }
 
         private void UnregisterForMessages()
         {
+            _localDispatcher.UnregisterForMessageEvent(_saveTriggerActivatedHandle);
+
             _localDispatcher.UnregisterForMessageEvent(_companionSlotsUpdatedHandle);
 
             _localDispatcher.UnregisterForMessageEvent(_pauseStatusChangedHandle);
@@ -174,6 +185,11 @@ namespace Assets.Scripts.UI
         private void OnCompanionSlotsUpdated(CompanionSlotsUpdatedMessage inMessage)
         {
             _uiDispatcher.InvokeMessageEvent(new CompanionSlotsUpdatedUIMessage(inMessage.Updates));
+        }
+
+        private void OnSaveTriggerActivated(SaveGameTriggerActivatedMessage inMessage)
+        {
+            _uiDispatcher.InvokeMessageEvent(new DisplayToastUIMessage(SavedMessage.ToString(), SavedNoise));
         }
     }
 }

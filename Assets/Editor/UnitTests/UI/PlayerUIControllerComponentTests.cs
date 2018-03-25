@@ -12,6 +12,7 @@ using Assets.Scripts.Components.Stamina;
 using Assets.Scripts.Instance;
 using Assets.Scripts.Localisation;
 using Assets.Scripts.Messaging;
+using Assets.Scripts.Services.Persistence;
 using Assets.Scripts.Services.Time;
 using Assets.Scripts.Test.Components.ActionStateMachine;
 using Assets.Scripts.Test.Components.Interaction;
@@ -279,6 +280,26 @@ namespace Assets.Editor.UnitTests.UI
 
             Assert.IsTrue(eventSpy.ActionCalled);
             Assert.AreSame(payload, eventSpy.MessagePayload.Updates);
+
+            dispatcher.UnregisterForMessageEvent(handle);
+        }
+
+        [Test]
+        public void ReceiveSaveMessage_ForwardsAppropriateToastNotificationToHUD()
+        {
+            var eventSpy = new UnityTestMessageHandleResponseObject<DisplayToastUIMessage>();
+
+            _playerUi.SavedNoise = new AudioClip();
+
+            var dispatcher = GameInstance.CurrentInstance.GetUIMessageDispatcher();
+            var handle = dispatcher
+                .RegisterForMessageEvent<DisplayToastUIMessage>(eventSpy.OnResponse);
+
+            UnityMessageEventFunctions.InvokeMessageEventWithDispatcher(_playerUi.gameObject, new SaveGameTriggerActivatedMessage());
+
+            Assert.IsTrue(eventSpy.ActionCalled);
+            Assert.IsTrue(eventSpy.MessagePayload.ToastText.Equals(_playerUi.DeathMessage.ToString()));
+            Assert.AreSame(_playerUi.SavedNoise, eventSpy.MessagePayload.ToastAudio);
 
             dispatcher.UnregisterForMessageEvent(handle);
         }
