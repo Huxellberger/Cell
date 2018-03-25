@@ -9,9 +9,9 @@ namespace Assets.Scripts.Test.AI.Companion
     public class TestCompanionSetComponent 
         : CompanionSetComponent
     {
-        public void TestStart() 
+        public void TestAwake() 
         {
-            Start();
+            Awake();
         }
 	
         public void TestUpdate() 

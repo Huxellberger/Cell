@@ -100,6 +100,11 @@ namespace Assets.Scripts.AI.Companion
 
         private bool PowerHasChargesRemaining()
         {
+            if (_currentData == null)
+            {
+                return false;
+            }
+
             return _currentData.PowerUseCount == CompanionConstants.UnlimitedCharges || _currentData.PowerUseCount > 0;
         }
 

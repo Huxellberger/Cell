@@ -1,5 +1,8 @@
 ﻿// Copyright (C) Threetee Gang All Rights Reserved
 
+using System;
+using System.IO;
+using System.Runtime.Serialization.Formatters.Binary;
 using Assets.Editor.UnitTests.Messaging;
 using Assets.Scripts.AI.Companion;
 using Assets.Scripts.Messaging;
@@ -25,13 +28,14 @@ namespace Assets.Editor.UnitTests.AI.Companion
             _set = new GameObject().AddComponent<TestCompanionSetComponent>();
             _set.gameObject.AddComponent<TestUnityMessageEventDispatcherComponent>().TestAwake();
 
-            _set.TestStart();
+            _set.TestAwake();
 
             _companion = new GameObject().AddComponent<MockCompanionComponent>();
             _otherCompanion = new GameObject().AddComponent<MockCompanionComponent>();
             _companion.GetCompanionDataResult = new CompanionData
             {
                 Image = Resources.Load<Sprite>(SpritePath),
+                CompanionPrefabReference = "Test/Prefabs/ExampleCompanion",
                 PowerCooldown = 1.4f,
                 PowerUseCount = 1
             };
@@ -298,6 +302,55 @@ namespace Assets.Editor.UnitTests.AI.Companion
             Assert.AreEqual(_companion.GetCompanionDataResult.PowerCooldown, messageSpy.MessagePayload.Updates[slot].PriorCooldown);
             Assert.AreSame(_companion.GetCompanionDataResult.Image, messageSpy.MessagePayload.Updates[slot].PriorUIIcon);
             Assert.AreEqual(_companion.GetCompanionDataResult.PowerUseCount, messageSpy.MessagePayload.Updates[slot].PriorUseCount);
+
+            UnityMessageEventFunctions.UnregisterActionWithDispatcher(_set.gameObject, handle);
+        }
+
+        [Test]
+        public void WriteData_WritesExpectedReferences()
+        {
+            _set.SetCompanion(_companion, ECompanionSlot.Primary);
+
+            var stream = new MemoryStream();
+
+            _set.WriteData(stream);
+
+            var readStream = new MemoryStream(stream.ToArray());
+
+            var bf = new BinaryFormatter();
+
+            Assert.AreEqual(Enum.GetValues(typeof(ECompanionSlot)).Length, bf.Deserialize(readStream));
+            Assert.AreEqual(ECompanionSlot.Primary, bf.Deserialize(readStream));
+            Assert.AreEqual(_companion.GetCompanionDataResult.CompanionPrefabReference, bf.Deserialize(readStream));
+            Assert.AreEqual(ECompanionSlot.Secondary, bf.Deserialize(readStream));
+            Assert.AreEqual(CompanionConstants.InvalidCompanion, bf.Deserialize(readStream));
+        }
+
+        [Test]
+        public void ReadData_SetsExpectedCompanions()
+        {
+            var messageSpy = new UnityTestMessageHandleResponseObject<CompanionSlotsUpdatedMessage>();
+
+            var handle =
+                UnityMessageEventFunctions.RegisterActionWithDispatcher<CompanionSlotsUpdatedMessage>(_set.gameObject,
+                    messageSpy.OnResponse);
+
+            _set.SetCompanion(_companion, ECompanionSlot.Primary);
+
+            var stream = new MemoryStream();
+
+            _set.WriteData(stream);
+
+            _set.ClearCompanion(ECompanionSlot.Primary);
+
+            var readStream = new MemoryStream(stream.ToArray());
+
+            _set.ReadData(readStream);
+
+            _set.TestUpdate();
+
+            Assert.IsTrue(messageSpy.ActionCalled);
+            Assert.IsNotNull(messageSpy.MessagePayload.Updates[ECompanionSlot.Primary].PriorCompanion);
 
             UnityMessageEventFunctions.UnregisterActionWithDispatcher(_set.gameObject, handle);
         }

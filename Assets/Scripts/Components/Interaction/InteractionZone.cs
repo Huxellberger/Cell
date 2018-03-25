@@ -11,12 +11,10 @@ namespace Assets.Scripts.Components.Interaction
         public GameObject AttachedInteractable;
 
         private IInteractableInterface _interactable;
-        private List<GameObject> _currentInteractionObjects;
+        private readonly List<GameObject> _currentInteractionObjects = new List<GameObject>();
 
         protected void Start()
         {
-            _currentInteractionObjects = new List<GameObject>();
-
             if (AttachedInteractable != null)
             {
                 _interactable = AttachedInteractable.GetComponent<IInteractableInterface>();

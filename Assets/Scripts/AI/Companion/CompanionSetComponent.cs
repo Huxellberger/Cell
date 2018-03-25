@@ -2,7 +2,10 @@
 
 using System;
 using System.Collections.Generic;
+using System.IO;
+using System.Runtime.Serialization.Formatters.Binary;
 using Assets.Scripts.Messaging;
+using Assets.Scripts.Services.Persistence;
 using UnityEngine;
 
 namespace Assets.Scripts.AI.Companion
@@ -11,9 +14,12 @@ namespace Assets.Scripts.AI.Companion
     {
         public void ConvertDataToState(CompanionData inData)
         {
-            PriorUIIcon = inData.Image;
-            PriorCooldown = inData.PowerCooldown;
-            PriorUseCount = inData.PowerUseCount;
+            if (inData != null)
+            {
+                PriorUIIcon = inData.Image;
+                PriorCooldown = inData.PowerCooldown;
+                PriorUseCount = inData.PowerUseCount;
+            }
         }
 
         public ICompanionInterface PriorCompanion;
@@ -26,11 +32,12 @@ namespace Assets.Scripts.AI.Companion
     public class CompanionSetComponent 
         : MonoBehaviour
         , ICompanionSetInterface
+        , IPersistentBehaviourInterface
     {
         private readonly Dictionary<ECompanionSlot, ICompanionInterface> _companions = new Dictionary<ECompanionSlot, ICompanionInterface>();
         private readonly Dictionary<ECompanionSlot, PriorCompanionSlotState> _priorStates = new Dictionary<ECompanionSlot, PriorCompanionSlotState>();
 
-        protected void Start()
+        protected void Awake()
         {
             foreach (ECompanionSlot slot in Enum.GetValues(typeof(ECompanionSlot)))
             {
@@ -151,5 +158,44 @@ namespace Assets.Scripts.AI.Companion
         {
             return _companions.ContainsKey(inSlot) && _companions[inSlot] != null;
         }
+
+        // IPersistentBehaviourInterface
+        public void WriteData(Stream stream)
+        {
+            var bf = new BinaryFormatter();
+
+            bf.Serialize(stream, _companions.Count);
+
+            foreach (var companion in _companions)
+            {
+                bf.Serialize(stream, companion.Key);
+                if (companion.Value != null)
+                {
+                    bf.Serialize(stream, companion.Value.GetCompanionData().CompanionPrefabReference);
+                }
+                else
+                {
+                    bf.Serialize(stream, CompanionConstants.InvalidCompanion);
+                }
+            }
+        }
+
+        public void ReadData(Stream stream)
+        {
+            var bf = new BinaryFormatter();
+
+            var companionCount = (int)bf.Deserialize(stream);
+
+            for (var currentIndex = 0; currentIndex < companionCount; currentIndex++)
+            {
+                var companionSlot = (ECompanionSlot)bf.Deserialize(stream);
+                var asset = (string)bf.Deserialize(stream);
+                if (!asset.Equals(CompanionConstants.InvalidCompanion))
+                {
+                    SetCompanion(Instantiate(Resources.Load<GameObject>(asset)).GetComponent<ICompanionInterface>(), companionSlot);
+                }
+            }
+        }
+        // ~IPersistentBehaviourInterface
     }
 }
