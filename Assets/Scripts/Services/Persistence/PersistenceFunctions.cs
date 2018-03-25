@@ -2,11 +2,53 @@
 
 using System.IO;
 using System.Runtime.Serialization.Formatters.Binary;
+using Assets.Scripts.Core;
+using Assets.Scripts.UnityLayer.Storage;
+using UnityEngine;
+using UnityEngine.SceneManagement;
 
 namespace Assets.Scripts.Services.Persistence
 {
     public static class PersistenceFunctions 
     {
+        public static void WriteCurrentSave(string savePath, IPersistenceServiceInterface persistenceService)
+        {
+            using (var writeStream = new MemoryStream())
+            {
+                var binaryFormatter = new BinaryFormatter();
+
+                binaryFormatter.Serialize(writeStream, SceneManager.GetActiveScene().path);
+                SaveData(writeStream, persistenceService);
+
+                var encryptedStream = new MemoryStream(PersistantDataOperationFunctions.EncryptFileStream(new MemoryStream(writeStream.ToArray()), GameDataStorageConstants.AESKey,
+                    GameDataStorageConstants.AESIV));
+
+                using (var fileStream =
+                    File.Open(Application.persistentDataPath + savePath, FileMode.OpenOrCreate))
+                {
+                    var bytesToCopy = encryptedStream.ToArray();
+                    fileStream.Write(bytesToCopy, 0, bytesToCopy.Length);
+
+                    fileStream.Close();
+                }
+            }
+        }
+
+        // Decrypts save data ready for other objects to read
+        public static Stream InitializeSaveRead(string savePath)
+        {
+            using (var fileStream =
+                File.Open(Application.persistentDataPath + savePath, FileMode.Open))
+            {
+                var decryptedStream = new MemoryStream(PersistantDataOperationFunctions.DecryptFileStream(fileStream, GameDataStorageConstants.AESKey,
+                    GameDataStorageConstants.AESIV));
+
+                fileStream.Close();
+
+                return decryptedStream;
+            }
+        }
+
         public static void SaveData(Stream data, IPersistenceServiceInterface persistenceService)
         {
             var binaryFormatter = new BinaryFormatter();
