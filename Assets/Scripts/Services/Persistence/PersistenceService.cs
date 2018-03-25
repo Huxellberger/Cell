@@ -1,7 +1,6 @@
 ﻿// Copyright (C) Threetee Gang All Rights Reserved
 
 using System.Collections.Generic;
-using UnityEngine;
 
 namespace Assets.Scripts.Services.Persistence
 {
@@ -21,19 +20,12 @@ namespace Assets.Scripts.Services.Persistence
 
         public void UnregisterPersistentEntity(string key)
         {
-            _entities.Remove(key);
+            _entities[key] = null;
         }
 
-        public IPersistentEntityInterface GetEntity(string key)
+        public Dictionary<string, IPersistentEntityInterface> GetEntities()
         {
-            if (_entities.ContainsKey(key))
-            {
-                return _entities[key];
-            }
-
-            Debug.LogError("Failed to find entity for " + key);
-
-            return null;
+            return _entities;
         }
         // ~IPersistenceServiceInterface
     }

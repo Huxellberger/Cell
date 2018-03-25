@@ -3,6 +3,7 @@
 using System.IO;
 using System.Runtime.Serialization.Formatters.Binary;
 using Assets.Scripts.Core;
+using Assets.Scripts.UnityLayer.GameObjects;
 using UnityEngine;
 
 namespace Assets.Scripts.Services.Persistence
@@ -26,15 +27,26 @@ namespace Assets.Scripts.Services.Persistence
         public void WriteData(Stream stream)
         {
             var bf = new BinaryFormatter();
+
+            bf.Serialize(stream, gameObject.activeSelf);
             bf.Serialize(stream, new Vector3Serializer().Fill(gameObject.transform.position));
             bf.Serialize(stream, new Vector3Serializer().Fill(gameObject.transform.eulerAngles));
         }
 
-        public void ReadData(Stream stream)
+        public void ReadData(Stream stream, bool previouslyDestroyed)
         {
             var bf = new BinaryFormatter();
-            gameObject.transform.position = ((Vector3Serializer)bf.Deserialize(stream)).AsVector;
-            gameObject.transform.eulerAngles = ((Vector3Serializer)bf.Deserialize(stream)).AsVector;
+
+            if (previouslyDestroyed)
+            {
+                DestructionFunctions.DestroyGameObject(gameObject);
+            }
+            else
+            {
+                gameObject.SetActive((bool)bf.Deserialize(stream));
+                gameObject.transform.position = ((Vector3Serializer)bf.Deserialize(stream)).AsVector;
+                gameObject.transform.eulerAngles = ((Vector3Serializer)bf.Deserialize(stream)).AsVector;
+            }
         }
     }
 }

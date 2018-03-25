@@ -7,6 +7,6 @@ namespace Assets.Scripts.Services.Persistence
     public interface IPersistentEntityInterface
     {
         void WriteData(Stream stream);
-        void ReadData(Stream stream);
+        void ReadData(Stream stream, bool previouslyDestroyed);
     }
 }

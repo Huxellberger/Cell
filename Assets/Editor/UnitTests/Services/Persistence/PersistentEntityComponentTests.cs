@@ -70,6 +70,7 @@ namespace Assets.Editor.UnitTests.Services.Persistence
 
             stream = new MemoryStream(stream.ToArray());
 
+            Assert.AreEqual(_entity.gameObject.activeSelf, (bool)bf.Deserialize(stream));
             Assert.AreEqual(_entity.gameObject.transform.position, ((Vector3Serializer)bf.Deserialize(stream)).AsVector);
             Assert.AreEqual(_entity.gameObject.transform.eulerAngles, ((Vector3Serializer)bf.Deserialize(stream)).AsVector);
         }
@@ -79,17 +80,30 @@ namespace Assets.Editor.UnitTests.Services.Persistence
         {
             var priorPosition = _entity.gameObject.transform.position;
             var priorRotation = _entity.gameObject.transform.eulerAngles;
+            var initialActive = _entity.gameObject.activeSelf;
 
             var stream = new MemoryStream();
             _entity.WriteData(stream);
 
+            _entity.gameObject.SetActive(!_entity.gameObject.activeSelf);
             _entity.gameObject.transform.position = Vector3.down;
             _entity.gameObject.transform.eulerAngles = Vector3.forward;
         
-            _entity.ReadData(new MemoryStream(stream.ToArray()));
+            _entity.ReadData(new MemoryStream(stream.ToArray()), false);
 
+            Assert.AreEqual(initialActive, _entity.gameObject.activeSelf);
             ExtendedAssertions.AssertVectorsNearlyEqual(_entity.gameObject.transform.position, priorPosition);
             ExtendedAssertions.AssertVectorsNearlyEqual(_entity.gameObject.transform.eulerAngles, priorRotation);
+        }
+
+        [Test]
+        public void ReadData_PreviouslyDestroyed_DoesNotReadValues()
+        {
+            _entity.gameObject.SetActive(!_entity.gameObject.activeSelf);
+            _entity.gameObject.transform.position = Vector3.down;
+            _entity.gameObject.transform.eulerAngles = Vector3.forward;
+
+            _entity.ReadData(new MemoryStream(), true);
         }
     }
 }

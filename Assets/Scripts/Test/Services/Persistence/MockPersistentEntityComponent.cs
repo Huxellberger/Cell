@@ -10,19 +10,21 @@ namespace Assets.Scripts.Test.Services.Persistence
 {
     public class MockPersistentEntityComponent 
         : MonoBehaviour 
-            , IPersistentEntityInterface
+        , IPersistentEntityInterface
     {
         public Stream WriteDataStream { get; private set; }
         public Stream ReadDataStream { get; private set; }
+        public bool ? PreviouslyDestroyedResult { get; private set; }
 
         public void WriteData(Stream stream)
         {
             WriteDataStream = stream;
         }
 
-        public void ReadData(Stream stream)
+        public void ReadData(Stream stream, bool previouslyDestroyed)
         {
             ReadDataStream = stream;
+            PreviouslyDestroyedResult = previouslyDestroyed;
         }
     }
 }

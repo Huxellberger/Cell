@@ -4,7 +4,6 @@ using Assets.Scripts.Services.Persistence;
 using Assets.Scripts.Test.Services.Persistence;
 using NUnit.Framework;
 using UnityEngine;
-using UnityEngine.TestTools;
 
 namespace Assets.Editor.UnitTests.Services.Persistence
 {
@@ -36,41 +35,26 @@ namespace Assets.Editor.UnitTests.Services.Persistence
             const string key = "Key";
             _service.RegisterPersistentEntity(key, _entity);
 
-            Assert.AreSame(_entity, _service.GetEntity(key));
+            Assert.AreSame(_entity, _service.GetEntities()[key]);
         }
 
         [Test]
-        public void Register_Null_NotReturnedWithGet()
-        {
-            const string key = "Key";
-            _service.RegisterPersistentEntity(key, null);
-
-            LogAssert.Expect(LogType.Error, "Failed to find entity for " + key);
-
-            Assert.IsNull(_service.GetEntity(key));
-        }
-
-        [Test]
-        public void Register_NotRegistered_ErrorAndNullReturned()
+        public void Register_NotRegistered_EntryNotEntered()
         {
             const string key = "Key";
 
-            LogAssert.Expect(LogType.Error, "Failed to find entity for " + key);
-
-            Assert.IsNull(_service.GetEntity(key));
+            Assert.IsFalse(_service.GetEntities().ContainsKey(key));
         }
 
         [Test]
-        public void Unregister_NoLongerReturned()
+        public void Unregister_NullReturned()
         {
             const string key = "Key";
 
             _service.RegisterPersistentEntity(key, _entity);
             _service.UnregisterPersistentEntity(key);
 
-            LogAssert.Expect(LogType.Error, "Failed to find entity for " + key);
-
-            _service.GetEntity(key);
+            Assert.IsNull(_service.GetEntities()[key]);
         }
     }
 }

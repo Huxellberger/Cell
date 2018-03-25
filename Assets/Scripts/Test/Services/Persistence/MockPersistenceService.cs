@@ -2,11 +2,12 @@
 
 #if UNITY_EDITOR
 
+using System.Collections.Generic;
 using Assets.Scripts.Services.Persistence;
 
 namespace Assets.Scripts.Test.Services.Persistence
 {
-    public class MockPersistenceService 
+    public class MockPersistenceService
         : IPersistenceServiceInterface
     {
         public string RegisterPersistentEntityKey { get; private set; }
@@ -14,8 +15,7 @@ namespace Assets.Scripts.Test.Services.Persistence
 
         public string UnregisterPersistentEntityKey { get; private set; }
 
-        public IPersistentEntityInterface GetEntityResult { get; set; }
-        public string GetEntityKey { get; private set; }
+        public Dictionary<string, IPersistentEntityInterface> GetEntitiesResult { get; set; }
 
         public void RegisterPersistentEntity(string key, IPersistentEntityInterface entity)
         {
@@ -28,10 +28,9 @@ namespace Assets.Scripts.Test.Services.Persistence
             UnregisterPersistentEntityKey = key;
         }
 
-        public IPersistentEntityInterface GetEntity(string key)
+        public Dictionary<string, IPersistentEntityInterface> GetEntities()
         {
-            GetEntityKey = key;
-            return GetEntityResult;
+            return GetEntitiesResult;
         }
     }
 }
