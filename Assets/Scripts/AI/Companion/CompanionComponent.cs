@@ -15,6 +15,7 @@ namespace Assets.Scripts.AI.Companion
     {
         public DialogueData DialogueEntries;
         public Sprite CompanionUIIcon;
+        public string CompanionAssetReference;
 
         public string DefaultDialogueEntry;
         public float PowerCooldownTime = 2.0f;
@@ -39,12 +40,18 @@ namespace Assets.Scripts.AI.Companion
             } 
         }
 
-        protected virtual void Start()
+        protected virtual void Awake()
         {
             _uiDispatcher = GameInstance.CurrentInstance.GetUIMessageDispatcher();
 
             _dialogueMappings = DialogueData.GenerateDialogueMappings(DialogueEntries);
-            _currentData = new CompanionData{Image = CompanionUIIcon, PowerCooldown = GetCompanionPowerCooldown(), PowerUseCount = MaxPowerCharges};
+            _currentData = new CompanionData
+            {
+                Image = CompanionUIIcon,
+                CompanionPrefabReference = CompanionAssetReference,
+                PowerCooldown = GetCompanionPowerCooldown(),
+                PowerUseCount = MaxPowerCharges
+            };
         }
 
         protected void Update()

@@ -34,6 +34,7 @@ namespace Assets.Editor.UnitTests.AI.Companion
             _companion.DialogueEntries = ScriptableObject.CreateInstance<DialogueData>();
             _companion.CompanionUIIcon = Resources.Load<Sprite>(SpritePath);
             _companion.MaxPowerCharges = 3;
+            _companion.CompanionAssetReference = "AssetReference";
 
             _companion.DialogueEntries.DialogueEntries = new List<DialogueEntry>
             {
@@ -41,7 +42,7 @@ namespace Assets.Editor.UnitTests.AI.Companion
                 new DialogueEntry{DialogueEntryKey = "Blah"}
             };
 
-            _companion.TestStart();
+            _companion.TestAwake();
         }
 	
         [TearDown]
@@ -114,7 +115,7 @@ namespace Assets.Editor.UnitTests.AI.Companion
             _companion.SetLeader(new GameObject());
             _companion.CanUseCompanionPowerImplResult = true;
             _companion.MaxPowerCharges = CompanionConstants.UnlimitedCharges;
-            _companion.TestStart();
+            _companion.TestAwake();
 
             Assert.IsTrue(_companion.CanUseCompanionPower());
         }
@@ -216,6 +217,12 @@ namespace Assets.Editor.UnitTests.AI.Companion
         public void GetCompanionData_CorrectSprite()
         {
             Assert.AreSame(_companion.CompanionUIIcon, _companion.GetCompanionData().Image);
+        }
+
+        [Test]
+        public void GetCompanionData_CorrectPrefabReference()
+        {
+            Assert.AreEqual(_companion.CompanionAssetReference, _companion.GetCompanionData().CompanionPrefabReference);
         }
 
         [Test]

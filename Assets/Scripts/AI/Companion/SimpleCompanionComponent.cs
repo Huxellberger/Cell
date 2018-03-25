@@ -13,9 +13,9 @@ namespace Assets.Scripts.AI.Companion
 
         private AudioSource _source;
 
-        protected override void Start()
+        protected override void Awake()
         {
-            base.Start();
+            base.Awake();
 
             _source = gameObject.GetComponent<AudioSource>();
         }
@@ -32,10 +32,14 @@ namespace Assets.Scripts.AI.Companion
 
         protected override void OnLeaderSetImpl()
         {
+            gameObject.GetComponent<SpriteRenderer>().enabled = false;
+            gameObject.GetComponent<Collider2D>().enabled = false;
         }
 
         protected override void OnLeaderClearedImpl()
         {
+            gameObject.GetComponent<SpriteRenderer>().enabled = true;
+            gameObject.GetComponent<Collider2D>().enabled = true;
         }
     }
 }

@@ -1,14 +1,16 @@
 ﻿// Copyright (C) Threetee Gang All Rights Reserved
 
 using Assets.Scripts.Components.Interaction;
+using Assets.Scripts.UnityLayer.GameObjects;
 using UnityEngine;
 
 namespace Assets.Scripts.AI.Companion
 {
-    [RequireComponent(typeof(ICompanionInterface), typeof(Collider2D), typeof(SpriteRenderer))]
     public class JoinableCompanionComponent 
         : InteractableComponent
     {
+        public GameObject CompanionPrefab;
+
         protected override bool CanInteractImpl(GameObject inGameObject)
         {
             if (inGameObject != null)
@@ -18,13 +20,12 @@ namespace Assets.Scripts.AI.Companion
 
             return false;
         }
-            
 
         protected override void OnInteractImpl(GameObject inGameObject)
         {
-            inGameObject.GetComponent<ICompanionSetInterface>().SetCompanion(gameObject.GetComponent<ICompanionInterface>(), ECompanionSlot.Primary);
-            gameObject.GetComponent<Collider2D>().enabled = false;
-            gameObject.GetComponent<SpriteRenderer>().enabled = false;
+            inGameObject.GetComponent<ICompanionSetInterface>().SetCompanion(Instantiate(CompanionPrefab).GetComponent<ICompanionInterface>(), ECompanionSlot.Primary);
+            gameObject.SetActive(false);
+            DestructionFunctions.DestroyGameObject(gameObject);
         }
     }
 }

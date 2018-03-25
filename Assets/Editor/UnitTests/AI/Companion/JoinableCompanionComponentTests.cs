@@ -3,7 +3,6 @@
 using Assets.Scripts.AI.Companion;
 using Assets.Scripts.Test.AI.Companion;
 using NUnit.Framework;
-using UnityEditor;
 using UnityEngine;
 
 namespace Assets.Editor.UnitTests.AI.Companion
@@ -14,16 +13,13 @@ namespace Assets.Editor.UnitTests.AI.Companion
         private MockCompanionComponent _companion;
         private JoinableCompanionComponent _joinable;
         private MockCompanionSetComponent _set;
-        private Collider2D _collider;
-        private SpriteRenderer _renderer;
 
         [SetUp]
         public void BeforeTest()
         {
             _companion = new GameObject().AddComponent<MockCompanionComponent>();
-            _collider = _companion.gameObject.AddComponent<BoxCollider2D>();
-            _renderer = _companion.gameObject.AddComponent<SpriteRenderer>();
             _joinable = _companion.gameObject.AddComponent<JoinableCompanionComponent>();
+            _joinable.CompanionPrefab = _companion.gameObject;
 
             _set = new GameObject().AddComponent<MockCompanionSetComponent>();
         }
@@ -59,26 +55,8 @@ namespace Assets.Editor.UnitTests.AI.Companion
         public void Interact_SetsPrimaryCompanion()
         {
             _joinable.OnInteract(_set.gameObject);
-            Assert.AreSame(_set.SetCompanionResult, _companion);
+            Assert.IsNotNull(_set.SetCompanionResult);
             Assert.AreEqual(ECompanionSlot.Primary, _set.SetCompanionSlotResult);
-        }
-
-        [Test]
-        public void Interact_DisablesCollider()
-        {
-            _collider.enabled = true;
-            _joinable.OnInteract(_set.gameObject);
-            
-            Assert.IsFalse(_collider.enabled);
-        }
-
-        [Test]
-        public void Interact_DisablesRenderer()
-        {
-            _renderer.enabled = true;
-            _joinable.OnInteract(_set.gameObject);
-
-            Assert.IsFalse(_renderer.enabled);
         }
     }
 }

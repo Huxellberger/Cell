@@ -18,9 +18,9 @@ namespace Assets.Scripts.Test.AI.Companion
         public bool CompanionPowerImplCalled = false;
 
 
-        public void TestStart() 
+        public void TestAwake() 
         {
-            Start();
+            Awake();
         }
 	
         public void TestUpdate(float deltaTime)
