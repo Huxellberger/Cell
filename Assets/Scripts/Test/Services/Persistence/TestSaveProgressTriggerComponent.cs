@@ -8,8 +8,8 @@ using UnityEngine;
 namespace Assets.Scripts.Test.Services.Persistence
 {
     public class TestSaveProgressTriggerComponent 
-        : SaveProgressTriggerComponent 
-    {
+        : SaveProgressTriggerComponent
+    { 
         public void TestCollide(GameObject inGameObject)
         {
             OnGameObjectCollides(inGameObject);

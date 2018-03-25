@@ -803,6 +803,52 @@ Prefab:
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 66cd52adf8d714246892f2dd5b4fda3a, type: 2}
   m_IsPrefabParent: 0
+--- !u!1001 &1908230966
+Prefab:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 4266418710661482, guid: be3e91a6238da3948a721adeae3f3a40, type: 2}
+      propertyPath: m_LocalPosition.x
+      value: -0.08
+      objectReference: {fileID: 0}
+    - target: {fileID: 4266418710661482, guid: be3e91a6238da3948a721adeae3f3a40, type: 2}
+      propertyPath: m_LocalPosition.y
+      value: 0.03
+      objectReference: {fileID: 0}
+    - target: {fileID: 4266418710661482, guid: be3e91a6238da3948a721adeae3f3a40, type: 2}
+      propertyPath: m_LocalPosition.z
+      value: -0.09375
+      objectReference: {fileID: 0}
+    - target: {fileID: 4266418710661482, guid: be3e91a6238da3948a721adeae3f3a40, type: 2}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4266418710661482, guid: be3e91a6238da3948a721adeae3f3a40, type: 2}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4266418710661482, guid: be3e91a6238da3948a721adeae3f3a40, type: 2}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4266418710661482, guid: be3e91a6238da3948a721adeae3f3a40, type: 2}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4266418710661482, guid: be3e91a6238da3948a721adeae3f3a40, type: 2}
+      propertyPath: m_RootOrder
+      value: 18
+      objectReference: {fileID: 0}
+    - target: {fileID: 1499974166916910, guid: be3e91a6238da3948a721adeae3f3a40, type: 2}
+      propertyPath: m_Name
+      value: SpawnSaveTrigger
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_ParentPrefab: {fileID: 100100000, guid: be3e91a6238da3948a721adeae3f3a40, type: 2}
+  m_IsPrefabParent: 0
 --- !u!1 &2035672566
 GameObject:
   m_ObjectHideFlags: 0

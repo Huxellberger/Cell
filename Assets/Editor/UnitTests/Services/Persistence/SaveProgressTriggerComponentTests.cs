@@ -1,6 +1,8 @@
 ﻿// Copyright (C) Threetee Gang All Rights Reserved
 
 using System.Collections.Generic;
+using System.IO;
+using System.Runtime.Serialization.Formatters.Binary;
 using Assets.Editor.UnitTests.Messaging;
 using Assets.Scripts.Messaging;
 using Assets.Scripts.Services;
@@ -115,11 +117,108 @@ namespace Assets.Editor.UnitTests.Services.Persistence
         }
 
         [Test]
+        public void OnCollidesTwice_CharacterComponent_MessageNotSent()
+        {
+            var messageSpy =
+                new UnityTestMessageHandleResponseObject<SaveGameTriggerActivatedMessage>();
+
+            _trigger.TestCollide(_character.gameObject);
+
+            var handle =
+                UnityMessageEventFunctions.RegisterActionWithDispatcher<SaveGameTriggerActivatedMessage>(_character.gameObject,
+                    messageSpy.OnResponse);
+
+            _trigger.TestCollide(_character.gameObject);
+
+            Assert.IsFalse(messageSpy.ActionCalled);
+
+            UnityMessageEventFunctions.UnregisterActionWithDispatcher(_character.gameObject, handle);
+        }
+
+        [Test]
         public void OnCollides_CharacterComponent_DataSaved()
         {
             _trigger.TestCollide(_character.gameObject);
 
             Assert.IsNotNull(_entity.WriteDataStream);
+        }
+
+        [Test]
+        public void WriteData_NoCollisions_WritesFalse()
+        {
+            var stream = new MemoryStream();
+            _trigger.WriteData(stream);
+
+            var readStream = new MemoryStream(stream.ToArray());
+
+            var bf = new BinaryFormatter();
+
+            Assert.IsFalse((bool)bf.Deserialize(readStream));
+        }
+
+        [Test]
+        public void WriteData_Collisions_WritesTrue()
+        {
+            _trigger.TestCollide(_character.gameObject);
+
+            var stream = new MemoryStream();
+            _trigger.WriteData(stream);
+
+            var readStream = new MemoryStream(stream.ToArray());
+
+            var bf = new BinaryFormatter();
+
+            Assert.IsTrue((bool)bf.Deserialize(readStream));
+        }
+
+        [Test]
+        public void ReadData_NoCollisions_CanSave()
+        {
+            var stream = new MemoryStream();
+            _trigger.WriteData(stream);
+
+            var readStream = new MemoryStream(stream.ToArray());
+
+            _trigger.ReadData(readStream);
+
+            var messageSpy =
+                new UnityTestMessageHandleResponseObject<SaveGameTriggerActivatedMessage>();
+
+            var handle =
+                UnityMessageEventFunctions.RegisterActionWithDispatcher<SaveGameTriggerActivatedMessage>(_character.gameObject,
+                    messageSpy.OnResponse);
+
+            _trigger.TestCollide(_character.gameObject);
+
+            Assert.IsTrue(messageSpy.ActionCalled);
+
+            UnityMessageEventFunctions.UnregisterActionWithDispatcher(_character.gameObject, handle);
+        }
+
+        [Test]
+        public void ReadData_Collisions_CannotSave()
+        {
+            _trigger.TestCollide(_character.gameObject);
+
+            var stream = new MemoryStream();
+            _trigger.WriteData(stream);
+
+            var readStream = new MemoryStream(stream.ToArray());
+
+            _trigger.ReadData(readStream);
+
+            var messageSpy =
+                new UnityTestMessageHandleResponseObject<SaveGameTriggerActivatedMessage>();
+
+            var handle =
+                UnityMessageEventFunctions.RegisterActionWithDispatcher<SaveGameTriggerActivatedMessage>(_character.gameObject,
+                    messageSpy.OnResponse);
+
+            _trigger.TestCollide(_character.gameObject);
+
+            Assert.IsFalse(messageSpy.ActionCalled);
+
+            UnityMessageEventFunctions.UnregisterActionWithDispatcher(_character.gameObject, handle);
         }
     }
 }
