@@ -3,6 +3,7 @@
 using System.IO;
 using System.Runtime.Serialization.Formatters.Binary;
 using Assets.Scripts.Core;
+using Assets.Scripts.Instance;
 using Assets.Scripts.UnityLayer.Storage;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -11,6 +12,31 @@ namespace Assets.Scripts.Services.Persistence
 {
     public static class PersistenceFunctions 
     {
+        public static void LoadCurrentSave(string savePath)
+        {
+            var saveData = InitializeSaveRead(savePath);
+
+            var binaryFormatter = new BinaryFormatter();
+
+            var levelToLoad = (string)binaryFormatter.Deserialize(saveData);
+            GameInstance.CurrentInstance.LoadLevel(levelToLoad, saveData);
+        }
+
+        // Decrypts save data ready for other objects to read
+        public static Stream InitializeSaveRead(string savePath)
+        {
+            using (var fileStream =
+                File.Open(Application.persistentDataPath + savePath, FileMode.Open))
+            {
+                var decryptedStream = new MemoryStream(PersistantDataOperationFunctions.DecryptFileStream(fileStream, GameDataStorageConstants.AESKey,
+                    GameDataStorageConstants.AESIV));
+
+                fileStream.Close();
+
+                return decryptedStream;
+            }
+        }
+
         public static void WriteCurrentSave(string savePath, IPersistenceServiceInterface persistenceService)
         {
             using (var writeStream = new MemoryStream())
@@ -34,23 +60,13 @@ namespace Assets.Scripts.Services.Persistence
             }
         }
 
-        // Decrypts save data ready for other objects to read
-        public static Stream InitializeSaveRead(string savePath)
-        {
-            using (var fileStream =
-                File.Open(Application.persistentDataPath + savePath, FileMode.Open))
-            {
-                var decryptedStream = new MemoryStream(PersistantDataOperationFunctions.DecryptFileStream(fileStream, GameDataStorageConstants.AESKey,
-                    GameDataStorageConstants.AESIV));
-
-                fileStream.Close();
-
-                return decryptedStream;
-            }
-        }
-
         public static void SaveData(Stream data, IPersistenceServiceInterface persistenceService)
         {
+            if (persistenceService == null)
+            {
+                return;
+            }
+
             var binaryFormatter = new BinaryFormatter();
 
             var persistentEntities = persistenceService.GetEntities();

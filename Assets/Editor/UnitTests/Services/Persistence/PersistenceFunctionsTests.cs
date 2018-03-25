@@ -4,7 +4,10 @@ using System.Collections.Generic;
 using System.IO;
 using System.Runtime.Serialization.Formatters.Binary;
 using Assets.Scripts.Core;
+using Assets.Scripts.Instance;
 using Assets.Scripts.Services.Persistence;
+using Assets.Scripts.Test.Input;
+using Assets.Scripts.Test.Instance;
 using Assets.Scripts.Test.Services.Persistence;
 using Assets.Scripts.UnityLayer.Storage;
 using NUnit.Framework;
@@ -63,6 +66,24 @@ namespace Assets.Editor.UnitTests.Services.Persistence
 
                 fileStream.Close();
             }
+        }
+
+        [Test]
+        public void LoadCurrentSave_GameInstanceSetupAsExpected()
+        {
+            var gameInstanceObject = new GameObject();
+            gameInstanceObject.AddComponent<MockInputComponent>();
+            var instance = gameInstanceObject.AddComponent<TestGameInstance>();
+            instance.TestAwake();
+
+            const string testPath = "TestSaveFile.dat";
+            PersistenceFunctions.WriteCurrentSave(testPath, _service);
+            PersistenceFunctions.LoadCurrentSave(testPath);
+
+            Assert.IsNotNull(instance.NextSceneSaveData);
+            Assert.AreEqual(SceneManager.GetActiveScene().path, instance.NextSceneToLoad);
+
+            GameInstance.ClearGameInstance();
         }
 
         [Test]

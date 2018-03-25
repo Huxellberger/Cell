@@ -5,17 +5,23 @@
 using System;
 using Assets.Editor.UnitTests.Services.Spawn;
 using Assets.Scripts.Components.ActionStateMachine.States.Dead;
+using Assets.Scripts.Instance;
 using Assets.Scripts.Messaging;
 using Assets.Scripts.Mode;
 using Assets.Scripts.Services;
+using Assets.Scripts.Services.Persistence;
 using Assets.Scripts.Services.Spawn;
 using Assets.Scripts.Test.Components.Controller;
+using Assets.Scripts.Test.Input;
+using Assets.Scripts.Test.Instance;
 using Assets.Scripts.Test.Messaging;
 using Assets.Scripts.Test.Mode;
 using Assets.Scripts.Test.Services;
 using Assets.Scripts.Test.Services.Spawn;
+using Assets.Scripts.UnityLayer.Storage;
 using NUnit.Framework;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 namespace Assets.Editor.UnitTests.Mode
 {
@@ -155,38 +161,45 @@ namespace Assets.Editor.UnitTests.Mode
         }
 
         [Test]
-        public void ReceivesRequestRespawnMessage_SetsControllerSpawnTransformToOneReceivedFromService()
+        public void ReceivesRequestRespawnMessage_LoadsCurrentSaveIntoInstance()
         {
+            var gameInstanceObject = new GameObject();
+            gameInstanceObject.AddComponent<MockInputComponent>();
+            var instance = gameInstanceObject.AddComponent<TestGameInstance>();
+            instance.TestAwake();
+
+            PersistenceFunctions.WriteCurrentSave(GameDataStorageConstants.SaveDataPath, null);
+
             _gameModeComponent.TestAwake();
 
             var controller = _gameModeComponent.ActiveController;
 
             UnityMessageEventFunctions.InvokeMessageEventWithDispatcher(_gameModeComponent.gameObject, new RequestRespawnMessage(controller.PawnInstance));
 
-            Assert.AreSame(_spawnService.GetNearestSpawnLocationResult, controller.PawnInitialTransform);
+            Assert.IsNotNull(instance.NextSceneSaveData);
+            Assert.AreEqual(SceneManager.GetActiveScene().path, instance.NextSceneToLoad);
+
+            GameInstance.ClearGameInstance();
         }
 
         [Test]
-        public void ReceivesRequestRespawnMessage_RecreatesPawn()
+        public void ReceivesRequestRespawnMessage_NonMatchingInstance_DoesNotLoadCurrentSaveIntoInstance()
         {
+            var gameInstanceObject = new GameObject();
+            gameInstanceObject.AddComponent<MockInputComponent>();
+            var instance = gameInstanceObject.AddComponent<TestGameInstance>();
+            instance.TestAwake();
+
+            PersistenceFunctions.WriteCurrentSave(GameDataStorageConstants.SaveDataPath, null);
+
             _gameModeComponent.TestAwake();
 
-            var controller = _gameModeComponent.ActiveController;
-            var initialPawn = _gameModeComponent.ActiveController.PawnInstance;
+            UnityMessageEventFunctions.InvokeMessageEventWithDispatcher(_gameModeComponent.gameObject, new RequestRespawnMessage(null));
 
-            UnityMessageEventFunctions.InvokeMessageEventWithDispatcher(_gameModeComponent.gameObject, new RequestRespawnMessage(controller.PawnInstance));
+            Assert.IsNull(instance.NextSceneSaveData);
+            Assert.AreNotEqual(SceneManager.GetActiveScene().path, instance.NextSceneToLoad);
 
-            Assert.AreNotSame(initialPawn, controller.PawnInstance);
-        }
-
-        [Test]
-        public void ReceivesRequestRespawnMessage_PawnNotMatching_DoesNotSetTransform()
-        {
-            _gameModeComponent.TestAwake();
-
-            UnityMessageEventFunctions.InvokeMessageEventWithDispatcher(_gameModeComponent.gameObject, new RequestRespawnMessage(_gameModeComponent.ActiveController.gameObject));
-
-            Assert.AreNotSame(_spawnService.GetNearestSpawnLocationResult, _gameModeComponent.ActiveController.PawnInitialTransform);
+            GameInstance.ClearGameInstance();
         }
     }
 }

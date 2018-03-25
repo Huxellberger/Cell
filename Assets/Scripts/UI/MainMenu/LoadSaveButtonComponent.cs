@@ -20,12 +20,7 @@ namespace Assets.Scripts.UI.MainMenu
 
         protected void OnButtonPressed()
         {
-            var saveData = PersistenceFunctions.InitializeSaveRead(GameDataStorageConstants.SaveDataPath);
-
-            var binaryFormatter = new BinaryFormatter();
-
-            var levelToLoad = (string)binaryFormatter.Deserialize(saveData);
-            GameInstance.CurrentInstance.LoadLevel(levelToLoad, saveData);
+            PersistenceFunctions.LoadCurrentSave(GameDataStorageConstants.SaveDataPath);
         }
     }
 }

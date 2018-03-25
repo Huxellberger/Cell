@@ -5,8 +5,10 @@ using Assets.Scripts.Components.ActionStateMachine.States.Dead;
 using Assets.Scripts.Components.Controller;
 using Assets.Scripts.Messaging;
 using Assets.Scripts.Services;
+using Assets.Scripts.Services.Persistence;
 using Assets.Scripts.Services.Spawn;
 using Assets.Scripts.UnityLayer.GameObjects;
+using Assets.Scripts.UnityLayer.Storage;
 using UnityEngine;
 
 namespace Assets.Scripts.Mode
@@ -80,11 +82,15 @@ namespace Assets.Scripts.Mode
         {
             if (ActiveController.PawnInstance == inMessage.RequestingPlayer)
             {
+                /*
                 ActiveController.PawnInitialTransform =
                     _spawnService.GetNearestSpawnLocation(inMessage.RequestingPlayer.transform.position);
 
                 ActiveController.DestroyPawn();
                 ActiveController.CreatePawnOfType(PlayerCharacterType);
+                */
+
+                PersistenceFunctions.LoadCurrentSave(GameDataStorageConstants.SaveDataPath);
             }
         }
     }

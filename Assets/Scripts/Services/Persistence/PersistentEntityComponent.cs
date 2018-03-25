@@ -31,6 +31,15 @@ namespace Assets.Scripts.Services.Persistence
             bf.Serialize(stream, gameObject.activeSelf);
             bf.Serialize(stream, new Vector3Serializer().Fill(gameObject.transform.position));
             bf.Serialize(stream, new Vector3Serializer().Fill(gameObject.transform.eulerAngles));
+
+            var persistentBehaviours = gameObject.GetComponents<IPersistentBehaviourInterface>();
+            if (persistentBehaviours != null && persistentBehaviours.Length > 0)
+            {
+                foreach (var behaviour in persistentBehaviours)
+                {
+                    behaviour.WriteData(stream);
+                }
+            }
         }
 
         public void ReadData(Stream stream, bool previouslyDestroyed)
@@ -46,6 +55,15 @@ namespace Assets.Scripts.Services.Persistence
                 gameObject.SetActive((bool)bf.Deserialize(stream));
                 gameObject.transform.position = ((Vector3Serializer)bf.Deserialize(stream)).AsVector;
                 gameObject.transform.eulerAngles = ((Vector3Serializer)bf.Deserialize(stream)).AsVector;
+
+                var persistentBehaviours = gameObject.GetComponents<IPersistentBehaviourInterface>();
+                if (persistentBehaviours != null && persistentBehaviours.Length > 0)
+                {
+                    foreach (var behaviour in persistentBehaviours)
+                    {
+                        behaviour.ReadData(stream);
+                    }
+                }
             }
         }
     }

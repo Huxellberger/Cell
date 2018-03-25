@@ -17,6 +17,8 @@ namespace Assets.Editor.UnitTests.Services.Persistence
     public class PersistentEntityComponentTestFixture
     {
         private TestPersistentEntityComponent _entity;
+        private MockPersistentBehaviourComponent _behaviour;
+        private MockPersistentBehaviourComponent _otherBehaviour;
         private MockPersistenceService _service;
 
         [SetUp]
@@ -25,6 +27,9 @@ namespace Assets.Editor.UnitTests.Services.Persistence
             _entity = new GameObject().AddComponent<TestPersistentEntityComponent>();
             _entity.gameObject.transform.position = new Vector3(12.0f, 44.0f, 33.0f);
             _entity.gameObject.transform.eulerAngles = new Vector3(33.0f, -12.0f, 2.0f);
+
+            _behaviour = _entity.gameObject.AddComponent<MockPersistentBehaviourComponent>();
+            _otherBehaviour = _entity.gameObject.AddComponent<MockPersistentBehaviourComponent>();
 
             _service = new MockPersistenceService();
 
@@ -76,6 +81,16 @@ namespace Assets.Editor.UnitTests.Services.Persistence
         }
 
         [Test]
+        public void WriteData_WritesAllBehaviours()
+        {
+            var stream = new MemoryStream();
+            _entity.WriteData(stream);
+
+            Assert.AreSame(_behaviour.WriteDataStream, stream);
+            Assert.AreSame(_otherBehaviour.WriteDataStream, stream);
+        }
+
+        [Test]
         public void ReadData_ReadsInPositionsCorrectly()
         {
             var priorPosition = _entity.gameObject.transform.position;
@@ -97,6 +112,20 @@ namespace Assets.Editor.UnitTests.Services.Persistence
         }
 
         [Test]
+        public void ReadData_ReadsAllBehaviours()
+        {
+            var stream = new MemoryStream();
+            _entity.WriteData(stream);
+
+            var readStream = new MemoryStream(stream.ToArray());
+
+            _entity.ReadData(readStream, false);
+
+            Assert.AreSame(_behaviour.ReadDataStream, readStream);
+            Assert.AreSame(_otherBehaviour.ReadDataStream, readStream);
+        }
+
+        [Test]
         public void ReadData_PreviouslyDestroyed_DoesNotReadValues()
         {
             _entity.gameObject.SetActive(!_entity.gameObject.activeSelf);
@@ -104,6 +133,20 @@ namespace Assets.Editor.UnitTests.Services.Persistence
             _entity.gameObject.transform.eulerAngles = Vector3.forward;
 
             _entity.ReadData(new MemoryStream(), true);
+        }
+
+        [Test]
+        public void ReadData_PreviouslyDestroyed_DoesNotReadAllBehaviours()
+        {
+            var stream = new MemoryStream();
+            _entity.WriteData(stream);
+
+            var readStream = new MemoryStream(stream.ToArray());
+
+            _entity.ReadData(readStream, true);
+
+            Assert.IsNull(_behaviour.ReadDataStream);
+            Assert.IsNull(_otherBehaviour.ReadDataStream);
         }
     }
 }
