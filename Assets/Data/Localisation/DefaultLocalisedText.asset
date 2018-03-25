@@ -147,3 +147,12 @@ MonoBehaviour:
         TranslatedText: Game Has Been Saved!
       - LanguageOption: 1
         TranslatedText: 'ERROR: TEXT NOT TRANSLATED'
+  - TextKey:
+      LocalisationNamespace: MainMenu
+      LocalisationKeyValue: LoadGame
+    LocalisedTexts:
+      Entries:
+      - LanguageOption: 0
+        TranslatedText: Load Game
+      - LanguageOption: 1
+        TranslatedText: 'ERROR: TEXT NOT TRANSLATED'
