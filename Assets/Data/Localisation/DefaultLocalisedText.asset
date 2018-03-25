@@ -138,3 +138,12 @@ MonoBehaviour:
         TranslatedText: What are you talking to me for? Play the damn game!
       - LanguageOption: 1
         TranslatedText: 'ERROR: TEXT NOT TRANSLATED'
+  - TextKey:
+      LocalisationNamespace: UIMessages
+      LocalisationKeyValue: SaveMessage
+    LocalisedTexts:
+      Entries:
+      - LanguageOption: 0
+        TranslatedText: Game Has Been Saved!
+      - LanguageOption: 1
+        TranslatedText: 'ERROR: TEXT NOT TRANSLATED'
