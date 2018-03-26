@@ -87,22 +87,6 @@ namespace Assets.Scripts.AI.Pathfinding
             }
             else
             {
-                /* ToDo: Write turning function for NPC 
-                var angle = Vector2.SignedAngle(gameObject.transform.up, targetNode.Position);
-
-                if (Math.Abs(angle) > 2.0f)
-                {
-                    if (angle < 180.0f)
-                    {
-                        _movement.
-                    }
-                    else
-                    {
-
-                    }
-                }
-                */
-
                 var deltaX =  targetNode.Position.x - gameObject.transform.position.x;
                 var deltaY =  targetNode.Position.y - gameObject.transform.position.y;
 
@@ -216,6 +200,29 @@ namespace Assets.Scripts.AI.Pathfinding
                 else
                 {
                     break;
+                }
+            }
+
+            SmoothPath();
+        }
+
+        private void SmoothPath()
+        {
+            for (var i = 0; i < _pathNodes.Count - 2; i++)
+            {
+                foreach (var neighbour in _pathNodes[i].NeighbourRefs)
+                {
+                    if (neighbour != _pathNodes[i + 1] &&
+                        Math.Abs
+                        (
+                            VectorFunctions.DistanceSquared(neighbour.Position, _pathNodes[i + 2].Position) -
+                            VectorFunctions.DistanceSquared(_pathNodes[i + 1].Position, _pathNodes[i + 2].Position)
+                        ) < 0.2f
+                    )
+                    {
+                        _pathNodes.RemoveAt(i+1);
+                        break;
+                    }
                 }
             }
         }
