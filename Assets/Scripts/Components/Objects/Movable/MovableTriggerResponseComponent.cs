@@ -1,6 +1,8 @@
 ﻿// Copyright (C) Threetee Gang All Rights Reserved
 
 using System;
+using System.IO;
+using System.Runtime.Serialization.Formatters.Binary;
 using Assets.Scripts.Components.Trigger;
 using Assets.Scripts.Core;
 using UnityEngine;
@@ -64,6 +66,22 @@ namespace Assets.Scripts.Components.Objects.Movable
             _initialLerpRotation = gameObject.transform.eulerAngles;
 
             BeginMovement();
+        }
+
+        protected override void OnWriteData(Stream stream)
+        {
+            var bf = new BinaryFormatter();
+
+            bf.Serialize(stream, new Vector3Serializer().Fill(_finalPosition));
+            bf.Serialize(stream, new Vector3Serializer().Fill(_finalRotation));
+        }
+
+        protected override void OnReadData(Stream stream)
+        {
+            var bf = new BinaryFormatter();
+
+            gameObject.transform.position = ((Vector3Serializer) bf.Deserialize(stream)).AsVector;
+            gameObject.transform.eulerAngles = ((Vector3Serializer)bf.Deserialize(stream)).AsVector;
         }
 
         protected void FixedUpdate()

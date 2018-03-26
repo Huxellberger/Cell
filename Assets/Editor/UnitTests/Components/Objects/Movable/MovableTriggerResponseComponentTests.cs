@@ -1,5 +1,6 @@
 ﻿// Copyright (C) Threetee Gang All Rights Reserved
 
+using System.IO;
 using Assets.Editor.UnitTests.Helpers;
 using Assets.Scripts.Components.Trigger;
 using Assets.Scripts.Core;
@@ -184,6 +185,44 @@ namespace Assets.Editor.UnitTests.Components.Objects.Movable
 
             Assert.AreEqual(Vector3.zero, _triggerResponse.gameObject.transform.position);
             Assert.AreEqual(Vector3.zero, _triggerResponse.gameObject.transform.eulerAngles);
+        }
+
+        [Test]
+        public void Read_Triggered_ReadImplSetsToFinalPosition()
+        {
+            BeginTriggerResponse();
+
+            var stream = new MemoryStream();
+
+            _triggerResponse.WriteData(stream);
+
+            var readData = new MemoryStream(stream.ToArray());
+
+            _triggerResponse.ReadData(readData);
+
+            ExtendedAssertions.AssertVectorsNearlyEqual(_triggerResponse.FinalPosition.transform.position, _triggerResponse.gameObject.transform.position);
+            ExtendedAssertions.AssertVectorsNearlyEqual(_triggerResponse.FinalPosition.transform.eulerAngles, _triggerResponse.gameObject.transform.eulerAngles);
+        }
+
+        [Test]
+        public void Read_TriggerCompleted_ReadImplSetsToFinalPosition()
+        {
+            var expectedFinalPosition = _triggerResponse.FinalPosition.transform.position;
+            var expectedFinalRotation = _triggerResponse.FinalPosition.transform.eulerAngles;
+
+            BeginTriggerResponse();
+            _triggerResponse.TestUpdate(_triggerResponse.MoveDuration + 0.1f);
+
+            var stream = new MemoryStream();
+
+            _triggerResponse.WriteData(stream);
+
+            var readData = new MemoryStream(stream.ToArray());
+
+            _triggerResponse.ReadData(readData);
+
+            ExtendedAssertions.AssertVectorsNearlyEqual(expectedFinalPosition, _triggerResponse.gameObject.transform.position);
+            ExtendedAssertions.AssertVectorsNearlyEqual(expectedFinalRotation, _triggerResponse.gameObject.transform.eulerAngles);
         }
 
         private void BeginTriggerResponse()

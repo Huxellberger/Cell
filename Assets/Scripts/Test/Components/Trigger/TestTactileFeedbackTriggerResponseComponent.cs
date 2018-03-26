@@ -12,6 +12,11 @@ namespace Assets.Scripts.Test.Components.Trigger
     {
         public AudioClip PlayedAudioClip { get; private set; }
 
+        public void TestAwake()
+        {
+            Awake();
+        }
+
         public void TestStart()
         {
             Start();

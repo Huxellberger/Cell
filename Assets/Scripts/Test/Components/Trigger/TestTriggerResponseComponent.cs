@@ -2,6 +2,7 @@
 
 #if UNITY_EDITOR
 
+using System.IO;
 using Assets.Scripts.Components.Trigger;
 using UnityEngine;
 
@@ -12,6 +13,9 @@ namespace Assets.Scripts.Test.Components.Trigger
     {
         public GameObject OnTriggerGameObject { get; private set; }
         public GameObject OnCancelTriggerGameObject { get; private set; }
+
+        public Stream ReadStream { get; private set; }
+        public Stream WriteStream { get; private set; }
 
         public void TestStart()
         {
@@ -31,6 +35,16 @@ namespace Assets.Scripts.Test.Components.Trigger
         protected override void OnCancelTriggerImpl(CancelTriggerMessage inMessage)
         {
             OnCancelTriggerGameObject = inMessage.TriggeringObject;
+        }
+
+        protected override void OnWriteData(Stream stream)
+        {
+            WriteStream = stream;
+        }
+
+        protected override void OnReadData(Stream stream)
+        {
+            ReadStream = stream;
         }
     }
 }

@@ -37,6 +37,7 @@ GameObject:
   - component: {fileID: 212608935817755808}
   - component: {fileID: 114239977745320212}
   - component: {fileID: 61231053759914800}
+  - component: {fileID: 114666125896551762}
   m_Layer: 0
   m_Name: MovableWallTriggerResponse
   m_TagString: Untagged
@@ -111,6 +112,17 @@ MonoBehaviour:
   MultiTrigger: 0
   FinalPosition: {fileID: 1006576747826390}
   MoveDuration: 3
+--- !u!114 &114666125896551762
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1423479471018322}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d1a9af969c786d6439af167a627699ed, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!212 &212608935817755808
 SpriteRenderer:
   m_ObjectHideFlags: 1

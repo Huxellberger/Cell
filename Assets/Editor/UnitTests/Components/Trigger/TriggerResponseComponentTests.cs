@@ -1,5 +1,6 @@
 ﻿// Copyright (C) Threetee Gang All Rights Reserved
 
+using System.IO;
 using Assets.Scripts.Components.Trigger;
 using Assets.Scripts.Messaging;
 using Assets.Scripts.Test.Components.Trigger;
@@ -110,6 +111,134 @@ namespace Assets.Editor.UnitTests.Components.Trigger
             UnityMessageEventFunctions.InvokeMessageEventWithDispatcher(_triggerResponse.TriggerObject, new TriggerMessage(expectedObject));
 
             Assert.AreNotSame(expectedObject, _triggerResponse.OnTriggerGameObject);
+        }
+
+        [Test]
+        public void Read_PreviouslyTriggered_BlocksMessages()
+        {
+            var stream = new MemoryStream();
+
+            var expectedObject = new GameObject();
+            _triggerResponse.TestStart();
+
+            UnityMessageEventFunctions.InvokeMessageEventWithDispatcher(_triggerResponse.TriggerObject, new TriggerMessage(expectedObject));
+
+            _triggerResponse.WriteData(stream);
+
+            var otherTriggerResponse = new GameObject().AddComponent<TestTriggerResponseComponent>();
+
+            var readStream = new MemoryStream(stream.ToArray());
+
+            otherTriggerResponse.ReadData(readStream);
+
+            UnityMessageEventFunctions.InvokeMessageEventWithDispatcher(_triggerResponse.TriggerObject, new TriggerMessage(expectedObject));
+
+            Assert.IsNull(otherTriggerResponse.OnTriggerGameObject);
+        }
+
+        [Test]
+        public void Write_PreviouslyTriggered_CallsWriteImpl()
+        {
+            var stream = new MemoryStream();
+
+            var expectedObject = new GameObject();
+            _triggerResponse.TestStart();
+
+            UnityMessageEventFunctions.InvokeMessageEventWithDispatcher(_triggerResponse.TriggerObject, new TriggerMessage(expectedObject));
+
+            _triggerResponse.WriteData(stream);
+
+            Assert.AreSame(stream, _triggerResponse.WriteStream);
+        }
+
+        [Test]
+        public void Write_NotPreviouslyTriggered_DoesNotWriteImpl()
+        {
+            var stream = new MemoryStream();
+
+            _triggerResponse.MultiTrigger = true;
+            _triggerResponse.TestStart();
+
+            _triggerResponse.WriteData(stream);
+
+            Assert.IsNull(_triggerResponse.WriteStream);
+        }
+
+        [Test]
+        public void Write_PreviouslyTriggered_Multi_DoesNotCallWriteImpl()
+        {
+            var stream = new MemoryStream();
+
+            var expectedObject = new GameObject();
+            _triggerResponse.MultiTrigger = true;
+            _triggerResponse.TestStart();
+
+            UnityMessageEventFunctions.InvokeMessageEventWithDispatcher(_triggerResponse.TriggerObject, new TriggerMessage(expectedObject));
+
+            _triggerResponse.WriteData(stream);
+
+            Assert.IsNull(_triggerResponse.WriteStream);
+        }
+
+        [Test]
+        public void Read_PreviouslyTriggered_CallsReadImpl()
+        {
+            var stream = new MemoryStream();
+
+            var expectedObject = new GameObject();
+            _triggerResponse.TestStart();
+
+            UnityMessageEventFunctions.InvokeMessageEventWithDispatcher(_triggerResponse.TriggerObject, new TriggerMessage(expectedObject));
+
+            _triggerResponse.WriteData(stream);
+
+            var otherTriggerResponse = new GameObject().AddComponent<TestTriggerResponseComponent>();
+
+            var readStream = new MemoryStream(stream.ToArray());
+
+            otherTriggerResponse.ReadData(readStream);
+
+            Assert.AreSame(readStream, otherTriggerResponse.ReadStream);
+        }
+
+        [Test]
+        public void Read_NotPreviouslyTriggered_DoesNotCallReadImpl()
+        {
+            var stream = new MemoryStream();
+
+            _triggerResponse.TestStart();
+
+            _triggerResponse.WriteData(stream);
+
+            var otherTriggerResponse = new GameObject().AddComponent<TestTriggerResponseComponent>();
+
+            var readStream = new MemoryStream(stream.ToArray());
+
+            otherTriggerResponse.ReadData(readStream);
+
+            Assert.IsNull(otherTriggerResponse.ReadStream);
+        }
+
+        [Test]
+        public void Read_PreviouslyTriggered_Multi_DoesNotCallReadImpl()
+        {
+            var stream = new MemoryStream();
+
+            var expectedObject = new GameObject();
+            _triggerResponse.TestStart();
+
+            UnityMessageEventFunctions.InvokeMessageEventWithDispatcher(_triggerResponse.TriggerObject, new TriggerMessage(expectedObject));
+
+            _triggerResponse.WriteData(stream);
+
+            var otherTriggerResponse = new GameObject().AddComponent<TestTriggerResponseComponent>();
+
+            var readStream = new MemoryStream(stream.ToArray());
+
+            otherTriggerResponse.MultiTrigger = true;
+            otherTriggerResponse.ReadData(readStream);
+
+            Assert.IsNull(otherTriggerResponse.ReadStream);
         }
     }
 }

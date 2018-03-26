@@ -1,12 +1,16 @@
 ﻿// Copyright (C) Threetee Gang All Rights Reserved
 
+using System.IO;
+using System.Runtime.Serialization.Formatters.Binary;
 using Assets.Scripts.Messaging;
+using Assets.Scripts.Services.Persistence;
 using UnityEngine;
 
 namespace Assets.Scripts.Components.Trigger
 {
     public abstract class TriggerResponseComponent
         : MonoBehaviour
+        , IPersistentBehaviourInterface
     {
         public GameObject TriggerObject;
         public bool MultiTrigger = false;
@@ -71,5 +75,33 @@ namespace Assets.Scripts.Components.Trigger
 
         protected abstract void OnTriggerImpl(TriggerMessage inMessage);
         protected abstract void OnCancelTriggerImpl(CancelTriggerMessage inMessage);
+        protected virtual void OnWriteData(Stream stream) { }
+        protected virtual void OnReadData(Stream stream) { }
+
+        // IPersistentBehaviourInterface
+        public void WriteData(Stream stream)
+        {
+            var bf = new BinaryFormatter();
+
+            bf.Serialize(stream, _previouslyTriggered);
+
+            if (!MultiTrigger && _previouslyTriggered)
+            {
+                OnWriteData(stream);
+            }
+        }
+
+        public void ReadData(Stream stream)
+        {
+            var bf = new BinaryFormatter();
+
+            _previouslyTriggered = (bool)bf.Deserialize(stream);
+
+            if (!MultiTrigger && _previouslyTriggered)
+            {
+                OnReadData(stream);
+            }
+        }
+        // ~IPersistentBehaviourInterface
     }
 }

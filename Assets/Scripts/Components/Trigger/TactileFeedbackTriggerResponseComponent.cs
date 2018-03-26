@@ -1,5 +1,6 @@
 ﻿// Copyright (C) Threetee Gang All Rights Reserved
 
+using System.IO;
 using UnityEngine;
 
 namespace Assets.Scripts.Components.Trigger
@@ -17,10 +18,8 @@ namespace Assets.Scripts.Components.Trigger
         private AudioSource _audioSource;
         private SpriteRenderer _spriteRenderer;
 
-        protected override void Start()
+        protected void Awake()
         {
-            base.Start();
-
             _audioSource = gameObject.GetComponent<AudioSource>();
             _spriteRenderer = gameObject.GetComponent<SpriteRenderer>();
 
@@ -47,6 +46,14 @@ namespace Assets.Scripts.Components.Trigger
             if (Application.isPlaying)
             {
                 _spriteRenderer.color = _initialColor;
+            }
+        }
+
+        protected override void OnReadData(Stream stream)
+        {
+            if (Application.isPlaying)
+            {
+                _spriteRenderer.color = TriggerColor;
             }
         }
 

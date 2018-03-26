@@ -32,6 +32,7 @@ namespace Assets.Editor.UnitTests.Components.Trigger
             _tactile.TriggerAudioClip = new AudioClip();
             _tactile.TriggerColor = Color.grey;
 
+            _tactile.TestAwake();
             _tactile.TestStart();
         }
 
