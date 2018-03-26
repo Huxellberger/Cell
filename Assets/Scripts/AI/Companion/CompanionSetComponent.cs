@@ -171,7 +171,10 @@ namespace Assets.Scripts.AI.Companion
                 bf.Serialize(stream, companion.Key);
                 if (companion.Value != null)
                 {
-                    bf.Serialize(stream, companion.Value.GetCompanionData().CompanionPrefabReference);
+                    var compData = companion.Value.GetCompanionData();
+
+                    bf.Serialize(stream, compData.CompanionPrefabReference);
+                    bf.Serialize(stream, compData.PowerUseCount);
                 }
                 else
                 {
@@ -192,7 +195,11 @@ namespace Assets.Scripts.AI.Companion
                 var asset = (string)bf.Deserialize(stream);
                 if (!asset.Equals(CompanionConstants.InvalidCompanion))
                 {
-                    SetCompanion(Instantiate(Resources.Load<GameObject>(asset)).GetComponent<ICompanionInterface>(), companionSlot);
+                    var newCompanion = Instantiate(Resources.Load<GameObject>(asset))
+                        .GetComponent<ICompanionInterface>();
+
+                    newCompanion.GetCompanionData().PowerUseCount = (int)bf.Deserialize(stream);
+                    SetCompanion(newCompanion, companionSlot);
                 }
             }
         }

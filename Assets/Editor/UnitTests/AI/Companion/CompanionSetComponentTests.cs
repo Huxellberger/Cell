@@ -322,6 +322,7 @@ namespace Assets.Editor.UnitTests.AI.Companion
             Assert.AreEqual(Enum.GetValues(typeof(ECompanionSlot)).Length, bf.Deserialize(readStream));
             Assert.AreEqual(ECompanionSlot.Primary, bf.Deserialize(readStream));
             Assert.AreEqual(_companion.GetCompanionDataResult.CompanionPrefabReference, bf.Deserialize(readStream));
+            Assert.AreEqual(_companion.GetCompanionDataResult.PowerUseCount, bf.Deserialize(readStream));
             Assert.AreEqual(ECompanionSlot.Secondary, bf.Deserialize(readStream));
             Assert.AreEqual(CompanionConstants.InvalidCompanion, bf.Deserialize(readStream));
         }
@@ -330,6 +331,7 @@ namespace Assets.Editor.UnitTests.AI.Companion
         public void ReadData_SetsExpectedCompanions()
         {
             var messageSpy = new UnityTestMessageHandleResponseObject<CompanionSlotsUpdatedMessage>();
+            var initialUseCount = _companion.GetCompanionDataResult.PowerUseCount;
 
             var handle =
                 UnityMessageEventFunctions.RegisterActionWithDispatcher<CompanionSlotsUpdatedMessage>(_set.gameObject,
@@ -345,12 +347,15 @@ namespace Assets.Editor.UnitTests.AI.Companion
 
             var readStream = new MemoryStream(stream.ToArray());
 
+            _companion.GetCompanionDataResult.PowerUseCount++;
+
             _set.ReadData(readStream);
 
             _set.TestUpdate();
 
             Assert.IsTrue(messageSpy.ActionCalled);
             Assert.IsNotNull(messageSpy.MessagePayload.Updates[ECompanionSlot.Primary].PriorCompanion);
+            Assert.AreEqual(initialUseCount, messageSpy.MessagePayload.Updates[ECompanionSlot.Primary].PriorCompanion.GetCompanionData().PowerUseCount);
 
             UnityMessageEventFunctions.UnregisterActionWithDispatcher(_set.gameObject, handle);
         }

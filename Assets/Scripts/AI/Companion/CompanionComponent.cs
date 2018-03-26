@@ -25,7 +25,7 @@ namespace Assets.Scripts.AI.Companion
 
         private Dictionary<string, DialogueEntry> _dialogueMappings;
         private UnityMessageEventDispatcher _uiDispatcher;
-        private CompanionData _currentData;
+        private CompanionData _currentData = new CompanionData();
         private float _cooldownTimeRemaining = 0.0f;
         private float CooldownTimeRemaining
         {
