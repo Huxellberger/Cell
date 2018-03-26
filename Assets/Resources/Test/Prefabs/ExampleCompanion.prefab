@@ -25,7 +25,7 @@ GameObject:
   - component: {fileID: 82802162549777844}
   - component: {fileID: 114878165081925630}
   m_Layer: 0
-  m_Name: TestCompanion
+  m_Name: ExampleCompanion
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
