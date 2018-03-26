@@ -168,10 +168,21 @@ namespace Assets.Scripts.AI.Vision
 
                 for (var currentNodeIndex = 0; currentNodeIndex < _visionCollider.GetTotalPointCount() - 1; currentNodeIndex++)
                 {
-                    Gizmos.DrawLine(currentPosition + _visionCollider.points[currentNodeIndex], currentPosition + _visionCollider.points[currentNodeIndex + 1]);
+                    var firstPoint = _visionCollider.points[currentNodeIndex];
+                    var secondPoint = _visionCollider.points[currentNodeIndex + 1];
+
+                    Vector2 adjustedFirstPoint = gameObject.transform.localToWorldMatrix * firstPoint;
+                    Vector2 adjustedSecondPoint = gameObject.transform.localToWorldMatrix * secondPoint;
+                    Gizmos.DrawLine(currentPosition + adjustedFirstPoint, currentPosition + adjustedSecondPoint);
                 }
 
-                Gizmos.DrawLine(currentPosition + _visionCollider.points[0], currentPosition + _visionCollider.points[_visionCollider.GetTotalPointCount() - 1]);
+                var initialPoint = _visionCollider.points[0];
+                var finalPoint = _visionCollider.points[_visionCollider.GetTotalPointCount() - 1];
+
+                Vector2 adjustedInitialPoint = gameObject.transform.localToWorldMatrix * initialPoint;
+                Vector2 adjustedFinalPoint = gameObject.transform.localToWorldMatrix * finalPoint;
+
+                Gizmos.DrawLine(currentPosition + adjustedInitialPoint, currentPosition + adjustedFinalPoint);
             }
         }
     }

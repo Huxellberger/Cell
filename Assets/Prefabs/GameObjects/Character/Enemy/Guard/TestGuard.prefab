@@ -27,7 +27,7 @@ GameObject:
   - component: {fileID: 114843260333725370}
   - component: {fileID: 114026501463988238}
   - component: {fileID: 114951379941032568}
-  - component: {fileID: 114240689010911304}
+  - component: {fileID: 114812385386237246}
   - component: {fileID: 114719450868368698}
   - component: {fileID: 114521985815774064}
   m_Layer: 0
@@ -178,21 +178,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   PossibleGoalIds: 0400000003000000
   GoalParameters: {fileID: 11400000, guid: 182efb813a7f58f46ba43d796f671f2c, type: 2}
---- !u!114 &114240689010911304
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1303255168216298}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f21cf11a1fab6c3458a3a1355950aee5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  SprintMultiplier: 1.5
-  ExhaustedMultiplier: 0.5
-  Velocity: 5
-  SprintStaminaCostPerUpdate: 1
 --- !u!114 &114383528492462416
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -245,6 +230,22 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   DistanceSquaredThreshold: 1
   DebugDrawColour: {r: 0, g: 1, b: 1, a: 1}
+--- !u!114 &114812385386237246
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1303255168216298}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7d0821e6e9ce6bd4eb89b8e457f53502, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  SprintMultiplier: 1.5
+  ExhaustedMultiplier: 0.5
+  Velocity: 5
+  SprintStaminaCostPerUpdate: 1
+  TurningSpeed: 1
 --- !u!114 &114843260333725370
 MonoBehaviour:
   m_ObjectHideFlags: 1

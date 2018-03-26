@@ -18,8 +18,8 @@ namespace Assets.Scripts.Components.Movement
         private Rigidbody2D ObjectRigidBody { get; set; }
         private IStaminaInterface StaminaInterface { get; set; }
 
-        private float HorizontalModifier { get; set; }
-        private float ForwardModifier { get; set; }
+        protected float HorizontalModifier { get; set; }
+        protected float ForwardModifier { get; set; }
         
         private bool SprintEnabled { get; set; }
         private float PriorVerticalVelocity { get; set; }
@@ -40,8 +40,7 @@ namespace Assets.Scripts.Components.Movement
         protected void FixedUpdate ()
         {
             // Normal Vector
-            var movementVector = new Vector3(HorizontalModifier, ForwardModifier, 0.0f).normalized;
-            movementVector = gameObject.transform.rotation * movementVector;
+            var movementVector = GetMovementVector();
 
             var currentVelocity = Velocity;
 
@@ -63,6 +62,14 @@ namespace Assets.Scripts.Components.Movement
 
             HorizontalModifier = 0.0f;
             ForwardModifier = 0.0f;
+        }
+
+        protected virtual Vector3 GetMovementVector()
+        {
+            var movementVector = new Vector3(HorizontalModifier, ForwardModifier, 0.0f).normalized;
+            movementVector = gameObject.transform.rotation * movementVector;
+
+            return movementVector;
         }
 
         private bool CanSprint()
