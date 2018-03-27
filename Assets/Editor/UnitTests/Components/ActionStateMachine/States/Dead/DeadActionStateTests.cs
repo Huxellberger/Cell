@@ -20,6 +20,7 @@ namespace Assets.Editor.UnitTests.Components.ActionStateMachine.States.Dead
         private DeadActionState _deadActionState;
         private MockInputBinderComponent _playerBinder;
         private MockStaminaComponent _stamina;
+        private DeadActionStateParams _params;
 
         [SetUp]
         public void BeforeTest()
@@ -33,8 +34,7 @@ namespace Assets.Editor.UnitTests.Components.ActionStateMachine.States.Dead
             player.AddComponent<TestUnityMessageEventDispatcherComponent>().TestAwake();
             _playerBinder = player.AddComponent<MockInputBinderComponent>();
             _stamina = player.AddComponent<MockStaminaComponent>();
-
-            _deadActionState = new DeadActionState(new ActionStateInfo(player));
+            _params = new DeadActionStateParams{CanRespawn = true};
         }
 
         [TearDown]
@@ -51,12 +51,16 @@ namespace Assets.Editor.UnitTests.Components.ActionStateMachine.States.Dead
         [Test]
         public void EnterState_IdIsDeadActionState()
         {
+            _deadActionState = new DeadActionState(new ActionStateInfo(_playerBinder.gameObject), _params);
+
             Assert.AreEqual(EActionStateId.Dead, _deadActionState.ActionStateId);
         }
 
         [Test]
         public void Start_SendsEnterEventToOwner()
         {
+            _deadActionState = new DeadActionState(new ActionStateInfo(_playerBinder.gameObject), _params);
+
             var eventSpy = new UnityTestMessageHandleResponseObject<EnterDeadActionStateMessage>();
             var handle =
                 UnityMessageEventFunctions.RegisterActionWithDispatcher<EnterDeadActionStateMessage>(_playerBinder.gameObject, eventSpy.OnResponse);
@@ -71,6 +75,8 @@ namespace Assets.Editor.UnitTests.Components.ActionStateMachine.States.Dead
         [Test]
         public void Start_DisablesStaminaRegenForDeadReason()
         {
+            _deadActionState = new DeadActionState(new ActionStateInfo(_playerBinder.gameObject), _params);
+
             _deadActionState.Start();
 
             Assert.IsFalse(_stamina.SetStaminaChangeEnabledResult);
@@ -80,6 +86,8 @@ namespace Assets.Editor.UnitTests.Components.ActionStateMachine.States.Dead
         [Test]
         public void End_SendsLeavingEventToOwner()
         {
+            _deadActionState = new DeadActionState(new ActionStateInfo(_playerBinder.gameObject), _params);
+
             var eventSpy = new UnityTestMessageHandleResponseObject<LeftDeadActionStateMessage>();
             var handle =
                 UnityMessageEventFunctions.RegisterActionWithDispatcher<LeftDeadActionStateMessage>(_playerBinder.gameObject, eventSpy.OnResponse);
@@ -94,6 +102,8 @@ namespace Assets.Editor.UnitTests.Components.ActionStateMachine.States.Dead
         [Test]
         public void Start_EnablesStaminaRegenForDeadReason()
         {
+            _deadActionState = new DeadActionState(new ActionStateInfo(_playerBinder.gameObject), _params);
+
             _deadActionState.Start();
             _deadActionState.End();
 
@@ -104,6 +114,8 @@ namespace Assets.Editor.UnitTests.Components.ActionStateMachine.States.Dead
         [Test]
         public void Update_ConditionsNotComplete_DoesNotFireRequestRespawnEventToGameMode()
         {
+            _deadActionState = new DeadActionState(new ActionStateInfo(_playerBinder.gameObject), _params);
+
             var eventSpy = new UnityTestMessageHandleResponseObject<RequestRespawnMessage>();
             var handle =
                 UnityMessageEventFunctions.RegisterActionWithDispatcher<RequestRespawnMessage>(GameModeComponent.RegisteredGameMode.gameObject, eventSpy.OnResponse);
@@ -119,6 +131,8 @@ namespace Assets.Editor.UnitTests.Components.ActionStateMachine.States.Dead
         [Test]
         public void Update_ConditionsComplete_FiresRequestRespawnEventToGameMode()
         {
+            _deadActionState = new DeadActionState(new ActionStateInfo(_playerBinder.gameObject), _params);
+
             var eventSpy = new UnityTestMessageHandleResponseObject<RequestRespawnMessage>();
             var handle =
                 UnityMessageEventFunctions.RegisterActionWithDispatcher<RequestRespawnMessage>(GameModeComponent.RegisteredGameMode.gameObject, eventSpy.OnResponse);
@@ -129,6 +143,25 @@ namespace Assets.Editor.UnitTests.Components.ActionStateMachine.States.Dead
 
             Assert.IsTrue(eventSpy.ActionCalled);
             Assert.AreSame(_playerBinder.gameObject, eventSpy.MessagePayload.RequestingPlayer);
+
+            UnityMessageEventFunctions.UnregisterActionWithDispatcher(GameModeComponent.RegisteredGameMode.gameObject, handle);
+        }
+
+        [Test]
+        public void Update_ConditionsCompleteCannotRespawn_DoesNotFireRequestRespawnEventToGameMode()
+        {
+            _params.CanRespawn = false;
+            _deadActionState = new DeadActionState(new ActionStateInfo(_playerBinder.gameObject), _params);
+
+            var eventSpy = new UnityTestMessageHandleResponseObject<RequestRespawnMessage>();
+            var handle =
+                UnityMessageEventFunctions.RegisterActionWithDispatcher<RequestRespawnMessage>(GameModeComponent.RegisteredGameMode.gameObject, eventSpy.OnResponse);
+
+            _deadActionState.Start();
+            _playerBinder.RegisteredHandlers[0].HandleButtonInput(_deadActionState.ValidProgressingInputs[0], true);
+            _deadActionState.Update(1.0f);
+
+            Assert.IsFalse(eventSpy.ActionCalled);
 
             UnityMessageEventFunctions.UnregisterActionWithDispatcher(GameModeComponent.RegisteredGameMode.gameObject, handle);
         }

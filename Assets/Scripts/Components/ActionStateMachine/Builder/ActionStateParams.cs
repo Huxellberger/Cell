@@ -1,5 +1,6 @@
 ﻿// Copyright (C) Threetee Gang All Rights Reserved
 
+using Assets.Scripts.Components.ActionStateMachine.States.Dead;
 using Assets.Scripts.Components.ActionStateMachine.States.Spawning;
 using UnityEngine;
 
@@ -10,5 +11,6 @@ namespace Assets.Scripts.Components.ActionStateMachine.Builder
         : ScriptableObject
     {
         public SpawningActionStateParams SpawningParams;
+        public DeadActionStateParams DeadParams;
     }
 }

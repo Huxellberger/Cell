@@ -27,7 +27,7 @@ namespace Assets.Scripts.Components.ActionStateMachine.Builder
         private void InitialiseDefinitions(ActionStateParams inParams)
         {
             Definitions.Add(EActionStateId.Locomotion, info => new LocomotionActionState(info));
-            Definitions.Add(EActionStateId.Dead, info => new DeadActionState(info));
+            Definitions.Add(EActionStateId.Dead, info => new DeadActionState(info, inParams.DeadParams));
             Definitions.Add(EActionStateId.Null, info => new NullActionState());
             Definitions.Add(EActionStateId.OpenMenuUI, info => new OpenMenuUIActionState(info));
             Definitions.Add(EActionStateId.MainMenu, info => new MainMenuActionState(info));

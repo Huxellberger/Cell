@@ -3,7 +3,10 @@
 using System.Collections.Generic;
 using System.Linq;
 using Assets.Scripts.AI.Goals;
+using Assets.Scripts.Components.ActionStateMachine.States.Dead;
+using Assets.Scripts.Messaging;
 using Assets.Scripts.Test.AI.Goals;
+using Assets.Scripts.Test.Messaging;
 using NUnit.Framework;
 using UnityEngine;
 
@@ -23,6 +26,7 @@ namespace Assets.Editor.UnitTests.AI.Goals
             _builder = new MockGoalBuilder(owner);
 
             _planner = owner.AddComponent<TestGoalPlannerComponent>();
+            _planner.gameObject.AddComponent<TestUnityMessageEventDispatcherComponent>().TestAwake();
 
             _planner.TestGoalBuilderInterface = _builder;
 
@@ -216,6 +220,63 @@ namespace Assets.Editor.UnitTests.AI.Goals
             _planner.TestUpdate(1.0f);
 
             Assert.IsFalse(initialDesirableGoal.Updated);
+        }
+
+        [Test]
+        public void EnterDeadActionState_TerminatesActiveGoal()
+        {
+            var mostDesirableGoal = _builder.CreatedGoals.First();
+            
+
+            mostDesirableGoal.OverrideDesirabilityFunction = true;
+            mostDesirableGoal.CalculateDesirabilityOverride = 1.0f;
+
+            _planner.TestUpdate(1.0f);
+            
+            UnityMessageEventFunctions.InvokeMessageEventWithDispatcher(_planner.gameObject, new EnterDeadActionStateMessage());
+
+            Assert.IsTrue(mostDesirableGoal.Terminated);
+        }
+
+        [Test]
+        public void EnterDeadActionState_NoLongerUpdatesActiveGoal()
+        {
+            var mostDesirableGoal = _builder.CreatedGoals.First();
+            var otherGoal = _builder.CreatedGoals.Last();
+
+            mostDesirableGoal.OverrideDesirabilityFunction = true;
+            mostDesirableGoal.CalculateDesirabilityOverride = 1.0f;
+            
+            otherGoal.OverrideDesirabilityFunction = true;
+            otherGoal.CalculateDesirabilityOverride = 0.5f;
+
+            _planner.TestUpdate(1.0f);
+
+            UnityMessageEventFunctions.InvokeMessageEventWithDispatcher(_planner.gameObject, new EnterDeadActionStateMessage());
+
+            _planner.TestUpdate(1.0f);
+
+            Assert.IsFalse(mostDesirableGoal.Updated);
+            Assert.IsFalse(otherGoal.Initialised);
+        }
+
+        [Test]
+        public void LeftDeadActionState_UpdatesGoalAgain()
+        {
+            var mostDesirableGoal = _builder.CreatedGoals.First();
+
+            mostDesirableGoal.OverrideDesirabilityFunction = true;
+            mostDesirableGoal.CalculateDesirabilityOverride = 1.0f;
+
+            _planner.TestUpdate(1.0f);
+            Assert.IsFalse(mostDesirableGoal.Updated);
+
+            UnityMessageEventFunctions.InvokeMessageEventWithDispatcher(_planner.gameObject, new EnterDeadActionStateMessage());
+            UnityMessageEventFunctions.InvokeMessageEventWithDispatcher(_planner.gameObject, new LeftDeadActionStateMessage());
+
+            _planner.TestUpdate(1.0f);
+            _planner.TestUpdate(1.0f);
+            Assert.IsTrue(mostDesirableGoal.Updated);
         }
     }
 }

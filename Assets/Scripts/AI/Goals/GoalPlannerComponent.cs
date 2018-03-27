@@ -1,6 +1,9 @@
 ﻿// Copyright (C) Threetee Gang All Rights Reserved
 
 using System.Collections.Generic;
+using Assets.Scripts.Components.ActionStateMachine.States.Dead;
+using Assets.Scripts.Core;
+using Assets.Scripts.Messaging;
 using UnityEngine;
 
 namespace Assets.Scripts.AI.Goals
@@ -12,6 +15,10 @@ namespace Assets.Scripts.AI.Goals
         public GoalParams GoalParameters;
 
         private IGoalBuilderInterface GoalBuilder { get; set; }
+        private readonly TieredLock<EIntelligenceDisableReason> _thoughtLock = new TieredLock<EIntelligenceDisableReason>();
+
+        private UnityMessageEventHandle<EnterDeadActionStateMessage> _enterDeadHandle;
+        private UnityMessageEventHandle<LeftDeadActionStateMessage> _leftDeadHandle;
 
         private IList<Goal> PotentialGoals { get; set; }
 
@@ -47,18 +54,71 @@ namespace Assets.Scripts.AI.Goals
                 newGoal.RegisterGoal();
                 PotentialGoals.Add(newGoal);
             }
+
+            RegisterForMessages();
+        }
+
+        private void RegisterForMessages()
+        {
+            _enterDeadHandle =
+                UnityMessageEventFunctions.RegisterActionWithDispatcher<EnterDeadActionStateMessage>(gameObject,
+                    OnEnterDeadActionState);
+
+            _leftDeadHandle =
+                UnityMessageEventFunctions.RegisterActionWithDispatcher<LeftDeadActionStateMessage>(gameObject,
+                    OnLeftDeadActionState);
+        }
+
+        private void OnEnterDeadActionState(EnterDeadActionStateMessage inMessage)
+        {
+            AlterLock(true, EIntelligenceDisableReason.Dead);
+        }
+
+        private void OnLeftDeadActionState(LeftDeadActionStateMessage inMessage)
+        {
+            AlterLock(false, EIntelligenceDisableReason.Dead);
+        }
+
+        private void AlterLock(bool locking, EIntelligenceDisableReason inReason)
+        {
+            if (locking)
+            {
+                _thoughtLock.Lock(EIntelligenceDisableReason.Dead);
+
+                if (ActiveGoal != null)
+                {
+                    ActiveGoal.Terminate();
+                }
+            }
+            else
+            {
+                _thoughtLock.Unlock(EIntelligenceDisableReason.Dead);
+            }
         }
 
         protected void OnDestroy()
         {
+            UnregisterForMessages();
+
             foreach (var potentialGoal in PotentialGoals)
             {
                 potentialGoal.UnregisterGoal();
             }
         }
+
+        private void UnregisterForMessages()
+        {
+            UnityMessageEventFunctions.UnregisterActionWithDispatcher(gameObject, _leftDeadHandle);
+            UnityMessageEventFunctions.UnregisterActionWithDispatcher(gameObject, _enterDeadHandle);
+        }
 	
         protected void Update ()
         {
+            if (_thoughtLock.IsLocked())
+            {
+                return;
+            }
+
             if (ActiveGoal == null)
             {
                 ActiveGoal = GetMostDesirableGoal();

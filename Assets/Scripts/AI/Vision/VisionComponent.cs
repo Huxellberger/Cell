@@ -1,7 +1,8 @@
 ﻿// Copyright (C) Threetee Gang All Rights Reserved
 
 using System.Collections.Generic;
-using System.Runtime.InteropServices;
+using Assets.Scripts.Components.ActionStateMachine.States.Dead;
+using Assets.Scripts.Core;
 using Assets.Scripts.Messaging;
 using UnityEngine;
 
@@ -46,6 +47,11 @@ namespace Assets.Scripts.AI.Vision
 
         private readonly List<GameObject> _nonSuspiciousObjects = new List<GameObject>(10);
         private readonly List<SuspicionEntry> _currentSuspicions = new List<SuspicionEntry>(2);
+
+        private readonly TieredLock<EVisionDisableReasons> _visionLock = new TieredLock<EVisionDisableReasons>();
+        private UnityMessageEventHandle<EnterDeadActionStateMessage> _enterDeadHandle;
+        private UnityMessageEventHandle<LeftDeadActionStateMessage> _leftDeadHandle;
+
         private List<VisionPointPosition> _points;
         private PolygonCollider2D _visionCollider;
 
@@ -61,6 +67,62 @@ namespace Assets.Scripts.AI.Vision
             }
 
             UpdateVisionBounds();
+
+            RegisterForMessages();
+        }
+
+        private void RegisterForMessages()
+        {
+            _enterDeadHandle =
+                UnityMessageEventFunctions.RegisterActionWithDispatcher<EnterDeadActionStateMessage>(DetectingObject,
+                    OnEnterDeadActionState);
+
+            _leftDeadHandle =
+                UnityMessageEventFunctions.RegisterActionWithDispatcher<LeftDeadActionStateMessage>(DetectingObject,
+                    OnLeftDeadActionState);
+        }
+
+        private void OnEnterDeadActionState(EnterDeadActionStateMessage inMessage)
+        {
+            AlterLock(true, EVisionDisableReasons.Dead);
+        }
+
+        private void OnLeftDeadActionState(LeftDeadActionStateMessage inMessage)
+        {
+            AlterLock(false, EVisionDisableReasons.Dead);
+        }
+
+        private void AlterLock(bool locking, EVisionDisableReasons inReason)
+        {
+            if (locking)
+            {
+                _visionLock.Lock(inReason);
+
+                if (_visionLock.IsLocked())
+                {
+                    gameObject.SetActive(false);
+                }
+            }
+            else
+            {
+                _visionLock.Unlock(inReason);
+
+                if (!_visionLock.IsLocked())
+                {
+                    gameObject.SetActive(true);
+                }
+            }
+        }
+
+        protected void OnDestroy()
+        {
+            UnregisterForMessages();
+        }
+
+        private void UnregisterForMessages()
+        {
+            UnityMessageEventFunctions.UnregisterActionWithDispatcher(DetectingObject, _leftDeadHandle);
+            UnityMessageEventFunctions.UnregisterActionWithDispatcher(DetectingObject, _enterDeadHandle);
         }
 
         protected abstract bool IsSuspicious(GameObject inDetectedObject);

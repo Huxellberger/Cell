@@ -18,6 +18,11 @@ namespace Assets.Scripts.Test.AI.Vision
             Awake();
         }
 
+        public void TestDestroy()
+        {
+            OnDestroy();
+        }
+
         public void TestUpdate(float deltaTime)
         {
             _deltaTime = deltaTime;

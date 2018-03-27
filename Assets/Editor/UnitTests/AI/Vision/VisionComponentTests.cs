@@ -2,6 +2,7 @@
 
 using Assets.Editor.UnitTests.Messaging;
 using Assets.Scripts.AI.Vision;
+using Assets.Scripts.Components.ActionStateMachine.States.Dead;
 using Assets.Scripts.Messaging;
 using Assets.Scripts.Test.AI.Vision;
 using Assets.Scripts.Test.Messaging;
@@ -34,6 +35,8 @@ namespace Assets.Editor.UnitTests.AI.Vision
         [TearDown]
         public void AfterTest()
         {
+            _vision.TestDestroy();
+
             _vision = null;
             _detector = null;
         }
@@ -333,6 +336,22 @@ namespace Assets.Editor.UnitTests.AI.Vision
             Assert.IsFalse(messageSpy.ActionCalled);
 
             UnityMessageEventFunctions.UnregisterActionWithDispatcher(_detector, handle);
+        }
+
+        [Test]
+        public void EnterDeadMessage_SetInactive()
+        {
+            UnityMessageEventFunctions.InvokeMessageEventWithDispatcher(_detector, new EnterDeadActionStateMessage());
+            Assert.IsFalse(_vision.gameObject.activeSelf);
+        }
+
+        [Test]
+        public void LeftDeadMessage_SetActive()
+        {
+            UnityMessageEventFunctions.InvokeMessageEventWithDispatcher(_detector, new EnterDeadActionStateMessage());
+            UnityMessageEventFunctions.InvokeMessageEventWithDispatcher(_detector, new LeftDeadActionStateMessage());
+
+            Assert.IsTrue(_vision.gameObject.activeSelf);
         }
     }
 }

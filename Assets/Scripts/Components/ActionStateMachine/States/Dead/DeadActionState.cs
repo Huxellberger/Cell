@@ -15,11 +15,13 @@ namespace Assets.Scripts.Components.ActionStateMachine.States.Dead
     {
         public readonly IList<EInputKey> ValidProgressingInputs = new List<EInputKey>{EInputKey.Interact};
         private readonly ActionStateConditionRunner _conditionRunner;
+        private readonly DeadActionStateParams _params;
 
-        public DeadActionState(ActionStateInfo inInfo) 
+        public DeadActionState(ActionStateInfo inInfo, DeadActionStateParams inParams) 
             : base(EActionStateId.Dead, inInfo)
         {
             _conditionRunner = new ActionStateConditionRunner();
+            _params = inParams;
         }
 
         protected override void OnStart()
@@ -41,7 +43,10 @@ namespace Assets.Scripts.Components.ActionStateMachine.States.Dead
 
             if (_conditionRunner.IsComplete())
             {
-                UnityMessageEventFunctions.InvokeMessageEventWithDispatcher(GameModeComponent.RegisteredGameMode.gameObject, new RequestRespawnMessage(Info.Owner));
+                if (_params.CanRespawn)
+                {
+                    UnityMessageEventFunctions.InvokeMessageEventWithDispatcher(GameModeComponent.RegisteredGameMode.gameObject, new RequestRespawnMessage(Info.Owner));
+                }
             }
         }
 
