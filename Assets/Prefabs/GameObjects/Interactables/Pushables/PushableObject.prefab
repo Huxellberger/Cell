@@ -22,7 +22,7 @@ GameObject:
   - component: {fileID: 61253942223422176}
   - component: {fileID: 114356174605461828}
   - component: {fileID: 114072740042556414}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: PushPointA
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -59,7 +59,7 @@ GameObject:
   - component: {fileID: 61937383573038534}
   - component: {fileID: 114646589769926830}
   - component: {fileID: 114602704528386846}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: PushPointD
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -77,7 +77,7 @@ GameObject:
   - component: {fileID: 61194783339016188}
   - component: {fileID: 114389546227978722}
   - component: {fileID: 114474589262887586}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: PushPointC
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -95,7 +95,7 @@ GameObject:
   - component: {fileID: 61272830510469230}
   - component: {fileID: 114001029988100304}
   - component: {fileID: 114804274685510218}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: PushPointB
   m_TagString: Untagged
   m_Icon: {fileID: 0}

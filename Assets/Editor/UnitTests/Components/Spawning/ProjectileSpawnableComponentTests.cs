@@ -11,6 +11,7 @@ namespace Assets.Editor.UnitTests.Components.Spawning
     {
         private TestProjectileSpawnableComponent _projectile;
         private Rigidbody2D _rigidbody;
+        private GameObject _collidingObject;
 
         private MockSpawnerComponent _spawner;
 
@@ -26,12 +27,15 @@ namespace Assets.Editor.UnitTests.Components.Spawning
             _projectile.SpawnAudioClip = new AudioClip();
             _projectile.CollisionAudioClip = new AudioClip();
 
+            _collidingObject = new GameObject();
+
             _projectile.TestAwake();
         }
 
         [TearDown]
         public void AfterTest()
         {
+            _collidingObject = null;
             _projectile = null;
             _rigidbody = null;
 
@@ -56,9 +60,47 @@ namespace Assets.Editor.UnitTests.Components.Spawning
         }
 
         [Test]
-        public void OnCollision_RequestsRespawn()
+        public void OnCollision_Null_DoesNotRequestRespawn()
         {
             _projectile.TestCollide(null);
+
+            Assert.IsNull(_spawner.RequestRespawnGameObject);
+        }
+
+        [Test]
+        public void OnCollision_Null_DoesNotPlayCollisionSound()
+        {
+            _projectile.TestCollide(null);
+
+            Assert.IsNull(_projectile.LastPlayedClip);
+        }
+
+        [Test]
+        public void OnCollision_WrongLayer_DoesNotRequestRespawn()
+        {
+            _collidingObject.layer = 0;
+            _projectile.HitLayers.value = 2;
+            _projectile.TestCollide(_collidingObject);
+
+            Assert.IsNull(_spawner.RequestRespawnGameObject);
+        }
+
+        [Test]
+        public void OnCollision_WrongLayer_DoesNotPlayCollisionSound()
+        {
+            _collidingObject.layer = 0;
+            _projectile.HitLayers.value = 2;
+            _projectile.TestCollide(_collidingObject);
+
+            Assert.IsNull(_projectile.LastPlayedClip);
+        }
+
+        [Test]
+        public void OnCollision_RequestsRespawn()
+        {
+            _collidingObject.layer = 0;
+            _projectile.HitLayers.value = 1;
+            _projectile.TestCollide(_collidingObject);
 
             Assert.AreSame(_spawner.RequestRespawnGameObject, _projectile.gameObject);
         }
@@ -66,7 +108,9 @@ namespace Assets.Editor.UnitTests.Components.Spawning
         [Test]
         public void OnCollision_PlaysCollisionSound()
         {
-            _projectile.TestCollide(null);
+            _collidingObject.layer = 0;
+            _projectile.HitLayers.value = 1;
+            _projectile.TestCollide(_collidingObject);
 
             Assert.AreSame(_projectile.CollisionAudioClip, _projectile.LastPlayedClip);
         }

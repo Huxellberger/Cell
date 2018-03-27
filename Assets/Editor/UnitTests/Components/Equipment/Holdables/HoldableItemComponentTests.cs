@@ -150,9 +150,11 @@ namespace Assets.Editor.UnitTests.Components.Equipment.Holdables
         public void OnHeld_OwnerWithInterface_PositionMatchesSocket()
         {
             _heldItem.GetHeldItemSocketResult.position = new Vector3(1.0f, 2.0f, 3.0f);
+            _heldItem.GetHeldItemSocketResult.eulerAngles = new Vector3(4.0f, 7.0f, 12.0f);
             _holdable.OnHeld(_heldItem.gameObject);
 
             ExtendedAssertions.AssertVectorsNearlyEqual(_heldItem.GetHeldItemSocketResult.position, _holdable.transform.position);
+            ExtendedAssertions.AssertVectorsNearlyEqual(_heldItem.GetHeldItemSocketResult.eulerAngles, _holdable.transform.eulerAngles);
         }
 
         [Test]

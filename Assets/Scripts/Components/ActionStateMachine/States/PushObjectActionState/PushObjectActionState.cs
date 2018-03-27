@@ -1,6 +1,5 @@
 ﻿// Copyright (C) Threetee Gang All Rights Reserved
 
-using System.Runtime.InteropServices;
 using Assets.Scripts.Components.ActionStateMachine.States.Locomotion;
 using Assets.Scripts.Components.Interaction;
 using Assets.Scripts.Components.Objects.Pushable;

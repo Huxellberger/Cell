@@ -9,6 +9,7 @@ namespace Assets.Scripts.Components.Spawning
         : SpawnableComponent
     {
         public float Speed = 5.0f;
+        public LayerMask HitLayers;
 
         public AudioClip SpawnAudioClip;
         public AudioClip CollisionAudioClip;
@@ -38,8 +39,11 @@ namespace Assets.Scripts.Components.Spawning
 
         protected void OnGameObjectCollides(GameObject inGameObject)
         {
-            PlaySound(CollisionAudioClip);
-            Despawn();
+            if (inGameObject != null && ((1 << inGameObject.layer) & HitLayers.value) != 0)
+            {
+                PlaySound(CollisionAudioClip);
+                Despawn();
+            }
         }
 
         protected virtual void PlaySound(AudioClip inClip)

@@ -2,10 +2,10 @@
 
 using Assets.Scripts.Components.ActionStateMachine;
 using Assets.Scripts.Components.ActionStateMachine.States.PushObjectActionState;
-using Assets.Scripts.Components.Objects.Pushable;
 using Assets.Scripts.Components.Species;
 using Assets.Scripts.Test.Components.ActionStateMachine;
 using Assets.Scripts.Test.Components.Equipment.Holdables;
+using Assets.Scripts.Test.Components.Objects.Pushable;
 using NUnit.Framework;
 using UnityEngine;
 
@@ -13,13 +13,12 @@ namespace Assets.Editor.UnitTests.Components.Objects.Pushable
 {
     [TestFixture]
     public class PushObjectPointComponentTestFixture 
-        : MonoBehaviour
     {
         private MockActionStateMachineComponent _actionStateMachine;
         private MockHeldItemComponent _heldItem;
 
         private GameObject _pushable;
-        private PushObjectPointComponent _pushPoint;
+        private TestPushObjectPointComponent _pushPoint;
 
         [SetUp]
         public void BeforeTest()
@@ -28,7 +27,7 @@ namespace Assets.Editor.UnitTests.Components.Objects.Pushable
             _heldItem = _actionStateMachine.gameObject.AddComponent<MockHeldItemComponent>();
 
             _pushable = new GameObject();
-            _pushPoint = new GameObject().AddComponent<PushObjectPointComponent>();
+            _pushPoint = new GameObject().AddComponent<TestPushObjectPointComponent>();
 
             _pushPoint.PushableObject = _pushable;
         }
@@ -104,6 +103,15 @@ namespace Assets.Editor.UnitTests.Components.Objects.Pushable
             _actionStateMachine.IsActionStateActiveResult = true;
 
             _heldItem.GetHeldItemResult = new GameObject().AddComponent<MockHoldableComponent>();
+
+            Assert.IsFalse(_pushPoint.CanInteract(_actionStateMachine.gameObject));
+        }
+
+        [Test]
+        public void CanInteract_ExtendedPushConditionInvalid_False()
+        {
+            _actionStateMachine.IsActionStateActiveResult = true;
+            _pushPoint.ExtendedPushConditionsValidResult = false;
 
             Assert.IsFalse(_pushPoint.CanInteract(_actionStateMachine.gameObject));
         }

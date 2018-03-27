@@ -184,6 +184,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Speed: 5
+  HitLayers:
+    serializedVersion: 2
+    m_Bits: 4294966271
   SpawnAudioClip: {fileID: 8300000, guid: a328ff07f7ccd5c409c99ca7fcce2cb9, type: 3}
   CollisionAudioClip: {fileID: 8300000, guid: c69f1c2f31693ae4aa2ca23029016cc0, type: 3}
 --- !u!212 &212395615799677728

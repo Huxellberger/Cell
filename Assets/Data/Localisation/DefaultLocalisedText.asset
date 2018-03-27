@@ -156,3 +156,12 @@ MonoBehaviour:
         TranslatedText: Load Game
       - LanguageOption: 1
         TranslatedText: 'ERROR: TEXT NOT TRANSLATED'
+  - TextKey:
+      LocalisationNamespace: Interact
+      LocalisationKeyValue: Body
+    LocalisedTexts:
+      Entries:
+      - LanguageOption: 0
+        TranslatedText: Body
+      - LanguageOption: 1
+        TranslatedText: 'ERROR: TEXT NOT TRANSLATED'

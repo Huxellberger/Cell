@@ -64,6 +64,7 @@ namespace Assets.Scripts.Components.Spawning
                 _waitingToSpawnObjects.Remove(spawned);
                 CurrentSpawnedObjects.Add(spawned);
 
+                spawned.transform.position = SpawnPoint.transform.position;
                 spawned.SetActive(true);
 
                 OnSpawn(spawned);
@@ -77,7 +78,6 @@ namespace Assets.Scripts.Components.Spawning
         }
 
         protected virtual void OnSpawn(GameObject inSpawnedGameObject) { }
-
         
         public void RequestRespawn(GameObject inGameObject)
         {

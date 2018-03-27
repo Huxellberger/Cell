@@ -55,6 +55,7 @@ namespace Assets.Scripts.Components.Equipment.Holdables
                     InteractionZone.SetActive(false);
                     gameObject.transform.parent = heldItemInterface.GetHeldItemSocket();
                     gameObject.transform.position = gameObject.transform.parent.position;
+                    gameObject.transform.eulerAngles = gameObject.transform.parent.eulerAngles;
                     OnHeldImpl();
                 }
             }

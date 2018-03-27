@@ -100,7 +100,7 @@ namespace Assets.Scripts.AI.Vision
 
                 if (_visionLock.IsLocked())
                 {
-                    gameObject.SetActive(false);
+                   gameObject.SetActive(false);
                 }
             }
             else

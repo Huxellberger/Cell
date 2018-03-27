@@ -28,7 +28,13 @@ namespace Assets.Scripts.Components.Objects.Pushable
             }
 
             return InLocomotion(inGameObject.GetComponent<IActionStateMachineInterface>()) &&
-                   NotHoldingAnything(inGameObject.GetComponent<IHeldItemInterface>());
+                   NotHoldingAnything(inGameObject.GetComponent<IHeldItemInterface>()) &&
+                   ExtendedPushConditionsValid(inGameObject);
+        }
+
+        protected virtual bool ExtendedPushConditionsValid(GameObject inGameObject)
+        {
+            return true;
         }
 
         protected override void OnInteractImpl(GameObject inGameObject)
