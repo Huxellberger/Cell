@@ -23,7 +23,7 @@ GameObject:
   - component: {fileID: 60737771652962080}
   - component: {fileID: 114686945654025318}
   - component: {fileID: 114460898235635238}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: TestJoinableCompanion
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -40,7 +40,7 @@ GameObject:
   - component: {fileID: 4986383484589722}
   - component: {fileID: 114123060802864860}
   - component: {fileID: 61385515545418364}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: InteractionZone
   m_TagString: Untagged
   m_Icon: {fileID: 0}

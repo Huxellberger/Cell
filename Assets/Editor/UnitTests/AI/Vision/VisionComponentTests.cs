@@ -22,10 +22,13 @@ namespace Assets.Editor.UnitTests.AI.Vision
             _detector = new GameObject();
             _detector.AddComponent<TestUnityMessageEventDispatcherComponent>().TestAwake();
 
-            _vision = new GameObject().AddComponent<TestVisionComponent>();
+            var visionObject = new GameObject().AddComponent<PolygonCollider2D>();
+            _vision = visionObject.gameObject.AddComponent<TestVisionComponent>();
 
             _vision.DetectingObject = _detector;
             _vision.TimeUntilDetection = 1.5f;
+
+            _vision.TestAwake();
         }
 	
         [TearDown]

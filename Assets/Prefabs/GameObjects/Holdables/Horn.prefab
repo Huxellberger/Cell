@@ -24,7 +24,7 @@ GameObject:
   - component: {fileID: 114495817632411756}
   - component: {fileID: 61962432094912686}
   - component: {fileID: 114117736907397746}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Horn
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -41,7 +41,7 @@ GameObject:
   - component: {fileID: 4207444936843624}
   - component: {fileID: 61046012319542640}
   - component: {fileID: 114270087113499344}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: HornInteractionZone
   m_TagString: Untagged
   m_Icon: {fileID: 0}

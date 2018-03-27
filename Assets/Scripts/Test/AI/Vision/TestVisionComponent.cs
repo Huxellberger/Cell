@@ -13,6 +13,11 @@ namespace Assets.Scripts.Test.AI.Vision
         public bool IsSuspiciousResult = false;
         private float _deltaTime;
 
+        public void TestAwake()
+        {
+            Awake();
+        }
+
         public void TestUpdate(float deltaTime)
         {
             _deltaTime = deltaTime;

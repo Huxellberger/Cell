@@ -1,11 +1,13 @@
 ﻿// Copyright (C) Threetee Gang All Rights Reserved
 
 using System.Collections.Generic;
+using System.Runtime.InteropServices;
 using Assets.Scripts.Messaging;
 using UnityEngine;
 
 namespace Assets.Scripts.AI.Vision
 {
+    [RequireComponent(typeof(PolygonCollider2D))]
     public abstract class VisionComponent 
         : MonoBehaviour
     {
@@ -23,13 +25,43 @@ namespace Assets.Scripts.AI.Vision
             }
         }
 
+        public class VisionPointPosition
+        {
+            public readonly Vector2 InitialPointOffset;
+            public readonly float Distance;
+            public Vector2 CurrentPointOffset;
+
+            public VisionPointPosition(Vector2 inInitialPoint)
+            {
+                InitialPointOffset = inInitialPoint;
+                CurrentPointOffset = inInitialPoint;
+                Distance = InitialPointOffset.magnitude;
+            }
+        }
+
         public GameObject DetectingObject;
+        public LayerMask BlockingMask;
         public float TimeUntilDetection = 1.5f;
         public Color DebugDrawColour = Color.red;
 
         private readonly List<GameObject> _nonSuspiciousObjects = new List<GameObject>(10);
         private readonly List<SuspicionEntry> _currentSuspicions = new List<SuspicionEntry>(2);
+        private List<VisionPointPosition> _points;
         private PolygonCollider2D _visionCollider;
+
+        protected void Awake()
+        {
+            _visionCollider = gameObject.GetComponent<PolygonCollider2D>();
+
+            _points = new List<VisionPointPosition>(_visionCollider.GetTotalPointCount());
+
+            foreach (var point in _visionCollider.points)
+            {
+                _points.Add(new VisionPointPosition(point));
+            }
+
+            UpdateVisionBounds();
+        }
 
         protected abstract bool IsSuspicious(GameObject inDetectedObject);
 
@@ -85,6 +117,8 @@ namespace Assets.Scripts.AI.Vision
             {
                 UpdateNonSuspiciousObjects(deltaTime);
             }
+
+            UpdateVisionBounds();
         }
 
         private void UpdateSuspiciousObjects(float inDeltaTime)
@@ -121,6 +155,28 @@ namespace Assets.Scripts.AI.Vision
                     }
                 }
             }
+        }
+
+        private void UpdateVisionBounds()
+        {
+            var originalPoints = _visionCollider.points;
+            for (var pointIndex = 0; pointIndex < _points.Count; pointIndex++)
+            {
+                var point = _points[pointIndex];
+                originalPoints[pointIndex] = point.InitialPointOffset;
+                Vector3 transformedPosition = gameObject.transform.localToWorldMatrix * point.InitialPointOffset;
+                var raycastDirection = (transformedPosition).normalized;
+                var result = Physics2D.Raycast(gameObject.transform.position, raycastDirection, point.Distance, BlockingMask);
+
+                if (result.transform != null && result.transform.position != transformedPosition)
+                {
+                    var newLocalPosition = gameObject.transform.InverseTransformPoint(result.point);
+                    point.CurrentPointOffset = newLocalPosition;
+                    originalPoints[pointIndex] = newLocalPosition;
+                }
+            }
+
+            _visionCollider.points = originalPoints;
         }
 
         private void UpdateNonSuspiciousObjects(float inDeltaTime)
