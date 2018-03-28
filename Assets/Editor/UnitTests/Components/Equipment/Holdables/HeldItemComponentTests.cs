@@ -40,16 +40,17 @@ namespace Assets.Editor.UnitTests.Components.Equipment.Holdables
         {
             _heldItem.TestStart();
 
-            Assert.AreSame(_heldItem.gameObject, _startingHoldable.OnHeldGameObject);
+            Assert.IsNotNull(_heldItem.GetHeldItem());
         }
 
         [Test]
         public void OnDestroy_DropsCurrentHoldable()
         {
             _heldItem.TestStart();
+            _heldItem.PickupHoldable(_holdable);
             _heldItem.TestDestroy();
 
-            Assert.IsTrue(_startingHoldable.OnDroppedCalled);
+            Assert.IsTrue(_holdable.OnDroppedCalled);
         }
 
         [Test]

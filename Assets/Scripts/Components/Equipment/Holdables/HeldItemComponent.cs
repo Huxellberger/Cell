@@ -17,7 +17,7 @@ namespace Assets.Scripts.Components.Equipment.Holdables
         {
             if (StartingHeldItem != null)
             {
-                PickupHoldable(StartingHeldItem.GetComponent<IHoldableInterface>());
+                PickupHoldable(Instantiate(StartingHeldItem).GetComponent<IHoldableInterface>());
             }
         }
 

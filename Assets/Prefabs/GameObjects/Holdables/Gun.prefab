@@ -154,6 +154,7 @@ MonoBehaviour:
     LocalisationNamespace: Holdable
     LocalisationKeyValue: Pistol
   InteractionZone: {fileID: 1478582281605872}
+  AttackRadiusSquared: 100
 --- !u!114 &114908070887578356
 MonoBehaviour:
   m_ObjectHideFlags: 1

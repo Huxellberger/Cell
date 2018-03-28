@@ -26,3 +26,7 @@ MonoBehaviour:
   InvestigateVisualDisturbanceGoalParameters:
     DesirabilityOnDetection: 0.4
     IdleDelay: 2
+  PursuitTargetGoalParameters:
+    TargetDetectedDesirability: 0.8
+    DelayBeforePursuit: 0
+    AbandonPursuitRadiusSquared: 100
