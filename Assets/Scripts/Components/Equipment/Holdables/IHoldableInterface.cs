@@ -9,5 +9,6 @@ namespace Assets.Scripts.Components.Equipment.Holdables
         void UseHoldable(EHoldableAction inAction);
         void OnHeld(GameObject inGameObject);
         void OnDropped();
+        GameObject GetHoldableObject();
     }
 }

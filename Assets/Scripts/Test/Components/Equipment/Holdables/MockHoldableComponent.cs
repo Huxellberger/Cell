@@ -16,6 +16,8 @@ namespace Assets.Scripts.Test.Components.Equipment.Holdables
         public GameObject OnHeldGameObject { get; private set; }
         public bool OnDroppedCalled = false;
 
+        public GameObject GetHoldableObjectResult { get; set; }
+
         public void UseHoldable(EHoldableAction inAction)
         {
             UseHoldableInputAction = inAction;
@@ -29,6 +31,11 @@ namespace Assets.Scripts.Test.Components.Equipment.Holdables
         public void OnDropped()
         {
             OnDroppedCalled = true;
+        }
+
+        public GameObject GetHoldableObject()
+        {
+            return GetHoldableObjectResult;
         }
     }
 }

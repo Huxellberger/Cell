@@ -77,6 +77,11 @@ namespace Assets.Scripts.Components.Equipment.Holdables
                 }
             }
         }
+
+        public GameObject GetHoldableObject()
+        {
+            return gameObject;
+        }
         // ~IHoldableInterface
 
         protected abstract void UseHoldableImpl(EHoldableAction inAction);

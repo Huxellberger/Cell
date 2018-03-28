@@ -209,5 +209,11 @@ namespace Assets.Editor.UnitTests.Components.Equipment.Holdables
 
             Assert.AreEqual(RigidbodyConstraints.None, _rigidbody.constraints);
         }
+
+        [Test]
+        public void GetHoldableObject_ReturnsGameObject()
+        {
+            Assert.AreSame(_holdable.gameObject, _holdable.GetHoldableObject());
+        }
     }
 }
