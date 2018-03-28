@@ -14,5 +14,6 @@ namespace Assets.Scripts.AI.Goals
         public RemainInRadiusGoalParams RemainInRadiusGoalParameters;
         public InvestigateDisturbanceGoalParams InvestigateAudioDisturbanceGoalParameters;
         public InvestigateDisturbanceGoalParams InvestigateVisualDisturbanceGoalParameters;
+        public PursuitTargetGoalParams PursuitTargetGoalParameters;
     }
 }

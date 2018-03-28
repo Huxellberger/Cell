@@ -60,9 +60,17 @@ namespace Assets.Scripts.AI.Pathfinding
 
                 if (_pathNodes.Count == 0)
                 {
-                    _currentTargetDelegate();
-                    _currentTargetDelegate = null;
+                   FinishPathfinding();
                 }
+            }
+        }
+
+        private void FinishPathfinding()
+        {
+            if (_currentTargetDelegate != null)
+            {
+                _currentTargetDelegate();
+                _currentTargetDelegate = null;
             }
         }
 
@@ -173,6 +181,10 @@ namespace Assets.Scripts.AI.Pathfinding
             if (_followTarget != null)
             {
                 SetTargetLocation(_followTarget.transform.position, () => {});
+            }
+            else
+            {
+                FinishPathfinding();
             }
         }
 
