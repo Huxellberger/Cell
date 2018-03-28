@@ -74,9 +74,18 @@ namespace Assets.Editor.UnitTests.Components.Equipment.Holdables.Spawner
         }
 
         [Test]
-        public void CanUseWeapon_Owner_True()
+        public void CanUseWeapon_NoClearShot_False()
         {
             _holdable.OnHeld(_owner);
+            _holdable.HasClearShotResult = false;
+            Assert.IsFalse(_holdable.CanUseWeapon(_target));
+        }
+
+        [Test]
+        public void CanUseWeapon_ClearShot_True()
+        {
+            _holdable.OnHeld(_owner);
+            _holdable.HasClearShotResult = true;
             Assert.IsTrue(_holdable.CanUseWeapon(_target));
         }
 

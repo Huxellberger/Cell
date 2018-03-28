@@ -10,6 +10,8 @@ namespace Assets.Scripts.Components.Equipment.Holdables.Spawner
     public class HoldableSpawnerComponent 
         : HoldableWeaponComponent
     {
+        public LayerMask BlockingMask;
+
         private ISpawnerInterface _spawner;
 
         protected void Start()
@@ -37,7 +39,15 @@ namespace Assets.Scripts.Components.Equipment.Holdables.Spawner
 
         protected override bool CanUseWeaponImpl(GameObject target)
         {
-            return Owner != null;
+            return Owner != null && HasClearShot(target);
+        }
+
+        protected virtual bool HasClearShot(GameObject target)
+        {
+            var raycastDirection = (target.transform.position - gameObject.transform.position).normalized;
+            var result = Physics2D.Raycast(gameObject.transform.position, raycastDirection, AttackRadiusSquared, BlockingMask);
+
+            return result.transform == target.transform;
         }
     }
 }
