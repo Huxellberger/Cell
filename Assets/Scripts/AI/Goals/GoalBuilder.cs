@@ -32,7 +32,8 @@ namespace Assets.Scripts.AI.Goals
             GoalInstantiationFunctions.Add(EGoalID.FollowTarget, () => new FollowTargetGoal(Owner, Params.FollowTargetGoalParameters, GameServiceProvider.CurrentInstance.GetService<IWildlifeServiceInterface>()));
             GoalInstantiationFunctions.Add(EGoalID.Idle, () => new IdleGoal(Owner, Params.IdleGoalParameters));
             GoalInstantiationFunctions.Add(EGoalID.RemainInRadius, () => new RemainInRadiusGoal(Owner, Params.RemainInRadiusGoalParameters));
-            GoalInstantiationFunctions.Add(EGoalID.InvestigateDisturbance, () => new InvestigateDisturbanceGoal(Owner, Params.InvestigateDisturbanceGoalParameters));
+            GoalInstantiationFunctions.Add(EGoalID.InvestigateAudioDisturbance, () => new InvestigateAudioDisturbanceGoal(Owner, Params.InvestigateAudioDisturbanceGoalParameters));
+            GoalInstantiationFunctions.Add(EGoalID.InvestigateVisualDisturbance, () => new InvestigateVisualDisturbanceGoal(Owner, Params.InvestigateVisualDisturbanceGoalParameters));
         }
 
         public Goal CreateGoalForId(EGoalID inId)

@@ -29,6 +29,8 @@ namespace Assets.Scripts.AI.Pathfinding
         private List<NavRegion> _pathRegions = new List<NavRegion>(8);
         private readonly List<NavNode> _pathNodes = new List<NavNode>(64);
 
+        private GameObject _followTarget;
+
         protected void Start()
         {
             _movement = gameObject.GetComponent<IMovementInterface>();
@@ -47,6 +49,11 @@ namespace Assets.Scripts.AI.Pathfinding
 
         protected void Update()
         {
+            if (_followTarget != null)
+            {
+                UpdateFollowTarget();
+            }
+
             if (_currentTargetDelegate != null)
             {
                 UpdateNodeStatus();
@@ -56,6 +63,16 @@ namespace Assets.Scripts.AI.Pathfinding
                     _currentTargetDelegate();
                     _currentTargetDelegate = null;
                 }
+            }
+        }
+
+        private void UpdateFollowTarget()
+        {
+            Vector2 followPosition = _followTarget.transform.position;
+            if (VectorFunctions.DistanceSquared(followPosition, _currentTargetLocation) >
+                DistanceSquaredThreshold)
+            {
+                SetTargetLocation(_followTarget.transform.position, () =>{});
             }
         }
 
@@ -151,8 +168,12 @@ namespace Assets.Scripts.AI.Pathfinding
 
         public void SetFollowTarget(GameObject inTarget)
         {
-            // Don't worry for the meantime
-            throw new NotImplementedException();
+            _followTarget = inTarget;
+
+            if (_followTarget != null)
+            {
+                SetTargetLocation(_followTarget.transform.position, () => {});
+            }
         }
 
         public NavNode GetNearestNavNode(NavRegion region, Vector2 position)

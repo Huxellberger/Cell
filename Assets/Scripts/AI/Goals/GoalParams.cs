@@ -12,6 +12,7 @@ namespace Assets.Scripts.AI.Goals
         public IdleGoalParams IdleGoalParameters;
         public FollowTargetGoalParams FollowTargetGoalParameters;
         public RemainInRadiusGoalParams RemainInRadiusGoalParameters;
-        public InvestigateDisturbanceGoalParams InvestigateDisturbanceGoalParameters;
+        public InvestigateDisturbanceGoalParams InvestigateAudioDisturbanceGoalParameters;
+        public InvestigateDisturbanceGoalParams InvestigateVisualDisturbanceGoalParameters;
     }
 }

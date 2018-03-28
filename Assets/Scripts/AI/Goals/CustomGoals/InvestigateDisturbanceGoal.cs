@@ -1,27 +1,22 @@
 ﻿// Copyright (C) Threetee Gang All Rights Reserved
 
 using Assets.Scripts.Components.Emote;
-using Assets.Scripts.Messaging;
-using Assets.Scripts.Services.Noise;
 using UnityEngine;
 
 namespace Assets.Scripts.AI.Goals.CustomGoals
 {
-    public class InvestigateDisturbanceGoal 
+    public abstract class InvestigateDisturbanceGoal 
         : CompositeGoal
     {
         private readonly InvestigateDisturbanceGoalParams _params;
 
-        private UnityMessageEventHandle<NoiseHeardMessage> _noiseHeardMessageHandle;
-
         private Vector3 _initialRotation;
-        private NoiseData _lastHeardNoise;
-
-        private bool _justHeardNoise = false;
-        private bool _inProgress = false;
+        private Vector3 ? _lastDisturbance;
         
+        private bool _justDisturbed = false;
+        private bool _inProgress = false;
 
-        public InvestigateDisturbanceGoal(GameObject inOwner, InvestigateDisturbanceGoalParams inParams) 
+        protected InvestigateDisturbanceGoal(GameObject inOwner, InvestigateDisturbanceGoalParams inParams) 
             : base(inOwner)
         {
             _params = inParams;
@@ -29,23 +24,35 @@ namespace Assets.Scripts.AI.Goals.CustomGoals
 
         public override void RegisterGoal()
         {
-            _noiseHeardMessageHandle =
-                UnityMessageEventFunctions.RegisterActionWithDispatcher<NoiseHeardMessage>(Owner, OnNoiseHeard);
+            RegisterForDisturbance();
         }
 
         public override void UnregisterGoal()
         {
-            UnityMessageEventFunctions.UnregisterActionWithDispatcher(Owner, _noiseHeardMessageHandle);
+            UnregisterForDisturbance();
         }
+
+        protected abstract void RegisterForDisturbance();
+
+        protected abstract void UnregisterForDisturbance();
 
         protected override void OnInitialised()
         {
             Owner.GetComponent<IEmoteInterface>().SetEmoteState(EEmoteState.Suspicious);
             _initialRotation = Owner.transform.eulerAngles;
 
+            if (_lastDisturbance != null)
+            {
+                Owner.gameObject.transform.up = (_lastDisturbance.Value - Owner.gameObject.transform.position).normalized;
+            }
+
             AddSubGoal(new MoveToTargetGoal(Owner, Owner.transform.position));
             AddSubGoal(new DelayGoal(Owner, _params.IdleDelay));
-            AddSubGoal(new MoveToTargetGoal(Owner, _lastHeardNoise.NoiseLocation));
+            if (_lastDisturbance != null)
+            {
+                AddSubGoal(new MoveToTargetGoal(Owner, _lastDisturbance.Value));
+            }
+            AddSubGoal(new DelayGoal(Owner, _params.IdleDelay));
 
             _inProgress = true;
         }
@@ -62,20 +69,20 @@ namespace Assets.Scripts.AI.Goals.CustomGoals
         {
             var desirability = 0.0f;
 
-            if (_justHeardNoise || _inProgress)
+            if (_justDisturbed || _inProgress)
             {
                 desirability = _params.DesirabilityOnDetection;
             }
 
-            _justHeardNoise = false;
+            _justDisturbed = false;
 
             return desirability;
         }
 
-        private void OnNoiseHeard(NoiseHeardMessage inMessage)
+        protected void RecordDisturbance(Vector3 disturbanceLocation)
         {
-            _lastHeardNoise = inMessage.HeardNoise;
-            _justHeardNoise = true;
+            _lastDisturbance = disturbanceLocation;
+            _justDisturbed = true;
         }
     }
 }

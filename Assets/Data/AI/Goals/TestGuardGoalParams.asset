@@ -20,6 +20,9 @@ MonoBehaviour:
   RemainInRadiusGoalParameters:
     LeftRadiusDesirability: 0
     MaxRadius: 0
-  InvestigateDisturbanceGoalParameters:
-    DesirabilityOnDetection: 0.6
-    IdleDelay: 3
+  InvestigateAudioDisturbanceGoalParameters:
+    DesirabilityOnDetection: 0.4
+    IdleDelay: 2
+  InvestigateVisualDisturbanceGoalParameters:
+    DesirabilityOnDetection: 0.4
+    IdleDelay: 2

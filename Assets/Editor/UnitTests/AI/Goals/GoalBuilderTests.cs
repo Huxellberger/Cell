@@ -69,9 +69,15 @@ namespace Assets.Editor.UnitTests.AI.Goals
         }
 
         [Test]
-        public void CreateGoalWithId_InvestigateDisturbance_CreateInvestigateDisturbanceGoal()
+        public void CreateGoalWithId_InvestigateDisturbance_CreateInvestigateAudioDisturbanceGoal()
         {
-            Assert.IsNotNull((InvestigateDisturbanceGoal)_goalBuilder.CreateGoalForId(EGoalID.InvestigateDisturbance));
+            Assert.IsNotNull((InvestigateDisturbanceGoal)_goalBuilder.CreateGoalForId(EGoalID.InvestigateAudioDisturbance));
+        }
+
+        [Test]
+        public void CreateGoalWithId_InvestigateDisturbance_CreateInvestigateVisualDisturbanceGoal()
+        {
+            Assert.IsNotNull((InvestigateDisturbanceGoal)_goalBuilder.CreateGoalForId(EGoalID.InvestigateVisualDisturbance));
         }
     }
 }

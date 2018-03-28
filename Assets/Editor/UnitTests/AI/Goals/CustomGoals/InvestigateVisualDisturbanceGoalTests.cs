@@ -1,9 +1,9 @@
 ﻿// Copyright (C) Threetee Gang All Rights Reserved
 
-using Assets.Editor.UnitTests.Helpers;
 using Assets.Scripts.AI.Goals.CustomGoals;
+using Assets.Scripts.AI.Vision;
 using Assets.Scripts.Components.Emote;
-using Assets.Scripts.Test.AI.Goals.CustomGoals;
+using Assets.Scripts.Messaging;
 using Assets.Scripts.Test.AI.Pathfinding;
 using Assets.Scripts.Test.Components.Emote;
 using Assets.Scripts.Test.Messaging;
@@ -13,13 +13,14 @@ using UnityEngine;
 namespace Assets.Editor.UnitTests.AI.Goals.CustomGoals
 {
     [TestFixture]
-    public class InvestigateDisturbanceGoalTestFixture
+    public class InvestigateVisualDisturbanceGoalTestFixture
     {
         private MockPathfindingComponent _pathfinding;
         private MockEmoteComponent _emote;
 
-        private readonly InvestigateDisturbanceGoalParams _params = new InvestigateDisturbanceGoalParams{DesirabilityOnDetection = 0.6f, IdleDelay = 2.0f};
-        private TestInvestigateDisturbanceGoal _goal;
+        private readonly InvestigateDisturbanceGoalParams _params = new InvestigateDisturbanceGoalParams { DesirabilityOnDetection = 0.6f, IdleDelay = 2.0f };
+        private InvestigateVisualDisturbanceGoal _goal;
+        private GameObject _targetObject;
 
         [SetUp]
         public void BeforeTest()
@@ -31,30 +32,36 @@ namespace Assets.Editor.UnitTests.AI.Goals.CustomGoals
 
             _pathfinding.gameObject.AddComponent<TestUnityMessageEventDispatcherComponent>().TestAwake();
 
-            _goal = new TestInvestigateDisturbanceGoal(_pathfinding.gameObject, _params);
+            _goal = new InvestigateVisualDisturbanceGoal(_pathfinding.gameObject, _params);
             _goal.RegisterGoal();
+
+            _targetObject = new GameObject();
+
+            _targetObject.transform.position = new Vector3(12.0f, 13.0f, -11.0f);
         }
-	
+
         [TearDown]
         public void AfterTest()
         {
+            _targetObject = null;
+
             _goal.UnregisterGoal();
             _goal = null;
 
             _emote = null;
             _pathfinding = null;
         }
-	
+
         [Test]
-        public void Desirability_NoNoiseData_Zero() 
+        public void Desirability_NoVisualData_Zero()
         {
             Assert.AreEqual(0.0f, _goal.CalculateDesirability());
         }
 
         [Test]
-        public void Desirability_Disturbance_ParamSpecified()
+        public void Desirability_NoiseData_ParamSpecified()
         {
-            _goal.TestRecordDisturbance(new Vector3(1.0f, 2.0f, 4.0f));
+            UnityMessageEventFunctions.InvokeMessageEventWithDispatcher(_pathfinding.gameObject, new SuspiciousObjectSightedMessage(_targetObject));
             Assert.AreEqual(_params.DesirabilityOnDetection, _goal.CalculateDesirability());
         }
 
@@ -67,50 +74,37 @@ namespace Assets.Editor.UnitTests.AI.Goals.CustomGoals
         }
 
         [Test]
-        public void Initialised_RotatesToFaceGoal()
+        public void Initialised_IdleTimeDoesNotPass_DoesNotSetTargetToSightingLocation()
         {
-            var expectedDisturbance = new Vector3(1.0f, 2.0f, 4.0f);
-            _goal.TestRecordDisturbance(expectedDisturbance);
-            _goal.Initialise();
-
-            ExtendedAssertions.AssertVectorsNearlyEqual(_pathfinding.gameObject.transform.up, (expectedDisturbance - _pathfinding.gameObject.transform.position).normalized);
-        }
-
-        [Test]
-        public void Initialised_IdleTimeNotPassed_DoesNotSetTargetToDisturbanceLocation()
-        {
-            var expectedPosition = new Vector3(2.0f, 3.0f, -1.0f);
-
-            _goal.TestRecordDisturbance(expectedPosition);
+            UnityMessageEventFunctions.InvokeMessageEventWithDispatcher(_pathfinding.gameObject, new SuspiciousObjectSightedMessage(_targetObject));
             _goal.Initialise();
 
             Assert.IsNull(_pathfinding.TargetLocation);
         }
 
         [Test]
-        public void Initialised_IdleTimePasses_SetsTargetToDisturbanceLocation()
+        public void Initialised_IdleTimePasses_SetsTargetToSightingLocation()
         {
-            var expectedPosition = new Vector3(2.0f, 3.0f, -1.0f);
-
-            _goal.TestRecordDisturbance(expectedPosition);
+            UnityMessageEventFunctions.InvokeMessageEventWithDispatcher(_pathfinding.gameObject, new SuspiciousObjectSightedMessage(_targetObject));
             _goal.Initialise();
+
             _goal.Update(_params.IdleDelay + 0.1f);
 
-            Assert.AreEqual(expectedPosition, _pathfinding.TargetLocation);
+            Assert.AreEqual(_targetObject.transform.position, _pathfinding.TargetLocation);
         }
 
         [Test]
         public void CompletesMovement_TimePassesLessThanDelay_StartingPositionNotSetAsTarget()
         {
             var initialLocation = _pathfinding.gameObject.transform.position;
-            var expectedPosition = new Vector3(2.0f, 3.0f, -1.0f);
 
-            _goal.TestRecordDisturbance(expectedPosition);
+            UnityMessageEventFunctions.InvokeMessageEventWithDispatcher(_pathfinding.gameObject, new SuspiciousObjectSightedMessage(_targetObject));
             _goal.Initialise();
 
             _goal.Update(_params.IdleDelay + 0.1f);
 
             _pathfinding.CompleteDelegate();
+
             _goal.Update(0.0f);
             _goal.Update(_params.IdleDelay * 0.5f);
 
@@ -121,9 +115,8 @@ namespace Assets.Editor.UnitTests.AI.Goals.CustomGoals
         public void CompletesMovement_TimePassesGreaterThanDelay_StartingPositionSetAsTarget()
         {
             var initialLocation = _pathfinding.gameObject.transform.position;
-            var expectedPosition = new Vector3(2.0f, 3.0f, -1.0f);
 
-            _goal.TestRecordDisturbance(expectedPosition);
+            UnityMessageEventFunctions.InvokeMessageEventWithDispatcher(_pathfinding.gameObject, new SuspiciousObjectSightedMessage(_targetObject));
             _goal.Initialise();
 
             _goal.Update(_params.IdleDelay + 0.1f);
@@ -139,9 +132,7 @@ namespace Assets.Editor.UnitTests.AI.Goals.CustomGoals
         [Test]
         public void Desirability_InProgress_ParamSpecified()
         {
-            var expectedPosition = new Vector3(2.0f, 3.0f, -1.0f);
-
-            _goal.TestRecordDisturbance(expectedPosition);
+            UnityMessageEventFunctions.InvokeMessageEventWithDispatcher(_pathfinding.gameObject, new SuspiciousObjectSightedMessage(_targetObject));
             _goal.CalculateDesirability();
             _goal.Initialise();
 
@@ -150,7 +141,7 @@ namespace Assets.Editor.UnitTests.AI.Goals.CustomGoals
             _pathfinding.CompleteDelegate();
 
             _goal.Update(0.0f);
-            
+
             Assert.AreEqual(_params.DesirabilityOnDetection, _goal.CalculateDesirability());
         }
 
@@ -158,11 +149,10 @@ namespace Assets.Editor.UnitTests.AI.Goals.CustomGoals
         public void Terminated_SetsRotationToInitialRotation()
         {
             var initialRotation = _pathfinding.gameObject.transform.eulerAngles;
-            var expectedPosition = new Vector3(2.0f, 3.0f, -1.0f);
 
-            _goal.TestRecordDisturbance(expectedPosition);
+            UnityMessageEventFunctions.InvokeMessageEventWithDispatcher(_pathfinding.gameObject, new SuspiciousObjectSightedMessage(_targetObject));
             _goal.Initialise();
-            
+
             _pathfinding.gameObject.transform.eulerAngles = new Vector3(200.0f, 100.0f, 30.0f);
 
             _goal.Terminate();
@@ -173,9 +163,7 @@ namespace Assets.Editor.UnitTests.AI.Goals.CustomGoals
         [Test]
         public void Desirability_Terminated_Zero()
         {
-            var expectedPosition = new Vector3(2.0f, 3.0f, -1.0f);
-
-            _goal.TestRecordDisturbance(expectedPosition);
+            UnityMessageEventFunctions.InvokeMessageEventWithDispatcher(_pathfinding.gameObject, new SuspiciousObjectSightedMessage(_targetObject));
             _goal.CalculateDesirability();
             _goal.Initialise();
 
@@ -194,3 +182,4 @@ namespace Assets.Editor.UnitTests.AI.Goals.CustomGoals
         }
     }
 }
+

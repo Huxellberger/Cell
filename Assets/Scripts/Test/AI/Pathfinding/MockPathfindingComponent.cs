@@ -12,7 +12,7 @@ namespace Assets.Scripts.Test.AI.Pathfinding
         , IPathfindingInterface
     {
         public GameObject SetFollowTargetResult { get; private set; }
-        public Vector3 TargetLocation { get; private set; }
+        public Vector3 ? TargetLocation { get; private set; }
         private OnPathfindingCompleteDelegate _delegate;
 
         public void SetTargetLocation(Vector3 targetLocation, OnPathfindingCompleteDelegate inDelegate)
