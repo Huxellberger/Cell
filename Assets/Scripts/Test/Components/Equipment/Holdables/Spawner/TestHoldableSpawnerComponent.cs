@@ -12,7 +12,6 @@ namespace Assets.Scripts.Test.Components.Equipment.Holdables.Spawner
         public void TestStart() 
         {
 		    Start();
-            Owner = gameObject;
         }
     }
 }

@@ -1,5 +1,6 @@
 ﻿// Copyright (C) Threetee Gang All Rights Reserved
 
+using Assets.Scripts.Components.Equipment.Holdables.Weapon;
 using Assets.Scripts.Components.Spawning;
 using UnityEngine;
 
@@ -7,7 +8,7 @@ namespace Assets.Scripts.Components.Equipment.Holdables.Spawner
 {
     [RequireComponent(typeof(ISpawnerInterface))]
     public class HoldableSpawnerComponent 
-        : HoldableItemComponent
+        : HoldableWeaponComponent
     {
         private ISpawnerInterface _spawner;
 
@@ -27,6 +28,16 @@ namespace Assets.Scripts.Components.Equipment.Holdables.Spawner
 
         protected override void OnDroppedImpl()
         {
+        }
+
+        protected override void PrepareWeapon(GameObject target)
+        {
+            Owner.transform.up = (target.transform.position - Owner.transform.position).normalized;
+        }
+
+        protected override bool CanUseWeaponImpl(GameObject target)
+        {
+            return Owner != null;
         }
     }
 }
