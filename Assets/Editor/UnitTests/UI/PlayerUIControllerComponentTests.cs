@@ -6,6 +6,7 @@ using Assets.Scripts.AI.Companion;
 using Assets.Scripts.Components.ActionStateMachine;
 using Assets.Scripts.Components.ActionStateMachine.States.CinematicCamera;
 using Assets.Scripts.Components.ActionStateMachine.States.Dead;
+using Assets.Scripts.Components.Gadget;
 using Assets.Scripts.Components.Health;
 using Assets.Scripts.Components.Interaction;
 using Assets.Scripts.Components.Stamina;
@@ -15,6 +16,7 @@ using Assets.Scripts.Messaging;
 using Assets.Scripts.Services.Persistence;
 using Assets.Scripts.Services.Time;
 using Assets.Scripts.Test.Components.ActionStateMachine;
+using Assets.Scripts.Test.Components.Gadget;
 using Assets.Scripts.Test.Components.Interaction;
 using Assets.Scripts.Test.Input;
 using Assets.Scripts.Test.Instance;
@@ -31,6 +33,8 @@ namespace Assets.Editor.UnitTests.UI
     [TestFixture]
     public class PlayerUIControllerComponentTestFixture
     {
+        public const string SpritePath = "Test/Sprites/TestSprite";
+
         private TestPlayerUIControllerComponent _playerUi;
         private MockActionStateMachineComponent _actionStateMachineComponent;
 
@@ -300,6 +304,50 @@ namespace Assets.Editor.UnitTests.UI
             Assert.IsTrue(eventSpy.ActionCalled);
             Assert.IsTrue(eventSpy.MessagePayload.ToastText.Equals(_playerUi.DeathMessage.ToString()));
             Assert.AreSame(_playerUi.SavedNoise, eventSpy.MessagePayload.ToastAudio);
+
+            dispatcher.UnregisterForMessageEvent(handle);
+        }
+
+        [Test]
+        public void ReceiveGadgetUpdatedMessage_ForwardsAppropriateToastNotificationToHUD()
+        {
+            var eventSpy = new UnityTestMessageHandleResponseObject<GadgetUpdatedUIMessage>();
+
+            var gadget = new GameObject().AddComponent<MockGadgetComponent>();
+
+            gadget.GetGadgetIconReturnSprite = Resources.Load<Sprite>(SpritePath);
+
+            const int expectedSlotCount = 2;
+
+            var dispatcher = GameInstance.CurrentInstance.GetUIMessageDispatcher();
+            var handle = dispatcher
+                .RegisterForMessageEvent<GadgetUpdatedUIMessage>(eventSpy.OnResponse);
+
+            UnityMessageEventFunctions.InvokeMessageEventWithDispatcher(_playerUi.gameObject, new GadgetUpdatedMessage(gadget, expectedSlotCount));
+
+            Assert.IsTrue(eventSpy.ActionCalled);
+            Assert.AreSame(gadget.GetGadgetIconReturnSprite, eventSpy.MessagePayload.GadgetGraphic);
+            Assert.AreEqual(expectedSlotCount, eventSpy.MessagePayload.SlotCount);
+
+            dispatcher.UnregisterForMessageEvent(handle);
+        }
+
+        [Test]
+        public void ReceiveGadgetUpdatedMessage_NullGadgetForwardsAppropriateToastNotificationToHUD()
+        {
+            var eventSpy = new UnityTestMessageHandleResponseObject<GadgetUpdatedUIMessage>();
+
+            const int expectedSlotCount = 2;
+
+            var dispatcher = GameInstance.CurrentInstance.GetUIMessageDispatcher();
+            var handle = dispatcher
+                .RegisterForMessageEvent<GadgetUpdatedUIMessage>(eventSpy.OnResponse);
+
+            UnityMessageEventFunctions.InvokeMessageEventWithDispatcher(_playerUi.gameObject, new GadgetUpdatedMessage(null, expectedSlotCount));
+
+            Assert.IsTrue(eventSpy.ActionCalled);
+            Assert.IsNull(eventSpy.MessagePayload.GadgetGraphic);
+            Assert.AreEqual(expectedSlotCount, eventSpy.MessagePayload.SlotCount);
 
             dispatcher.UnregisterForMessageEvent(handle);
         }

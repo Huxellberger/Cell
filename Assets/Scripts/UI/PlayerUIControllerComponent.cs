@@ -4,6 +4,7 @@ using Assets.Scripts.AI.Companion;
 using Assets.Scripts.Components.ActionStateMachine;
 using Assets.Scripts.Components.ActionStateMachine.States.CinematicCamera;
 using Assets.Scripts.Components.ActionStateMachine.States.Dead;
+using Assets.Scripts.Components.Gadget;
 using Assets.Scripts.Components.Health;
 using Assets.Scripts.Components.Interaction;
 using Assets.Scripts.Components.Stamina;
@@ -52,6 +53,8 @@ namespace Assets.Scripts.UI
 
         private UnityMessageEventHandle<SaveGameTriggerActivatedMessage> _saveTriggerActivatedHandle;
 
+        private UnityMessageEventHandle<GadgetUpdatedMessage> _gadgetUpdatedHandle;
+
         protected void Start ()
         {
             DeathMessage = new LocalisedTextRef(new LocalisationKey("UIMessages", "DeathMessage"));
@@ -94,10 +97,14 @@ namespace Assets.Scripts.UI
             _companionSlotsUpdatedHandle =  _localDispatcher.RegisterForMessageEvent<CompanionSlotsUpdatedMessage>(OnCompanionSlotsUpdated);
 
             _saveTriggerActivatedHandle = _localDispatcher.RegisterForMessageEvent<SaveGameTriggerActivatedMessage>(OnSaveTriggerActivated);
+
+            _gadgetUpdatedHandle = _localDispatcher.RegisterForMessageEvent<GadgetUpdatedMessage>(OnGadgetUpdated);
         }
 
         private void UnregisterForMessages()
         {
+            _localDispatcher.UnregisterForMessageEvent(_gadgetUpdatedHandle);
+
             _localDispatcher.UnregisterForMessageEvent(_saveTriggerActivatedHandle);
 
             _localDispatcher.UnregisterForMessageEvent(_companionSlotsUpdatedHandle);
@@ -190,6 +197,17 @@ namespace Assets.Scripts.UI
         private void OnSaveTriggerActivated(SaveGameTriggerActivatedMessage inMessage)
         {
             _uiDispatcher.InvokeMessageEvent(new DisplayToastUIMessage(SavedMessage.ToString(), SavedNoise));
+        }
+
+        private void OnGadgetUpdated(GadgetUpdatedMessage inMessage)
+        {
+            Sprite dispatchedSprite = null;
+            if (inMessage.NewGadget != null)
+            {
+                dispatchedSprite = inMessage.NewGadget.GetGadgetIcon();
+            }
+
+            _uiDispatcher.InvokeMessageEvent(new GadgetUpdatedUIMessage(dispatchedSprite, inMessage.SlotCount));
         }
     }
 }
