@@ -110,6 +110,7 @@ namespace Assets.Editor.UnitTests.Components.Gadget
 
             Assert.IsTrue(messageSpy.ActionCalled);
             Assert.AreSame(_gadget, messageSpy.MessagePayload.NewGadget);
+            Assert.AreEqual(1, messageSpy.MessagePayload.SlotCount);
 
             UnityMessageEventFunctions.UnregisterActionWithDispatcher(_set.gameObject, handle);
         }
@@ -135,6 +136,7 @@ namespace Assets.Editor.UnitTests.Components.Gadget
 
             Assert.IsTrue(messageSpy.ActionCalled);
             Assert.AreSame(_otherGadget, messageSpy.MessagePayload.NewGadget);
+            Assert.AreEqual(2, messageSpy.MessagePayload.SlotCount);
 
             UnityMessageEventFunctions.UnregisterActionWithDispatcher(_set.gameObject, handle);
         }
@@ -161,6 +163,7 @@ namespace Assets.Editor.UnitTests.Components.Gadget
 
             Assert.IsTrue(messageSpy.ActionCalled);
             Assert.AreSame(_gadget, messageSpy.MessagePayload.NewGadget);
+            Assert.AreEqual(1, messageSpy.MessagePayload.SlotCount);
 
             UnityMessageEventFunctions.UnregisterActionWithDispatcher(_set.gameObject, handle);
         }
@@ -238,6 +241,7 @@ namespace Assets.Editor.UnitTests.Components.Gadget
 
             Assert.IsTrue(messageSpy.ActionCalled);
             Assert.IsNull(messageSpy.MessagePayload.NewGadget);
+            Assert.AreEqual(0, messageSpy.MessagePayload.SlotCount);
 
             UnityMessageEventFunctions.UnregisterActionWithDispatcher(_set.gameObject, handle);
         }
@@ -264,6 +268,7 @@ namespace Assets.Editor.UnitTests.Components.Gadget
 
             Assert.IsTrue(messageSpy.ActionCalled);
             Assert.AreSame(_gadget, messageSpy.MessagePayload.NewGadget);
+            Assert.AreEqual(1, messageSpy.MessagePayload.SlotCount);
 
             UnityMessageEventFunctions.UnregisterActionWithDispatcher(_set.gameObject, handle);
         }
@@ -291,6 +296,7 @@ namespace Assets.Editor.UnitTests.Components.Gadget
 
             Assert.IsTrue(messageSpy.ActionCalled);
             Assert.AreSame(_otherGadget, messageSpy.MessagePayload.NewGadget);
+            Assert.AreEqual(1, messageSpy.MessagePayload.SlotCount);
 
             UnityMessageEventFunctions.UnregisterActionWithDispatcher(_set.gameObject, handle);
         }
@@ -398,6 +404,7 @@ namespace Assets.Editor.UnitTests.Components.Gadget
 
             Assert.IsTrue(messageSpy.ActionCalled);
             Assert.AreSame(_otherGadget, messageSpy.MessagePayload.NewGadget);
+            Assert.AreEqual(1, messageSpy.MessagePayload.SlotCount);
 
             UnityMessageEventFunctions.UnregisterActionWithDispatcher(_set.gameObject, handle);
         }
@@ -425,6 +432,7 @@ namespace Assets.Editor.UnitTests.Components.Gadget
 
             Assert.IsTrue(messageSpy.ActionCalled);
             Assert.AreSame(_otherGadget, messageSpy.MessagePayload.NewGadget);
+            Assert.AreEqual(1, messageSpy.MessagePayload.SlotCount);
 
             UnityMessageEventFunctions.UnregisterActionWithDispatcher(_set.gameObject, handle);
         }

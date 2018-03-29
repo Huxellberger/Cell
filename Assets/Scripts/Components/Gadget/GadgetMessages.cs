@@ -1,6 +1,7 @@
 ﻿// Copyright (C) Threetee Gang All Rights Reserved
 
 using Assets.Scripts.Messaging;
+using UnityEngine;
 
 namespace Assets.Scripts.Components.Gadget
 {
@@ -8,23 +9,27 @@ namespace Assets.Scripts.Components.Gadget
         : UnityMessagePayload
     {
         public readonly IGadgetInterface NewGadget;
+        public readonly int SlotCount;
 
-        public GadgetUpdatedMessage(IGadgetInterface newGadget)
+        public GadgetUpdatedMessage(IGadgetInterface newGadget, int slotCount)
             : base()
         {
             NewGadget = newGadget;
+            SlotCount = slotCount;
         }
     }
 
     public class GadgetUpdatedUIMessage
         : UnityMessagePayload
     {
-        public readonly IGadgetInterface NewGadget;
+        public readonly Sprite GadgetGraphic;
+        public readonly int SlotCount;
 
-        public GadgetUpdatedUIMessage(IGadgetInterface newGadget)
+        public GadgetUpdatedUIMessage(Sprite gadgetGraphic, int slotCount)
             : base()
         {
-            NewGadget = newGadget;
+            GadgetGraphic = gadgetGraphic;
+            SlotCount = slotCount;
         }
     }
 }

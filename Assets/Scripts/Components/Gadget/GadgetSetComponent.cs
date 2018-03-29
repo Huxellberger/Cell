@@ -84,11 +84,12 @@ namespace Assets.Scripts.Components.Gadget
         {
             if (_gadgetSlots.Count > 0)
             {
-                UnityMessageEventFunctions.InvokeMessageEventWithDispatcher(gameObject, new GadgetUpdatedMessage(_gadgetSlots[_activeSlotIndex].Gadgets.Last()));
+                var activeSlot = _gadgetSlots[_activeSlotIndex];
+                UnityMessageEventFunctions.InvokeMessageEventWithDispatcher(gameObject, new GadgetUpdatedMessage(activeSlot.Gadgets.Last(), activeSlot.Gadgets.Count));
             }
             else
             {
-                UnityMessageEventFunctions.InvokeMessageEventWithDispatcher(gameObject, new GadgetUpdatedMessage(null));
+                UnityMessageEventFunctions.InvokeMessageEventWithDispatcher(gameObject, new GadgetUpdatedMessage(null, 0));
             }
         }
 
