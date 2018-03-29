@@ -535,7 +535,7 @@ MonoBehaviour:
   ExhaustedMultiplier: 0.5
   Velocity: 5
   SprintStaminaCostPerUpdate: 1
-  TurningSpeed: 100
+  TurningSpeed: 3
 --- !u!114 &114329593778810886
 MonoBehaviour:
   m_ObjectHideFlags: 1
