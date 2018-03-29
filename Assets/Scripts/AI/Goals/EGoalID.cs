@@ -10,6 +10,7 @@ namespace Assets.Scripts.AI.Goals
         InvestigateAudioDisturbance,
         InvestigateVisualDisturbance,
         PursuitTarget,
+        PatrolPoints,
         Idle
     }
 }

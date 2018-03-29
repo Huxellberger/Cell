@@ -71,6 +71,7 @@ GameObject:
   - component: {fileID: 114910459470766700}
   - component: {fileID: 114696887673270228}
   - component: {fileID: 114140235829235296}
+  - component: {fileID: 114826644097477226}
   m_Layer: 9
   m_Name: TestGuard
   m_TagString: Untagged
@@ -614,6 +615,20 @@ MonoBehaviour:
   InitialStamina: 100
   RegenRate: 0.5
   RegenBlockTime: 5
+--- !u!114 &114826644097477226
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1300127848117578}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 03156f27617f1c24cbd1c454bfa0ba92, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  PatrolPoints: []
+  IdleTimeBetweenPoints: 5
+  DebugDrawColor: {r: 1, g: 0, b: 0, a: 1}
 --- !u!114 &114837952363176406
 MonoBehaviour:
   m_ObjectHideFlags: 1

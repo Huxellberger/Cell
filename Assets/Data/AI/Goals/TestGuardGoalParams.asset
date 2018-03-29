@@ -30,3 +30,5 @@ MonoBehaviour:
     TargetDetectedDesirability: 0.8
     DelayBeforePursuit: 0
     AbandonPursuitRadiusSquared: 100
+  PatrolPointsGoalParameters:
+    PatrolDesirability: 0.3

@@ -85,5 +85,11 @@ namespace Assets.Editor.UnitTests.AI.Goals
         {
             Assert.IsNotNull((PursuitTargetGoal)_goalBuilder.CreateGoalForId(EGoalID.PursuitTarget));
         }
+
+        [Test]
+        public void CreateGoalWithId_PatrolPointsGoal_CreatePatrolPointsGoal()
+        {
+            Assert.IsNotNull((PatrolPointsGoal)_goalBuilder.CreateGoalForId(EGoalID.PatrolPoints));
+        }
     }
 }

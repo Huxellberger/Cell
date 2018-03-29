@@ -35,6 +35,7 @@ namespace Assets.Scripts.AI.Goals
             GoalInstantiationFunctions.Add(EGoalID.InvestigateAudioDisturbance, () => new InvestigateAudioDisturbanceGoal(Owner, Params.InvestigateAudioDisturbanceGoalParameters));
             GoalInstantiationFunctions.Add(EGoalID.InvestigateVisualDisturbance, () => new InvestigateVisualDisturbanceGoal(Owner, Params.InvestigateVisualDisturbanceGoalParameters));
             GoalInstantiationFunctions.Add(EGoalID.PursuitTarget, () => new PursuitTargetGoal(Owner, Params.PursuitTargetGoalParameters));
+            GoalInstantiationFunctions.Add(EGoalID.PatrolPoints, () => new PatrolPointsGoal(Owner, Params.PatrolPointsGoalParameters));
         }
 
         public Goal CreateGoalForId(EGoalID inId)

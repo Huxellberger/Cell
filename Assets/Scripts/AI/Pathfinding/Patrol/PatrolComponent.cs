@@ -96,6 +96,8 @@ namespace Assets.Scripts.AI.Pathfinding.Patrol
                 {
                     Gizmos.DrawLine(PatrolPoints[currentNodeIndex], PatrolPoints[currentNodeIndex + 1]);
                 }
+
+                Gizmos.DrawLine(PatrolPoints[PatrolPoints.Count -1], PatrolPoints[0]);
             }
         }
     }

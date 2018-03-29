@@ -15,5 +15,6 @@ namespace Assets.Scripts.AI.Goals
         public InvestigateDisturbanceGoalParams InvestigateAudioDisturbanceGoalParameters;
         public InvestigateDisturbanceGoalParams InvestigateVisualDisturbanceGoalParameters;
         public PursuitTargetGoalParams PursuitTargetGoalParameters;
+        public PatrolPointsGoalParams PatrolPointsGoalParameters;
     }
 }

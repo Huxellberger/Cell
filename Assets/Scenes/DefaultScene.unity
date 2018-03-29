@@ -246,6 +246,11 @@ Prefab:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 114826644097477226, guid: 096d5da0021d82742af4d847f1334ace,
+        type: 2}
+      propertyPath: PatrolPoints.Array.size
+      value: 4
+      objectReference: {fileID: 0}
     - target: {fileID: 4169225601249766, guid: 096d5da0021d82742af4d847f1334ace, type: 2}
       propertyPath: m_LocalPosition.x
       value: -6.68
@@ -277,6 +282,46 @@ Prefab:
     - target: {fileID: 4169225601249766, guid: 096d5da0021d82742af4d847f1334ace, type: 2}
       propertyPath: m_RootOrder
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114826644097477226, guid: 096d5da0021d82742af4d847f1334ace,
+        type: 2}
+      propertyPath: PatrolPoints.Array.data[0].x
+      value: -2
+      objectReference: {fileID: 0}
+    - target: {fileID: 114826644097477226, guid: 096d5da0021d82742af4d847f1334ace,
+        type: 2}
+      propertyPath: PatrolPoints.Array.data[1].x
+      value: -6
+      objectReference: {fileID: 0}
+    - target: {fileID: 114826644097477226, guid: 096d5da0021d82742af4d847f1334ace,
+        type: 2}
+      propertyPath: PatrolPoints.Array.data[1].y
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 114826644097477226, guid: 096d5da0021d82742af4d847f1334ace,
+        type: 2}
+      propertyPath: PatrolPoints.Array.data[0].y
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 114826644097477226, guid: 096d5da0021d82742af4d847f1334ace,
+        type: 2}
+      propertyPath: PatrolPoints.Array.data[2].x
+      value: -6
+      objectReference: {fileID: 0}
+    - target: {fileID: 114826644097477226, guid: 096d5da0021d82742af4d847f1334ace,
+        type: 2}
+      propertyPath: PatrolPoints.Array.data[2].y
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 114826644097477226, guid: 096d5da0021d82742af4d847f1334ace,
+        type: 2}
+      propertyPath: PatrolPoints.Array.data[3].x
+      value: -2
+      objectReference: {fileID: 0}
+    - target: {fileID: 114826644097477226, guid: 096d5da0021d82742af4d847f1334ace,
+        type: 2}
+      propertyPath: PatrolPoints.Array.data[3].y
+      value: 4
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 096d5da0021d82742af4d847f1334ace, type: 2}
