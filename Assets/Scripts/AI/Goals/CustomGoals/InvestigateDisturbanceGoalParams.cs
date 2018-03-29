@@ -9,6 +9,7 @@ namespace Assets.Scripts.AI.Goals.CustomGoals
     {
         [Range(0.0f, 1.0f)]
         public float DesirabilityOnDetection;
-        public float IdleDelay;
+        public float IdleDelayOnDetection;
+        public float IdleDelayOnObservation;
     }
 }

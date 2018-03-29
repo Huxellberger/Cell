@@ -18,7 +18,7 @@ namespace Assets.Editor.UnitTests.AI.Goals.CustomGoals
         private MockPathfindingComponent _pathfinding;
         private MockEmoteComponent _emote;
 
-        private readonly InvestigateDisturbanceGoalParams _params = new InvestigateDisturbanceGoalParams { DesirabilityOnDetection = 0.6f, IdleDelay = 2.0f };
+        private readonly InvestigateDisturbanceGoalParams _params = new InvestigateDisturbanceGoalParams { DesirabilityOnDetection = 0.6f, IdleDelayOnDetection = 2.0f, IdleDelayOnObservation = 3.0f};
         private InvestigateAudioDisturbanceGoal _goal;
 
         [SetUp]
@@ -85,7 +85,7 @@ namespace Assets.Editor.UnitTests.AI.Goals.CustomGoals
             UnityMessageEventFunctions.InvokeMessageEventWithDispatcher(_pathfinding.gameObject, new NoiseHeardMessage(expectedNoise));
             _goal.Initialise();
 
-            _goal.Update(_params.IdleDelay + 0.1f);
+            _goal.Update(_params.IdleDelayOnDetection + 0.1f);
 
             Assert.AreEqual(expectedNoise.NoiseLocation, _pathfinding.TargetLocation);
         }
@@ -99,12 +99,12 @@ namespace Assets.Editor.UnitTests.AI.Goals.CustomGoals
             UnityMessageEventFunctions.InvokeMessageEventWithDispatcher(_pathfinding.gameObject, new NoiseHeardMessage(expectedNoise));
             _goal.Initialise();
 
-            _goal.Update(_params.IdleDelay + 0.1f);
+            _goal.Update(_params.IdleDelayOnDetection + 0.1f);
 
             _pathfinding.CompleteDelegate();
 
             _goal.Update(0.0f);
-            _goal.Update(_params.IdleDelay * 0.5f);
+            _goal.Update(_params.IdleDelayOnObservation * 0.5f);
 
             Assert.AreNotEqual(initialLocation, _pathfinding.TargetLocation);
         }
@@ -118,12 +118,12 @@ namespace Assets.Editor.UnitTests.AI.Goals.CustomGoals
             UnityMessageEventFunctions.InvokeMessageEventWithDispatcher(_pathfinding.gameObject, new NoiseHeardMessage(expectedNoise));
             _goal.Initialise();
 
-            _goal.Update(_params.IdleDelay + 0.1f);
+            _goal.Update(_params.IdleDelayOnDetection + 0.1f);
 
             _pathfinding.CompleteDelegate();
 
             _goal.Update(0.0f);
-            _goal.Update(_params.IdleDelay + 0.1f);
+            _goal.Update(_params.IdleDelayOnObservation + 0.1f);
 
             Assert.AreEqual(initialLocation, _pathfinding.TargetLocation);
         }
@@ -137,7 +137,7 @@ namespace Assets.Editor.UnitTests.AI.Goals.CustomGoals
             _goal.CalculateDesirability();
             _goal.Initialise();
 
-            _goal.Update(_params.IdleDelay + 0.1f);
+            _goal.Update(_params.IdleDelayOnDetection + 0.1f);
 
             _pathfinding.CompleteDelegate();
 

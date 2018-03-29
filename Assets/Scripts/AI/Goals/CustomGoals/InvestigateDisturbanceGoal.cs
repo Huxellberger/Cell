@@ -47,12 +47,12 @@ namespace Assets.Scripts.AI.Goals.CustomGoals
             }
 
             AddSubGoal(new MoveToTargetGoal(Owner, Owner.transform.position));
-            AddSubGoal(new DelayGoal(Owner, _params.IdleDelay));
+            AddSubGoal(new DelayGoal(Owner, _params.IdleDelayOnObservation));
             if (_lastDisturbance != null)
             {
                 AddSubGoal(new MoveToTargetGoal(Owner, _lastDisturbance.Value));
             }
-            AddSubGoal(new DelayGoal(Owner, _params.IdleDelay));
+            AddSubGoal(new DelayGoal(Owner, _params.IdleDelayOnDetection));
 
             _inProgress = true;
         }

@@ -9,6 +9,7 @@ namespace Assets.Scripts.AI.Goals
         RemainInRadius,
         InvestigateAudioDisturbance,
         InvestigateVisualDisturbance,
+        InvestigateDamage,
         PursuitTarget,
         PatrolPoints,
         Idle

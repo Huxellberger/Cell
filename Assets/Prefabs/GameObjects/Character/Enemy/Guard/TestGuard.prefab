@@ -535,7 +535,7 @@ MonoBehaviour:
   ExhaustedMultiplier: 0.5
   Velocity: 5
   SprintStaminaCostPerUpdate: 1
-  TurningSpeed: 3
+  TurningSpeed: 100
 --- !u!114 &114329593778810886
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -734,7 +734,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b2d1d8f58c0129e42839992b580256d2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  PossibleGoalIds: 05000000040000000300000006000000
+  PossibleGoalIds: 060000000500000004000000030000000700000008000000
   GoalParameters: {fileID: 11400000, guid: 182efb813a7f58f46ba43d796f671f2c, type: 2}
 --- !u!212 &212244315730230032
 SpriteRenderer:

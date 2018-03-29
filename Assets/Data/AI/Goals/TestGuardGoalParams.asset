@@ -22,10 +22,16 @@ MonoBehaviour:
     MaxRadius: 0
   InvestigateAudioDisturbanceGoalParameters:
     DesirabilityOnDetection: 0.4
-    IdleDelay: 2
+    IdleDelayOnDetection: 2
+    IdleDelayOnObservation: 4
   InvestigateVisualDisturbanceGoalParameters:
-    DesirabilityOnDetection: 0.4
-    IdleDelay: 2
+    DesirabilityOnDetection: 0.45
+    IdleDelayOnDetection: 2
+    IdleDelayOnObservation: 4
+  InvestigateDamageGoalParameters:
+    DesirabilityOnDetection: 0.5
+    IdleDelayOnDetection: 0
+    IdleDelayOnObservation: 4
   PursuitTargetGoalParameters:
     TargetDetectedDesirability: 0.8
     DelayBeforePursuit: 0
