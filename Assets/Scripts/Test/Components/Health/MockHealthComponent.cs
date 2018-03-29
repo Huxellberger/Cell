@@ -11,16 +11,16 @@ namespace Assets.Scripts.Test.Components.Health
         : MonoBehaviour
         , IHealthInterface
     {
-        public int ? AdjustHealthResult { get; private set; }
+        public HealthAdjustmentUnit AdjustHealthResult { get; private set; }
         public bool ? SetHealthChangeEnabledResult { get; private set; }
         public EHealthLockReason ? SetHealthChangeEnabledLockReason { get; private set; }
 
         public bool ReplenishHealthCalled = false;
 
         // IHealthInterface
-        public void AdjustHealth(int inChange)
+        public void AdjustHealth(HealthAdjustmentUnit inAdjustment)
         {
-            AdjustHealthResult = inChange;
+            AdjustHealthResult = inAdjustment;
         }
 
         public void SetHealthChangedEnabled(bool isEnabled, EHealthLockReason inReason)

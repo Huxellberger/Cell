@@ -4,7 +4,7 @@ namespace Assets.Scripts.Components.Health
 {
     public interface IHealthInterface
     {
-        void AdjustHealth(int inChange);
+        void AdjustHealth(HealthAdjustmentUnit inAdjustment);
         void SetHealthChangedEnabled(bool isEnabled, EHealthLockReason inReason);
         void ReplenishHealth();
         int GetCurrentHealth();

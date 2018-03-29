@@ -23,7 +23,21 @@ namespace Assets.Editor.UnitTests.Components.Health.Damage
             adjustComponent.HealthChangeOnContact = 12;
             adjustComponent.TestCollide(healthComponent.gameObject);
 
-            Assert.AreEqual(adjustComponent.HealthChangeOnContact, healthComponent.AdjustHealthResult);
+            Assert.AreEqual(adjustComponent.HealthChangeOnContact, healthComponent.AdjustHealthResult.AdjustAmount);
+        }
+
+        [Test]
+        public void OnCollision_AdjustsHealthWithProximityAsAuthor()
+        {
+            var healthComponent =
+                new GameObject().AddComponent<MockHealthComponent>();
+
+            var adjustComponent = new GameObject().AddComponent<TestProximityHealthAdjustmentComponent>();
+
+            adjustComponent.HealthChangeOnContact = 12;
+            adjustComponent.TestCollide(healthComponent.gameObject);
+
+            Assert.AreSame(adjustComponent.gameObject, healthComponent.AdjustHealthResult.Author);
         }
     }
 }

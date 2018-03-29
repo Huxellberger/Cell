@@ -79,6 +79,7 @@ namespace Assets.Editor.UnitTests.Components.Health
 
             Assert.IsTrue(eventCapture.ActionCalled);
             Assert.AreEqual(_healthComponent.InitialHealth, eventCapture.MessagePayload.NewHealth);
+            Assert.IsNull(eventCapture.MessagePayload.Author);
 
             _dispatcherComponent.GetUnityMessageEventDispatcher().UnregisterForMessageEvent(handle);
         }
@@ -96,7 +97,7 @@ namespace Assets.Editor.UnitTests.Components.Health
         {
             _healthComponent.TestStart();
 
-            _healthComponent.AdjustHealth(100);
+            _healthComponent.AdjustHealth(new HealthAdjustmentUnit(100, null));
             Assert.AreEqual(_healthComponent.GetCurrentHealth(), _healthComponent.GetMaxHealth());
         }
 
@@ -107,7 +108,7 @@ namespace Assets.Editor.UnitTests.Components.Health
 
             var expectedHealthChange = _healthComponent.GetCurrentHealth() / 2;
 
-            _healthComponent.AdjustHealth(-expectedHealthChange);
+            _healthComponent.AdjustHealth(new HealthAdjustmentUnit(-expectedHealthChange, null));
 
             Assert.AreEqual(_healthComponent.GetMaxHealth() - expectedHealthChange, _healthComponent.GetCurrentHealth());
         }
@@ -115,6 +116,7 @@ namespace Assets.Editor.UnitTests.Components.Health
         [Test]
         public void AdjustHealth_FiresHealthChangedMessage()
         {
+            var expectedAuthor = new GameObject();
             _healthComponent.TestStart();
 
             var expectedHealthChange = _healthComponent.GetCurrentHealth() / 2;
@@ -126,10 +128,12 @@ namespace Assets.Editor.UnitTests.Components.Health
                 eventCapture.OnResponse
             );
 
-            _healthComponent.AdjustHealth(-expectedHealthChange);
+            _healthComponent.AdjustHealth(new HealthAdjustmentUnit(-expectedHealthChange, expectedAuthor));
 
+            Assert.IsTrue(eventCapture.ActionCalled);
             Assert.AreEqual(_healthComponent.GetMaxHealth() - expectedHealthChange, eventCapture.MessagePayload.NewHealth);
             Assert.AreEqual(-expectedHealthChange, eventCapture.MessagePayload.HealthChange);
+            Assert.AreSame(expectedAuthor, eventCapture.MessagePayload.Author);
 
             _dispatcherComponent.GetUnityMessageEventDispatcher().UnregisterForMessageEvent(handle);
         }
@@ -141,7 +145,7 @@ namespace Assets.Editor.UnitTests.Components.Health
 
             _healthComponent.SetHealthChangedEnabled(false, EHealthLockReason.Cinematic);
 
-            _healthComponent.AdjustHealth(-1 *(_healthComponent.GetCurrentHealth() / 2));
+            _healthComponent.AdjustHealth(new HealthAdjustmentUnit(-1 *(_healthComponent.GetCurrentHealth() / 2), null));
 
             Assert.AreEqual(_healthComponent.GetMaxHealth(), _healthComponent.GetCurrentHealth());
         }
@@ -156,7 +160,7 @@ namespace Assets.Editor.UnitTests.Components.Health
             _healthComponent.SetHealthChangedEnabled(false, EHealthLockReason.Cinematic);
             _healthComponent.SetHealthChangedEnabled(true, EHealthLockReason.Cinematic);
 
-            _healthComponent.AdjustHealth(expectedAdjustment);
+            _healthComponent.AdjustHealth(new HealthAdjustmentUnit(expectedAdjustment, null));
 
             Assert.AreEqual(_healthComponent.GetMaxHealth() + expectedAdjustment, _healthComponent.GetCurrentHealth());
         }
@@ -174,7 +178,7 @@ namespace Assets.Editor.UnitTests.Components.Health
             );
 
             _healthComponent.SetHealthChangedEnabled(false, EHealthLockReason.Cinematic);
-            _healthComponent.AdjustHealth(-1 * (_healthComponent.GetCurrentHealth() / 2));
+            _healthComponent.AdjustHealth(new HealthAdjustmentUnit(-1 * (_healthComponent.GetCurrentHealth() / 2), null));
 
             Assert.IsFalse(eventCapture.ActionCalled);
 
@@ -186,7 +190,7 @@ namespace Assets.Editor.UnitTests.Components.Health
         {
             _healthComponent.TestStart();
 
-            _healthComponent.AdjustHealth(_healthComponent.GetMaxHealth() * -1);
+            _healthComponent.AdjustHealth(new HealthAdjustmentUnit(_healthComponent.GetMaxHealth() * -1, null));
 
             Assert.AreEqual(EActionStateMachineTrack.Locomotion, _actionStateMachineComponent.RequestedTrack);
             Assert.AreEqual(EActionStateId.Dead, _actionStateMachineComponent.RequestedId);
@@ -197,7 +201,7 @@ namespace Assets.Editor.UnitTests.Components.Health
         {
             _healthComponent.TestStart();
 
-            _healthComponent.AdjustHealth(-1 * (_healthComponent.GetCurrentHealth() / 2));
+            _healthComponent.AdjustHealth(new HealthAdjustmentUnit(-1 * (_healthComponent.GetCurrentHealth() / 2), null));
             _healthComponent.ReplenishHealth();
 
             Assert.AreEqual(_healthComponent.GetMaxHealth(), _healthComponent.GetCurrentHealth());
@@ -209,7 +213,7 @@ namespace Assets.Editor.UnitTests.Components.Health
             _healthComponent.TestStart();
 
             _healthComponent.SetHealthChangedEnabled(false, EHealthLockReason.Cinematic);
-            _healthComponent.AdjustHealth(-1 * (_healthComponent.GetCurrentHealth() / 2));
+            _healthComponent.AdjustHealth(new HealthAdjustmentUnit(-1 * (_healthComponent.GetCurrentHealth() / 2), null));
             _healthComponent.ReplenishHealth();
 
             Assert.AreEqual(_healthComponent.GetMaxHealth(), _healthComponent.GetCurrentHealth());

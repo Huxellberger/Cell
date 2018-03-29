@@ -31,9 +31,9 @@ namespace Assets.Scripts.Components.Health
             ReplenishHealth();
         }
 
-        public void AdjustHealth(int inChange)
+        public void AdjustHealth(HealthAdjustmentUnit inAdjustment)
         {
-            CurrentHealth += inChange;
+            OnHealthSet(CurrentHealth + inAdjustment.AdjustAmount, inAdjustment.Author);
         }
 
         public void SetHealthChangedEnabled(bool isEnabled, EHealthLockReason inReason)
@@ -73,7 +73,7 @@ namespace Assets.Scripts.Components.Health
             return false;
         }
 
-        private void OnHealthSet(int newHealth)
+        private void OnHealthSet(int newHealth, GameObject healthAdjuster = null)
         {
             if (CanAdjustHealth())
             {
@@ -81,7 +81,7 @@ namespace Assets.Scripts.Components.Health
                 _currentHealth = newHealth;
                 _currentHealth = Mathf.Clamp(_currentHealth, 0, GetMaxHealth());
 
-                UnityMessageEventFunctions.InvokeMessageEventWithDispatcher(gameObject, new HealthChangedMessage(healthChange, _currentHealth));
+                UnityMessageEventFunctions.InvokeMessageEventWithDispatcher(gameObject, new HealthChangedMessage(healthChange, _currentHealth, healthAdjuster));
 
                 if (_currentHealth <= 0)
                 {

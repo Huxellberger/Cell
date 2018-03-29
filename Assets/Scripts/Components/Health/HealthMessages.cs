@@ -1,6 +1,7 @@
 ﻿// Copyright (C) Threetee Gang All Rights Reserved
 
 using Assets.Scripts.Messaging;
+using UnityEngine;
 
 namespace Assets.Scripts.Components.Health
 {
@@ -8,14 +9,16 @@ namespace Assets.Scripts.Components.Health
     public class HealthChangedMessage
         : UnityMessagePayload
     {
-        public HealthChangedMessage(int inHealthChange, int inNewHealth)
+        public HealthChangedMessage(int inHealthChange, int inNewHealth, GameObject inAuthor)
         {
             HealthChange = inHealthChange;
             NewHealth = inNewHealth;
+            Author = inAuthor;
         }
 
         public readonly int HealthChange;
         public readonly int NewHealth;
+        public readonly GameObject Author;
     }
 
     [System.Serializable]

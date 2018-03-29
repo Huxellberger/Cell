@@ -38,7 +38,7 @@ namespace Assets.Editor.UnitTests.Components.Audio
         [Test]
         public void HealthChangedMessage_HealthLoss_PlaysDamageSound()
         {
-            UnityMessageEventFunctions.InvokeMessageEventWithDispatcher(_audio.gameObject, new HealthChangedMessage(-12, 2));
+            UnityMessageEventFunctions.InvokeMessageEventWithDispatcher(_audio.gameObject, new HealthChangedMessage(-12, 2, null));
 
             Assert.AreSame(_audio.DamageSound, _audio.PlayedClip);
         }
@@ -46,7 +46,7 @@ namespace Assets.Editor.UnitTests.Components.Audio
         [Test]
         public void HealthChangedMessage_NoHealthChange_DoesNotPlayDamageSound()
         {
-            UnityMessageEventFunctions.InvokeMessageEventWithDispatcher(_audio.gameObject, new HealthChangedMessage(0, 2));
+            UnityMessageEventFunctions.InvokeMessageEventWithDispatcher(_audio.gameObject, new HealthChangedMessage(0, 2, null));
 
             Assert.IsNull(_audio.PlayedClip);
         }
@@ -54,7 +54,7 @@ namespace Assets.Editor.UnitTests.Components.Audio
         [Test]
         public void HealthChangedMessage_HealthGain_DoesNotPlayDamageSound()
         {
-            UnityMessageEventFunctions.InvokeMessageEventWithDispatcher(_audio.gameObject, new HealthChangedMessage(12, 2));
+            UnityMessageEventFunctions.InvokeMessageEventWithDispatcher(_audio.gameObject, new HealthChangedMessage(12, 2, null));
 
             Assert.IsNull(_audio.PlayedClip);
         }

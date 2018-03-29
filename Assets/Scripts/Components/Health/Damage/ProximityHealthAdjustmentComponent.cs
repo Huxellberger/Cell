@@ -22,7 +22,7 @@ namespace Assets.Scripts.Components.Health.Damage
             var healthComponentInterface = inCollidingObject.GetComponent<IHealthInterface>();
             if (healthComponentInterface != null)
             {
-                healthComponentInterface.AdjustHealth(HealthChangeOnContact);
+                healthComponentInterface.AdjustHealth(new HealthAdjustmentUnit(HealthChangeOnContact, gameObject));
             }
         }
     }

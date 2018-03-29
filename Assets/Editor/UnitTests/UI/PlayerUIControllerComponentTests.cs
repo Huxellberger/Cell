@@ -115,7 +115,7 @@ namespace Assets.Editor.UnitTests.UI
 
             const int newHealth = 10;
 
-            UnityMessageEventFunctions.InvokeMessageEventWithDispatcher(_playerUi.gameObject, new HealthChangedMessage(11, newHealth));
+            UnityMessageEventFunctions.InvokeMessageEventWithDispatcher(_playerUi.gameObject, new HealthChangedMessage(11, newHealth, null));
 
             Assert.AreEqual(newHealth, eventSpy.MessagePayload.NewHealth);
 
