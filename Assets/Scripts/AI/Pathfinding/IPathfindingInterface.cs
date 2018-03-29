@@ -10,5 +10,7 @@ namespace Assets.Scripts.AI.Pathfinding
     {
         void SetTargetLocation(Vector3 targetLocation, OnPathfindingCompleteDelegate inDelegate);
         void SetFollowTarget(GameObject inTarget);
+
+        void CancelPathfinding();
     }
 }

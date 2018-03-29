@@ -60,7 +60,7 @@ namespace Assets.Scripts.AI.Goals.CustomGoals
 
         protected override void OnTerminated()
         {
-            _pathfinding.SetFollowTarget(null);
+            _pathfinding.CancelPathfinding();
             _emote.SetEmoteState(EEmoteState.None);
             _inProgress = false;
 

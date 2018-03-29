@@ -146,14 +146,14 @@ namespace Assets.Editor.UnitTests.AI.Goals.CustomGoals
         }
 
         [Test]
-        public void Terminated_SetsFollowTargetToNull()
+        public void Terminated_CancelsPathfinding()
         {
             UnityMessageEventFunctions.InvokeMessageEventWithDispatcher(_pathfinding.gameObject, new SuspiciousObjectDetectedMessage(_targetObject));
             _goal.Initialise();
 
             _goal.Terminate();
 
-            Assert.IsNull(_pathfinding.SetFollowTargetResult);
+            Assert.IsTrue(_pathfinding.CancelPathfindingCalled);
         }
 
         [Test]

@@ -15,6 +15,8 @@ namespace Assets.Scripts.Test.AI.Pathfinding
         public Vector3 ? TargetLocation { get; private set; }
         private OnPathfindingCompleteDelegate _delegate;
 
+        public bool CancelPathfindingCalled = false;
+
         public void SetTargetLocation(Vector3 targetLocation, OnPathfindingCompleteDelegate inDelegate)
         {
             TargetLocation = targetLocation;
@@ -24,6 +26,11 @@ namespace Assets.Scripts.Test.AI.Pathfinding
         public void SetFollowTarget(GameObject inTarget)
         {
             SetFollowTargetResult = inTarget;
+        }
+
+        public void CancelPathfinding()
+        {
+            CancelPathfindingCalled = true;
         }
 
         public void CompleteDelegate()

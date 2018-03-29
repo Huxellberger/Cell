@@ -3,7 +3,6 @@
 using Assets.Scripts.Core;
 using UnityEngine;
 using UnityEngine.AI;
-using UnityEngine.Tilemaps;
 
 namespace Assets.Scripts.AI.Pathfinding
 {
@@ -95,6 +94,12 @@ namespace Assets.Scripts.AI.Pathfinding
             {
                 PlotCourse(gameObject.transform.position);
             }
+        }
+
+        public void CancelPathfinding()
+        {
+            _followTarget = null;
+            _delegate = null;
         }
         // ~IPathfindingInterface
 

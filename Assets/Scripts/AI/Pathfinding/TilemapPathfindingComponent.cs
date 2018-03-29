@@ -188,6 +188,13 @@ namespace Assets.Scripts.AI.Pathfinding
             }
         }
 
+        public void CancelPathfinding()
+        {
+            _followTarget = null;
+            _pathNodes.Clear();
+            _currentTargetDelegate = null;
+        }
+
         public NavNode GetNearestNavNode(NavRegion region, Vector2 position)
         {
             NavNode nearestNode = null;
