@@ -3,6 +3,7 @@
 using System.Collections.Generic;
 using Assets.Scripts.Components.ActionStateMachine.ConditionRunner;
 using Assets.Scripts.Components.ActionStateMachine.ConditionRunner.Conditions;
+using Assets.Scripts.Components.Equipment.Holdables;
 using Assets.Scripts.Components.Stamina;
 using Assets.Scripts.Input;
 using Assets.Scripts.Messaging;
@@ -32,6 +33,12 @@ namespace Assets.Scripts.Components.ActionStateMachine.States.Dead
             if (stamina != null)
             {
                 stamina.SetStaminaChangeEnabled(false, ELockStaminaReason.Dead);
+            }
+
+            var heldItem = Info.Owner.GetComponent<IHeldItemInterface>();
+            if (heldItem != null)
+            {
+                heldItem.DropHoldable();
             }
 
             InitialiseConditions();

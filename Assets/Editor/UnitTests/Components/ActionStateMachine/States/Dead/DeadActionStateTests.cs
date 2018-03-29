@@ -6,6 +6,7 @@ using Assets.Scripts.Components.ActionStateMachine.States.Dead;
 using Assets.Scripts.Components.Stamina;
 using Assets.Scripts.Messaging;
 using Assets.Scripts.Mode;
+using Assets.Scripts.Test.Components.Equipment.Holdables;
 using Assets.Scripts.Test.Components.Stamina;
 using Assets.Scripts.Test.Input;
 using Assets.Scripts.Test.Messaging;
@@ -20,6 +21,7 @@ namespace Assets.Editor.UnitTests.Components.ActionStateMachine.States.Dead
         private DeadActionState _deadActionState;
         private MockInputBinderComponent _playerBinder;
         private MockStaminaComponent _stamina;
+        private MockHeldItemComponent _heldItem;
         private DeadActionStateParams _params;
 
         [SetUp]
@@ -34,6 +36,7 @@ namespace Assets.Editor.UnitTests.Components.ActionStateMachine.States.Dead
             player.AddComponent<TestUnityMessageEventDispatcherComponent>().TestAwake();
             _playerBinder = player.AddComponent<MockInputBinderComponent>();
             _stamina = player.AddComponent<MockStaminaComponent>();
+            _heldItem = player.AddComponent<MockHeldItemComponent>();
             _params = new DeadActionStateParams{CanRespawn = true};
         }
 
@@ -42,6 +45,7 @@ namespace Assets.Editor.UnitTests.Components.ActionStateMachine.States.Dead
         {
             _deadActionState = null;
 
+            _heldItem = null;
             _stamina = null;
             _playerBinder = null;
 
@@ -81,6 +85,16 @@ namespace Assets.Editor.UnitTests.Components.ActionStateMachine.States.Dead
 
             Assert.IsFalse(_stamina.SetStaminaChangeEnabledResult);
             Assert.AreEqual(ELockStaminaReason.Dead, _stamina.SetStaminaChangeEnabledReason);
+        }
+
+        [Test]
+        public void Start_DropsHoldable()
+        {
+            _deadActionState = new DeadActionState(new ActionStateInfo(_playerBinder.gameObject), _params);
+
+            _deadActionState.Start();
+
+            Assert.IsTrue(_heldItem.DropHoldableCalled);
         }
 
         [Test]
