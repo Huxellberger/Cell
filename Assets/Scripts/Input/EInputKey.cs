@@ -31,6 +31,11 @@ namespace Assets.Scripts.Input
         PositiveAnimalCry,
         NegativeAnimalCry,
 
+        // Gadget
+        UseActiveGadget,
+        CycleGadgetPositive,
+        CycleGadgetNegative,
+
         // MouseSim
         VirtualLeftClick,
         VirtualRightClick,

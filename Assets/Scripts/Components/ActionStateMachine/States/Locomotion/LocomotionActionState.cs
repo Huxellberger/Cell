@@ -3,6 +3,7 @@
 using Assets.Scripts.AI.Companion;
 using Assets.Scripts.Components.Character;
 using Assets.Scripts.Components.Equipment.Holdables;
+using Assets.Scripts.Components.Gadget;
 using Assets.Scripts.Components.Interaction;
 using Assets.Scripts.Components.Movement;
 using Assets.Scripts.Input;
@@ -20,6 +21,7 @@ namespace Assets.Scripts.Components.ActionStateMachine.States.Locomotion
         private PauseInputHandler _pauseInputHandler;
         private InteractionInputHandler _interactionInputHandler;
         private CompanionInputHandler _companionInputHandler;
+        private GadgetInputHandler _gadgetInputHandler;
 
         private IInputBinderInterface _inputBinderInterface;
 
@@ -42,11 +44,13 @@ namespace Assets.Scripts.Components.ActionStateMachine.States.Locomotion
             _interactionInputHandler = new InteractionInputHandler(Info.Owner.GetComponent<IInteractionInterface>());
             _pauseInputHandler = new PauseInputHandler(GameServiceProvider.CurrentInstance.GetService<ITimeServiceInterface>());
             _companionInputHandler = new CompanionInputHandler(Info.Owner.GetComponent<ICompanionSetInterface>());
+            _gadgetInputHandler = new GadgetInputHandler(Info.Owner.GetComponent<IGadgetSetInterface>());
 
             _inputBinderInterface = Info.Owner.GetComponent<IInputBinderInterface>();
 
             if (_inputBinderInterface != null)
             {
+                _inputBinderInterface.RegisterInputHandler(_gadgetInputHandler);
                 _inputBinderInterface.RegisterInputHandler(_companionInputHandler);
                 _inputBinderInterface.RegisterInputHandler(_pauseInputHandler);
                 _inputBinderInterface.RegisterInputHandler(_interactionInputHandler);
@@ -70,6 +74,7 @@ namespace Assets.Scripts.Components.ActionStateMachine.States.Locomotion
         {
             if (_inputBinderInterface != null)
             {
+                _inputBinderInterface.UnregisterInputHandler(_gadgetInputHandler);
                 _inputBinderInterface.UnregisterInputHandler(_companionInputHandler);
                 _inputBinderInterface.UnregisterInputHandler(_pauseInputHandler);
                 _inputBinderInterface.UnregisterInputHandler(_interactionInputHandler);

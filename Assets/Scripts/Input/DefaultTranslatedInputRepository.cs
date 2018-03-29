@@ -122,6 +122,18 @@ namespace Assets.Scripts.Input
                 {
                     new RawInput("R_Button", EInputType.Button),
                     new TranslatedInput(EInputKey.DropHeldItem, EInputType.Button)
+                },
+                {
+                    new RawInput("1_Button", EInputType.Button),
+                    new TranslatedInput(EInputKey.CycleGadgetPositive, EInputType.Button)
+                },
+                {
+                    new RawInput("2_Button", EInputType.Button),
+                    new TranslatedInput(EInputKey.CycleGadgetNegative, EInputType.Button)
+                },
+                {
+                    new RawInput("G_Button", EInputType.Button),
+                    new TranslatedInput(EInputKey.UseActiveGadget, EInputType.Button)
                 }
             };
         }

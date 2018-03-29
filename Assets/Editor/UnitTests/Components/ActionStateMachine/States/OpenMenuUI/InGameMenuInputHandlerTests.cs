@@ -144,6 +144,42 @@ namespace Assets.Editor.UnitTests.Components.ActionStateMachine.States.OpenMenuU
         }
 
         [Test]
+        public void HandleButtonInput_UseActiveGadget_Pressed_Handled()
+        {
+            Assert.AreEqual(EInputHandlerResult.Handled, _handler.HandleButtonInput(EInputKey.UseActiveGadget, true));
+        }
+
+        [Test]
+        public void HandleButtonInput_UseActiveGadget_Unpressed_Handled()
+        {
+            Assert.AreEqual(EInputHandlerResult.Handled, _handler.HandleButtonInput(EInputKey.UseActiveGadget, false));
+        }
+
+        [Test]
+        public void HandleButtonInput_CycleGadgetPositive_Pressed_Handled()
+        {
+            Assert.AreEqual(EInputHandlerResult.Handled, _handler.HandleButtonInput(EInputKey.CycleGadgetPositive, true));
+        }
+
+        [Test]
+        public void HandleButtonInput_CycleGadgetPositive_Unpressed_Handled()
+        {
+            Assert.AreEqual(EInputHandlerResult.Handled, _handler.HandleButtonInput(EInputKey.CycleGadgetPositive, false));
+        }
+
+        [Test]
+        public void HandleButtonInput_CycleGadgetNegative_Pressed_Handled()
+        {
+            Assert.AreEqual(EInputHandlerResult.Handled, _handler.HandleButtonInput(EInputKey.CycleGadgetNegative, true));
+        }
+
+        [Test]
+        public void HandleButtonInput_CycleGadgetNegative_Unpressed_Handled()
+        {
+            Assert.AreEqual(EInputHandlerResult.Handled, _handler.HandleButtonInput(EInputKey.CycleGadgetNegative, false));
+        }
+
+        [Test]
         public void HandleAnalogInput_CameraHorizontal_Handled()
         {
             Assert.AreEqual(EInputHandlerResult.Handled, _handler.HandleAnalogInput(EInputKey.CameraHorizontal, 1.0f));
